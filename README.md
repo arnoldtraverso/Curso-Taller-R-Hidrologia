@@ -1,7 +1,10 @@
-# PROGRAMACIÓN EN R APLICADA A LA HIDROLOGÍA Y CAMBIO CLIMÁTICO
-Curso Desarrollado el 19 y 20 de nov. 2026. Dirigido a profesionales y estudiantes de la Universidad Nacional del Altiplano
+# Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático
 
-Publicado en: https:arnold.traverso.github.io/Curso-Taller-R-Hidrologia/
+Curso Desarrollado el 19 y 20 de nov. 2026, en la Universidad Nacional del Altiplano.
+
+Dirigido a profesionales y estudiantes de la Universidad Nacional del Altiplano
+
+Publicado en: https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia/
 
 Materiales del Curso Taller:
 
