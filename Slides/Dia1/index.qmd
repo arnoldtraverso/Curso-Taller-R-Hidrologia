@@ -1,0 +1,19 @@
+---
+title: 'Programación en R Aplicada a la Hidrología y Cambio Climático'
+subtitle: 'Curso Taller Día 1'
+format: revealjs
+---
+
+## Contenido
+
+1. Introducción
+2. Fundamentos de datos reales
+3. Automatización
+
+## Primer ejemplo con codigo
+
+```{r}
+caudales <- c(5, 8, 10)
+mean(caudales)
+```
+
