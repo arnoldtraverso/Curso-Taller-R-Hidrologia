@@ -1,6 +1,6 @@
 ---
-title: "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático"
-subtitle: "Curso Taller — Universidad Nacional del Altiplano"
+title: 'Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático'
+subtitle: 'Curso Taller — Universidad Nacional del Altiplano'
 format: html
 ---
 
