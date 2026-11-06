@@ -1,19 +1,65 @@
 ---
 title: 'Programación en R Aplicada a la Hidrología y Cambio Climático'
 subtitle: 'Curso Taller Día 1'
-format: revealjs
+institute: 'Universidad Nacional del Altiplano - Facultad de Ingeniería Agrícola'
+author: 'Profesor: Kevin Arnold Traverso Yucra'
+
+format: 
+  revealjs:
+    theme: [default, ../../assets/tema.scss]
+    footer: 'Programación en R Aplicada a la Hidrología y Cambio Climático'
+    slide-number: true
+    code-line-numbers: true
+    title-slide-attributes:
+      data-background-color: "#073763"
 ---
 
-## Contenido
+## Contenido día 1 {.contenido background-color="#0B5394"}
 
-1. Introducción
-2. Fundamentos de datos reales
-3. Automatización
+1.  Introducción
+2.  Fundamentos de datos reales
+3.  Procesamiento y visualización
+4.  Automatización
+5.  Datos climáticos grillados
 
-## Primer ejemplo con codigo
+## Introducción {.seccion background-color="#0B5394"}
 
-```{r}
-caudales <- c(5, 8, 10)
-mean(caudales)
-```
+::: {.num}
+01
+:::
+
+R en ciencias del agua y cambio climático, Proyectos y Estructuras de Carpetas
+
+## Fundamentos con datos reales {.seccion background-color="#0B5394"}
+
+::: {.num}
+02
+:::
+
+Objetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse
+
+## Procesamiento y visualización {.seccion background-color="#0B5394"}
+
+::: {.num}
+03
+:::
+
+Objetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse
+
+## Automatización {.seccion background-color="#0B5394"}
+
+::: {.num}
+04
+:::
+
+if/else (años secos/húmedos), for sobre multiples estaciones, funciones propias (ETP Hargreaves), integración con purrr::map como alternativa
+
+## Datos climáticos grillados {.seccion background-color="#0B5394"}
+
+::: {.num}
+05
+:::
+
+paquete terra: lectura de NetCDF, recorte de cuenca, extracción de series, precipitación areal, climatología y mapas
+
 

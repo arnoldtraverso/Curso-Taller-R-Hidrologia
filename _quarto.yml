@@ -1,3 +1,14 @@
 project:
   type: website
-  output-dir: Docs
+  output-dir: docs
+
+website:
+  title: "R aplicado a la Hidrología y Cambio Climático"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: slides/dia1/index.qmd
+        text: Día 1
+      - href: slides/dia2/index.qmd
+        text: Día 2

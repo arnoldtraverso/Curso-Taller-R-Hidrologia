@@ -5,6 +5,6 @@ Publicado en: https:arnold.traverso.github.io/Curso-Taller-R-Hidrologia/
 
 Materiales del Curso Taller:
 
-- Diapositivas: `Slides/`
-- Ejercicios: `Ejercicios/`
-- Datos: `Data/`
+- Diapositivas: `slides/`
+- Ejercicios: `ejercicios/`
+- Datos: `data/`

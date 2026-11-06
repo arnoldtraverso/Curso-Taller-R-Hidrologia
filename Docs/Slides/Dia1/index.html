@@ -9,7 +9,8 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.11.9">
 
-  <title>Programación en R Aplicada a la Hidrología y Cambio Climático</title>
+  <meta name="author" content="Profesor: Kevin Arnold Traverso Yucra">
+  <title>R aplicado a la Hidrología y Cambio Climático – Programación en R Aplicada a la Hidrología y Cambio Climático</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +35,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-00ad5a49dff614330cd349bcec985ec3.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b08f48eb7facb5cef153230614f4ec84.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -131,36 +132,73 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
+<section id="title-slide" data-background-color="#073763" class="quarto-title-block center">
   <h1 class="title">Programación en R Aplicada a la Hidrología y Cambio Climático</h1>
   <p class="subtitle">Curso Taller Día 1</p>
 
 <div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Profesor: Kevin Arnold Traverso Yucra
+</div>
+        <p class="quarto-title-affiliation">
+            Universidad Nacional del Altiplano - Facultad de Ingeniería Agrícola
+          </p>
+    </div>
 </div>
 
 </section>
-<section id="contenido" class="slide level2">
-<h2>Contenido</h2>
+<section id="contenido-día-1" class="slide level2 contenido" data-background-color="#0B5394">
+<h2>Contenido día 1</h2>
 <ol type="1">
 <li>Introducción</li>
 <li>Fundamentos de datos reales</li>
+<li>Procesamiento y visualización</li>
 <li>Automatización</li>
+<li>Datos climáticos grillados</li>
 </ol>
 </section>
-<section id="primer-ejemplo-con-codigo" class="slide level2">
-<h2>Primer ejemplo con codigo</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.666667</code></pre>
+<section id="introducción" class="slide level2 seccion" data-background-color="#0B5394">
+<h2>Introducción</h2>
+<div class="num">
+<p>01</p>
 </div>
+<p>R en ciencias del agua y cambio climático, Proyectos y Estructuras de Carpetas</p>
+</section>
+<section id="fundamentos-con-datos-reales" class="slide level2 seccion" data-background-color="#0B5394">
+<h2>Fundamentos con datos reales</h2>
+<div class="num">
+<p>02</p>
 </div>
+<p>Objetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse</p>
+</section>
+<section id="procesamiento-y-visualización" class="slide level2 seccion" data-background-color="#0B5394">
+<h2>Procesamiento y visualización</h2>
+<div class="num">
+<p>03</p>
+</div>
+<p>Objetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse</p>
+</section>
+<section id="automatización" class="slide level2 seccion" data-background-color="#0B5394">
+<h2>Automatización</h2>
+<div class="num">
+<p>04</p>
+</div>
+<p>if/else (años secos/húmedos), for sobre multiples estaciones, funciones propias (ETP Hargreaves), integración con purrr::map como alternativa</p>
+</section>
+<section id="datos-climáticos-grillados" class="slide level2 seccion" data-background-color="#0B5394">
+<h2>Datos climáticos grillados</h2>
+<div class="num">
+<p>05</p>
+</div>
+<p>paquete terra: lectura de NetCDF, recorte de cuenca, extracción de series, precipitación areal, climatología y mapas</p>
 
 
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p>Programación en R Aplicada a la Hidrología y Cambio Climático</p>
 </div>
 </div></div>
 
@@ -213,7 +251,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -372,82 +410,6 @@
         ]
       });
     </script>
-    
-
-    <script>
-
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
-      // slide changes (different for each slide format).
-
-      (function () {
-
-        // dispatch for htmlwidgets
-
-        function fireSlideEnter() {
-
-          const event = window.document.createEvent("Event");
-
-          event.initEvent("slideenter", true, true);
-
-          window.document.dispatchEvent(event);
-
-        }
-
-    
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-
-          fireSlideEnter();
-
-    
-
-          // dispatch for shiny
-
-          if (window.jQuery) {
-
-            if (previousSlide) {
-
-              window.jQuery(previousSlide).trigger("hidden");
-
-            }
-
-            if (currentSlide) {
-
-              window.jQuery(currentSlide).trigger("shown");
-
-            }
-
-          }
-
-        }
-
-    
-
-        // hookup for slidy
-
-        if (window.w3c_slidy) {
-
-          window.w3c_slidy.add_observer(function (slide_num) {
-
-            // slide_num starts at position 1
-
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
-          });
-
-        }
-
-    
-
-      })();
-
-    </script>
-
-    
-
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

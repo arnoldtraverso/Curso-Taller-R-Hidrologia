@@ -1,16 +1,93 @@
 [
   {
-    "objectID": "Slides/Dia1/index.html#contenido",
-    "href": "Slides/Dia1/index.html#contenido",
+    "objectID": "slides/dia2/index.html#contenido",
+    "href": "slides/dia2/index.html#contenido",
     "title": "Programación en R Aplicada a la Hidrología y Cambio Climático",
     "section": "Contenido",
-    "text": "Contenido\n\nIntroducción\nFundamentos de datos reales\nAutomatización"
+    "text": "Contenido\n\nCambio climático observado\nEscenarios futuros\nModelamiento bajo Cambio Climático"
   },
   {
-    "objectID": "Slides/Dia1/index.html#primer-ejemplo-con-codigo",
-    "href": "Slides/Dia1/index.html#primer-ejemplo-con-codigo",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "",
+    "text": "En un entorno donde la tecnología y el análisis de datos avanzan a passos agingantados, optimizar los flujos de trabajo son fundamentales para la toma de desiciones. En ese sentido, contar con un entorno robutso para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.\nBajo este enfoque, se presenta el Curso-Taller: “Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adapctación al Cambio Climático”. El Lenguaje R se ha consolidado como una herramienta indispensable en el ambito científico, académico y profesional gracias a su capacidad de gestionar grandes volúmenes de datos, realizar análisis complejos y desaroollar o replicar modelos hidrológicos de manera eficiente."
+  },
+  {
+    "objectID": "index.html#materiales",
+    "href": "index.html#materiales",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Materiales",
+    "text": "Materiales\nLas diapositivas del Curso se encuentran en los siguientes enlaces\n\nDiapositivas Día 1\nDiapositivas Día 2"
+  },
+  {
+    "objectID": "slides/dia1/index.html#contenido",
+    "href": "slides/dia1/index.html#contenido",
+    "title": "Programación en R Aplicada a la Hidrología y Cambio Climático",
+    "section": "Contenido",
+    "text": "Contenido\n\nIntroducción\nFundamentos de datos reales\nProcesamiento y visualización\nAutomatización\nDatos climáticos grillados"
+  },
+  {
+    "objectID": "slides/dia1/index.html#primer-ejemplo-con-codigo",
+    "href": "slides/dia1/index.html#primer-ejemplo-con-codigo",
     "title": "Programación en R Aplicada a la Hidrología y Cambio Climático",
     "section": "Primer ejemplo con codigo",
     "text": "Primer ejemplo con codigo\n\n\n[1] 7.666667"
+  },
+  {
+    "objectID": "index.html#objetivos",
+    "href": "index.html#objetivos",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "",
+    "text": "En un entorno donde la tecnología y el análisis de datos avanzan a passos agingantados, optimizar los flujos de trabajo son fundamentales para la toma de desiciones. En ese sentido, contar con un entorno robutso para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.\nBajo este enfoque, se presenta el Curso-Taller: “Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adapctación al Cambio Climático”. El Lenguaje R se ha consolidado como una herramienta indispensable en el ambito científico gracias a su capacidad de gestionar grandes volúmenes de datos hidrometeorológicos, realizar análisis complejos y desaroollar o replicar modelos hidrológicos de manera eficiente."
+  },
+  {
+    "objectID": "index.html#objetivo",
+    "href": "index.html#objetivo",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "",
+    "text": "En un entorno donde la tecnología y el análisis de datos avanzan a passos agingantados, optimizar los flujos de trabajo son fundamentales para la toma de desiciones. En ese sentido, contar con un entorno robutso para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.\nBajo este enfoque, se presenta el Curso-Taller: “Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adapctación al Cambio Climático”. El Lenguaje R se ha consolidado como una herramienta indispensable en el ambito científico, académico y profesional gracias a su capacidad de gestionar grandes volúmenes de datos, realizar análisis complejos y desaroollar o replicar modelos hidrológicos de manera eficiente."
+  },
+  {
+    "objectID": "slides/dia1/index.html#introducción",
+    "href": "slides/dia1/index.html#introducción",
+    "title": "Programación en R Aplicada a la Hidrología y Cambio Climático",
+    "section": "Introducción",
+    "text": "Introducción\n\n01\n\nR en ciencias del agua y cambio climático, Proyectos y Estructuras de Carpetas"
+  },
+  {
+    "objectID": "slides/dia1/index.html#fundamentos-con-datos-reales",
+    "href": "slides/dia1/index.html#fundamentos-con-datos-reales",
+    "title": "Programación en R Aplicada a la Hidrología y Cambio Climático",
+    "section": "Fundamentos con datos reales",
+    "text": "Fundamentos con datos reales\n\n02\n\nObjetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse"
+  },
+  {
+    "objectID": "slides/dia1/index.html#procesamiento-y-visualización",
+    "href": "slides/dia1/index.html#procesamiento-y-visualización",
+    "title": "Programación en R Aplicada a la Hidrología y Cambio Climático",
+    "section": "Procesamiento y visualización",
+    "text": "Procesamiento y visualización\n\n03\n\nObjetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse"
+  },
+  {
+    "objectID": "slides/dia1/index.html#automatización",
+    "href": "slides/dia1/index.html#automatización",
+    "title": "Programación en R Aplicada a la Hidrología y Cambio Climático",
+    "section": "Automatización",
+    "text": "Automatización\n\n04\n\nif/else (años secos/húmedos), for sobre multiples estaciones, funciones propias (ETP Hargreaves), integración con purrr::map como alternativa"
+  },
+  {
+    "objectID": "slides/dia1/index.html#datos-climáticos-grillados",
+    "href": "slides/dia1/index.html#datos-climáticos-grillados",
+    "title": "Programación en R Aplicada a la Hidrología y Cambio Climático",
+    "section": "Datos climáticos grillados",
+    "text": "Datos climáticos grillados\n\n05\n\npaquete terra: lectura de NetCDF, recorte de cuenca, extracción de series, precipitación areal, climatología y mapas"
+  },
+  {
+    "objectID": "slides/dia1/index.html#contenido-día-1",
+    "href": "slides/dia1/index.html#contenido-día-1",
+    "title": "Programación en R Aplicada a la Hidrología y Cambio Climático",
+    "section": "Contenido día 1",
+    "text": "Contenido día 1\n\nIntroducción\nFundamentos de datos reales\nProcesamiento y visualización\nAutomatización\nDatos climáticos grillados"
   }
 ]
