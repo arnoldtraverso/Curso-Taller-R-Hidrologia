@@ -44,7 +44,7 @@ Objetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyvers
 03
 :::
 
-Objetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse
+Importación (readr, readxl), dplyr/tidyr, NAs y control de calidad, agregación diaria → mensual → anual, ggplot2
 
 ## Automatización {.seccion background-color="#0B5394"}
 

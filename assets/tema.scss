@@ -14,12 +14,12 @@ $presentation-heading-text-transform: none;
 /*-- scss:rules --*/
 // Portada
 #title-slide { text-align: left; }
-#title-slide .title { color: #fff; font-weight: bold; font-size: 1.7em; }
+#title-slide .title { color: #fff; font-weight: bold; font-size: 1.5em; }
 #title-slide .subtitle { color: $naranja; font-weight: bold; font-size: 0.7em; }
 #title-slide .quarto-title-authors { justify-content: flex-start; color: $cian; }
 #title-slide .quarto-title-author { padding-left: 0; }
-#title-slide .quarto-title-author-name { color: $cian; font-size: 0.7em; }
-#title-slide .quarto-title-affiliation { color: $cian; font-size: 0.7em; margin: 0 0 0.6em 0; }
+#title-slide .quarto-title-author-name { color: $cian; font-size: 0.6em; }
+#title-slide .quarto-title-affiliation { color: $cian; font-size: 0.6em; margin: 0 0 0.6em 0; }
 
 // Invertir el orden: institución arriba, autor abajo
 #title-slide .quarto-title-author { display: flex; flex-direction: column-reverse; }

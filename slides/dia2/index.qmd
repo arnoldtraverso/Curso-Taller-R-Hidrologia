@@ -19,3 +19,27 @@ format:
 1.  Cambio climático observado
 2.  Escenarios futuros
 3.  Modelamiento bajo Cambio Climático
+
+## Cambio Climático opbservado {.seccion background-color="#0B5394"}
+
+::: {.num}
+01
+:::
+
+R en ciencias del agua y cambio climático, Proyectos y Estructuras de Carpetas
+
+## Escenarios futuros {.seccion background-color="#0B5394"}
+
+::: {.num}
+02
+:::
+
+R en ciencias del agua y cambio climático, Proyectos y Estructuras de Carpetas
+
+## Modelamiento bajo cambio climático {.seccion background-color="#0B5394"}
+
+::: {.num}
+03
+:::
+
+R en ciencias del agua y cambio climático, Proyectos y Estructuras de Carpetas
