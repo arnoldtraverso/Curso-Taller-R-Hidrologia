@@ -1,7 +1,7 @@
 ---
 title: 'Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático'
 subtitle: 'Curso Taller Día 1'
-institute: 'Universidad Nacional del Altiplano - Facultad de Ingeniería Agrícola'
+institute: 'Universidad Nacional del Altiplano - Facultad de Ingeniería del Agua y Gestión de Recursos Hídricos'
 author: 'Profesor: Kevin Arnold Traverso Yucra'
 
 format: 
@@ -52,7 +52,7 @@ Importación (readr, readxl), dplyr/tidyr, NAs y control de calidad, agregación
 04
 :::
 
-if/else (años secos/húmedos), for sobre multiples estaciones, funciones propias (ETP Hargreaves), integración con purrr::map como alternativa
+if/else (años secos/húmedos), for sobre múltiples estaciones, funciones propias (ETP Hargreaves), interación con purrr::map como alternativa
 
 ## Datos climáticos grillados {.seccion background-color="#0B5394"}
 
