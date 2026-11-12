@@ -10,3 +10,8 @@
 *.nc
 *.tif
 *.tiff
+
+# Resultados: se sube la estructura, no el contenido
+ outputs/**
+!outputs/**/
+!outputs/**/.gitkeep
