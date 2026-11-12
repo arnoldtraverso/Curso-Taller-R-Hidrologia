@@ -5,3 +5,8 @@
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Datos grillados pesados no considerados
+*.nc
+*.tif
+*.tiff
