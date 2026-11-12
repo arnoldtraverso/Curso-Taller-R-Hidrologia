@@ -1,6 +1,6 @@
 # Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático
 
-Este repositorio contiene el material, los scripts y los datos utilizados en el Curso-Taller realizado los días 19 y 20 de noviembre del 2026 en conmemoración del **Día del Ingeniero Agrícola**. El evento conó con el respaldo de la **Universidad Nacional del Altiplano**, **Facultad de Ingeniería del Agua y Gestión de Recursos Hídricos** y el **Colegio de Ingenieros del Perú (CD Puno)**.
+Este repositorio contiene el material, los scripts y los datos utilizados en el Curso-Taller realizado los días 19 y 20 de noviembre del 2026 en conmemoración del **Día del Ingeniero Agrícola**. El evento contó con el respaldo de la **Universidad Nacional del Altiplano**, **Facultad de Ingeniería del Agua y Gestión de Recursos Hídricos** y el **Colegio de Ingenieros del Perú (CD Puno)**.
 
 El Curso-Taller está dirigido a profesionales y estudiantes interesados en el manejo de información, análisis y aprendizaje del lenguaje R aplicado a procesos hidrológicos y de cambio climático. Durante el curso se presenta una selección de paquetes de R, tanto básicos como de reciente desarrollo, aplicables al análisis de datos en hidrología y otras disciplinas afines.
 

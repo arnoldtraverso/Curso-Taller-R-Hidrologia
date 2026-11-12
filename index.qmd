@@ -7,7 +7,7 @@ format: html
 
 ## Objetivo
 
-En un entorno donde la tecnología y el análisis de datos avanzan a pasos agigantados, es fundamental para la toma de decisiones. En ese sentido, contar con un entorno robusto para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.
+En un entorno donde la tecnología y el análisis de datos avanzan a pasos agigantados, optimizar los flujos de trabajo es fundamental para la toma de decisiones. En ese sentido, contar con un entorno robusto para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.
 
 Bajo este enfoque, se presenta el Curso-Taller: **"Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático".** El Lenguaje R se ha consolidado como una herramienta indispensable en el ámbito científico, académico y profesional gracias a su capacidad de gestionar grandes volúmenes de datos, realizar análisis complejos y desarrollar o replicar modelos hidrológicos de manera eficiente.
 
