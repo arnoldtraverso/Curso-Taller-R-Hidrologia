@@ -34,8 +34,74 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-244f0701148291542fa78cff90854bb4.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-60b81c9f2997e84a0d3db3319681de3e.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -152,7 +218,7 @@ Profesor: Kevin Arnold Traverso Yucra
 <h2>Contenido día 1</h2>
 <ol type="1">
 <li>Introducción</li>
-<li>Fundamentos de datos reales</li>
+<li>Fundamentos</li>
 <li>Procesamiento y visualización</li>
 <li>Automatización</li>
 <li>Datos climáticos grillados</li>
@@ -163,10 +229,225 @@ Profesor: Kevin Arnold Traverso Yucra
 <div class="num">
 <p>01</p>
 </div>
-<p>R en ciencias del agua y cambio climático, Proyectos y Estructuras de Carpetas</p>
+<p>R en Ciencias del Agua y Cambio Climático, Proyectos y Estructuras de Carpetas</p>
 </section>
-<section id="fundamentos-con-datos-reales" class="slide level2 seccion" data-background-color="#0B5394">
-<h2>Fundamentos con datos reales</h2>
+<section id="r-en-ciencias-del-agua-y-cambio-climático" class="slide level2">
+<h2>R en Ciencias del Agua y Cambio Climático</h2>
+<div class="columns">
+<div class="column" style="width:75%;">
+<div class="fragment fade-in">
+<h3 id="ciencia-de-datos">Ciencia de datos</h3>
+<ul>
+<li>Es un campo interdisciplinario centrado en extraer conocimiento, valor y patrones predictivos a partir de grandes volúmenes de datos (tanto estructurados como no estructurados). Integra matemáticas, estadística aplicada y programación de software</li>
+</ul>
+</div>
+<div class="fragment fade-in">
+<h3 id="hidrología-computacional">Hidrología computacional</h3>
+<ul>
+<li>Es una disciplina que permite a los investigadores gestionar todo el ciclo de la información: desde la obtención, procesamiento y limpieza de grandes volúmenes de datos, hasta su análisis y modelamiento mediante flujos de trabajo específicos. Además facilita la documentación, visualización y el intercambio de resultados en diversas plataformas.</li>
+</ul>
+</div>
+</div><div class="column" style="width:25%;">
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/laptop.jpg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/rstudio.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="r-en-ciencias-del-agua-y-cambio-climático-1" class="slide level2">
+<h2>R en Ciencias del Agua y Cambio Climático</h2>
+<div class="fragment fade-in">
+<h3 id="hidroinformática">Hidroinformática</h3>
+<ul>
+<li>Es una disciplina que aplica las tecnologías de la información, las ciencias de la computación y la inteligencia artificial al estudio, control y gestión de los recursos hídricos. Nace de la necesidad de integrar la hidrología y la hidráulica tradicionales con herramientas computacionales avanzadas.</li>
+</ul>
+<div class="fuente">
+<p>Fuente: Abbott, M. B. (1991). <em>Hydroinformatics: Information technology and the aquatic environment. Avebury Technical.</em></p>
+</div>
+</div>
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/hess-23-2939-2019-f03.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+</figure>
+</div>
+<div class="fuente">
+<p>Fuente: Slater et al.&nbsp;(2019). <em>Using R in hydrology: a review of recent developments and future directions</em>. HESS, 23, 2939–2963. <a href="https://doi.org/10.5194/hess-23-2939-2019" class="uri">https://doi.org/10.5194/hess-23-2939-2019</a></p>
+</div>
+</div>
+</section>
+<section id="r-en-ciencias-del-agua-y-cambio-climático-2" class="slide level2">
+<h2>R en Ciencias del Agua y Cambio Climático</h2>
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/Image_502a.jpg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="por-qué-r-en-hidrología-y-cambio-climático" class="slide level2">
+<h2>¿Por qué R en Hidrología y Cambio Climático?</h2>
+<h3 id="de-la-hoja-de-cálculo-al-script">De la hoja de cálculo al script</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment fade-in">
+<p><strong>Hoja de cálculo</strong></p>
+<ul>
+<li>Fórmulas dispersas en celdas</li>
+<li>Pasos manuales difíciles de rastrear</li>
+<li>Otra estación = repetir todo</li>
+<li>Falla de una máquina a otra</li>
+<li>No existe control de versiones</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment fade-in">
+<p><strong>Script en R</strong></p>
+<ul>
+<li>Cada paso queda escrito y estructurado</li>
+<li>Se ejecuta de nuevo con un clic</li>
+<li>Una función sirve para 1 o 100 estaciones</li>
+<li>Presentación interactiva de resultados</li>
+<li>Control de versiones</li>
+</ul>
+</div>
+</div></div>
+<div class="fragment fade-in">
+<p>R permite procesar grandes volúmenes de datos de forma eficiente, y la presentación interactiva de resultados facilita su comprensión.</p>
+</div>
+<div class="fragment fade-in">
+<p>En los análisis de grandes cuencas y para los enfoques de cambio climático esto es clave: el mismo análisis se repite para <strong>varios modelos, escenarios y periodos</strong>.</p>
+</div>
+</section>
+<section id="por-qué-r-en-hidrología-y-cambio-climático-1" class="slide level2">
+<h2>¿Por qué R en Hidrología y Cambio Climático?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment fade-in">
+<p><strong>Libre y gratuito</strong><br>
+No requiere licencia; funciona en Windows, macOS y Linux.</p>
+<p><strong>Construido para analizar datos</strong><br>
+Estadística y gráficos de calidad desde su origen.</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment fade-in">
+<p><strong>Reproducible</strong><br>
+El script documenta cada paso del análisis.</p>
+<p><strong>Paquetes hidrológicos</strong><br>
+<code>airGR</code>, <code>hydroGOF</code>, <code>trend</code>, <code>qmap</code>, <code>terra</code>, etc.</p>
+</div>
+</div></div>
+<div class="fragment">
+<p>CRAN reúne más de 20 000 paquetes y mantiene una guía temática de hidrología (<em>CRAN Task View: Hydrology</em>).</p>
+<div class="fuente">
+<p>Enlace: <a href="https://github.com/cran-task-views/Hydrology/blob/main/Hydrology.md" class="uri">https://github.com/cran-task-views/Hydrology/blob/main/Hydrology.md</a></p>
+</div>
+</div>
+</section>
+<section id="rstudio-los-cuatro-paneles" class="slide level2">
+<h2>RStudio: Los cuatro paneles</h2>
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/rstudio_panel.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="rstudio-atajos-y-rutas" class="slide level2 smaller">
+<h2>RStudio: atajos y rutas</h2>
+<div class="fragment fade-in">
+<h3 id="atajos-de-teclado">Atajos de teclado</h3>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Atajo</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Ctrl + Enter</code></td>
+<td>Ejecutar la línea o la selección</td>
+</tr>
+<tr class="even">
+<td><code>Ctrl + Shift + N</code></td>
+<td>Nuevo script</td>
+</tr>
+<tr class="odd">
+<td><code>Ctrl + S</code></td>
+<td>Guardar</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<h3 id="el-problema-de-setwd">El problema de <code>setwd()</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="co"># Solo funciona en MI computadora</span></span>
+<span id="cb1-2"><a aria-label="2"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/Arnold/Documents/curso/datos"</span>)</span>
+<span id="cb1-3"><a aria-label="3"></a>pp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Precipitaciones.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<ul>
+<li>Esa ruta no existe en otra computadora</li>
+<li>El script deja de funcionar al compartirlo</li>
+<li>Si mueves la carpeta, tampoco funciona en la tuya</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="proyectos-y-estructura-de-carpetas" class="slide level2">
+<h2>Proyectos y estructura de carpetas</h2>
+<h3 id="proyectos-de-rstudio">Proyectos de RStudio</h3>
+<div class="fragment">
+<ul>
+<li>Un proyecto es una carpeta con un archivo <code>.Rproj</code></li>
+<li>Al abrirlo, R trabaja desde esa carpeta</li>
+<li>Las rutas se escriben desde la raíz del proyecto</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">getwd</span>()   <span class="co"># carpeta del proyecto</span></span>
+<span id="cb2-2"><a aria-label="2"></a></span>
+<span id="cb2-3"><a aria-label="3"></a><span class="co"># Funciona en CUALQUIER computadora</span></span>
+<span id="cb2-4"><a aria-label="4"></a>pp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/Precipitaciones.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>En el Curso-Taller: doble clic en el archivo <code>.Rproj</code> de la carpeta descargada.</p>
+<p>Enlace: <a href="https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia" class="uri">https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia</a></p>
+</div>
+</section>
+<section id="proyectos-y-estructura-de-carpetas-1" class="slide level2 arbol">
+<h2>Proyectos y estructura de carpetas</h2>
+<h3 id="estructura-del-curso-taller">Estructura del Curso-Taller</h3>
+<div class="fragment">
+<pre class="arbol-carpetas"><span class="raiz">Curso-Taller-R-Hidrologia/</span>
+<span class="rama">├──</span> <span class="rproj">Curso-Taller-R-Hidrologia.Rproj</span>    <span class="nota">← abrir siempre desde aquí</span>
+<span class="rama">├──</span> <span class="dir">data/</span>
+<span class="rama">│   ├──</span> <span class="dir">raw/</span>                           <span class="nota">datos originales (no se tocan)</span>
+<span class="rama">│   └──</span> <span class="dir">processed/</span>                     <span class="nota">datos procesados</span>
+<span class="rama">├──</span> <span class="dir">ejercicios/</span>                        <span class="nota">scripts del curso</span>
+<span class="rama">├──</span> <span class="dir">outputs/</span>
+<span class="rama">│   ├──</span> <span class="dir">figuras/</span>                       <span class="nota">gráficos generados</span>
+<span class="rama">│   └──</span> <span class="dir">tablas/</span>                        <span class="nota">tablas generadas</span>
+<span class="rama">└──</span> <span class="dir">slides/</span>                            <span class="nota">diapositivas</span></pre>
+</div>
+<div class="fragment">
+<p>Los datos de <code>data/raw/</code> <strong>no se modifican</strong>: Los resultados se irán generando conforme se avance con los scripts del Curso-Taller.</p>
+</div>
+</section>
+<section id="fundamentos" class="slide level2 seccion" data-background-color="#0B5394">
+<h2>Fundamentos</h2>
 <div class="num">
 <p>02</p>
 </div>
@@ -184,14 +465,14 @@ Profesor: Kevin Arnold Traverso Yucra
 <div class="num">
 <p>04</p>
 </div>
-<p>if/else (años secos/húmedos), for sobre múltiples estaciones, funciones propias (ETP Hargreaves), interación con purrr::map como alternativa</p>
+<p>if/else (años secos/húmedos), for sobre múltiples estaciones, funciones propias (ETP Hargreaves), iteración con purrr::map como alternativa</p>
 </section>
 <section id="datos-climáticos-grillados" class="slide level2 seccion" data-background-color="#0B5394">
 <h2>Datos climáticos grillados</h2>
 <div class="num">
 <p>05</p>
 </div>
-<p>paquete terra: lectura de NetCDF, recorte de cuenca, extracción de series, precipitación areal, climatología y mapas</p>
+<p>Paquete terra: lectura de NetCDF, recorte de cuenca, extracción de series, precipitación areal, climatología y mapas</p>
 
 
 </section>

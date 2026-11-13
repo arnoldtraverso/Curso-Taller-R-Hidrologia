@@ -53,21 +53,21 @@
     "href": "slides/dia1/index.html#contenido-día-1",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Contenido día 1",
-    "text": "Contenido día 1\n\nIntroducción\nFundamentos de datos reales\nProcesamiento y visualización\nAutomatización\nDatos climáticos grillados"
+    "text": "Contenido día 1\n\nIntroducción\nFundamentos\nProcesamiento y visualización\nAutomatización\nDatos climáticos grillados"
   },
   {
     "objectID": "slides/dia1/index.html#introducción",
     "href": "slides/dia1/index.html#introducción",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Introducción",
-    "text": "Introducción\n\n01\n\nR en ciencias del agua y cambio climático, Proyectos y Estructuras de Carpetas"
+    "text": "Introducción\n\n01\n\nR en Ciencias del Agua y Cambio Climático, Proyectos y Estructuras de Carpetas"
   },
   {
     "objectID": "slides/dia1/index.html#fundamentos-con-datos-reales",
     "href": "slides/dia1/index.html#fundamentos-con-datos-reales",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Fundamentos con datos reales",
-    "text": "Fundamentos con datos reales\n\n02\n\nObjetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse"
+    "text": "Fundamentos con datos reales"
   },
   {
     "objectID": "slides/dia1/index.html#procesamiento-y-visualización",
@@ -81,13 +81,146 @@
     "href": "slides/dia1/index.html#automatización",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Automatización",
-    "text": "Automatización\n\n04\n\nif/else (años secos/húmedos), for sobre múltiples estaciones, funciones propias (ETP Hargreaves), interación con purrr::map como alternativa"
+    "text": "Automatización\n\n04\n\nif/else (años secos/húmedos), for sobre múltiples estaciones, funciones propias (ETP Hargreaves), iteración con purrr::map como alternativa"
   },
   {
     "objectID": "slides/dia1/index.html#datos-climáticos-grillados",
     "href": "slides/dia1/index.html#datos-climáticos-grillados",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Datos climáticos grillados",
-    "text": "Datos climáticos grillados\n\n05\n\npaquete terra: lectura de NetCDF, recorte de cuenca, extracción de series, precipitación areal, climatología y mapas"
+    "text": "Datos climáticos grillados\n\n05\n\nPaquete terra: lectura de NetCDF, recorte de cuenca, extracción de series, precipitación areal, climatología y mapas"
+  },
+  {
+    "objectID": "slides/dia1/index.html#de-la-hoja-de-calculo-al-script",
+    "href": "slides/dia1/index.html#de-la-hoja-de-calculo-al-script",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "De la hoja de calculo al script",
+    "text": "De la hoja de calculo al script\n\n\nHoja de cálculo\n\nFórmulas dispersas en celdas\nPasos manuales difíciles de rastrear\nOtra estación = repetir todo\n\n\nScript en R\n\nCada paso queda escrito y estructurado\nSe ejecuta de nuevo con un clic\nuna función sirve para 1 o 100 estaciones\n\n\n\n02\n\nObjetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse"
+  },
+  {
+    "objectID": "slides/dia1/index.html#r-en-ciencias-del-agua",
+    "href": "slides/dia1/index.html#r-en-ciencias-del-agua",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "R en Ciencias del agua",
+    "text": "R en Ciencias del agua\nDe la hoja de calculo al script\n\n\nHoja de cálculo\n\nFórmulas dispersas en celdas\nPasos manuales difíciles de rastrear\nOtra estación = repetir todo\n\n\nScript en R\n\nCada paso queda escrito y estructurado\nSe ejecuta de nuevo con un clic\nuna función sirve para 1 o 100 estaciones\n\n\n. . . En cambio climático esto es clave: el mismo análisis se repite para varios modelos, escenarios y periodos.\n\n02\n\nObjetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse"
+  },
+  {
+    "objectID": "slides/dia1/index.html#r-en-ciencias-del-agua-y-cambio-climático",
+    "href": "slides/dia1/index.html#r-en-ciencias-del-agua-y-cambio-climático",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "R en Ciencias del Agua y Cambio Climático",
+    "text": "R en Ciencias del Agua y Cambio Climático\n\n\n\nCiencia de datos\n\nEs un campo interdisciplinario centrado en extraer conocimiento, valor y patrones predictivos a partir de grandes volúmenes de datos (tanto estructurados como no estructurados). Integra matemáticas, estadística aplicada y programación de software\n\n\n\nHidrología computacional\n\nEs una disciplina que permite a los investigadores gestionar todo el ciclo de la información: desde la obtención, procesamiento y limpieza de grandes volúmenes de datos, hasta su análisis y modelamiento mediante flujos de trabajo específicos. Además facilita la documentación, visualización y el intercambio de resultados en diversas plataformas."
+  },
+  {
+    "objectID": "slides/dia1/index.html#r-en-ciencias-del-agua-y-cambio-climático-1",
+    "href": "slides/dia1/index.html#r-en-ciencias-del-agua-y-cambio-climático-1",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "R en Ciencias del Agua y Cambio Climático",
+    "text": "R en Ciencias del Agua y Cambio Climático\n\nHidroinformática\n\nEs una disciplina que aplica las tecnologías de la información, las ciencias de la computación y la inteligencia artificial al estudio, control y gestión de los recursos hídricos. Nace de la necesidad de integrar la hidrología y la hidráulica tradicionales con herramientas computacionales avanzadas.\n\n\nFuente: Abbott, M. B. (1991). Hydroinformatics: Information technology and the aquatic environment. Avebury Technical.\n\n\n\n\n\n\n\n\n\nFuente: Slater et al. (2019). Using R in hydrology: a review of recent developments and future directions. HESS, 23, 2939–2963. https://doi.org/10.5194/hess-23-2939-2019"
+  },
+  {
+    "objectID": "slides/dia1/index.html#r-en-ciencias-del-agua-y-cambio-climático-2",
+    "href": "slides/dia1/index.html#r-en-ciencias-del-agua-y-cambio-climático-2",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "R en Ciencias del Agua y Cambio Climático",
+    "text": "R en Ciencias del Agua y Cambio Climático"
+  },
+  {
+    "objectID": "slides/dia1/index.html#r-en-ciencias-del-agua-y-cambio-climático-3",
+    "href": "slides/dia1/index.html#r-en-ciencias-del-agua-y-cambio-climático-3",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "R en Ciencias del Agua y Cambio Climático",
+    "text": "R en Ciencias del Agua y Cambio Climático\nDe la hoja de cálculo al script\n\n\n\nHoja de cálculo\n\nFórmulas dispersas en celdas\nPasos manuales difíciles de rastrear\nOtra estación = repetir todo\nFalla de una máquina a otra\nNo existe control de versiones\n\n\n\n\nScript en R\n\nCada paso queda escrito y estructurado\nSe ejecuta de nuevo con un clic\nUna función sirve para 1 o 100 estaciones\nPresentación interactiva de resultados\nControl de versiones\n\n\n\n\nEl procesamiento de grandes volúmenes de datos conlleva a una mejora empleando R, la presentación e interactividad de resultados ayuda a una mejor comprensión de los análisis realizados.\n\n\nEn los análisis de grandes cuencas y para los enfoques de cambio climático esto es clave: el mismo análisis se repite para varios modelos, escenarios y periodos."
+  },
+  {
+    "objectID": "slides/dia1/index.html#fundamentos",
+    "href": "slides/dia1/index.html#fundamentos",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Fundamentos",
+    "text": "Fundamentos\n\n02\n\nObjetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse"
+  },
+  {
+    "objectID": "slides/dia1/index.html#por-queé-r-en-hidrología-y-cambio-climático",
+    "href": "slides/dia1/index.html#por-queé-r-en-hidrología-y-cambio-climático",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿Por queé R en hidrología y Cambio Climático?",
+    "text": "¿Por queé R en hidrología y Cambio Climático?\n\n\nLibre y gratuito No requiere licencia; funciona en Windows, macOS y Linux. Construido para analizar datos Realiza estadística y graficos de calidad desde su origen.\n\nReproducible El script documenta cada paso del análisis Paquetes hidrológicos airGR, hydroGOF, trend, qmap, terra, etc.\nCRAN reúne mas de 20 000 paquetes y mantiene una guía temática en hidrología (CRAN Task View: Hydrology)Enlace: https://github.com/cran-task-views/Hydrology/blob/main/Hydrology.md"
+  },
+  {
+    "objectID": "slides/dia1/index.html#por-qué-r-en-hidrología-y-cambio-climático",
+    "href": "slides/dia1/index.html#por-qué-r-en-hidrología-y-cambio-climático",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿Por qué R en Hidrología y Cambio Climático?",
+    "text": "¿Por qué R en Hidrología y Cambio Climático?\nDe la hoja de cálculo al script\n\n\n\nHoja de cálculo\n\nFórmulas dispersas en celdas\nPasos manuales difíciles de rastrear\nOtra estación = repetir todo\nFalla de una máquina a otra\nNo existe control de versiones\n\n\n\n\nScript en R\n\nCada paso queda escrito y estructurado\nSe ejecuta de nuevo con un clic\nUna función sirve para 1 o 100 estaciones\nPresentación interactiva de resultados\nControl de versiones\n\n\n\n\nR permite procesar grandes volúmenes de datos de forma eficiente, y la presentación interactiva de resultados facilita su comprensión.\n\n\nEn los análisis de grandes cuencas y para los enfoques de cambio climático esto es clave: el mismo análisis se repite para varios modelos, escenarios y periodos."
+  },
+  {
+    "objectID": "slides/dia1/index.html#rstudio-los-cuatro-paneles",
+    "href": "slides/dia1/index.html#rstudio-los-cuatro-paneles",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "RStudio: Los cuatro paneles",
+    "text": "RStudio: Los cuatro paneles"
+  },
+  {
+    "objectID": "slides/dia1/index.html#rstudio-los-cuatro-paneles-1",
+    "href": "slides/dia1/index.html#rstudio-los-cuatro-paneles-1",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "RStudio: los cuatro paneles",
+    "text": "RStudio: los cuatro paneles\n\n\n\n\nAtajo\nAcción\n\n\n\n\nCtrl + Enter\nEjecutar la línea o la selección\n\n\nCtrl + Shift + N\nNuevo script\n\n\nCtrl + S\nGuardar\n\n\n\nEl problema de setwd()\n# Solo funciona en MI computadora\nsetwd(\"C:/Users/Arnold/Documents/curso/datos\")\npp &lt;- read.csv(\"Precipitaciones.csv\")\n\n\n\nEsa ruta no existe en otra computadora\nEl script deja de funcionar al compartirlo\nSi mueves la carpeta, tampoco funciona en la tuya"
+  },
+  {
+    "objectID": "slides/dia1/index.html#el-problema-de-setwd",
+    "href": "slides/dia1/index.html#el-problema-de-setwd",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "El problema de setwd()",
+    "text": "El problema de setwd()\n# Solo funciona en MI computadora\nsetwd(\"C:/Users/Arnold/Documents/curso/datos\")\npp &lt;- read.csv(\"Precipitaciones.csv\")\n\n\nEsa ruta no existe en otra computadora\nEl script deja de funcionar al compartirlo\nSi mueves la carpeta, tampoco funciona en la tuya"
+  },
+  {
+    "objectID": "slides/dia1/index.html#proyectos-de-rstudio",
+    "href": "slides/dia1/index.html#proyectos-de-rstudio",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Proyectos de RStudio",
+    "text": "Proyectos de RStudio\n\n\nUn proyecto es una carpeta con un archivo .Rproj\nAl abrirlo, R trabaja desde esa carpeta\nLas rutas se escriben desde la raíz del proyecto\n\n\n\ngetwd()   # carpeta del proyecto\n\n# Funciona en CUALQUIER computadora\npp &lt;- read.csv(\"data/raw/Precipitaciones.csv\")\n\n\nEn el curso: doble clic en el archivo .Rproj de la carpeta descargada."
+  },
+  {
+    "objectID": "slides/dia1/index.html#estructura-de-carpetas",
+    "href": "slides/dia1/index.html#estructura-de-carpetas",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Estructura de carpetas",
+    "text": "Estructura de carpetas\nCurso-Taller-R-Hidrologia/\n├── Curso-Taller-R-Hidrologia.Rproj    abrir siempre desde aquí\n├── data/\n│   ├── raw/                           datos originales\n│   └── processed/                     datos procesados\n├── ejercicios/                        scripts del curso\n├── outputs/\n│   ├── figuras/                       gráficos generados\n│   └── tablas/                        tablas generadas\n└── slides/                            diapositivas\n\nLos datos de data/raw/ no se modifican: todo resultado se genera con un script."
+  },
+  {
+    "objectID": "slides/dia1/index.html#rstudio",
+    "href": "slides/dia1/index.html#rstudio",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "RStudio:",
+    "text": "RStudio:\n\nAcciones\n\n\n\nAtajo\nAcción\n\n\n\n\nCtrl + Enter\nEjecutar la línea o la selección\n\n\nCtrl + Shift + N\nNuevo script\n\n\nCtrl + S\nGuardar\n\n\n\n\nEl problema de setwd()\n# Solo funciona en MI computadora\nsetwd(\"C:/Users/Arnold/Documents/curso/datos\")\npp &lt;- read.csv(\"Precipitaciones.csv\")\n\n\n\nEsa ruta no existe en otra computadora\nEl script deja de funcionar al compartirlo\nSi mueves la carpeta, tampoco funciona en la tuya"
+  },
+  {
+    "objectID": "slides/dia1/index.html#rstudio-atajos-y-rutas",
+    "href": "slides/dia1/index.html#rstudio-atajos-y-rutas",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "RStudio: atajos y rutas",
+    "text": "RStudio: atajos y rutas\n\nAtajos de teclado\n\n\n\nAtajo\nAcción\n\n\n\n\nCtrl + Enter\nEjecutar la línea o la selección\n\n\nCtrl + Shift + N\nNuevo script\n\n\nCtrl + S\nGuardar\n\n\n\n\n\nEl problema de setwd()\n# Solo funciona en MI computadora\nsetwd(\"C:/Users/Arnold/Documents/curso/datos\")\npp &lt;- read.csv(\"Precipitaciones.csv\")\n\n\nEsa ruta no existe en otra computadora\nEl script deja de funcionar al compartirlo\nSi mueves la carpeta, tampoco funciona en la tuya"
+  },
+  {
+    "objectID": "slides/dia1/index.html#por-qué-r-en-hidrología-y-cambio-climático-1",
+    "href": "slides/dia1/index.html#por-qué-r-en-hidrología-y-cambio-climático-1",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿Por qué R en Hidrología y Cambio Climático?",
+    "text": "¿Por qué R en Hidrología y Cambio Climático?\n\n\n\nLibre y gratuito\nNo requiere licencia; funciona en Windows, macOS y Linux.\nConstruido para analizar datos\nEstadística y gráficos de calidad desde su origen.\n\n\n\nReproducible\nEl script documenta cada paso del análisis.\nPaquetes hidrológicos\nairGR, hydroGOF, trend, qmap, terra, etc.\n\n\n\nCRAN reúne más de 20 000 paquetes y mantiene una guía temática de hidrología (CRAN Task View: Hydrology).\n\nEnlace: https://github.com/cran-task-views/Hydrology/blob/main/Hydrology.md"
+  },
+  {
+    "objectID": "slides/dia1/index.html#proyectos-y-estructura-de-carpetas",
+    "href": "slides/dia1/index.html#proyectos-y-estructura-de-carpetas",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Proyectos y estructura de carpetas",
+    "text": "Proyectos y estructura de carpetas\nProyectos de RStudio\n\n\nUn proyecto es una carpeta con un archivo .Rproj\nAl abrirlo, R trabaja desde esa carpeta\nLas rutas se escriben desde la raíz del proyecto\n\n\n\ngetwd()   # carpeta del proyecto\n\n# Funciona en CUALQUIER computadora\npp &lt;- read.csv(\"data/raw/Precipitaciones.csv\")\n\n\nEn el Curso-Taller: doble clic en el archivo .Rproj de la carpeta descargada.\nEnlace: https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia"
+  },
+  {
+    "objectID": "slides/dia1/index.html#proyectos-y-estructura-de-carpetas-1",
+    "href": "slides/dia1/index.html#proyectos-y-estructura-de-carpetas-1",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Proyectos y estructura de carpetas",
+    "text": "Proyectos y estructura de carpetas\nEstructura del Curso-Taller\n\nCurso-Taller-R-Hidrologia/\n├── Curso-Taller-R-Hidrologia.Rproj    ← abrir siempre desde aquí\n├── data/\n│   ├── raw/                           datos originales (no se tocan)\n│   └── processed/                     datos procesados\n├── ejercicios/                        scripts del curso\n├── outputs/\n│   ├── figuras/                       gráficos generados\n│   └── tablas/                        tablas generadas\n└── slides/                            diapositivas\n\n\nLos datos de data/raw/ no se modifican: Los resultados se irán generando conforme se avance con los scripts del Curso-Taller."
   }
 ]

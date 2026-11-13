@@ -36,6 +36,47 @@ $presentation-heading-text-transform: none;
 .reveal .slides section.seccion h2 { color: #fff; font-size: 1.7em; margin-bottom: 0.8em; }
 .reveal .slides section.seccion > p { color: #fff; font-size: 0.7em; padding-left: 0.2em; }
 
+// Diapositivas de contenido (todas excepto portada, índice y separadores)
+// Para ajustar el tamaño general del texto basta con cambiar $escala-contenido.
+$escala-contenido: 0.65;
+
+.reveal .slides section:not(#title-slide):not(.contenido):not(.seccion):not(.stack) {
+  font-size: #{$escala-contenido}em;
+
+  h2 { font-size: 1.9em; margin-bottom: 0.5em; }
+  h3 { font-size: 1.25em; color: $azul; margin: 0.6em 0 0.3em 0; }
+  h2 + h3 { margin-top: 0; }
+  p, li { line-height: 1.35; }
+  ul, ol { margin-top: 0.2em; }
+  li { margin-bottom: 0.25em; }
+  .columns { margin-top: 0.4em; }
+  img { margin: 0.3em 0; }
+  .fuente { font-size: 0.6em; color: #666; margin-top: 0.2em; }
+}
+
+// Árbol de carpetas: recuadro con colores
+.reveal .slides section pre.arbol-carpetas {
+  font-size: 0.85em;
+  line-height: 1.45;
+  width: auto;
+  margin: 0.4em 0;
+  padding: 0.7em 1.1em;
+  background: #EEF4FB;
+  border: 2px solid $azul;
+  border-left: 10px solid $azul;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  color: #333;
+  white-space: pre;
+  overflow-x: auto;
+
+  .raiz  { color: $azul-oscuro; font-weight: bold; }
+  .rproj { color: $naranja; font-weight: bold; }
+  .dir   { color: $azul-titulo; font-weight: bold; }
+  .rama  { color: #9AA9BC; }
+  .nota  { color: #6B7785; font-style: italic; }
+}
+
 // Pie de página
 .reveal .footer { color: #555; font-size: 0.45em; }
 .has-dark-background .footer,
