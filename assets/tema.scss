@@ -51,6 +51,9 @@ $escala-contenido: 0.65;
   li { margin-bottom: 0.25em; }
   .columns { margin-top: 0.4em; }
   img { margin: 0.3em 0; }
+  div.sourceCode { margin: 0.35em 0; }
+  pre:not(.arbol-carpetas) { font-size: 0.8em; }   // tamaño del código (~21 px)
+  pre code { line-height: 1.35; }
   .fuente { font-size: 0.6em; color: #666; margin-top: 0.2em; }
 }
 

@@ -101,7 +101,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-60b81c9f2997e84a0d3db3319681de3e.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-d0821221f71f7114ffbf96746614051a.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -360,9 +360,12 @@ El script documenta cada paso del análisis.</p>
 <div class="fragment fade-in">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../../assets/img/rstudio_panel.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+<p><img data-src="../../assets/img/rstudio_panel.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
 </figure>
 </div>
+</div>
+<div class="fuente">
+<p>Enlace: <a href="https://rstudio.github.io/cheatsheets/html/rstudio-ide.html" class="uri">https://rstudio.github.io/cheatsheets/html/rstudio-ide.html</a></p>
 </div>
 </section>
 <section id="rstudio-atajos-y-rutas" class="slide level2 smaller">
@@ -453,6 +456,329 @@ El script documenta cada paso del análisis.</p>
 </div>
 <p>Objetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse</p>
 </section>
+<section id="estructuras-de-datos" class="slide level2">
+<h2>Estructuras de datos</h2>
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/Estructuras2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+</figure>
+</div>
+<div class="fuente">
+<p>Imagen tomada del Enlace: <a href="https://irwingss.github.io/intro_r_ciencias/estructurasdatos.html" class="uri">https://irwingss.github.io/intro_r_ciencias/estructurasdatos.html</a></p>
+</div>
+</div>
+</section>
+<section id="objetos-y-asignación" class="slide level2">
+<h2>Objetos y asignación</h2>
+<div class="fragment fade-in">
+<h3 id="guardar-un-valor-con--">Guardar un valor con <code>&lt;-</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a>caudal   <span class="ot">&lt;-</span> <span class="fl">12.69</span>            <span class="co"># m³/s, Huancané el 01/01/2024</span></span>
+<span id="cb3-2"><a aria-label="2"></a>estacion <span class="ot">&lt;-</span> <span class="st">"Huancane"</span>       <span class="co"># el uso de tilde a veces genera errores</span></span>
+<span id="cb3-3"><a aria-label="3"></a>caudal                       <span class="co"># escribir el nombre muestra su valor</span></span>
+<span id="cb3-4"><a aria-label="4"></a><span class="co">#&gt; [1] 12.69</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<h3 id="r-como-calculadora-hidrológica">R como calculadora hidrológica</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a>vol_dia <span class="ot">&lt;-</span> caudal <span class="sc">*</span> <span class="dv">86400</span>    <span class="co"># m³ que pasan en un día</span></span>
+<span id="cb4-2"><a aria-label="2"></a>vol_dia</span>
+<span id="cb4-3"><a aria-label="3"></a><span class="co">#&gt; [1] 1096416</span></span>
+<span id="cb4-4"><a aria-label="4"></a>vol_dia <span class="sc">/</span> <span class="fl">1e6</span>                <span class="co"># en hm³ (millones de m³)</span></span>
+<span id="cb4-5"><a aria-label="5"></a><span class="co">#&gt; [1] 1.096416</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="fuente">
+<p>Nombres válidos: empiezan con letra, sin espacios ni tildes (<code>pp_anual</code>, no <code>pp anual</code> ni <code>precipitación</code>). R distingue mayúsculas: <code>Caudal</code> ≠ <code>caudal</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="tipos-de-datos" class="slide level2">
+<h2>Tipos de datos</h2>
+<div class="fragment">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Ejemplo</th>
+<th>Uso en hidrología</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>numeric</code></td>
+<td><code>12.69</code></td>
+<td>caudal, precipitación, altitud</td>
+</tr>
+<tr class="even">
+<td><code>character</code></td>
+<td><code>"Huancane"</code></td>
+<td>nombre o código de estación</td>
+</tr>
+<tr class="odd">
+<td><code>logical</code></td>
+<td><code>TRUE</code>, <code>FALSE</code></td>
+<td>¿es año seco?, ¿falta el dato?</td>
+</tr>
+<tr class="even">
+<td><code>Date</code></td>
+<td><code>as.Date("2024-01-01")</code></td>
+<td>fecha de la observación</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p>Verificar los valores durante el proceso de escribir codigo es importante!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">class</span>(caudal)          <span class="co">#&gt; "numeric"</span></span>
+<span id="cb5-2"><a aria-label="2"></a><span class="fu">class</span>(estacion)        <span class="co">#&gt; "character"</span></span>
+<span id="cb5-3"><a aria-label="3"></a>caudal <span class="sc">&gt;</span> <span class="dv">10</span>            <span class="co">#&gt; TRUE</span></span>
+<span id="cb5-4"><a aria-label="4"></a><span class="fu">is.na</span>(<span class="cn">NA</span>)              <span class="co">#&gt; TRUE    NA = dato faltante</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="vectores" class="slide level2">
+<h2>Vectores</h2>
+<h3 id="precipitación-mensual-promedio-huancané-19912020">Precipitación mensual promedio — Huancané (1991–2020)</h3>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a><span class="co"># Valores de enero a diciembre</span></span>
+<span id="cb6-2"><a aria-label="2"></a>pp_mensual <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">134.0</span>, <span class="fl">104.9</span>, <span class="fl">104.2</span>, <span class="fl">36.8</span>, <span class="fl">11.2</span>, <span class="fl">7.0</span>,</span>
+<span id="cb6-3"><a aria-label="3"></a>                <span class="fl">4.2</span>, <span class="fl">8.8</span>, <span class="fl">25.0</span>, <span class="fl">56.4</span>, <span class="fl">58.6</span>, <span class="fl">105.8</span>)</span>
+<span id="cb6-4"><a aria-label="4"></a><span class="co"># Asignamos nombres</span></span>
+<span id="cb6-5"><a aria-label="5"></a><span class="fu">names</span>(pp_mensual) <span class="ot">&lt;-</span> month.abb    <span class="co"># Jan, Feb, ..., Dec</span></span>
+<span id="cb6-6"><a aria-label="6"></a><span class="co"># Verificamos la longitud de datos</span></span>
+<span id="cb6-7"><a aria-label="7"></a><span class="fu">length</span>(pp_mensual)   <span class="co">#&gt; 12</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>Operaciones básicas en la serie mensual</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a><span class="fu">sum</span>(pp_mensual)      <span class="co">#&gt; 656.9   precipitación anual (mm)</span></span>
+<span id="cb7-2"><a aria-label="2"></a><span class="fu">mean</span>(pp_mensual)     <span class="co">#&gt; 54.7    promedio</span></span>
+<span id="cb7-3"><a aria-label="3"></a><span class="fu">max</span>(pp_mensual)      <span class="co">#&gt; 134     valor máximo  </span></span>
+<span id="cb7-4"><a aria-label="4"></a><span class="fu">min</span>(pp_mensual)      <span class="co">#&gt; 4.2     valor mínimo</span></span>
+<span id="cb7-5"><a aria-label="5"></a><span class="fu">which.max</span>(pp_mensual) <span class="co">#&gt; Jan 1  mes más lluvioso</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>Las operaciones se aplican <strong>a todos los elementos a la vez</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a>pp_mensual <span class="sc">/</span> <span class="dv">10</span>                    <span class="co"># de mm a cm</span></span>
+<span id="cb8-2"><a aria-label="2"></a><span class="fu">round</span>(pp_mensual <span class="sc">/</span> <span class="fu">sum</span>(pp_mensual) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)  <span class="co"># % del total anual (mes a mes)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="vectores-seleccionar-elementos" class="slide level2">
+<h2>Vectores: seleccionar elementos</h2>
+<div class="fragment">
+<p>La selección se realiza empleando <strong>Corchetes</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-label="1"></a>pp_mensual[<span class="dv">1</span>]                  <span class="co"># primer elemento (enero)</span></span>
+<span id="cb9-2"><a aria-label="2"></a>pp_mensual[<span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)]     <span class="co"># temporada de lluvias DEFM</span></span>
+<span id="cb9-3"><a aria-label="3"></a>pp_mensual[<span class="st">"Jul"</span>]              <span class="co"># por nombre</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<h3 id="condiciones-lógicas">Condiciones lógicas</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-label="1"></a>pp_mensual <span class="sc">&gt;</span> <span class="dv">100</span></span>
+<span id="cb10-2"><a aria-label="2"></a><span class="co">#&gt;   Jan   Feb   Mar   Apr ...   Dec</span></span>
+<span id="cb10-3"><a aria-label="3"></a><span class="co">#&gt;  TRUE  TRUE  TRUE FALSE ...  TRUE</span></span>
+<span id="cb10-4"><a aria-label="4"></a></span>
+<span id="cb10-5"><a aria-label="5"></a>pp_mensual[pp_mensual <span class="sc">&gt;</span> <span class="dv">100</span>]   <span class="co"># solo los meses con más de 100 mm</span></span>
+<span id="cb10-6"><a aria-label="6"></a><span class="co">#&gt;   Jan   Feb   Mar   Dec</span></span>
+<span id="cb10-7"><a aria-label="7"></a><span class="co">#&gt; 134.0 104.9 104.2 105.8</span></span>
+<span id="cb10-8"><a aria-label="8"></a></span>
+<span id="cb10-9"><a aria-label="9"></a><span class="fu">sum</span>(pp_mensual[<span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)]) <span class="sc">/</span> <span class="fu">sum</span>(pp_mensual) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb10-10"><a aria-label="10"></a><span class="co">#&gt; 68.3   % de la lluvia anual cae en DEFM</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="data-frame" class="slide level2">
+<h2>Data frame</h2>
+<div class="fragment">
+<h3 id="tabla-de-estaciones-una-fila-una-estación">Tabla de estaciones (una fila = una estación)</h3>
+<p>Estructura clásica de un data frame</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-label="1"></a>estaciones <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-2"><a aria-label="2"></a>  <span class="at">nombre  =</span> <span class="fu">c</span>(<span class="st">"Ananea"</span>, <span class="st">"Muñani"</span>, <span class="st">"Putina"</span>, <span class="st">"Huancané"</span>, <span class="st">"Cojata"</span>),</span>
+<span id="cb11-3"><a aria-label="3"></a>  <span class="at">codigo  =</span> <span class="fu">c</span>(<span class="st">"000826"</span>, <span class="st">"000785"</span>, <span class="st">"157414"</span>, <span class="st">"000786"</span>, <span class="st">"000827"</span>),</span>
+<span id="cb11-4"><a aria-label="4"></a>  <span class="at">lat     =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">14.676</span>, <span class="sc">-</span><span class="fl">14.767</span>, <span class="sc">-</span><span class="fl">14.921</span>, <span class="sc">-</span><span class="fl">15.207</span>, <span class="sc">-</span><span class="fl">15.012</span>),</span>
+<span id="cb11-5"><a aria-label="5"></a>  <span class="at">lon     =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">69.534</span>, <span class="sc">-</span><span class="fl">69.952</span>, <span class="sc">-</span><span class="fl">69.876</span>, <span class="sc">-</span><span class="fl">69.758</span>, <span class="sc">-</span><span class="fl">69.361</span>),</span>
+<span id="cb11-6"><a aria-label="6"></a>  <span class="at">altitud =</span> <span class="fu">c</span>(<span class="dv">4660</span>, <span class="dv">3932</span>, <span class="dv">3861</span>, <span class="dv">3842</span>, <span class="dv">4347</span>)</span>
+<span id="cb11-7"><a aria-label="7"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>Explorando el <strong>data.frame</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-label="1"></a><span class="fu">str</span>(estaciones)       <span class="co"># ver la estructura: columnas y tipos</span></span>
+<span id="cb12-2"><a aria-label="2"></a><span class="fu">nrow</span>(estaciones)      <span class="co">#&gt; 5</span></span>
+<span id="cb12-3"><a aria-label="3"></a><span class="fu">names</span>(estaciones)     <span class="co">#&gt; "nombre" "codigo" "lat" "lon" "altitud"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fuente">
+<p><code>codigo</code> va entre comillas: si fuera número, R borraría los ceros iniciales (<code>000826</code> → <code>826</code>).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="data-frame-acceder-a-los-datos" class="slide level2">
+<h2>Data frame: acceder a los datos</h2>
+<div class="fragment">
+<p>Verificar el contenido del <strong>data.frame</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-label="1"></a>estaciones<span class="sc">$</span>altitud              <span class="co"># una columna (vector)</span></span>
+<span id="cb13-2"><a aria-label="2"></a><span class="fu">mean</span>(estaciones<span class="sc">$</span>altitud)        <span class="co">#&gt; 4128.4</span></span>
+<span id="cb13-3"><a aria-label="3"></a>estaciones[<span class="dv">2</span>, ]                 <span class="co"># fila 2 (Muñani)</span></span>
+<span id="cb13-4"><a aria-label="4"></a>estaciones[ , <span class="fu">c</span>(<span class="st">"nombre"</span>, <span class="st">"altitud"</span>)]   <span class="co"># dos columnas</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>Aplicando una condición básica</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-label="1"></a><span class="co"># Filas que cumplen una condición</span></span>
+<span id="cb14-2"><a aria-label="2"></a>estaciones[estaciones<span class="sc">$</span>altitud <span class="sc">&gt;</span> <span class="dv">4000</span>, ]</span>
+<span id="cb14-3"><a aria-label="3"></a><span class="co">#&gt;   nombre codigo     lat     lon altitud</span></span>
+<span id="cb14-4"><a aria-label="4"></a><span class="co">#&gt; 1 Ananea 000826 -14.676 -69.534    4660</span></span>
+<span id="cb14-5"><a aria-label="5"></a><span class="co">#&gt; 5 Cojata 000827 -15.012 -69.361    4347</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>Agregar una nueva columna se realiza con <strong>$</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-label="1"></a><span class="co"># Crear una columna nueva</span></span>
+<span id="cb15-2"><a aria-label="2"></a>estaciones<span class="sc">$</span>zona <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(estaciones<span class="sc">$</span>altitud <span class="sc">&gt;</span> <span class="dv">4000</span>, <span class="st">"alta"</span>, <span class="st">"media"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="listas" class="slide level2">
+<h2>Listas</h2>
+<div class="fragment">
+<h3 id="un-objeto-que-guarda-objetos-de-distinto-tipo">Un objeto que guarda objetos de distinto tipo</h3>
+<p>Asignamos las características de la Est. Huancané (nombre, código, coordenadas, valores)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-label="1"></a>huancane <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb16-2"><a aria-label="2"></a>  <span class="at">nombre     =</span> <span class="st">"Huancané"</span>,</span>
+<span id="cb16-3"><a aria-label="3"></a>  <span class="at">codigo     =</span> <span class="st">"000786"</span>,</span>
+<span id="cb16-4"><a aria-label="4"></a>  <span class="at">coord      =</span> <span class="fu">c</span>(<span class="at">lat =</span> <span class="sc">-</span><span class="fl">15.207</span>, <span class="at">lon =</span> <span class="sc">-</span><span class="fl">69.758</span>),</span>
+<span id="cb16-5"><a aria-label="5"></a>  <span class="at">pp_mensual =</span> pp_mensual</span>
+<span id="cb16-6"><a aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>Explorando la lista, empleamos <strong>$</strong> y <strong>corchetes</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-label="1"></a>huancane<span class="sc">$</span>nombre          <span class="co">#&gt; "Huancané"</span></span>
+<span id="cb17-2"><a aria-label="2"></a>huancane<span class="sc">$</span>coord[<span class="st">"lat"</span>]    <span class="co">#&gt; -15.207</span></span>
+<span id="cb17-3"><a aria-label="3"></a>huancane[[<span class="st">"pp_mensual"</span>]] <span class="co"># vector completo de 12 meses</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="fuente">
+<p>Las listas son clave para automatizar: en la sección 04 guardaremos <strong>una estación por elemento</strong> y aplicaremos la misma función a todas con <code>purrr::map()</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="fechas-con-lubridate" class="slide level2">
+<h2>Fechas con lubridate</h2>
+<div class="fragment">
+<h3 id="los-datos-del-visor-ana-traen-la-fecha-como-texto">Los datos del visor ANA traen la fecha como texto</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-label="1"></a><span class="co"># Cargamos la librería para fechas</span></span>
+<span id="cb18-2"><a aria-label="2"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb18-3"><a aria-label="3"></a></span>
+<span id="cb18-4"><a aria-label="4"></a>fecha_txt <span class="ot">&lt;-</span> <span class="st">"04/05/2026"</span>        <span class="co"># día/mes/año</span></span>
+<span id="cb18-5"><a aria-label="5"></a><span class="fu">class</span>(fecha_txt)                 <span class="co">#&gt; "character"</span></span>
+<span id="cb18-6"><a aria-label="6"></a></span>
+<span id="cb18-7"><a aria-label="7"></a><span class="co"># Cambiamos al formato adecuado</span></span>
+<span id="cb18-8"><a aria-label="8"></a>fecha <span class="ot">&lt;-</span> <span class="fu">dmy</span>(fecha_txt)          <span class="co"># d-m-y: día, mes, año</span></span>
+<span id="cb18-9"><a aria-label="9"></a>fecha                            <span class="co">#&gt; "2026-05-04" año, mes, día</span></span>
+<span id="cb18-10"><a aria-label="10"></a><span class="fu">class</span>(fecha)                     <span class="co">#&gt; "Date", verificamos la clase</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>Exploramos las fechas con las funciones</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-label="1"></a><span class="fu">year</span>(fecha)     <span class="co">#&gt; 2026</span></span>
+<span id="cb19-2"><a aria-label="2"></a><span class="fu">month</span>(fecha)    <span class="co">#&gt; 5</span></span>
+<span id="cb19-3"><a aria-label="3"></a><span class="fu">yday</span>(fecha)     <span class="co">#&gt; 124      día del año</span></span>
+<span id="cb19-4"><a aria-label="4"></a>fecha <span class="sc">+</span> <span class="dv">30</span>      <span class="co">#&gt; "2026-06-03"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="fechas-secuencias-y-diferencias" class="slide level2">
+<h2>Fechas: secuencias y diferencias</h2>
+<div class="fragment">
+<p>Creando la secuencia de fechas o vector fecha</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a><span class="co"># Primera forma</span></span>
+<span id="cb20-2"><a aria-label="2"></a>dias <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">ymd</span>(<span class="st">"2024-01-01"</span>), <span class="fu">ymd</span>(<span class="st">"2024-12-31"</span>), <span class="at">by =</span> <span class="st">"day"</span>)</span>
+<span id="cb20-3"><a aria-label="3"></a><span class="fu">length</span>(dias)                     <span class="co">#&gt; 366   (2024 es bisiesto)</span></span>
+<span id="cb20-4"><a aria-label="4"></a></span>
+<span id="cb20-5"><a aria-label="5"></a>meses <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">ymd</span>(<span class="st">"1991-01-01"</span>), <span class="fu">ymd</span>(<span class="st">"2020-12-01"</span>), <span class="at">by =</span> <span class="st">"month"</span>)</span>
+<span id="cb20-6"><a aria-label="6"></a><span class="fu">length</span>(meses)                    <span class="co">#&gt; 360   (30 años × 12)</span></span>
+<span id="cb20-7"><a aria-label="7"></a></span>
+<span id="cb20-8"><a aria-label="8"></a><span class="co"># Segunda forma</span></span>
+<span id="cb20-9"><a aria-label="9"></a>dias <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"2024-01-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2024-12-31"</span>), <span class="at">by =</span> <span class="st">"day"</span>)</span>
+<span id="cb20-10"><a aria-label="10"></a>meses <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"1991-01-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2020-12-01"</span>), <span class="at">by =</span> <span class="st">"month"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-label="1"></a>inicio <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"1956-01-01"</span>)      <span class="co"># inicio del registro de caudal</span></span>
+<span id="cb21-2"><a aria-label="2"></a>fin    <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"2026-05-04"</span>)</span>
+<span id="cb21-3"><a aria-label="3"></a>fin <span class="sc">-</span> inicio                     <span class="co">#&gt; Time difference of 25691 days</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="fuente">
+<p>El registro tiene 25 208 días con dato, pero el periodo abarca 25 692: <strong>faltan 484 días</strong> que no aparecen ni como <code>NA</code>. Las secuencias de fechas sirven para detectarlos (sección 03).</p>
+</div>
+</div>
+</section>
+<section id="paquetes-y-tidyverse" class="slide level2">
+<h2>Paquetes y tidyverse</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-label="1"></a><span class="co"># Se instala UNA vez</span></span>
+<span id="cb22-2"><a aria-label="2"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb22-3"><a aria-label="3"></a></span>
+<span id="cb22-4"><a aria-label="4"></a><span class="co"># Se carga en CADA sesión</span></span>
+<span id="cb22-5"><a aria-label="5"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb22-6"><a aria-label="6"></a><span class="fu">library</span>(readxl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Paquete</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>readr</code> / <code>readxl</code></td>
+<td>importar datos</td>
+</tr>
+<tr class="even">
+<td><code>dplyr</code></td>
+<td>filtrar, resumir</td>
+</tr>
+<tr class="odd">
+<td><code>tidyr</code></td>
+<td>reordenar tablas</td>
+</tr>
+<tr class="even">
+<td><code>lubridate</code></td>
+<td>fechas</td>
+</tr>
+<tr class="odd">
+<td><code>ggplot2</code></td>
+<td>gráficos</td>
+</tr>
+<tr class="even">
+<td><code>purrr</code></td>
+<td>repetir tareas</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="fragment">
+<h3 id="el-pipe-y-luego">El pipe <code>|&gt;</code>: “y luego…”</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-label="1"></a><span class="fu">round</span>(<span class="fu">mean</span>(pp_mensual), <span class="dv">1</span>)              <span class="co"># se lee de adentro hacia afuera</span></span>
+<span id="cb23-2"><a aria-label="2"></a></span>
+<span id="cb23-3"><a aria-label="3"></a>pp_mensual <span class="sc">|&gt;</span> <span class="fu">mean</span>() <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">1</span>)        <span class="co"># se lee de izquierda a derecha</span></span>
+<span id="cb23-4"><a aria-label="4"></a><span class="co">#&gt; 54.7</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="primer-contacto-con-los-datos-reales" class="slide level2">
+<h2>Primer contacto con los datos reales</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-label="1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb24-2"><a aria-label="2"></a></span>
+<span id="cb24-3"><a aria-label="3"></a>q <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx"</span>,</span>
+<span id="cb24-4"><a aria-label="4"></a>                <span class="at">skip =</span> <span class="dv">13</span>)       <span class="co"># saltar las 13 filas de metadatos</span></span>
+<span id="cb24-5"><a aria-label="5"></a><span class="fu">head</span>(q, <span class="dv">3</span>)</span>
+<span id="cb24-6"><a aria-label="6"></a><span class="co">#&gt;   FECHA      HORA  `VALOR (m³/s)`</span></span>
+<span id="cb24-7"><a aria-label="7"></a><span class="co">#&gt; 1 04/05/2026 00:00          17.41</span></span>
+<span id="cb24-8"><a aria-label="8"></a><span class="co">#&gt; ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<h3 id="qué-hay-que-arreglar">¿Qué hay que arreglar?</h3>
+<ul>
+<li><code>FECHA</code> es texto → convertir con <code>dmy()</code></li>
+<li>Está ordenado de <strong>2026 a 1956</strong> → ordenar</li>
+<li>Faltan días sin fila → completar y contar vacíos</li>
+<li>En precipitación hay <strong>días duplicados</strong> (2017–2024)</li>
+</ul>
+<div class="fragment">
+<p>Eso es la sección 03: <strong>procesamiento y control de calidad</strong>.</p>
+</div>
+</div>
+</section>
 <section id="procesamiento-y-visualización" class="slide level2 seccion" data-background-color="#0B5394">
 <h2>Procesamiento y visualización</h2>
 <div class="num">
@@ -460,21 +786,753 @@ El script documenta cada paso del análisis.</p>
 </div>
 <p>Importación (readr, readxl), dplyr/tidyr, NAs y control de calidad, agregación diaria → mensual → anual, ggplot2</p>
 </section>
+<section id="importar-y-ordenar-el-caudal" class="slide level2">
+<h2>Importar y ordenar el caudal</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-2"><a aria-label="2"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-3"><a aria-label="3"></a></span>
+<span id="cb25-4"><a aria-label="4"></a>q <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx"</span>,</span>
+<span id="cb25-5"><a aria-label="5"></a>                <span class="at">skip =</span> <span class="dv">13</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-6"><a aria-label="6"></a>  <span class="fu">rename</span>(<span class="at">fecha =</span> FECHA, <span class="at">hora =</span> HORA, <span class="at">q =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span>  <span class="co"># nombres cortos</span></span>
+<span id="cb25-7"><a aria-label="7"></a>  <span class="fu">mutate</span>(<span class="at">fecha =</span> <span class="fu">dmy</span>(fecha)) <span class="sc">|&gt;</span>                 <span class="co"># texto → Date</span></span>
+<span id="cb25-8"><a aria-label="8"></a>  <span class="fu">arrange</span>(fecha) <span class="sc">|&gt;</span>                             <span class="co"># de 1956 a 2026</span></span>
+<span id="cb25-9"><a aria-label="9"></a>  <span class="fu">select</span>(fecha, q)                              <span class="co"># columnas útiles</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-label="1"></a>q</span>
+<span id="cb26-2"><a aria-label="2"></a><span class="co">#&gt;   fecha          q</span></span>
+<span id="cb26-3"><a aria-label="3"></a><span class="co">#&gt; 1 1956-01-01  0.08</span></span>
+<span id="cb26-4"><a aria-label="4"></a><span class="co">#&gt; 2 1956-01-02  0.05</span></span>
+<span id="cb26-5"><a aria-label="5"></a><span class="co">#&gt; ...</span></span>
+<span id="cb26-6"><a aria-label="6"></a><span class="fu">nrow</span>(q)            <span class="co">#&gt; 25208</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fuente">
+<p>Una sola cadena con <code>|&gt;</code> resuelve los tres problemas de la sección 02: nombres, tipo de fecha y orden.</p>
+</div>
+</div>
+</section>
+<section id="los-verbos-de-dplyr" class="slide level2">
+<h2>Los verbos de dplyr</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 35%">
+<col style="width: 48%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Verbo</th>
+<th>Qué hace</th>
+<th>Ejemplo con el caudal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>filter()</code></td>
+<td>elige filas</td>
+<td><code>filter(q &gt; 200)</code> → 72 días</td>
+</tr>
+<tr class="even">
+<td><code>mutate()</code></td>
+<td>crea columnas</td>
+<td><code>mutate(vol_hm3 = q * 86400 / 1e6)</code></td>
+</tr>
+<tr class="odd">
+<td><code>arrange()</code></td>
+<td>ordena</td>
+<td><code>arrange(desc(q))</code> → 368.6 el 27/02/2016</td>
+</tr>
+<tr class="even">
+<td><code>select()</code></td>
+<td>elige columnas</td>
+<td><code>select(fecha, q)</code></td>
+</tr>
+<tr class="odd">
+<td><code>summarise()</code></td>
+<td>resume</td>
+<td><code>summarise(q_medio = mean(q))</code> → 18.3</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<h3 id="group_by-summarise-resumir-por-grupos"><code>group_by()</code> + <code>summarise()</code>: resumir por grupos</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-label="1"></a>q <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a aria-label="2"></a>  <span class="fu">group_by</span>(<span class="at">anio =</span> <span class="fu">year</span>(fecha)) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a aria-label="3"></a>  <span class="fu">summarise</span>(<span class="at">q_medio =</span> <span class="fu">mean</span>(q), <span class="at">q_max =</span> <span class="fu">max</span>(q))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="completar-las-fechas-faltantes" class="slide level2">
+<h2>Completar las fechas faltantes</h2>
+<h3 id="los-días-sin-dato-no-tienen-fila-hay-que-crearlos">Los días sin dato no tienen fila → hay que crearlos</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-label="1"></a>q_full <span class="ot">&lt;-</span> q <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a aria-label="2"></a>  <span class="fu">complete</span>(<span class="at">fecha =</span> <span class="fu">seq</span>(<span class="fu">min</span>(fecha), <span class="fu">max</span>(fecha), <span class="at">by =</span> <span class="st">"day"</span>))</span>
+<span id="cb28-3"><a aria-label="3"></a></span>
+<span id="cb28-4"><a aria-label="4"></a><span class="fu">nrow</span>(q_full)            <span class="co">#&gt; 25692</span></span>
+<span id="cb28-5"><a aria-label="5"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(q_full<span class="sc">$</span>q))    <span class="co">#&gt; 484   ahora sí aparecen como NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-label="1"></a>q_full <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a aria-label="2"></a>  <span class="fu">group_by</span>(<span class="at">anio =</span> <span class="fu">year</span>(fecha)) <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a aria-label="3"></a>  <span class="fu">summarise</span>(<span class="at">n_na =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(q))) <span class="sc">|&gt;</span></span>
+<span id="cb29-4"><a aria-label="4"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_na))</span>
+<span id="cb29-5"><a aria-label="5"></a><span class="co">#&gt;   anio  n_na</span></span>
+<span id="cb29-6"><a aria-label="6"></a><span class="co">#&gt;   1975   244</span></span>
+<span id="cb29-7"><a aria-label="7"></a><span class="co">#&gt;   2020   119</span></span>
+<span id="cb29-8"><a aria-label="8"></a><span class="co">#&gt;   1985    32</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="precipitación-registros-duplicados" class="slide level2">
+<h2>Precipitación: registros duplicados</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-label="1"></a>pp <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/precipitacion/PP_000786_Huancane.xlsx"</span>, <span class="at">skip =</span> <span class="dv">13</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a aria-label="2"></a>  <span class="fu">rename</span>(<span class="at">fecha =</span> FECHA, <span class="at">hora =</span> HORA, <span class="at">pp =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a aria-label="3"></a>  <span class="fu">mutate</span>(<span class="at">fecha =</span> <span class="fu">dmy</span>(fecha))</span>
+<span id="cb30-4"><a aria-label="4"></a></span>
+<span id="cb30-5"><a aria-label="5"></a><span class="fu">table</span>(pp<span class="sc">$</span>hora)</span>
+<span id="cb30-6"><a aria-label="6"></a><span class="co">#&gt; 00:00 01:00 05:00</span></span>
+<span id="cb30-7"><a aria-label="7"></a><span class="co">#&gt; 19030     1  1260</span></span>
+<span id="cb30-8"><a aria-label="8"></a></span>
+<span id="cb30-9"><a aria-label="9"></a>pp <span class="sc">|&gt;</span> <span class="fu">count</span>(fecha) <span class="sc">|&gt;</span> <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">nrow</span>()</span>
+<span id="cb30-10"><a aria-label="10"></a><span class="co">#&gt; 1260   fechas repetidas entre 2017 y 2024</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-label="1"></a>pp <span class="sc">|&gt;</span> <span class="fu">group_by</span>(fecha) <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="fu">n_distinct</span>(pp) <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb31-2"><a aria-label="2"></a><span class="co">#&gt;   fecha      hora     pp</span></span>
+<span id="cb31-3"><a aria-label="3"></a><span class="co">#&gt;   2017-02-28 00:00  21.9</span></span>
+<span id="cb31-4"><a aria-label="4"></a><span class="co">#&gt;   2017-02-28 05:00   2.9     ← ¿cuál es el correcto?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="precipitación-una-fila-por-día" class="slide level2">
+<h2>Precipitación: una fila por día</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a aria-label="1"></a>pp <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">year</span>(fecha) <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(pp))</span>
+<span id="cb32-2"><a aria-label="2"></a><span class="co">#&gt; 1334.5 mm   ← ¡casi el doble de lo normal!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<h3 id="regla-del-curso-usar-0000-si-no-existe-0500">Regla del curso: usar 00:00; si no existe, 05:00</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-label="1"></a>pp <span class="ot">&lt;-</span> pp <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a aria-label="2"></a>  <span class="fu">arrange</span>(fecha, hora) <span class="sc">|&gt;</span>            <span class="co"># "00:00" queda antes que "05:00"</span></span>
+<span id="cb33-3"><a aria-label="3"></a>  <span class="fu">distinct</span>(fecha, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span>   <span class="co"># conserva la primera fila</span></span>
+<span id="cb33-4"><a aria-label="4"></a>  <span class="fu">select</span>(fecha, pp)</span>
+<span id="cb33-5"><a aria-label="5"></a></span>
+<span id="cb33-6"><a aria-label="6"></a>pp <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">year</span>(fecha) <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(pp))</span>
+<span id="cb33-7"><a aria-label="7"></a><span class="co">#&gt; 685.8 mm</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="fuente">
+<p>Antes de calcular cualquier estadístico hay que conocer el dato: un error de formato puede duplicar la lluvia anual sin que aparezca ningún mensaje de error.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="control-de-calidad-básico" class="slide level2">
+<h2>Control de calidad básico</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a aria-label="1"></a>q_full <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">negativos =</span> <span class="fu">sum</span>(q <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb34-2"><a aria-label="2"></a>                    <span class="at">ceros     =</span> <span class="fu">sum</span>(q <span class="sc">==</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb34-3"><a aria-label="3"></a><span class="co">#&gt;   negativos ceros</span></span>
+<span id="cb34-4"><a aria-label="4"></a><span class="co">#&gt;           0     6     ← 2012 y 2014: revisar</span></span>
+<span id="cb34-5"><a aria-label="5"></a></span>
+<span id="cb34-6"><a aria-label="6"></a>pp_full <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">negativos =</span> <span class="fu">sum</span>(pp <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb34-7"><a aria-label="7"></a>                     <span class="at">maximo    =</span> <span class="fu">max</span>(pp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb34-8"><a aria-label="8"></a><span class="co">#&gt;   negativos maximo</span></span>
+<span id="cb34-9"><a aria-label="9"></a><span class="co">#&gt;           0   68.7    ← 15/03/1994</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-label="1"></a>vacios_pp <span class="ot">&lt;-</span> pp_full <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a aria-label="2"></a>  <span class="fu">group_by</span>(<span class="at">anio =</span> <span class="fu">year</span>(fecha), <span class="at">mes =</span> <span class="fu">month</span>(fecha)) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a aria-label="3"></a>  <span class="fu">summarise</span>(<span class="at">n_na =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(pp)), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="control-de-calidad-mapa-de-vacíos" class="slide level2">
+<h2>Control de calidad: mapa de vacíos</h2>
+
+<img data-src="../../assets/img/s03_PP_vacios.png" class="quarto-figure quarto-figure-center r-stretch" style="width:85.0%"><div class="fuente">
+<p>Estación Huancané (000786): sin datos en 2010–2016 y 2020–2022. Antes de usar una estación hay que saber <strong>qué periodo cubre realmente</strong>.</p>
+</div>
+</section>
+<section id="agregación-diaria-mensual" class="slide level2">
+<h2>Agregación: diaria → mensual</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a aria-label="1"></a>max_na <span class="ot">&lt;-</span> <span class="dv">3</span>     <span class="co"># un mes es válido con 3 días sin dato como máximo</span></span>
+<span id="cb36-2"><a aria-label="2"></a></span>
+<span id="cb36-3"><a aria-label="3"></a>q_mensual <span class="ot">&lt;-</span> q_full <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a aria-label="4"></a>  <span class="fu">group_by</span>(<span class="at">anio =</span> <span class="fu">year</span>(fecha), <span class="at">mes =</span> <span class="fu">month</span>(fecha)) <span class="sc">|&gt;</span></span>
+<span id="cb36-5"><a aria-label="5"></a>  <span class="fu">summarise</span>(<span class="at">n_na =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(q)),</span>
+<span id="cb36-6"><a aria-label="6"></a>            <span class="at">q    =</span> <span class="fu">mean</span>(q, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),     <span class="co"># caudal: PROMEDIO</span></span>
+<span id="cb36-7"><a aria-label="7"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-8"><a aria-label="8"></a>  <span class="fu">mutate</span>(<span class="at">q =</span> <span class="fu">if_else</span>(n_na <span class="sc">&gt;</span> max_na, <span class="cn">NA</span>, q))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a aria-label="1"></a>pp_mensual <span class="ot">&lt;-</span> pp_full <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a aria-label="2"></a>  <span class="fu">group_by</span>(<span class="at">anio =</span> <span class="fu">year</span>(fecha), <span class="at">mes =</span> <span class="fu">month</span>(fecha)) <span class="sc">|&gt;</span></span>
+<span id="cb37-3"><a aria-label="3"></a>  <span class="fu">summarise</span>(<span class="at">n_na =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(pp)),</span>
+<span id="cb37-4"><a aria-label="4"></a>            <span class="at">pp   =</span> <span class="fu">sum</span>(pp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),     <span class="co"># precipitación: SUMA</span></span>
+<span id="cb37-5"><a aria-label="5"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb37-6"><a aria-label="6"></a>  <span class="fu">mutate</span>(<span class="at">pp =</span> <span class="fu">if_else</span>(n_na <span class="sc">&gt;</span> max_na, <span class="cn">NA</span>, pp))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="agregación-mensual-anual" class="slide level2">
+<h2>Agregación: mensual → anual</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a aria-label="1"></a>q_anual <span class="ot">&lt;-</span> q_mensual <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a aria-label="2"></a>  <span class="fu">group_by</span>(anio) <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a aria-label="3"></a>  <span class="fu">summarise</span>(<span class="at">n_meses =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(q)),   <span class="co"># se calcula ANTES que q</span></span>
+<span id="cb38-4"><a aria-label="4"></a>            <span class="at">q       =</span> <span class="fu">mean</span>(q)) <span class="sc">|&gt;</span></span>
+<span id="cb38-5"><a aria-label="5"></a>  <span class="fu">filter</span>(n_meses <span class="sc">==</span> <span class="dv">12</span>)                 <span class="co"># solo años completos</span></span>
+<span id="cb38-6"><a aria-label="6"></a></span>
+<span id="cb38-7"><a aria-label="7"></a>q_anual <span class="sc">|&gt;</span> <span class="fu">arrange</span>(q) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span>
+<span id="cb38-8"><a aria-label="8"></a><span class="co">#&gt;   anio n_meses     q</span></span>
+<span id="cb38-9"><a aria-label="9"></a><span class="co">#&gt;   2023      12  4.75   ← el año más seco del registro</span></span>
+<span id="cb38-10"><a aria-label="10"></a><span class="co">#&gt;   1983      12  7.23</span></span>
+<span id="cb38-11"><a aria-label="11"></a><span class="co">#&gt;   1967      12  7.67</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="fuente">
+<p><code>summarise()</code> calcula en orden: si <code>q</code> se calculara primero, <code>n_meses</code> contaría sobre el valor anual y no sobre los 12 meses.</p>
+</div>
+</div>
+</section>
+<section id="ggplot2-la-gramática-de-los-gráficos" class="slide level2">
+<h2>ggplot2: la gramática de los gráficos</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-label="1"></a><span class="fu">ggplot</span>(q_full,</span>
+<span id="cb39-2"><a aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> fecha, <span class="at">y =</span> q)) <span class="sc">+</span></span>
+<span id="cb39-3"><a aria-label="3"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#0B5394"</span>,</span>
+<span id="cb39-4"><a aria-label="4"></a>            <span class="at">linewidth =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb39-5"><a aria-label="5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Caudal diario"</span>,</span>
+<span id="cb39-6"><a aria-label="6"></a>       <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb39-7"><a aria-label="7"></a>       <span class="at">y =</span> <span class="st">"Caudal (m³/s)"</span>) <span class="sc">+</span></span>
+<span id="cb39-8"><a aria-label="8"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:55%;">
+<ul>
+<li><code>ggplot()</code>: <strong>datos</strong></li>
+<li><code>aes()</code>: qué variable va en cada <strong>eje</strong></li>
+<li><code>geom_*()</code>: la <strong>forma</strong> (línea, barra, punto)</li>
+<li><code>labs()</code>, <code>theme()</code>: títulos y estilo</li>
+<li>Las capas se suman con <code>+</code></li>
+</ul>
+</div></div>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/s03_Q_hidrograma.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="ggplot2-régimen-y-variabilidad" class="slide level2">
+<h2>ggplot2: régimen y variabilidad</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a aria-label="1"></a><span class="fu">ggplot</span>(q_clim, <span class="fu">aes</span>(<span class="fu">factor</span>(mes), q)) <span class="sc">+</span></span>
+<span id="cb40-2"><a aria-label="2"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#0B5394"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img data-src="../../assets/img/s03_Q_regimen.png" style="width:100.0%"></p>
+</div><div class="column" style="width:50%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a aria-label="1"></a><span class="fu">ggplot</span>(q_anual, <span class="fu">aes</span>(anio, q)) <span class="sc">+</span></span>
+<span id="cb41-2"><a aria-label="2"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> anio <span class="sc">==</span> <span class="dv">2023</span>)) <span class="sc">+</span></span>
+<span id="cb41-3"><a aria-label="3"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> q_medio)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img data-src="../../assets/img/s03_Q_anual.png" style="width:100.0%"></p>
+</div></div>
+<div class="fuente">
+<p>Febrero concentra el mayor caudal (57.4 m³/s) y setiembre el menor (2.6 m³/s). En 2023 el caudal medio anual fue de 4.75 m³/s, una cuarta parte del promedio (17.9 m³/s).</p>
+</div>
+</section>
+<section id="exportar-resultados" class="slide level2">
+<h2>Exportar resultados</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a aria-label="1"></a><span class="co"># Tablas procesadas</span></span>
+<span id="cb42-2"><a aria-label="2"></a><span class="fu">write_csv</span>(q_full,     <span class="st">"data/processed/Q_diario_Huancane.csv"</span>)</span>
+<span id="cb42-3"><a aria-label="3"></a><span class="fu">write_csv</span>(pp_mensual, <span class="st">"data/processed/PP_mensual_Huancane.csv"</span>)</span>
+<span id="cb42-4"><a aria-label="4"></a><span class="fu">write_csv</span>(q_anual,    <span class="st">"outputs/tablas/Q_anual_Huancane.csv"</span>)</span>
+<span id="cb42-5"><a aria-label="5"></a></span>
+<span id="cb42-6"><a aria-label="6"></a><span class="co"># Figuras</span></span>
+<span id="cb42-7"><a aria-label="7"></a><span class="fu">ggsave</span>(<span class="st">"outputs/figuras/Q_hidrograma.png"</span>, g_hidro,</span>
+<span id="cb42-8"><a aria-label="8"></a>       <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="fl">4.5</span>, <span class="at">dpi =</span> <span class="dv">150</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<ul>
+<li><code>data/raw/</code> sigue intacto: todo se puede <strong>regenerar</strong> ejecutando el script</li>
+<li>Script completo: <code>ejercicios/02_Procesamiento.R</code> (con ejercicios E1–E6)</li>
+</ul>
+</div>
+</section>
 <section id="automatización" class="slide level2 seccion" data-background-color="#0B5394">
 <h2>Automatización</h2>
 <div class="num">
 <p>04</p>
 </div>
-<p>if/else (años secos/húmedos), for sobre múltiples estaciones, funciones propias (ETP Hargreaves), iteración con purrr::map como alternativa</p>
+<p>Funciones propias, if/else (años secos/húmedos), for sobre múltiples estaciones, iteración con purrr::map</p>
+</section>
+<section id="funciones-propias" class="slide level2">
+<h2>Funciones propias</h2>
+<h3 id="escribir-la-limpieza-una-vez-y-reutilizarla">Escribir la limpieza UNA vez y reutilizarla</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a aria-label="1"></a>leer_senamhi <span class="ot">&lt;-</span> <span class="cf">function</span>(archivo) {</span>
+<span id="cb43-2"><a aria-label="2"></a>  <span class="fu">read_excel</span>(archivo, <span class="at">skip =</span> <span class="dv">13</span>) <span class="sc">|&gt;</span></span>
+<span id="cb43-3"><a aria-label="3"></a>    <span class="fu">rename</span>(<span class="at">fecha =</span> <span class="dv">1</span>, <span class="at">hora =</span> <span class="dv">2</span>, <span class="at">valor =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb43-4"><a aria-label="4"></a>    <span class="fu">mutate</span>(<span class="at">fecha =</span> <span class="fu">dmy</span>(fecha)) <span class="sc">|&gt;</span></span>
+<span id="cb43-5"><a aria-label="5"></a>    <span class="fu">arrange</span>(fecha, hora) <span class="sc">|&gt;</span></span>
+<span id="cb43-6"><a aria-label="6"></a>    <span class="fu">distinct</span>(fecha, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span>        <span class="co"># regla 00:00 → 05:00</span></span>
+<span id="cb43-7"><a aria-label="7"></a>    <span class="fu">select</span>(fecha, valor) <span class="sc">|&gt;</span></span>
+<span id="cb43-8"><a aria-label="8"></a>    <span class="fu">complete</span>(<span class="at">fecha =</span> <span class="fu">seq</span>(<span class="fu">min</span>(fecha), <span class="fu">max</span>(fecha), <span class="at">by =</span> <span class="st">"day"</span>))</span>
+<span id="cb43-9"><a aria-label="9"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a aria-label="1"></a>q  <span class="ot">&lt;-</span> <span class="fu">leer_senamhi</span>(<span class="st">"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx"</span>)</span>
+<span id="cb44-2"><a aria-label="2"></a>pp <span class="ot">&lt;-</span> <span class="fu">leer_senamhi</span>(<span class="st">"data/raw/precipitacion/PP_000786_Huancane.xlsx"</span>)</span>
+<span id="cb44-3"><a aria-label="3"></a><span class="fu">nrow</span>(q)     <span class="co">#&gt; 25692</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fuente">
+<p>Todo el procesamiento de la sección 03 quedó en una línea. Si mañana cambia el formato de SENAMHI, se corrige <strong>en un solo lugar</strong>.</p>
+</div>
+</div>
+</section>
+<section id="funciones-argumentos-por-defecto" class="slide level2">
+<h2>Funciones: argumentos por defecto</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a aria-label="1"></a>agregar_mensual <span class="ot">&lt;-</span> <span class="cf">function</span>(datos, <span class="at">fun =</span> sum, <span class="at">max_na =</span> <span class="dv">3</span>) {</span>
+<span id="cb45-2"><a aria-label="2"></a>  datos <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a aria-label="3"></a>    <span class="fu">group_by</span>(<span class="at">anio =</span> <span class="fu">year</span>(fecha), <span class="at">mes =</span> <span class="fu">month</span>(fecha)) <span class="sc">|&gt;</span></span>
+<span id="cb45-4"><a aria-label="4"></a>    <span class="fu">summarise</span>(<span class="at">n_na  =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(valor)),</span>
+<span id="cb45-5"><a aria-label="5"></a>              <span class="at">valor =</span> <span class="fu">fun</span>(valor, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-6"><a aria-label="6"></a>              <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-7"><a aria-label="7"></a>    <span class="fu">mutate</span>(<span class="at">valor =</span> <span class="fu">if_else</span>(n_na <span class="sc">&gt;</span> max_na, <span class="cn">NA</span>, valor))</span>
+<span id="cb45-8"><a aria-label="8"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a aria-label="1"></a>pp_mensual <span class="ot">&lt;-</span> <span class="fu">agregar_mensual</span>(pp)                         <span class="co"># suma (por defecto)</span></span>
+<span id="cb46-2"><a aria-label="2"></a>q_mensual  <span class="ot">&lt;-</span> <span class="fu">agregar_mensual</span>(q, <span class="at">fun =</span> mean)              <span class="co"># promedio</span></span>
+<span id="cb46-3"><a aria-label="3"></a>q_estricto <span class="ot">&lt;-</span> <span class="fu">agregar_mensual</span>(q, <span class="at">fun =</span> mean, <span class="at">max_na =</span> <span class="dv">0</span>)  <span class="co"># sin vacíos</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fuente">
+<p>En el script también está <code>agregar_anual()</code>, que conserva solo los años con 12 meses válidos: 62 años de caudal.</p>
+</div>
+</div>
+</section>
+<section id="condicionales-if-else" class="slide level2">
+<h2>Condicionales: if / else</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a aria-label="1"></a>umbrales <span class="ot">&lt;-</span> <span class="fu">quantile</span>(q_anual<span class="sc">$</span>valor, <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>))</span>
+<span id="cb47-2"><a aria-label="2"></a><span class="co">#&gt;   20%   80%</span></span>
+<span id="cb47-3"><a aria-label="3"></a><span class="co">#&gt; 11.48 24.41</span></span>
+<span id="cb47-4"><a aria-label="4"></a></span>
+<span id="cb47-5"><a aria-label="5"></a>clasificar <span class="ot">&lt;-</span> <span class="cf">function</span>(q, p20, p80) {</span>
+<span id="cb47-6"><a aria-label="6"></a>  <span class="cf">if</span> (q <span class="sc">&lt;</span> p20) {</span>
+<span id="cb47-7"><a aria-label="7"></a>    <span class="st">"seco"</span></span>
+<span id="cb47-8"><a aria-label="8"></a>  } <span class="cf">else</span> <span class="cf">if</span> (q <span class="sc">&gt;</span> p80) {</span>
+<span id="cb47-9"><a aria-label="9"></a>    <span class="st">"húmedo"</span></span>
+<span id="cb47-10"><a aria-label="10"></a>  } <span class="cf">else</span> {</span>
+<span id="cb47-11"><a aria-label="11"></a>    <span class="st">"normal"</span></span>
+<span id="cb47-12"><a aria-label="12"></a>  }</span>
+<span id="cb47-13"><a aria-label="13"></a>}</span>
+<span id="cb47-14"><a aria-label="14"></a></span>
+<span id="cb47-15"><a aria-label="15"></a><span class="fu">clasificar</span>(<span class="fl">4.75</span>, umbrales[<span class="dv">1</span>], umbrales[<span class="dv">2</span>])   <span class="co"># caudal medio de 2023</span></span>
+<span id="cb47-16"><a aria-label="16"></a><span class="co">#&gt; "seco"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="condicionales-para-una-columna-case_when" class="slide level2">
+<h2>Condicionales para una columna: <code>case_when()</code></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a aria-label="1"></a>q_anual <span class="ot">&lt;-</span> q_anual <span class="sc">|&gt;</span></span>
+<span id="cb48-2"><a aria-label="2"></a>  <span class="fu">mutate</span>(<span class="at">tipo =</span> <span class="fu">case_when</span>(</span>
+<span id="cb48-3"><a aria-label="3"></a>    valor <span class="sc">&lt;</span> umbrales[<span class="dv">1</span>] <span class="sc">~</span> <span class="st">"seco"</span>,</span>
+<span id="cb48-4"><a aria-label="4"></a>    valor <span class="sc">&gt;</span> umbrales[<span class="dv">2</span>] <span class="sc">~</span> <span class="st">"húmedo"</span>,</span>
+<span id="cb48-5"><a aria-label="5"></a>    <span class="at">.default            =</span> <span class="st">"normal"</span></span>
+<span id="cb48-6"><a aria-label="6"></a>  ))</span>
+<span id="cb48-7"><a aria-label="7"></a></span>
+<span id="cb48-8"><a aria-label="8"></a><span class="fu">count</span>(q_anual, tipo)</span>
+<span id="cb48-9"><a aria-label="9"></a><span class="co">#&gt;   tipo       n</span></span>
+<span id="cb48-10"><a aria-label="10"></a><span class="co">#&gt;   húmedo    13</span></span>
+<span id="cb48-11"><a aria-label="11"></a><span class="co">#&gt;   normal    36</span></span>
+<span id="cb48-12"><a aria-label="12"></a><span class="co">#&gt;   seco      13</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="fuente">
+<p><code>if()</code> evalúa <strong>un solo valor</strong>; <code>case_when()</code> evalúa una columna completa. Los años más secos: 2023 (4.75), 1983 (7.23), 1967 (7.67), 1990 (8.23) y 2009 (9.29 m³/s).</p>
+</div>
+</div>
+</section>
+<section id="bucles-for-repetir-para-cada-estación" class="slide level2">
+<h2>Bucles for: repetir para cada estación</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a aria-label="1"></a>archivos <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"data/raw/precipitacion"</span>, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.xlsx$"</span>,</span>
+<span id="cb49-2"><a aria-label="2"></a>                       <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-3"><a aria-label="3"></a>nombres  <span class="ot">&lt;-</span> archivos <span class="sc">|&gt;</span> <span class="fu">basename</span>() <span class="sc">|&gt;</span> <span class="fu">str_remove</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.xlsx$"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-4"><a aria-label="4"></a>  <span class="fu">str_remove</span>(<span class="st">"^PP_</span><span class="sc">\\</span><span class="st">d+_"</span>)</span>
+<span id="cb49-5"><a aria-label="5"></a><span class="co">#&gt; "Munani" "Huancane" "Ananea" "Cojata" "Putina"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a aria-label="1"></a>resumen <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="fu">length</span>(archivos))     <span class="co"># lista vacía</span></span>
+<span id="cb50-2"><a aria-label="2"></a></span>
+<span id="cb50-3"><a aria-label="3"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(archivos)) {</span>
+<span id="cb50-4"><a aria-label="4"></a>  datos <span class="ot">&lt;-</span> <span class="fu">leer_senamhi</span>(archivos[i])</span>
+<span id="cb50-5"><a aria-label="5"></a>  anual <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span> <span class="fu">agregar_mensual</span>() <span class="sc">|&gt;</span> <span class="fu">agregar_anual</span>()</span>
+<span id="cb50-6"><a aria-label="6"></a>  resumen[[i]] <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb50-7"><a aria-label="7"></a>    <span class="at">estacion     =</span> nombres[i],</span>
+<span id="cb50-8"><a aria-label="8"></a>    <span class="at">pct_faltante =</span> <span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">is.na</span>(datos<span class="sc">$</span>valor)) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>),</span>
+<span id="cb50-9"><a aria-label="9"></a>    <span class="at">pp_anual     =</span> <span class="fu">mean</span>(anual<span class="sc">$</span>valor[anual<span class="sc">$</span>anio <span class="sc">%in%</span> <span class="dv">1991</span><span class="sc">:</span><span class="dv">2020</span>])</span>
+<span id="cb50-10"><a aria-label="10"></a>  )</span>
+<span id="cb50-11"><a aria-label="11"></a>}</span>
+<span id="cb50-12"><a aria-label="12"></a>resumen <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(resumen)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="bucles-for-el-resultado" class="slide level2">
+<h2>Bucles for: el resultado</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Estación</th>
+<th>Periodo</th>
+<th style="text-align: right;">% faltante</th>
+<th style="text-align: right;">Años comp.</th>
+<th style="text-align: right;">PP 1991–2020 (mm)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Muñani</td>
+<td>1964–2026</td>
+<td style="text-align: right;">14.8</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">646.9</td>
+</tr>
+<tr class="even">
+<td>Huancané</td>
+<td>1963–2026</td>
+<td style="text-align: right;">17.0</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">658.3</td>
+</tr>
+<tr class="odd">
+<td>Ananea</td>
+<td>1963–2024</td>
+<td style="text-align: right;">14.3</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">623.6</td>
+</tr>
+<tr class="even">
+<td>Cojata</td>
+<td>1956–2026</td>
+<td style="text-align: right;">1.5</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">711.4</td>
+</tr>
+<tr class="odd">
+<td>Putina</td>
+<td>1970–2026</td>
+<td style="text-align: right;">14.7</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">640.1</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<div class="fuente">
+<p>Cinco estaciones procesadas con el mismo código. Con 50 estaciones, el bucle sería exactamente el mismo.</p>
+</div>
+</div>
+</section>
+<section id="iteración-con-purrrmap" class="slide level2">
+<h2>Iteración con <code>purrr::map()</code></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a aria-label="1"></a>pp_lista <span class="ot">&lt;-</span> <span class="fu">map</span>(archivos, leer_senamhi)   <span class="co"># aplica la función a cada archivo</span></span>
+<span id="cb51-2"><a aria-label="2"></a><span class="fu">names</span>(pp_lista) <span class="ot">&lt;-</span> nombres</span>
+<span id="cb51-3"><a aria-label="3"></a>pp_lista<span class="sc">$</span>Cojata                           <span class="co"># una estación de la lista</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a aria-label="1"></a><span class="co"># Une la lista en UNA tabla larga con la columna "estacion"</span></span>
+<span id="cb52-2"><a aria-label="2"></a>pp_todas <span class="ot">&lt;-</span> pp_lista <span class="sc">|&gt;</span> <span class="fu">list_rbind</span>(<span class="at">names_to =</span> <span class="st">"estacion"</span>)</span>
+<span id="cb52-3"><a aria-label="3"></a><span class="fu">nrow</span>(pp_todas)       <span class="co">#&gt; 114159</span></span>
+<span id="cb52-4"><a aria-label="4"></a></span>
+<span id="cb52-5"><a aria-label="5"></a><span class="co"># Con la tabla larga, group_by() reemplaza al bucle</span></span>
+<span id="cb52-6"><a aria-label="6"></a>pp_todas <span class="sc">|&gt;</span></span>
+<span id="cb52-7"><a aria-label="7"></a>  <span class="fu">group_by</span>(estacion) <span class="sc">|&gt;</span></span>
+<span id="cb52-8"><a aria-label="8"></a>  <span class="fu">summarise</span>(<span class="at">pct_faltante =</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(valor)) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb52-9"><a aria-label="9"></a>            <span class="at">maximo       =</span> <span class="fu">max</span>(valor, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="fuente">
+<p><code>for</code> y <code>map()</code> hacen lo mismo; <code>map()</code> es más corto y no necesita preparar la lista vacía.</p>
+</div>
+</div>
+</section>
+<section id="todas-las-estaciones-en-un-gráfico" class="slide level2">
+<h2>Todas las estaciones en un gráfico</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a aria-label="1"></a>pp_anual <span class="ot">&lt;-</span> pp_lista <span class="sc">|&gt;</span></span>
+<span id="cb53-2"><a aria-label="2"></a>  <span class="fu">map</span>(\(d) d <span class="sc">|&gt;</span></span>
+<span id="cb53-3"><a aria-label="3"></a>        <span class="fu">agregar_mensual</span>() <span class="sc">|&gt;</span></span>
+<span id="cb53-4"><a aria-label="4"></a>        <span class="fu">agregar_anual</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb53-5"><a aria-label="5"></a>  <span class="fu">list_rbind</span>(<span class="at">names_to =</span> <span class="st">"estacion"</span>)</span>
+<span id="cb53-6"><a aria-label="6"></a></span>
+<span id="cb53-7"><a aria-label="7"></a><span class="fu">ggplot</span>(pp_anual,</span>
+<span id="cb53-8"><a aria-label="8"></a>       <span class="fu">aes</span>(anio, valor)) <span class="sc">+</span></span>
+<span id="cb53-9"><a aria-label="9"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#0B5394"</span>) <span class="sc">+</span></span>
+<span id="cb53-10"><a aria-label="10"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> estacion,</span>
+<span id="cb53-11"><a aria-label="11"></a>             <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fuente">
+<p><code>facet_wrap()</code> hace un panel por estación. Entre 2010 y 2016 <strong>solo Cojata</strong> tiene años completos: es un vacío de toda la red, no de una estación.</p>
+</div>
+</div><div class="column" style="width:55%;">
+<p><img data-src="../../assets/img/s04_PP_anual_estaciones.png" style="width:100.0%"></p>
+</div></div>
 </section>
 <section id="datos-climáticos-grillados" class="slide level2 seccion" data-background-color="#0B5394">
 <h2>Datos climáticos grillados</h2>
 <div class="num">
 <p>05</p>
 </div>
-<p>Paquete terra: lectura de NetCDF, recorte de cuenca, extracción de series, precipitación areal, climatología y mapas</p>
+<p>Paquete terra: lectura de NetCDF, recorte de cuenca, climatología, mapas, precipitación areal y balance P – ETP</p>
+</section>
+<section id="pisco-datos-grillados-del-perú" class="slide level2">
+<h2>PISCO: datos grillados del Perú</h2>
+<ul>
+<li><strong>PISCOp v2.1</strong> (SENAMHI): precipitación mensual 1981–2016, celdas de 0.1° (~11 km)</li>
+<li>Combina estaciones, satélite (CHIRPS) y climatología</li>
+<li>Formato <strong>NetCDF</strong> (<code>.nc</code>): un “cubo” longitud × latitud × tiempo</li>
+</ul>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a aria-label="1"></a>url_pisco <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb54-2"><a aria-label="2"></a>  <span class="st">"https://iridl.ldeo.columbia.edu/SOURCES/.SENAMHI/.HSR/.PISCO/"</span>,</span>
+<span id="cb54-3"><a aria-label="3"></a>  <span class="st">".Prec/.v2p1/.stable/.monthly/.Prec/"</span>,</span>
+<span id="cb54-4"><a aria-label="4"></a>  <span class="st">"X/(-70.3)/(-69.2)/RANGEEDGES/Y/(-15.5)/(-14.4)/RANGEEDGES/data.nc"</span></span>
+<span id="cb54-5"><a aria-label="5"></a>)</span>
+<span id="cb54-6"><a aria-label="6"></a>archivo_pp <span class="ot">&lt;-</span> <span class="st">"data/raw/pisco/PISCOp_v2.1_mensual.nc"</span></span>
+<span id="cb54-7"><a aria-label="7"></a></span>
+<span id="cb54-8"><a aria-label="8"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(archivo_pp)) {</span>
+<span id="cb54-9"><a aria-label="9"></a>  <span class="fu">download.file</span>(url_pisco, archivo_pp, <span class="at">mode =</span> <span class="st">"wb"</span>)</span>
+<span id="cb54-10"><a aria-label="10"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fuente">
+<p>La URL pide solo el recuadro de la cuenca: ~200 KB en lugar de todo el Perú.</p>
+</div>
+</div>
+</section>
+<section id="leer-un-netcdf-con-terra" class="slide level2">
+<h2>Leer un NetCDF con <code>terra</code></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a aria-label="1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb55-2"><a aria-label="2"></a>pp <span class="ot">&lt;-</span> <span class="fu">rast</span>(archivo_pp)</span>
+<span id="cb55-3"><a aria-label="3"></a>pp</span>
+<span id="cb55-4"><a aria-label="4"></a><span class="co">#&gt; class       : SpatRaster</span></span>
+<span id="cb55-5"><a aria-label="5"></a><span class="co">#&gt; size        : 11, 11, 432  (nrow, ncol, nlyr)</span></span>
+<span id="cb55-6"><a aria-label="6"></a><span class="co">#&gt; resolution  : 0.1, 0.1  (x, y)</span></span>
+<span id="cb55-7"><a aria-label="7"></a><span class="co">#&gt; extent      : -70.3, -69.2, -15.5, -14.4  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb55-8"><a aria-label="8"></a><span class="co">#&gt; coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)</span></span>
+<span id="cb55-9"><a aria-label="9"></a><span class="co">#&gt; unit        : mm/month</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a aria-label="1"></a><span class="co"># El tiempo viene como "meses desde 1960": lo asignamos nosotros</span></span>
+<span id="cb56-2"><a aria-label="2"></a>fechas <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"1981-01-01"</span>), <span class="at">by =</span> <span class="st">"month"</span>, <span class="at">length.out =</span> <span class="fu">nlyr</span>(pp))</span>
+<span id="cb56-3"><a aria-label="3"></a><span class="fu">time</span>(pp)  <span class="ot">&lt;-</span> fechas</span>
+<span id="cb56-4"><a aria-label="4"></a><span class="fu">names</span>(pp) <span class="ot">&lt;-</span> <span class="fu">format</span>(fechas, <span class="st">"%Y-%m"</span>)</span>
+<span id="cb56-5"><a aria-label="5"></a></span>
+<span id="cb56-6"><a aria-label="6"></a><span class="fu">plot</span>(pp[[<span class="st">"2010-01"</span>]])          <span class="co"># una capa = un mapa</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fuente">
+<p>432 capas = 432 meses. Cada capa es una grilla de 11 × 11 celdas.</p>
+</div>
+</div>
+</section>
+<section id="la-cuenca-datos-vectoriales" class="slide level2">
+<h2>La cuenca: datos vectoriales</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a aria-label="1"></a>subcuencas <span class="ot">&lt;-</span> <span class="fu">vect</span>(<span class="st">"data/basin/Subbasins.shp"</span>)</span>
+<span id="cb57-2"><a aria-label="2"></a>rios       <span class="ot">&lt;-</span> <span class="fu">vect</span>(<span class="st">"data/rivers/Rivers.shp"</span>)</span>
+<span id="cb57-3"><a aria-label="3"></a><span class="fu">crs</span>(subcuencas, <span class="at">describe =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>name   <span class="co">#&gt; "WGS 84 / UTM zone 19S"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a aria-label="1"></a><span class="co"># Ráster en grados, cuenca en metros: mismo sistema de coordenadas</span></span>
+<span id="cb58-2"><a aria-label="2"></a>subcuencas <span class="ot">&lt;-</span> <span class="fu">project</span>(subcuencas, <span class="fu">crs</span>(pp))</span>
+<span id="cb58-3"><a aria-label="3"></a>rios       <span class="ot">&lt;-</span> <span class="fu">project</span>(rios, <span class="fu">crs</span>(pp))</span>
+<span id="cb58-4"><a aria-label="4"></a></span>
+<span id="cb58-5"><a aria-label="5"></a>cuenca <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(subcuencas)        <span class="co"># disolver 5 subcuencas en 1</span></span>
+<span id="cb58-6"><a aria-label="6"></a><span class="fu">expanse</span>(cuenca, <span class="at">unit =</span> <span class="st">"km"</span>)           <span class="co">#&gt; 3545 km²</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a aria-label="1"></a>pp_cuenca <span class="ot">&lt;-</span> <span class="fu">crop</span>(pp, cuenca, <span class="at">mask =</span> <span class="cn">TRUE</span>)   <span class="co"># recortar y enmascarar</span></span>
+<span id="cb59-2"><a aria-label="2"></a><span class="fu">plot</span>(pp_cuenca[[<span class="st">"2010-01"</span>]]); <span class="fu">lines</span>(cuenca)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="climatología-con-tapp" class="slide level2">
+<h2>Climatología con <code>tapp()</code></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a aria-label="1"></a>pp_anual <span class="ot">&lt;-</span> <span class="fu">tapp</span>(pp, <span class="st">"years"</span>, sum)     <span class="co"># 36 mapas: total de cada año</span></span>
+<span id="cb60-2"><a aria-label="2"></a>pp_media <span class="ot">&lt;-</span> <span class="fu">mean</span>(pp_anual)             <span class="co"># 1 mapa: media 1981–2016</span></span>
+<span id="cb60-3"><a aria-label="3"></a></span>
+<span id="cb60-4"><a aria-label="4"></a>pp_mes <span class="ot">&lt;-</span> <span class="fu">tapp</span>(pp, <span class="st">"months"</span>, mean)     <span class="co"># 12 mapas: régimen mensual</span></span>
+<span id="cb60-5"><a aria-label="5"></a><span class="fu">names</span>(pp_mes) <span class="ot">&lt;-</span> month.abb</span>
+<span id="cb60-6"><a aria-label="6"></a><span class="fu">plot</span>(pp_mes, <span class="at">nc =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a aria-label="1"></a><span class="fu">global</span>(<span class="fu">crop</span>(pp_media, cuenca, <span class="at">mask =</span> <span class="cn">TRUE</span>), range, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb61-2"><a aria-label="2"></a><span class="co">#&gt; 525 a 890 mm/año</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fuente">
+<p><code>tapp()</code> agrupa capas por fecha: <code>"years"</code>, <code>"months"</code>, <code>"yearmonths"</code>, <code>"doy"</code>…</p>
+</div>
+</div>
+</section>
+<section id="mapa-con-ggplot2" class="slide level2">
+<h2>Mapa con ggplot2</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a aria-label="1"></a>pp_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pp_media,</span>
+<span id="cb62-2"><a aria-label="2"></a>                       <span class="at">xy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb62-3"><a aria-label="3"></a></span>
+<span id="cb62-4"><a aria-label="4"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb62-5"><a aria-label="5"></a>  <span class="fu">geom_raster</span>(<span class="at">data =</span> pp_df,</span>
+<span id="cb62-6"><a aria-label="6"></a>              <span class="fu">aes</span>(x, y, <span class="at">fill =</span> mean)) <span class="sc">+</span></span>
+<span id="cb62-7"><a aria-label="7"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(cuenca),</span>
+<span id="cb62-8"><a aria-label="8"></a>          <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb62-9"><a aria-label="9"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(rios),</span>
+<span id="cb62-10"><a aria-label="10"></a>          <span class="at">color =</span> <span class="st">"#00BFFF"</span>) <span class="sc">+</span></span>
+<span id="cb62-11"><a aria-label="11"></a>  <span class="fu">scale_fill_distiller</span>(</span>
+<span id="cb62-12"><a aria-label="12"></a>    <span class="at">palette =</span> <span class="st">"YlGnBu"</span>,</span>
+<span id="cb62-13"><a aria-label="13"></a>    <span class="at">direction =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fuente">
+<p>La lluvia aumenta hacia el norte y el noreste (cabecera): hasta ~890 mm/año.</p>
+</div>
+</div><div class="column" style="width:55%;">
+<p><img data-src="../../assets/img/s05_PISCO_mapa_pp.png" style="width:100.0%"></p>
+</div></div>
+</section>
+<section id="precipitación-areal" class="slide level2">
+<h2>Precipitación areal</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a aria-label="1"></a><span class="co"># Promedio de las celdas, ponderado por la fracción dentro de la cuenca</span></span>
+<span id="cb63-2"><a aria-label="2"></a>pp_areal <span class="ot">&lt;-</span> <span class="fu">extract</span>(pp, cuenca, <span class="at">fun =</span> mean, <span class="at">weights =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb63-3"><a aria-label="3"></a>                    <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">ID =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb63-4"><a aria-label="4"></a></span>
+<span id="cb63-5"><a aria-label="5"></a>pp_cuenca_mes <span class="ot">&lt;-</span> pp_areal <span class="sc">|&gt;</span></span>
+<span id="cb63-6"><a aria-label="6"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">values_to =</span> <span class="st">"pp"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb63-7"><a aria-label="7"></a>  <span class="fu">mutate</span>(<span class="at">fecha =</span> fechas)</span>
+<span id="cb63-8"><a aria-label="8"></a><span class="co">#&gt; Precipitación media anual de la cuenca: 695 mm</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a aria-label="1"></a><span class="co"># El mismo código, con las subcuencas</span></span>
+<span id="cb64-2"><a aria-label="2"></a><span class="fu">extract</span>(pp_media, subcuencas,</span>
+<span id="cb64-3"><a aria-label="3"></a>        <span class="at">fun =</span> mean, <span class="at">weights =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:45%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Subcuenca</th>
+<th style="text-align: right;">Área (km²)</th>
+<th style="text-align: right;">PP (mm/año)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: right;">892</td>
+<td style="text-align: right;">760</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: right;">948</td>
+<td style="text-align: right;">782</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: right;">231</td>
+<td style="text-align: right;">642</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: right;">1106</td>
+<td style="text-align: right;">611</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: right;">367</td>
+<td style="text-align: right;">602</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="pisco-frente-a-la-estación" class="slide level2">
+<h2>PISCO frente a la estación</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a aria-label="1"></a>pisco_punto <span class="ot">&lt;-</span> <span class="fu">extract</span>(pp, huancane_v,</span>
+<span id="cb65-2"><a aria-label="2"></a>                       <span class="at">ID =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb65-3"><a aria-label="3"></a></span>
+<span id="cb65-4"><a aria-label="4"></a>comparacion <span class="sc">|&gt;</span></span>
+<span id="cb65-5"><a aria-label="5"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb65-6"><a aria-label="6"></a>    <span class="at">r     =</span> <span class="fu">cor</span>(obs, pisco),</span>
+<span id="cb65-7"><a aria-label="7"></a>    <span class="at">pbias =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">sum</span>(pisco <span class="sc">-</span> obs) <span class="sc">/</span></span>
+<span id="cb65-8"><a aria-label="8"></a>                  <span class="fu">sum</span>(obs))</span>
+<span id="cb65-9"><a aria-label="9"></a><span class="co">#&gt;       r  pbias</span></span>
+<span id="cb65-10"><a aria-label="10"></a><span class="co">#&gt;   0.971  -6.37</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fuente">
+<p>353 meses comunes. PISCOp subestima en un 6 % la estación Huancané. Como PISCO <strong>incorpora</strong> las estaciones del SENAMHI, esto no es una validación independiente.</p>
+</div>
+</div><div class="column" style="width:45%;">
+<p><img data-src="../../assets/img/s05_PISCO_vs_estacion.png" style="width:100.0%"></p>
+</div></div>
+</section>
+<section id="temperatura-por-subcuenca" class="slide level2">
+<h2>Temperatura por subcuenca</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a aria-label="1"></a>tmax <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/temp/Datos_tmax.csv"</span>)    <span class="co"># diaria, 1981–2020</span></span>
+<span id="cb66-2"><a aria-label="2"></a>tmin <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/temp/Datos_tmin.csv"</span>)</span>
+<span id="cb66-3"><a aria-label="3"></a><span class="co">#&gt;   Date         Sb1   Sb3   Sb2   Sb5   Sb4</span></span>
+<span id="cb66-4"><a aria-label="4"></a><span class="co">#&gt;   1981-01-01 13.9  15.8  14.0  15.9  14.7</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a aria-label="1"></a>a_largo <span class="ot">&lt;-</span> <span class="cf">function</span>(datos, nombre) {</span>
+<span id="cb67-2"><a aria-label="2"></a>  datos <span class="sc">|&gt;</span></span>
+<span id="cb67-3"><a aria-label="3"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>Date, <span class="at">names_to =</span> <span class="st">"subcuenca"</span>, <span class="at">values_to =</span> nombre) <span class="sc">|&gt;</span></span>
+<span id="cb67-4"><a aria-label="4"></a>    <span class="fu">mutate</span>(<span class="at">subcuenca =</span> <span class="fu">parse_number</span>(subcuenca)) <span class="sc">|&gt;</span></span>
+<span id="cb67-5"><a aria-label="5"></a>    <span class="fu">rename</span>(<span class="at">fecha =</span> Date)</span>
+<span id="cb67-6"><a aria-label="6"></a>}</span>
+<span id="cb67-7"><a aria-label="7"></a></span>
+<span id="cb67-8"><a aria-label="8"></a>temp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="fu">a_largo</span>(tmax, <span class="st">"tmax"</span>), <span class="fu">a_largo</span>(tmin, <span class="st">"tmin"</span>),</span>
+<span id="cb67-9"><a aria-label="9"></a>                   <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"fecha"</span>, <span class="st">"subcuenca"</span>))</span>
+<span id="cb67-10"><a aria-label="10"></a><span class="fu">nrow</span>(temp)                          <span class="co">#&gt; 73050 (14610 días × 5)</span></span>
+<span id="cb67-11"><a aria-label="11"></a>temp <span class="sc">|&gt;</span> <span class="fu">filter</span>(tmin <span class="sc">&gt;</span> tmax) <span class="sc">|&gt;</span> <span class="fu">nrow</span>()   <span class="co">#&gt; 0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="etp-por-hargreaves-samani" class="slide level2">
+<h2>ETP por Hargreaves-Samani</h2>
+<p><span class="math display">\[ETP = 0.0023 \cdot R_a \cdot (T_{media} + 17.8) \cdot \sqrt{T_{max} - T_{min}}\]</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a aria-label="1"></a>hargreaves <span class="ot">&lt;-</span> <span class="cf">function</span>(tmax, tmin, lat, fecha) {</span>
+<span id="cb68-2"><a aria-label="2"></a>  tmedia <span class="ot">&lt;-</span> (tmax <span class="sc">+</span> tmin) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb68-3"><a aria-label="3"></a>  <span class="fl">0.0023</span> <span class="sc">*</span> <span class="fu">radiacion_ext</span>(lat, fecha) <span class="sc">*</span> (tmedia <span class="sc">+</span> <span class="fl">17.8</span>) <span class="sc">*</span></span>
+<span id="cb68-4"><a aria-label="4"></a>    <span class="fu">sqrt</span>(<span class="fu">pmax</span>(tmax <span class="sc">-</span> tmin, <span class="dv">0</span>))</span>
+<span id="cb68-5"><a aria-label="5"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a aria-label="1"></a>etp_dia <span class="ot">&lt;-</span> temp <span class="sc">|&gt;</span></span>
+<span id="cb69-2"><a aria-label="2"></a>  <span class="fu">left_join</span>(info_sub, <span class="at">by =</span> <span class="st">"subcuenca"</span>) <span class="sc">|&gt;</span>        <span class="co"># latitud y área</span></span>
+<span id="cb69-3"><a aria-label="3"></a>  <span class="fu">mutate</span>(<span class="at">etp =</span> <span class="fu">hargreaves</span>(tmax, tmin, lat, fecha))</span>
+<span id="cb69-4"><a aria-label="4"></a></span>
+<span id="cb69-5"><a aria-label="5"></a>etp_cuenca_mes <span class="ot">&lt;-</span> etp_dia <span class="sc">|&gt;</span></span>
+<span id="cb69-6"><a aria-label="6"></a>  <span class="fu">group_by</span>(subcuenca, area_km2, <span class="at">fecha =</span> <span class="fu">floor_date</span>(fecha, <span class="st">"month"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb69-7"><a aria-label="7"></a>  <span class="fu">summarise</span>(<span class="at">etp =</span> <span class="fu">sum</span>(etp), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span>   <span class="co"># diaria -&gt; mensual</span></span>
+<span id="cb69-8"><a aria-label="8"></a>  <span class="fu">group_by</span>(fecha) <span class="sc">|&gt;</span></span>
+<span id="cb69-9"><a aria-label="9"></a>  <span class="fu">summarise</span>(<span class="at">etp =</span> <span class="fu">weighted.mean</span>(etp, area_km2))    <span class="co"># ponderado por área</span></span>
+<span id="cb69-10"><a aria-label="10"></a><span class="co">#&gt; ETP media anual: 1105 mm</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fuente">
+<p><span class="math inline">\(R_a\)</span> = radiación extraterrestre (FAO-56), función de la latitud del centroide y del día del año.</p>
+</div>
+</div>
+</section>
+<section id="balance-p-etp" class="slide level2">
+<h2>Balance P – ETP</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a aria-label="1"></a>balance <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(</span>
+<span id="cb70-2"><a aria-label="2"></a>  pp_cuenca_mes,</span>
+<span id="cb70-3"><a aria-label="3"></a>  etp_cuenca_mes,</span>
+<span id="cb70-4"><a aria-label="4"></a>  <span class="at">by =</span> <span class="st">"fecha"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">mm/año</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Precipitación</td>
+<td style="text-align: right;">695</td>
+</tr>
+<tr class="even">
+<td>ETP</td>
+<td style="text-align: right;">1101</td>
+</tr>
+<tr class="odd">
+<td><strong>P / ETP</strong></td>
+<td style="text-align: right;"><strong>0.63</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="fuente">
+<p>Solo de diciembre a febrero llueve más de lo que se puede evaporar. De abril a noviembre la cuenca tiene déficit.</p>
+</div>
+</div><div class="column" style="width:60%;">
+<p><img data-src="../../assets/img/s05_Balance_P_ETP.png" style="width:100.0%"></p>
+</div></div>
+</section>
+<section id="exportar-entrada-para-el-día-2" class="slide level2">
+<h2>Exportar: entrada para el Día 2</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a aria-label="1"></a><span class="co"># Serie mensual areal de la cuenca (1981–2016)</span></span>
+<span id="cb71-2"><a aria-label="2"></a><span class="fu">write_csv</span>(balance, <span class="st">"data/processed/PP_ETP_mensual_cuenca.csv"</span>)</span>
+<span id="cb71-3"><a aria-label="3"></a></span>
+<span id="cb71-4"><a aria-label="4"></a><span class="co"># Mapa de precipitación media como GeoTIFF (se abre en QGIS)</span></span>
+<span id="cb71-5"><a aria-label="5"></a><span class="fu">writeRaster</span>(pp_media, <span class="st">"outputs/PP_media_anual_PISCO.tif"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="fuente">
+<p><code>PP_ETP_mensual_cuenca.csv</code> + el caudal de Huancané = todo lo que necesita un modelo hidrológico mensual (GR2M) en el Día 2.</p>
+</div>
 
 
+</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
