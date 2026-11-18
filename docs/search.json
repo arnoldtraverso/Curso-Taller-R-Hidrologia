@@ -1,54 +1,5 @@
 [
   {
-    "objectID": "slides/dia2/index.html#contenido-día-2",
-    "href": "slides/dia2/index.html#contenido-día-2",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Contenido día 2",
-    "text": "Contenido día 2\n\nCambio climático observado\nEscenarios futuros\nModelamiento bajo Cambio Climático"
-  },
-  {
-    "objectID": "slides/dia2/index.html#cambio-climático-opbservado",
-    "href": "slides/dia2/index.html#cambio-climático-opbservado",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Cambio Climático opbservado",
-    "text": "Cambio Climático opbservado\n\n01"
-  },
-  {
-    "objectID": "slides/dia2/index.html#escenarios-futuros",
-    "href": "slides/dia2/index.html#escenarios-futuros",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Escenarios futuros",
-    "text": "Escenarios futuros\n\n02\n\nR en ciencias del agua y cambio climático, Proyectos y Estructuras de Carpetas"
-  },
-  {
-    "objectID": "slides/dia2/index.html#modelamiento-bajo-cambio-climático",
-    "href": "slides/dia2/index.html#modelamiento-bajo-cambio-climático",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Modelamiento bajo cambio climático",
-    "text": "Modelamiento bajo cambio climático\n\n03\n\nR en ciencias del agua y cambio climático, Proyectos y Estructuras de Carpetas"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "",
-    "text": "En un entorno donde la tecnología y el análisis de datos avanzan a pasos agigantados, es fundamental para la toma de decisiones. En ese sentido, contar con un entorno robusto para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.\nBajo este enfoque, se presenta el Curso-Taller: “Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático”. El Lenguaje R se ha consolidado como una herramienta indispensable en el ámbito científico, académico y profesional gracias a su capacidad de gestionar grandes volúmenes de datos, realizar análisis complejos y desarrollar o replicar modelos hidrológicos de manera eficiente."
-  },
-  {
-    "objectID": "index.html#objetivo",
-    "href": "index.html#objetivo",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "",
-    "text": "En un entorno donde la tecnología y el análisis de datos avanzan a pasos agigantados, es fundamental para la toma de decisiones. En ese sentido, contar con un entorno robusto para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.\nBajo este enfoque, se presenta el Curso-Taller: “Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático”. El Lenguaje R se ha consolidado como una herramienta indispensable en el ámbito científico, académico y profesional gracias a su capacidad de gestionar grandes volúmenes de datos, realizar análisis complejos y desarrollar o replicar modelos hidrológicos de manera eficiente."
-  },
-  {
-    "objectID": "index.html#materiales",
-    "href": "index.html#materiales",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Materiales",
-    "text": "Materiales\nLas diapositivas del Curso-Taller, para los dos días se encuentran en los siguientes enlaces:\n\nDiapositivas Día 1\nDiapositivas Día 2"
-  },
-  {
     "objectID": "slides/dia1/index.html#contenido-día-1",
     "href": "slides/dia1/index.html#contenido-día-1",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
@@ -61,48 +12,6 @@
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Introducción",
     "text": "Introducción\n\n01\n\nR en Ciencias del Agua y Cambio Climático, Proyectos y Estructuras de Carpetas"
-  },
-  {
-    "objectID": "slides/dia1/index.html#fundamentos-con-datos-reales",
-    "href": "slides/dia1/index.html#fundamentos-con-datos-reales",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Fundamentos con datos reales",
-    "text": "Fundamentos con datos reales"
-  },
-  {
-    "objectID": "slides/dia1/index.html#procesamiento-y-visualización",
-    "href": "slides/dia1/index.html#procesamiento-y-visualización",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Procesamiento y visualización",
-    "text": "Procesamiento y visualización\n\n03\n\nImportación (readr, readxl), dplyr/tidyr, NAs y control de calidad, agregación diaria → mensual → anual, ggplot2"
-  },
-  {
-    "objectID": "slides/dia1/index.html#automatización",
-    "href": "slides/dia1/index.html#automatización",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Automatización",
-    "text": "Automatización\n\n04\n\nFunciones propias, if/else (años secos/húmedos), for sobre múltiples estaciones, iteración con purrr::map"
-  },
-  {
-    "objectID": "slides/dia1/index.html#datos-climáticos-grillados",
-    "href": "slides/dia1/index.html#datos-climáticos-grillados",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Datos climáticos grillados",
-    "text": "Datos climáticos grillados\n\n05\n\nPaquete terra: lectura de NetCDF, recorte de cuenca, climatología, mapas, precipitación areal y balance P – ETP"
-  },
-  {
-    "objectID": "slides/dia1/index.html#de-la-hoja-de-calculo-al-script",
-    "href": "slides/dia1/index.html#de-la-hoja-de-calculo-al-script",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "De la hoja de calculo al script",
-    "text": "De la hoja de calculo al script\n\n\nHoja de cálculo\n\nFórmulas dispersas en celdas\nPasos manuales difíciles de rastrear\nOtra estación = repetir todo\n\n\nScript en R\n\nCada paso queda escrito y estructurado\nSe ejecuta de nuevo con un clic\nuna función sirve para 1 o 100 estaciones\n\n\n\n02\n\nObjetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse"
-  },
-  {
-    "objectID": "slides/dia1/index.html#r-en-ciencias-del-agua",
-    "href": "slides/dia1/index.html#r-en-ciencias-del-agua",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "R en Ciencias del agua",
-    "text": "R en Ciencias del agua\nDe la hoja de calculo al script\n\n\nHoja de cálculo\n\nFórmulas dispersas en celdas\nPasos manuales difíciles de rastrear\nOtra estación = repetir todo\n\n\nScript en R\n\nCada paso queda escrito y estructurado\nSe ejecuta de nuevo con un clic\nuna función sirve para 1 o 100 estaciones\n\n\n. . . En cambio climático esto es clave: el mismo análisis se repite para varios modelos, escenarios y periodos.\n\n02\n\nObjetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse"
   },
   {
     "objectID": "slides/dia1/index.html#r-en-ciencias-del-agua-y-cambio-climático",
@@ -126,32 +35,18 @@
     "text": "R en Ciencias del Agua y Cambio Climático"
   },
   {
-    "objectID": "slides/dia1/index.html#r-en-ciencias-del-agua-y-cambio-climático-3",
-    "href": "slides/dia1/index.html#r-en-ciencias-del-agua-y-cambio-climático-3",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "R en Ciencias del Agua y Cambio Climático",
-    "text": "R en Ciencias del Agua y Cambio Climático\nDe la hoja de cálculo al script\n\n\n\nHoja de cálculo\n\nFórmulas dispersas en celdas\nPasos manuales difíciles de rastrear\nOtra estación = repetir todo\nFalla de una máquina a otra\nNo existe control de versiones\n\n\n\n\nScript en R\n\nCada paso queda escrito y estructurado\nSe ejecuta de nuevo con un clic\nUna función sirve para 1 o 100 estaciones\nPresentación interactiva de resultados\nControl de versiones\n\n\n\n\nEl procesamiento de grandes volúmenes de datos conlleva a una mejora empleando R, la presentación e interactividad de resultados ayuda a una mejor comprensión de los análisis realizados.\n\n\nEn los análisis de grandes cuencas y para los enfoques de cambio climático esto es clave: el mismo análisis se repite para varios modelos, escenarios y periodos."
-  },
-  {
-    "objectID": "slides/dia1/index.html#fundamentos",
-    "href": "slides/dia1/index.html#fundamentos",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Fundamentos",
-    "text": "Fundamentos\n\n02\n\nObjetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse"
-  },
-  {
-    "objectID": "slides/dia1/index.html#por-queé-r-en-hidrología-y-cambio-climático",
-    "href": "slides/dia1/index.html#por-queé-r-en-hidrología-y-cambio-climático",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "¿Por queé R en hidrología y Cambio Climático?",
-    "text": "¿Por queé R en hidrología y Cambio Climático?\n\n\nLibre y gratuito No requiere licencia; funciona en Windows, macOS y Linux. Construido para analizar datos Realiza estadística y graficos de calidad desde su origen.\n\nReproducible El script documenta cada paso del análisis Paquetes hidrológicos airGR, hydroGOF, trend, qmap, terra, etc.\nCRAN reúne mas de 20 000 paquetes y mantiene una guía temática en hidrología (CRAN Task View: Hydrology)Enlace: https://github.com/cran-task-views/Hydrology/blob/main/Hydrology.md"
-  },
-  {
     "objectID": "slides/dia1/index.html#por-qué-r-en-hidrología-y-cambio-climático",
     "href": "slides/dia1/index.html#por-qué-r-en-hidrología-y-cambio-climático",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "¿Por qué R en Hidrología y Cambio Climático?",
     "text": "¿Por qué R en Hidrología y Cambio Climático?\nDe la hoja de cálculo al script\n\n\n\nHoja de cálculo\n\nFórmulas dispersas en celdas\nPasos manuales difíciles de rastrear\nOtra estación = repetir todo\nFalla de una máquina a otra\nNo existe control de versiones\n\n\n\n\nScript en R\n\nCada paso queda escrito y estructurado\nSe ejecuta de nuevo con un clic\nUna función sirve para 1 o 100 estaciones\nPresentación interactiva de resultados\nControl de versiones\n\n\n\n\nR permite procesar grandes volúmenes de datos de forma eficiente, y la presentación interactiva de resultados facilita su comprensión.\n\n\nEn los análisis de grandes cuencas y para los enfoques de cambio climático esto es clave: el mismo análisis se repite para varios modelos, escenarios y periodos."
+  },
+  {
+    "objectID": "slides/dia1/index.html#por-qué-r-en-hidrología-y-cambio-climático-1",
+    "href": "slides/dia1/index.html#por-qué-r-en-hidrología-y-cambio-climático-1",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿Por qué R en Hidrología y Cambio Climático?",
+    "text": "¿Por qué R en Hidrología y Cambio Climático?\n\n\n\nLibre y gratuito\nNo requiere licencia; funciona en Windows, macOS y Linux.\nConstruido para analizar datos\nEstadística y gráficos de calidad desde su origen.\n\n\n\nReproducible\nEl script documenta cada paso del análisis.\nPaquetes hidrológicos\nairGR, hydroGOF, trend, qmap, terra, etc.\n\n\n\nCRAN reúne más de 20 000 paquetes y mantiene una guía temática de hidrología (CRAN Task View: Hydrology).\n\nEnlace: https://github.com/cran-task-views/Hydrology/blob/main/Hydrology.md"
   },
   {
     "objectID": "slides/dia1/index.html#rstudio-los-cuatro-paneles",
@@ -161,53 +56,11 @@
     "text": "RStudio: Los cuatro paneles\n\n\n\n\n\n\n\n\nEnlace: https://rstudio.github.io/cheatsheets/html/rstudio-ide.html"
   },
   {
-    "objectID": "slides/dia1/index.html#rstudio-los-cuatro-paneles-1",
-    "href": "slides/dia1/index.html#rstudio-los-cuatro-paneles-1",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "RStudio: los cuatro paneles",
-    "text": "RStudio: los cuatro paneles\n\n\n\n\nAtajo\nAcción\n\n\n\n\nCtrl + Enter\nEjecutar la línea o la selección\n\n\nCtrl + Shift + N\nNuevo script\n\n\nCtrl + S\nGuardar\n\n\n\nEl problema de setwd()\n# Solo funciona en MI computadora\nsetwd(\"C:/Users/Arnold/Documents/curso/datos\")\npp &lt;- read.csv(\"Precipitaciones.csv\")\n\n\n\nEsa ruta no existe en otra computadora\nEl script deja de funcionar al compartirlo\nSi mueves la carpeta, tampoco funciona en la tuya"
-  },
-  {
-    "objectID": "slides/dia1/index.html#el-problema-de-setwd",
-    "href": "slides/dia1/index.html#el-problema-de-setwd",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "El problema de setwd()",
-    "text": "El problema de setwd()\n# Solo funciona en MI computadora\nsetwd(\"C:/Users/Arnold/Documents/curso/datos\")\npp &lt;- read.csv(\"Precipitaciones.csv\")\n\n\nEsa ruta no existe en otra computadora\nEl script deja de funcionar al compartirlo\nSi mueves la carpeta, tampoco funciona en la tuya"
-  },
-  {
-    "objectID": "slides/dia1/index.html#proyectos-de-rstudio",
-    "href": "slides/dia1/index.html#proyectos-de-rstudio",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Proyectos de RStudio",
-    "text": "Proyectos de RStudio\n\n\nUn proyecto es una carpeta con un archivo .Rproj\nAl abrirlo, R trabaja desde esa carpeta\nLas rutas se escriben desde la raíz del proyecto\n\n\n\ngetwd()   # carpeta del proyecto\n\n# Funciona en CUALQUIER computadora\npp &lt;- read.csv(\"data/raw/Precipitaciones.csv\")\n\n\nEn el curso: doble clic en el archivo .Rproj de la carpeta descargada."
-  },
-  {
-    "objectID": "slides/dia1/index.html#estructura-de-carpetas",
-    "href": "slides/dia1/index.html#estructura-de-carpetas",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Estructura de carpetas",
-    "text": "Estructura de carpetas\nCurso-Taller-R-Hidrologia/\n├── Curso-Taller-R-Hidrologia.Rproj    abrir siempre desde aquí\n├── data/\n│   ├── raw/                           datos originales\n│   └── processed/                     datos procesados\n├── ejercicios/                        scripts del curso\n├── outputs/\n│   ├── figuras/                       gráficos generados\n│   └── tablas/                        tablas generadas\n└── slides/                            diapositivas\n\nLos datos de data/raw/ no se modifican: todo resultado se genera con un script."
-  },
-  {
-    "objectID": "slides/dia1/index.html#rstudio",
-    "href": "slides/dia1/index.html#rstudio",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "RStudio:",
-    "text": "RStudio:\n\nAcciones\n\n\n\nAtajo\nAcción\n\n\n\n\nCtrl + Enter\nEjecutar la línea o la selección\n\n\nCtrl + Shift + N\nNuevo script\n\n\nCtrl + S\nGuardar\n\n\n\n\nEl problema de setwd()\n# Solo funciona en MI computadora\nsetwd(\"C:/Users/Arnold/Documents/curso/datos\")\npp &lt;- read.csv(\"Precipitaciones.csv\")\n\n\n\nEsa ruta no existe en otra computadora\nEl script deja de funcionar al compartirlo\nSi mueves la carpeta, tampoco funciona en la tuya"
-  },
-  {
     "objectID": "slides/dia1/index.html#rstudio-atajos-y-rutas",
     "href": "slides/dia1/index.html#rstudio-atajos-y-rutas",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "RStudio: atajos y rutas",
     "text": "RStudio: atajos y rutas\n\nAtajos de teclado\n\n\n\nAtajo\nAcción\n\n\n\n\nCtrl + Enter\nEjecutar la línea o la selección\n\n\nCtrl + Shift + N\nNuevo script\n\n\nCtrl + S\nGuardar\n\n\n\n\n\nEl problema de setwd()\n# Solo funciona en MI computadora\nsetwd(\"C:/Users/Arnold/Documents/curso/datos\")\npp &lt;- read.csv(\"Precipitaciones.csv\")\n\n\nEsa ruta no existe en otra computadora\nEl script deja de funcionar al compartirlo\nSi mueves la carpeta, tampoco funciona en la tuya"
-  },
-  {
-    "objectID": "slides/dia1/index.html#por-qué-r-en-hidrología-y-cambio-climático-1",
-    "href": "slides/dia1/index.html#por-qué-r-en-hidrología-y-cambio-climático-1",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "¿Por qué R en Hidrología y Cambio Climático?",
-    "text": "¿Por qué R en Hidrología y Cambio Climático?\n\n\n\nLibre y gratuito\nNo requiere licencia; funciona en Windows, macOS y Linux.\nConstruido para analizar datos\nEstadística y gráficos de calidad desde su origen.\n\n\n\nReproducible\nEl script documenta cada paso del análisis.\nPaquetes hidrológicos\nairGR, hydroGOF, trend, qmap, terra, etc.\n\n\n\nCRAN reúne más de 20 000 paquetes y mantiene una guía temática de hidrología (CRAN Task View: Hydrology).\n\nEnlace: https://github.com/cran-task-views/Hydrology/blob/main/Hydrology.md"
   },
   {
     "objectID": "slides/dia1/index.html#proyectos-y-estructura-de-carpetas",
@@ -222,6 +75,20 @@
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Proyectos y estructura de carpetas",
     "text": "Proyectos y estructura de carpetas\nEstructura del Curso-Taller\n\nCurso-Taller-R-Hidrologia/\n├── Curso-Taller-R-Hidrologia.Rproj    ← abrir siempre desde aquí\n├── data/\n│   ├── raw/                           datos originales (no se tocan)\n│   └── processed/                     datos procesados\n├── ejercicios/                        scripts del curso\n├── outputs/\n│   ├── figuras/                       gráficos generados\n│   └── tablas/                        tablas generadas\n└── slides/                            diapositivas\n\n\nLos datos de data/raw/ no se modifican: Los resultados se irán generando conforme se avance con los scripts del Curso-Taller."
+  },
+  {
+    "objectID": "slides/dia1/index.html#fundamentos",
+    "href": "slides/dia1/index.html#fundamentos",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Fundamentos",
+    "text": "Fundamentos\n\n02\n\nObjetos, vectores, data frame, listas, fechas con lubridate, paquetes y tidyverse"
+  },
+  {
+    "objectID": "slides/dia1/index.html#estructuras-de-datos",
+    "href": "slides/dia1/index.html#estructuras-de-datos",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Estructuras de datos",
+    "text": "Estructuras de datos\n\n\n\n\n\n\n\nImagen tomada del Enlace: https://irwingss.github.io/intro_r_ciencias/estructurasdatos.html"
   },
   {
     "objectID": "slides/dia1/index.html#objetos-y-asignación",
@@ -301,11 +168,11 @@
     "text": "Primer contacto con los datos reales\nlibrary(readxl)\n\nq &lt;- read_excel(\"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx\",\n                skip = 13)       # saltar las 13 filas de metadatos\nhead(q, 3)\n#&gt;   FECHA      HORA  `VALOR (m³/s)`\n#&gt; 1 04/05/2026 00:00          17.41\n#&gt; ...\n\n¿Qué hay que arreglar?\n\nFECHA es texto → convertir con dmy()\nEstá ordenado de 2026 a 1956 → ordenar\nFaltan días sin fila → completar y contar vacíos\nEn precipitación hay días duplicados (2017–2024)\n\n\nEso es la sección 03: procesamiento y control de calidad."
   },
   {
-    "objectID": "slides/dia1/index.html#estructuras-de-datos",
-    "href": "slides/dia1/index.html#estructuras-de-datos",
+    "objectID": "slides/dia1/index.html#procesamiento-y-visualización",
+    "href": "slides/dia1/index.html#procesamiento-y-visualización",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Estructuras de datos",
-    "text": "Estructuras de datos\n\n\n\n\n\n\n\nImagen tomada del Enlace: https://irwingss.github.io/intro_r_ciencias/estructurasdatos.html"
+    "section": "Procesamiento y visualización",
+    "text": "Procesamiento y visualización\n\n03\n\nImportación (readr, readxl), dplyr/tidyr, NAs y control de calidad, agregación diaria → mensual → anual, ggplot2"
   },
   {
     "objectID": "slides/dia1/index.html#importar-y-ordenar-el-caudal",
@@ -392,6 +259,13 @@
     "text": "Exportar resultados\n# Tablas procesadas\nwrite_csv(q_full,     \"data/processed/Q_diario_Huancane.csv\")\nwrite_csv(pp_mensual, \"data/processed/PP_mensual_Huancane.csv\")\nwrite_csv(q_anual,    \"outputs/tablas/Q_anual_Huancane.csv\")\n\n# Figuras\nggsave(\"outputs/figuras/Q_hidrograma.png\", g_hidro,\n       width = 10, height = 4.5, dpi = 150)\n\n\ndata/raw/ sigue intacto: todo se puede regenerar ejecutando el script\nScript completo: ejercicios/02_Procesamiento.R (con ejercicios E1–E6)"
   },
   {
+    "objectID": "slides/dia1/index.html#automatización",
+    "href": "slides/dia1/index.html#automatización",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Automatización",
+    "text": "Automatización\n\n04\n\nFunciones propias, if/else (años secos/húmedos), for sobre múltiples estaciones, iteración con purrr::map"
+  },
+  {
     "objectID": "slides/dia1/index.html#funciones-propias",
     "href": "slides/dia1/index.html#funciones-propias",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
@@ -399,11 +273,11 @@
     "text": "Funciones propias\nEscribir la limpieza UNA vez y reutilizarla\nleer_senamhi &lt;- function(archivo) {\n  read_excel(archivo, skip = 13) |&gt;\n    rename(fecha = 1, hora = 2, valor = 3) |&gt;\n    mutate(fecha = dmy(fecha)) |&gt;\n    arrange(fecha, hora) |&gt;\n    distinct(fecha, .keep_all = TRUE) |&gt;        # regla 00:00 → 05:00\n    select(fecha, valor) |&gt;\n    complete(fecha = seq(min(fecha), max(fecha), by = \"day\"))\n}\n\nq  &lt;- leer_senamhi(\"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx\")\npp &lt;- leer_senamhi(\"data/raw/precipitacion/PP_000786_Huancane.xlsx\")\nnrow(q)     #&gt; 25692\n\nTodo el procesamiento de la sección 03 quedó en una línea. Si mañana cambia el formato de SENAMHI, se corrige en un solo lugar."
   },
   {
-    "objectID": "slides/dia1/index.html#funciones-argumentos-y-valores-por-defecto",
-    "href": "slides/dia1/index.html#funciones-argumentos-y-valores-por-defecto",
+    "objectID": "slides/dia1/index.html#funciones-argumentos-por-defecto",
+    "href": "slides/dia1/index.html#funciones-argumentos-por-defecto",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Funciones: argumentos y valores por defecto",
-    "text": "Funciones: argumentos y valores por defecto\nagregar_mensual &lt;- function(datos, fun = sum, max_na = 3) {\n  datos |&gt;\n    group_by(anio = year(fecha), mes = month(fecha)) |&gt;\n    summarise(n_na  = sum(is.na(valor)),\n              valor = fun(valor, na.rm = TRUE),\n              .groups = \"drop\") |&gt;\n    mutate(valor = if_else(n_na &gt; max_na, NA, valor))\n}\n\npp_mensual &lt;- agregar_mensual(pp)                         # suma (por defecto)\nq_mensual  &lt;- agregar_mensual(q, fun = mean)              # promedio\nq_estricto &lt;- agregar_mensual(q, fun = mean, max_na = 0)  # sin vacíos\n\nEn el script también está agregar_anual(), que conserva solo los años con 12 meses válidos: 62 años de caudal."
+    "section": "Funciones: argumentos por defecto",
+    "text": "Funciones: argumentos por defecto\nagregar_mensual &lt;- function(datos, fun = sum, max_na = 3) {\n  datos |&gt;\n    group_by(anio = year(fecha), mes = month(fecha)) |&gt;\n    summarise(n_na  = sum(is.na(valor)),\n              valor = fun(valor, na.rm = TRUE),\n              .groups = \"drop\") |&gt;\n    mutate(valor = if_else(n_na &gt; max_na, NA, valor))\n}\n\npp_mensual &lt;- agregar_mensual(pp)                         # suma (por defecto)\nq_mensual  &lt;- agregar_mensual(q, fun = mean)              # promedio\nq_estricto &lt;- agregar_mensual(q, fun = mean, max_na = 0)  # sin vacíos\n\nEn el script también está agregar_anual(), que conserva solo los años con 12 meses válidos: 62 años de caudal."
   },
   {
     "objectID": "slides/dia1/index.html#condicionales-if-else",
@@ -448,94 +322,122 @@
     "text": "Todas las estaciones en un gráfico\n\n\npp_anual &lt;- pp_lista |&gt;\n  map(\\(d) d |&gt;\n        agregar_mensual() |&gt;\n        agregar_anual()) |&gt;\n  list_rbind(names_to = \"estacion\")\n\nggplot(pp_anual,\n       aes(anio, valor)) +\n  geom_col(fill = \"#0B5394\") +\n  facet_wrap(~ estacion,\n             ncol = 1)\n\nfacet_wrap() hace un panel por estación. Entre 2010 y 2016 solo Cojata tiene años completos: es un vacío de toda la red, no de una estación."
   },
   {
-    "objectID": "slides/dia1/index.html#funciones-argumentos-por-defecto",
-    "href": "slides/dia1/index.html#funciones-argumentos-por-defecto",
+    "objectID": "slides/dia1/index.html#datos-climáticos-grillados",
+    "href": "slides/dia1/index.html#datos-climáticos-grillados",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Funciones: argumentos por defecto",
-    "text": "Funciones: argumentos por defecto\nagregar_mensual &lt;- function(datos, fun = sum, max_na = 3) {\n  datos |&gt;\n    group_by(anio = year(fecha), mes = month(fecha)) |&gt;\n    summarise(n_na  = sum(is.na(valor)),\n              valor = fun(valor, na.rm = TRUE),\n              .groups = \"drop\") |&gt;\n    mutate(valor = if_else(n_na &gt; max_na, NA, valor))\n}\n\npp_mensual &lt;- agregar_mensual(pp)                         # suma (por defecto)\nq_mensual  &lt;- agregar_mensual(q, fun = mean)              # promedio\nq_estricto &lt;- agregar_mensual(q, fun = mean, max_na = 0)  # sin vacíos\n\nEn el script también está agregar_anual(), que conserva solo los años con 12 meses válidos: 62 años de caudal."
-  },
-  {
-    "objectID": "slides/dia2/index.html#servicios-climáticos-y-cambio-climático",
-    "href": "slides/dia2/index.html#servicios-climáticos-y-cambio-climático",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Servicios climáticos y Cambio Climático",
-    "text": "Servicios climáticos y Cambio Climático\n¿Que son los Servicios Climáticos?\nLos servicios climáticos consisten en la generación, traducción y entrega de información científica sobre el clima (pasado, presente y futuro) en un formato práctico y comprensible. Su objetivo es ayudar a personas, empresas y gobiernos a tomar mejores decisiones para reducir riesgos y aprovechar oportunidades frente a las condiciones del clima.\n¿Qué es el cambio climático?\nEl cambio climático es la variación a largo plazo de las temperaturas y los patrones habituales del clima en la Tierra. Aunque puede tener causas naturales, desde el siglo XIX se debe principalmente a las actividades humanas (como la quema de combustibles fósiles y la deforestación), que aumentan los gases de efecto invernadero y provocan el calentamiento global.\nR en ciencias del agua y cambio climático, Proyectos y Estructuras de Carpetas"
+    "section": "Datos climáticos grillados",
+    "text": "Datos climáticos grillados\n\n05\n\nPaquete terra: lectura de NetCDF, recorte de cuenca, climatología, mapas, precipitación areal y balance P – ETP"
   },
   {
     "objectID": "slides/dia1/index.html#pisco-datos-grillados-del-perú",
     "href": "slides/dia1/index.html#pisco-datos-grillados-del-perú",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "PISCO: datos grillados del Perú",
-    "text": "PISCO: datos grillados del Perú\n\nPISCOp v2.1 (SENAMHI): precipitación mensual 1981–2016, celdas de 0.1° (~11 km)\nCombina estaciones, satélite (CHIRPS) y climatología\nFormato NetCDF (.nc): un “cubo” longitud × latitud × tiempo\n\n\nurl_pisco &lt;- paste0(\n  \"https://iridl.ldeo.columbia.edu/SOURCES/.SENAMHI/.HSR/.PISCO/\",\n  \".Prec/.v2p1/.stable/.monthly/.Prec/\",\n  \"X/(-70.3)/(-69.2)/RANGEEDGES/Y/(-15.5)/(-14.4)/RANGEEDGES/data.nc\"\n)\narchivo_pp &lt;- \"data/raw/pisco/PISCOp_v2.1_mensual.nc\"\n\nif (!file.exists(archivo_pp)) {\n  download.file(url_pisco, archivo_pp, mode = \"wb\")\n}\n\nLa URL pide solo el recuadro de la cuenca: ~200 KB en lugar de todo el Perú."
+    "text": "PISCO: datos grillados del Perú\n\nPISCOp v3.0 (SENAMHI): precipitación diaria 1981–2025, celdas de 0.1° (~11 km)\nFormato NetCDF (.nc): un “cubo” longitud × latitud × tiempo\nEl archivo nacional pesa 1.5 GB (16 436 días)\n\n\n# Recorte de la cuenca (lo hace el instructor UNA vez)\nnc &lt;- ncdf4::nc_open(\"data/raw/pisco/PISCOp_d.nc\")\na  &lt;- ncdf4::ncvar_get(nc, \"precipitation\",\n                       start = c(min(ix), min(iy), 1),       # esquina\n                       count = c(length(ix), length(iy), -1)) # 11 x 11 x todo\n\nterra::crop() sobre el archivo nacional tarda más de 10 minutos; leer solo la ventana con ncdf4 tarda menos de 1 segundo. El recorte (5.9 MB) ya está en data/raw/pisco/."
   },
   {
     "objectID": "slides/dia1/index.html#leer-un-netcdf-con-terra",
     "href": "slides/dia1/index.html#leer-un-netcdf-con-terra",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Leer un NetCDF con terra",
-    "text": "Leer un NetCDF con terra\nlibrary(terra)\npp &lt;- rast(archivo_pp)\npp\n#&gt; class       : SpatRaster\n#&gt; size        : 11, 11, 432  (nrow, ncol, nlyr)\n#&gt; resolution  : 0.1, 0.1  (x, y)\n#&gt; extent      : -70.3, -69.2, -15.5, -14.4  (xmin, xmax, ymin, ymax)\n#&gt; coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)\n#&gt; unit        : mm/month\n\n# El tiempo viene como \"meses desde 1960\": lo asignamos nosotros\nfechas &lt;- seq(as.Date(\"1981-01-01\"), by = \"month\", length.out = nlyr(pp))\ntime(pp)  &lt;- fechas\nnames(pp) &lt;- format(fechas, \"%Y-%m\")\n\nplot(pp[[\"2010-01\"]])          # una capa = un mapa\n\n432 capas = 432 meses. Cada capa es una grilla de 11 × 11 celdas."
+    "text": "Leer un NetCDF con terra\nlibrary(terra)\npp_dia &lt;- rast(\"data/raw/pisco/PISCOp_v3_diario_Huancane.nc\")\npp_dia\n#&gt; class       : SpatRaster\n#&gt; size        : 11, 11, 16436  (nrow, ncol, nlyr)\n#&gt; resolution  : 0.1, 0.1  (x, y)\n#&gt; extent      : -70.3, -69.2, -15.5, -14.4  (xmin, xmax, ymin, ymax)\n#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326)\n#&gt; unit        : mm\n#&gt; time (days) : 1981-01-01 to 2025-12-31 (16436 steps)\n\nplot(pp_dia[[1]])            # una capa = un mapa (1 de enero de 1981)\n\n16 436 capas = 16 436 días. Cada capa es una grilla de 11 × 11 celdas."
+  },
+  {
+    "objectID": "slides/dia1/index.html#de-diario-a-mensual-con-tapp",
+    "href": "slides/dia1/index.html#de-diario-a-mensual-con-tapp",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "De diario a mensual con tapp()",
+    "text": "De diario a mensual con tapp()\n# Agrupa las capas por su fecha y aplica una función\npp &lt;- tapp(pp_dia, \"yearmonths\", sum)   # lluvia total de cada mes\nnlyr(pp)                                #&gt; 540 meses = 45 años\n\nfechas    &lt;- seq(as.Date(\"1981-01-01\"), by = \"month\", length.out = nlyr(pp))\ntime(pp)  &lt;- fechas\nnames(pp) &lt;- format(fechas, \"%Y-%m\")\n\nplot(pp[[\"2025-01\"]])\n\ntapp() acepta \"years\", \"months\", \"yearmonths\", \"doy\"… y cualquier función: sum, mean, max."
   },
   {
     "objectID": "slides/dia1/index.html#la-cuenca-datos-vectoriales",
     "href": "slides/dia1/index.html#la-cuenca-datos-vectoriales",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "La cuenca: datos vectoriales",
-    "text": "La cuenca: datos vectoriales\nsubcuencas &lt;- vect(\"data/basin/Subbasins.shp\")\nrios       &lt;- vect(\"data/rivers/Rivers.shp\")\ncrs(subcuencas, describe = TRUE)$name   #&gt; \"WGS 84 / UTM zone 19S\"\n\n# Ráster en grados, cuenca en metros: mismo sistema de coordenadas\nsubcuencas &lt;- project(subcuencas, crs(pp))\nrios       &lt;- project(rios, crs(pp))\n\ncuenca &lt;- aggregate(subcuencas)        # disolver 5 subcuencas en 1\nexpanse(cuenca, unit = \"km\")           #&gt; 3545 km²\n\n\npp_cuenca &lt;- crop(pp, cuenca, mask = TRUE)   # recortar y enmascarar\nplot(pp_cuenca[[\"2010-01\"]]); lines(cuenca)"
+    "text": "La cuenca: datos vectoriales\nsubcuencas &lt;- vect(\"data/basin/Subbasins.shp\")\nrios       &lt;- vect(\"data/rivers/Rivers.shp\")\ncrs(subcuencas, describe = TRUE)$name   #&gt; \"WGS 84 / UTM zone 19S\"\n\n# Ráster en grados, cuenca en metros: mismo sistema de coordenadas\nsubcuencas &lt;- project(subcuencas, crs(pp))\nrios       &lt;- project(rios, crs(pp))\n\ncuenca &lt;- aggregate(subcuencas) |&gt;     # disolver 5 subcuencas en 1\n  fillHoles()                          # sin huecos entre subcuencas\nexpanse(cuenca, unit = \"km\")           #&gt; 3545 km²\n\n\n# Salida: 1er vértice del tramo que no desemboca en otra subcuenca\nsalida &lt;- crds(rios[rios$SubbasinR == 0])[1, ]   #&gt; -69.79 -15.22\n\npp_cuenca &lt;- crop(pp, cuenca, mask = TRUE)       # recortar y enmascarar\nplot(pp_cuenca[[\"2025-01\"]]); lines(cuenca)"
   },
   {
-    "objectID": "slides/dia1/index.html#climatología-con-tapp",
-    "href": "slides/dia1/index.html#climatología-con-tapp",
+    "objectID": "slides/dia1/index.html#climatología-19912020",
+    "href": "slides/dia1/index.html#climatología-19912020",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Climatología con tapp()",
-    "text": "Climatología con tapp()\npp_anual &lt;- tapp(pp, \"years\", sum)     # 36 mapas: total de cada año\npp_media &lt;- mean(pp_anual)             # 1 mapa: media 1981–2016\n\npp_mes &lt;- tapp(pp, \"months\", mean)     # 12 mapas: régimen mensual\nnames(pp_mes) &lt;- month.abb\nplot(pp_mes, nc = 4)\n\nglobal(crop(pp_media, cuenca, mask = TRUE), range, na.rm = TRUE)\n#&gt; 525 a 890 mm/año\n\ntapp() agrupa capas por fecha: \"years\", \"months\", \"yearmonths\", \"doy\"…"
+    "section": "Climatología 1991–2020",
+    "text": "Climatología 1991–2020\n# Normal climatológica: periodo estándar de 30 años (OMM)\npp_normal &lt;- pp[[year(fechas) %in% 1991:2020]]    # 360 meses\n\npp_anual   &lt;- tapp(pp_normal, \"years\", sum)       # 30 mapas: total anual\npp_media   &lt;- mean(pp_anual)                      # 1 mapa: media anual\npp_regimen &lt;- tapp(pp_normal, \"months\", mean)     # 12 mapas: régimen\nplot(pp_regimen, nc = 4)\n\nglobal(crop(pp_media, cuenca, mask = TRUE), range, na.rm = TRUE)\n#&gt; 560 a 942 mm/año"
   },
   {
     "objectID": "slides/dia1/index.html#mapa-con-ggplot2",
     "href": "slides/dia1/index.html#mapa-con-ggplot2",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Mapa con ggplot2",
-    "text": "Mapa con ggplot2\n\n\npp_df &lt;- as.data.frame(pp_media,\n                       xy = TRUE)\n\nggplot() +\n  geom_raster(data = pp_df,\n              aes(x, y, fill = mean)) +\n  geom_sf(data = st_as_sf(cuenca),\n          fill = NA) +\n  geom_sf(data = st_as_sf(rios),\n          color = \"#00BFFF\") +\n  scale_fill_distiller(\n    palette = \"YlGnBu\",\n    direction = 1)\n\nLa lluvia aumenta hacia el norte y el noreste (cabecera): hasta ~890 mm/año."
+    "text": "Mapa con ggplot2\n\n\npp_df &lt;- as.data.frame(pp_media,\n                       xy = TRUE)\nggplot() +\n  geom_tile(data = pp_df,\n    aes(x, y, fill = mean),\n    color = \"grey85\") +   # grilla\n  geom_sf(data = st_as_sf(cuenca),\n    fill = NA) +\n  geom_sf(data = st_as_sf(rios),\n    color = \"#00BFFF\") +\n  annotate(\"point\",       # salida\n    x = salida[1], y = salida[2],\n    shape = 21, fill = \"#FF6732\") +\n  annotate(\"segment\",     # norte\n    x = -70.22, xend = -70.22,\n    y = -14.66, yend = -14.50,\n    arrow = arrow())\n\nEn la cuenca la lluvia va de 560 a 942 mm/año; es mayor al noreste (subcuenca 2)."
+  },
+  {
+    "objectID": "slides/dia1/index.html#climatología-mensual-en-la-cuenca",
+    "href": "slides/dia1/index.html#climatología-mensual-en-la-cuenca",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Climatología mensual en la cuenca",
+    "text": "Climatología mensual en la cuenca\n\n\nreg_cuenca &lt;- pp_regimen |&gt;\n  crop(cuenca) |&gt;\n  mask(cuenca, touches = TRUE)\n\nregimen_df &lt;- reg_cuenca |&gt;\n  as.data.frame(xy = TRUE) |&gt;\n  pivot_longer(-c(x, y),\n    names_to = \"mes\",\n    values_to = \"pp\")\n\nggplot(regimen_df) +\n  geom_tile(aes(x, y,\n                fill = pp)) +\n  facet_wrap(~ mes, ncol = 4)\n\nDiciembre a marzo concentra el 68 % de la lluvia anual (489 de 716 mm). En julio caen apenas 5 mm."
   },
   {
     "objectID": "slides/dia1/index.html#precipitación-areal",
     "href": "slides/dia1/index.html#precipitación-areal",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Precipitación areal",
-    "text": "Precipitación areal\n# Promedio de las celdas, ponderado por la fracción dentro de la cuenca\npp_areal &lt;- extract(pp, cuenca, fun = mean, weights = TRUE,\n                    na.rm = TRUE, ID = FALSE)\n\npp_cuenca_mes &lt;- pp_areal |&gt;\n  pivot_longer(everything(), values_to = \"pp\") |&gt;\n  mutate(fecha = fechas)\n#&gt; Precipitación media anual de la cuenca: 695 mm\n\n\n\n# El mismo código, con las subcuencas\nextract(pp_media, subcuencas,\n        fun = mean, weights = TRUE)\n\n\n\n\nSubcuenca\nÁrea (km²)\nPP (mm/año)\n\n\n\n\n1\n892\n760\n\n\n2\n948\n782\n\n\n3\n231\n642\n\n\n4\n1106\n611\n\n\n5\n367\n602"
+    "text": "Precipitación areal\n# Promedio de las celdas, ponderado por la fracción dentro de la cuenca\npp_areal &lt;- extract(pp, cuenca, fun = mean, weights = TRUE,\n                    na.rm = TRUE, ID = FALSE)\n\npp_cuenca_mes &lt;- pp_areal |&gt;\n  pivot_longer(everything(), values_to = \"pp\") |&gt;\n  mutate(fecha = fechas)\n#&gt; Media anual 1991–2020 de la cuenca: 716 mm\n\n\n\n# El mismo código, con las subcuencas\nextract(pp_media, subcuencas,\n        fun = mean, weights = TRUE)\n\n\n\n\nSubcuenca\nÁrea (km²)\nPP (mm/año)\n\n\n\n\n1\n892\n737\n\n\n2\n948\n819\n\n\n3\n231\n689\n\n\n4\n1106\n650\n\n\n5\n367\n619"
   },
   {
     "objectID": "slides/dia1/index.html#pisco-frente-a-la-estación",
     "href": "slides/dia1/index.html#pisco-frente-a-la-estación",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "PISCO frente a la estación",
-    "text": "PISCO frente a la estación\n\n\npisco_punto &lt;- extract(pp, huancane_v,\n                       ID = FALSE)\n\ncomparacion |&gt;\n  summarise(\n    r     = cor(obs, pisco),\n    pbias = 100 * sum(pisco - obs) /\n                  sum(obs))\n#&gt;       r  pbias\n#&gt;   0.971  -6.37\n\n353 meses comunes. PISCOp subestima en un 6 % la estación Huancané. Como PISCO incorpora las estaciones del SENAMHI, esto no es una validación independiente."
+    "text": "PISCO frente a la estación\n\n\npisco_punto &lt;- extract(pp, huancane_v,\n                       ID = FALSE)\n\ncomparacion |&gt;\n  summarise(\n    r     = cor(obs, pisco),\n    pbias = 100 * sum(pisco - obs) /\n                  sum(obs))\n#&gt;       r  pbias\n#&gt;   0.950  -4.13\n\n413 meses comunes (1981–2025). PISCOp v3 subestima en un 4 % la estación Huancané. Como PISCO incorpora las estaciones del SENAMHI, esto no es una validación independiente."
   },
   {
     "objectID": "slides/dia1/index.html#temperatura-por-subcuenca",
     "href": "slides/dia1/index.html#temperatura-por-subcuenca",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Temperatura por subcuenca",
-    "text": "Temperatura por subcuenca\ntmax &lt;- read_csv(\"data/temp/Datos_tmax.csv\")    # diaria, 1981–2020\ntmin &lt;- read_csv(\"data/temp/Datos_tmin.csv\")\n#&gt;   Date         Sb1   Sb3   Sb2   Sb5   Sb4\n#&gt;   1981-01-01 13.9  15.8  14.0  15.9  14.7\n\na_largo &lt;- function(datos, nombre) {\n  datos |&gt;\n    pivot_longer(-Date, names_to = \"subcuenca\", values_to = nombre) |&gt;\n    mutate(subcuenca = parse_number(subcuenca)) |&gt;\n    rename(fecha = Date)\n}\n\ntemp &lt;- inner_join(a_largo(tmax, \"tmax\"), a_largo(tmin, \"tmin\"),\n                   by = c(\"fecha\", \"subcuenca\"))\nnrow(temp)                          #&gt; 73050 (14610 días × 5)\ntemp |&gt; filter(tmin &gt; tmax) |&gt; nrow()   #&gt; 0"
+    "text": "Temperatura por subcuenca\ntmax &lt;- read_csv(\"data/temp/Datos_tmax.csv\")    # diaria, 1981–2020\ntmin &lt;- read_csv(\"data/temp/Datos_tmin.csv\")\n#&gt;   Date         Sb1   Sb3   Sb2   Sb5   Sb4\n#&gt;   1981-01-01 13.9  15.8  14.0  15.9  14.7\n\na_largo &lt;- function(datos, nombre) {\n  datos |&gt;\n    pivot_longer(-Date, names_to = \"subcuenca\", values_to = nombre) |&gt;\n    mutate(subcuenca = parse_number(subcuenca)) |&gt;\n    rename(fecha = Date)\n}\n\ntemp &lt;- inner_join(a_largo(tmax, \"tmax\"), a_largo(tmin, \"tmin\"),\n                   by = c(\"fecha\", \"subcuenca\"))\nnrow(temp)                          #&gt; 73050 (14610 días × 5)\ntemp |&gt; filter(tmin &gt; tmax) |&gt; nrow()   #&gt; 0\n\nFuente: PISCO temperatura diaria 1981–2020 (SENAMHI), promediada por subcuenca. Tmax: doi.org/10.6084/m9.figshare.20522806 · Tmin: doi.org/10.6084/m9.figshare.20533715"
   },
   {
     "objectID": "slides/dia1/index.html#etp-por-hargreaves-samani",
     "href": "slides/dia1/index.html#etp-por-hargreaves-samani",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "ETP por Hargreaves-Samani",
-    "text": "ETP por Hargreaves-Samani\n\\[ETP = 0.0023 \\cdot R_a \\cdot (T_{media} + 17.8) \\cdot \\sqrt{T_{max} - T_{min}}\\]\nhargreaves &lt;- function(tmax, tmin, lat, fecha) {\n  tmedia &lt;- (tmax + tmin) / 2\n  0.0023 * radiacion_ext(lat, fecha) * (tmedia + 17.8) *\n    sqrt(pmax(tmax - tmin, 0))\n}\n\netp_dia &lt;- temp |&gt;\n  left_join(info_sub, by = \"subcuenca\") |&gt;        # latitud y área\n  mutate(etp = hargreaves(tmax, tmin, lat, fecha))\n\netp_cuenca_mes &lt;- etp_dia |&gt;\n  group_by(subcuenca, area_km2, fecha = floor_date(fecha, \"month\")) |&gt;\n  summarise(etp = sum(etp), .groups = \"drop\") |&gt;   # diaria -&gt; mensual\n  group_by(fecha) |&gt;\n  summarise(etp = weighted.mean(etp, area_km2))    # ponderado por área\n#&gt; ETP media anual: 1105 mm\n\n\\(R_a\\) = radiación extraterrestre (FAO-56), función de la latitud del centroide y del día del año."
+    "text": "ETP por Hargreaves-Samani\n\\[ETP = 0.0023 \\cdot R_a \\cdot (T_{media} + 17.8) \\cdot \\sqrt{T_{max} - T_{min}}\\]\nhargreaves &lt;- function(tmax, tmin, lat, fecha) {\n  tmedia &lt;- (tmax + tmin) / 2\n  0.0023 * radiacion_ext(lat, fecha) * (tmedia + 17.8) *\n    sqrt(pmax(tmax - tmin, 0))\n}\n\netp_dia &lt;- temp |&gt;\n  left_join(info_sub, by = \"subcuenca\") |&gt;        # latitud y área\n  mutate(etp = hargreaves(tmax, tmin, lat, fecha))\n\netp_cuenca_mes &lt;- etp_dia |&gt;\n  group_by(subcuenca, area_km2, fecha = floor_date(fecha, \"month\")) |&gt;\n  summarise(etp = sum(etp), .groups = \"drop\") |&gt;   # diaria -&gt; mensual\n  group_by(fecha) |&gt;\n  summarise(etp = weighted.mean(etp, area_km2))    # ponderado por área\n#&gt; ETP media anual 1981–2020: 1105 mm\n\n\\(R_a\\) = radiación extraterrestre (FAO-56), función de la latitud del centroide y del día del año."
   },
   {
     "objectID": "slides/dia1/index.html#balance-p-etp",
     "href": "slides/dia1/index.html#balance-p-etp",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Balance P – ETP",
-    "text": "Balance P – ETP\n\n\nbalance &lt;- inner_join(\n  pp_cuenca_mes,\n  etp_cuenca_mes,\n  by = \"fecha\")\n\n\n\n\nmm/año\n\n\n\n\nPrecipitación\n695\n\n\nETP\n1101\n\n\nP / ETP\n0.63\n\n\n\n\nSolo de diciembre a febrero llueve más de lo que se puede evaporar. De abril a noviembre la cuenca tiene déficit."
+    "text": "Balance P – ETP\n\n\nbalance &lt;- inner_join(\n  pp_cuenca_mes,\n  etp_cuenca_mes,\n  by = \"fecha\") |&gt;\n  filter(year(fecha) %in%\n         1991:2020)\n\n\n\n\nmm/año\n\n\n\n\nPrecipitación\n716\n\n\nETP\n1115\n\n\nP / ETP\n0.64\n\n\n\n\nNormal 1991–2020. Solo de diciembre a marzo llueve más de lo que se puede evaporar; de abril a noviembre la cuenca tiene déficit."
   },
   {
     "objectID": "slides/dia1/index.html#exportar-entrada-para-el-día-2",
     "href": "slides/dia1/index.html#exportar-entrada-para-el-día-2",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Exportar: entrada para el Día 2",
-    "text": "Exportar: entrada para el Día 2\n# Serie mensual areal de la cuenca (1981–2016)\nwrite_csv(balance, \"data/processed/PP_ETP_mensual_cuenca.csv\")\n\n# Mapa de precipitación media como GeoTIFF (se abre en QGIS)\nwriteRaster(pp_media, \"outputs/PP_media_anual_PISCO.tif\")\n\n\nPP_ETP_mensual_cuenca.csv + el caudal de Huancané = todo lo que necesita un modelo hidrológico mensual (GR2M) en el Día 2."
+    "text": "Exportar: entrada para el Día 2\n# Series mensuales areales: pp 1981–2025, etp 1981–2020\npp_cuenca_mes |&gt;\n  left_join(etp_cuenca_mes, by = \"fecha\") |&gt;\n  write_csv(\"data/processed/PP_ETP_mensual_cuenca.csv\")\n\n# Mapa de precipitación media como GeoTIFF (se abre en QGIS)\nwriteRaster(pp_media, \"outputs/PP_media_anual_PISCOv3.tif\")\n\n\nPP_ETP_mensual_cuenca.csv + el caudal de Huancané = todo lo que necesita un modelo hidrológico mensual (GR2M) en el Día 2."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "",
+    "text": "En un entorno donde la tecnología y el análisis de datos avanzan a pasos agigantados, optimizar los flujos de trabajo es fundamental para la toma de decisiones. En ese sentido, contar con un entorno robusto para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.\nBajo este enfoque, se presenta el Curso-Taller: “Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático”. El Lenguaje R se ha consolidado como una herramienta indispensable en el ámbito científico, académico y profesional gracias a su capacidad de gestionar grandes volúmenes de datos, realizar análisis complejos y desarrollar o replicar modelos hidrológicos de manera eficiente.\nOrganizado por las entidades:\n\nColegio de Ingenieros del Perú Consejo Departamental Puno\nFacultad de Ingeniería del Agua y Gestión de Recursos Hídricos\nIICTA-FIA Instituto de Investigación en Ciencia y Tenología del Agua\nERASMUS\nEMPOANDES - Empowering Climate Services in the Andes"
+  },
+  {
+    "objectID": "index.html#objetivo",
+    "href": "index.html#objetivo",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "",
+    "text": "En un entorno donde la tecnología y el análisis de datos avanzan a pasos agigantados, optimizar los flujos de trabajo es fundamental para la toma de decisiones. En ese sentido, contar con un entorno robusto para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.\nBajo este enfoque, se presenta el Curso-Taller: “Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático”. El Lenguaje R se ha consolidado como una herramienta indispensable en el ámbito científico, académico y profesional gracias a su capacidad de gestionar grandes volúmenes de datos, realizar análisis complejos y desarrollar o replicar modelos hidrológicos de manera eficiente.\nOrganizado por las entidades:\n\nColegio de Ingenieros del Perú Consejo Departamental Puno\nFacultad de Ingeniería del Agua y Gestión de Recursos Hídricos\nIICTA-FIA Instituto de Investigación en Ciencia y Tenología del Agua\nERASMUS\nEMPOANDES - Empowering Climate Services in the Andes"
+  },
+  {
+    "objectID": "index.html#materiales",
+    "href": "index.html#materiales",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Materiales",
+    "text": "Materiales\nLas diapositivas del Curso-Taller, para los dos días se encuentran en los siguientes enlaces:\n\nDiapositivas Día 1"
   }
 ]

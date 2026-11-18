@@ -42,10 +42,13 @@ paquetes <- c(
   "tidyverse",   # readr, dplyr, tidyr, ggplot2, purrr, lubridate
   "readxl",      # lectura de archivos Excel
   "terra",       # datos grillados (NetCDF, ráster)
+  "sf",          # vectores en mapas de ggplot2 (geom_sf)
   "trend",       # Mann-Kendall y pendiente de Sen
   "modifiedmk",  # Mann-Kendall modificado
   "qmap",        # corrección de sesgo por mapeo de cuantiles
   "airGR",       # modelos hidrológicos GR4J / GR2M
+  "airGRiwrm",   # redes de subcuencas con modelos GR
+  "zoo",         # sumas móviles (índice Rx5day)
   "hydroGOF",    # métricas de desempeño NSE, KGE
   "reticulate"   # conexión con Python
 )

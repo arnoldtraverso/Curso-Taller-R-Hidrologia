@@ -1,7 +1,7 @@
 ---
 title: 'Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático'
 subtitle: 'Curso Taller Día 1'
-institute: 'Universidad Nacional del Altiplano - Facultad de Ingeniería del Agua y Gestión de Recursos Hídricos'
+institute: 'CIP Puno - Cap. Ingeniería Agrícola - Facultad de Ingeniería del Agua y Gestión de Recursos Hídricos'
 author: 'Profesor: Kevin Arnold Traverso Yucra'
 
 format: 
@@ -1104,56 +1104,69 @@ Paquete terra: lectura de NetCDF, recorte de cuenca, climatología, mapas, preci
 
 ## PISCO: datos grillados del Perú
 
--   **PISCOp v2.1** (SENAMHI): precipitación mensual 1981–2016, celdas de 0.1° (~11 km)
--   Combina estaciones, satélite (CHIRPS) y climatología
+-   **PISCOp v3.0** (SENAMHI): precipitación **diaria** 1981–2025, celdas de 0.1° (~11 km)
 -   Formato **NetCDF** (`.nc`): un "cubo" longitud × latitud × tiempo
+-   El archivo nacional pesa **1.5 GB** (16 436 días)
 
 . . .
 
 ```r
-url_pisco <- paste0(
-  "https://iridl.ldeo.columbia.edu/SOURCES/.SENAMHI/.HSR/.PISCO/",
-  ".Prec/.v2p1/.stable/.monthly/.Prec/",
-  "X/(-70.3)/(-69.2)/RANGEEDGES/Y/(-15.5)/(-14.4)/RANGEEDGES/data.nc"
-)
-archivo_pp <- "data/raw/pisco/PISCOp_v2.1_mensual.nc"
-
-if (!file.exists(archivo_pp)) {
-  download.file(url_pisco, archivo_pp, mode = "wb")
-}
+# Recorte de la cuenca (lo hace el instructor UNA vez)
+nc <- ncdf4::nc_open("data/raw/pisco/PISCOp_d.nc")
+a  <- ncdf4::ncvar_get(nc, "precipitation",
+                       start = c(min(ix), min(iy), 1),       # esquina
+                       count = c(length(ix), length(iy), -1)) # 11 x 11 x todo
 ```
 
 ::: {.fuente}
-La URL pide solo el recuadro de la cuenca: ~200 KB en lugar de todo el Perú.
+`terra::crop()` sobre el archivo nacional tarda más de 10 minutos; leer solo la ventana con `ncdf4` tarda menos de 1 segundo. El recorte (5.9 MB) ya está en `data/raw/pisco/`.
 :::
 
 ## Leer un NetCDF con `terra`
 
 ```r
 library(terra)
-pp <- rast(archivo_pp)
-pp
+pp_dia <- rast("data/raw/pisco/PISCOp_v3_diario_Huancane.nc")
+pp_dia
 #> class       : SpatRaster
-#> size        : 11, 11, 432  (nrow, ncol, nlyr)
+#> size        : 11, 11, 16436  (nrow, ncol, nlyr)
 #> resolution  : 0.1, 0.1  (x, y)
 #> extent      : -70.3, -69.2, -15.5, -14.4  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)
-#> unit        : mm/month
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
+#> unit        : mm
+#> time (days) : 1981-01-01 to 2025-12-31 (16436 steps)
 ```
 
 . . .
 
 ```r
-# El tiempo viene como "meses desde 1960": lo asignamos nosotros
-fechas <- seq(as.Date("1981-01-01"), by = "month", length.out = nlyr(pp))
-time(pp)  <- fechas
-names(pp) <- format(fechas, "%Y-%m")
-
-plot(pp[["2010-01"]])          # una capa = un mapa
+plot(pp_dia[[1]])            # una capa = un mapa (1 de enero de 1981)
 ```
 
 ::: {.fuente}
-432 capas = 432 meses. Cada capa es una grilla de 11 × 11 celdas.
+16 436 capas = 16 436 días. Cada capa es una grilla de 11 × 11 celdas.
+:::
+
+## De diario a mensual con `tapp()`
+
+```r
+# Agrupa las capas por su fecha y aplica una función
+pp <- tapp(pp_dia, "yearmonths", sum)   # lluvia total de cada mes
+nlyr(pp)                                #> 540 meses = 45 años
+```
+
+. . .
+
+```r
+fechas    <- seq(as.Date("1981-01-01"), by = "month", length.out = nlyr(pp))
+time(pp)  <- fechas
+names(pp) <- format(fechas, "%Y-%m")
+
+plot(pp[["2025-01"]])
+```
+
+::: {.fuente}
+`tapp()` acepta `"years"`, `"months"`, `"yearmonths"`, `"doy"`... y cualquier función: `sum`, `mean`, `max`.
 :::
 
 ## La cuenca: datos vectoriales
@@ -1171,66 +1184,102 @@ crs(subcuencas, describe = TRUE)$name   #> "WGS 84 / UTM zone 19S"
 subcuencas <- project(subcuencas, crs(pp))
 rios       <- project(rios, crs(pp))
 
-cuenca <- aggregate(subcuencas)        # disolver 5 subcuencas en 1
+cuenca <- aggregate(subcuencas) |>     # disolver 5 subcuencas en 1
+  fillHoles()                          # sin huecos entre subcuencas
 expanse(cuenca, unit = "km")           #> 3545 km²
 ```
 
 . . .
 
 ```r
-pp_cuenca <- crop(pp, cuenca, mask = TRUE)   # recortar y enmascarar
-plot(pp_cuenca[["2010-01"]]); lines(cuenca)
+# Salida: 1er vértice del tramo que no desemboca en otra subcuenca
+salida <- crds(rios[rios$SubbasinR == 0])[1, ]   #> -69.79 -15.22
+
+pp_cuenca <- crop(pp, cuenca, mask = TRUE)       # recortar y enmascarar
+plot(pp_cuenca[["2025-01"]]); lines(cuenca)
 ```
 
-## Climatología con `tapp()`
+## Climatología 1991–2020
 
 ```r
-pp_anual <- tapp(pp, "years", sum)     # 36 mapas: total de cada año
-pp_media <- mean(pp_anual)             # 1 mapa: media 1981–2016
+# Normal climatológica: periodo estándar de 30 años (OMM)
+pp_normal <- pp[[year(fechas) %in% 1991:2020]]    # 360 meses
 
-pp_mes <- tapp(pp, "months", mean)     # 12 mapas: régimen mensual
-names(pp_mes) <- month.abb
-plot(pp_mes, nc = 4)
+pp_anual   <- tapp(pp_normal, "years", sum)       # 30 mapas: total anual
+pp_media   <- mean(pp_anual)                      # 1 mapa: media anual
+pp_regimen <- tapp(pp_normal, "months", mean)     # 12 mapas: régimen
+plot(pp_regimen, nc = 4)
 ```
 
 . . .
 
 ```r
 global(crop(pp_media, cuenca, mask = TRUE), range, na.rm = TRUE)
-#> 525 a 890 mm/año
+#> 560 a 942 mm/año
 ```
-
-::: {.fuente}
-`tapp()` agrupa capas por fecha: `"years"`, `"months"`, `"yearmonths"`, `"doy"`...
-:::
 
 ## Mapa con ggplot2
 
 :::: {.columns}
-::: {.column width="45%"}
+::: {.column width="50%"}
 ```r
 pp_df <- as.data.frame(pp_media,
                        xy = TRUE)
-
 ggplot() +
-  geom_raster(data = pp_df,
-              aes(x, y, fill = mean)) +
+  geom_tile(data = pp_df,
+    aes(x, y, fill = mean),
+    color = "grey85") +   # grilla
   geom_sf(data = st_as_sf(cuenca),
-          fill = NA) +
+    fill = NA) +
   geom_sf(data = st_as_sf(rios),
-          color = "#00BFFF") +
-  scale_fill_distiller(
-    palette = "YlGnBu",
-    direction = 1)
+    color = "#00BFFF") +
+  annotate("point",       # salida
+    x = salida[1], y = salida[2],
+    shape = 21, fill = "#FF6732") +
+  annotate("segment",     # norte
+    x = -70.22, xend = -70.22,
+    y = -14.66, yend = -14.50,
+    arrow = arrow())
 ```
 
 ::: {.fuente}
-La lluvia aumenta hacia el norte y el noreste (cabecera): hasta ~890 mm/año.
+En la cuenca la lluvia va de 560 a 942 mm/año; es mayor al noreste (subcuenca 2).
 :::
 :::
 
-::: {.column width="55%"}
+::: {.column width="50%"}
 ![](../../assets/img/s05_PISCO_mapa_pp.png){width="100%"}
+:::
+::::
+
+## Climatología mensual en la cuenca
+
+:::: {.columns}
+::: {.column width="46%"}
+```r
+reg_cuenca <- pp_regimen |>
+  crop(cuenca) |>
+  mask(cuenca, touches = TRUE)
+
+regimen_df <- reg_cuenca |>
+  as.data.frame(xy = TRUE) |>
+  pivot_longer(-c(x, y),
+    names_to = "mes",
+    values_to = "pp")
+
+ggplot(regimen_df) +
+  geom_tile(aes(x, y,
+                fill = pp)) +
+  facet_wrap(~ mes, ncol = 4)
+```
+
+::: {.fuente}
+Diciembre a marzo concentra el 68 % de la lluvia anual (489 de 716 mm). En julio caen apenas 5 mm.
+:::
+:::
+
+::: {.column width="54%"}
+![](../../assets/img/s05_PISCO_regimen_mensual.png){width="100%"}
 :::
 ::::
 
@@ -1244,7 +1293,7 @@ pp_areal <- extract(pp, cuenca, fun = mean, weights = TRUE,
 pp_cuenca_mes <- pp_areal |>
   pivot_longer(everything(), values_to = "pp") |>
   mutate(fecha = fechas)
-#> Precipitación media anual de la cuenca: 695 mm
+#> Media anual 1991–2020 de la cuenca: 716 mm
 ```
 
 . . .
@@ -1261,11 +1310,11 @@ extract(pp_media, subcuencas,
 ::: {.column width="45%"}
 | Subcuenca | Área (km²) | PP (mm/año) |
 |:---:|---:|---:|
-| 1 | 892 | 760 |
-| 2 | 948 | 782 |
-| 3 | 231 | 642 |
-| 4 | 1106 | 611 |
-| 5 | 367 | 602 |
+| 1 | 892 | 737 |
+| 2 | 948 | 819 |
+| 3 | 231 | 689 |
+| 4 | 1106 | 650 |
+| 5 | 367 | 619 |
 :::
 ::::
 
@@ -1283,11 +1332,11 @@ comparacion |>
     pbias = 100 * sum(pisco - obs) /
                   sum(obs))
 #>       r  pbias
-#>   0.971  -6.37
+#>   0.950  -4.13
 ```
 
 ::: {.fuente}
-353 meses comunes. PISCOp subestima en un 6 % la estación Huancané. Como PISCO **incorpora** las estaciones del SENAMHI, esto no es una validación independiente.
+413 meses comunes (1981–2025). PISCOp v3 subestima en un 4 % la estación Huancané. Como PISCO **incorpora** las estaciones del SENAMHI, esto no es una validación independiente.
 :::
 :::
 
@@ -1321,6 +1370,10 @@ nrow(temp)                          #> 73050 (14610 días × 5)
 temp |> filter(tmin > tmax) |> nrow()   #> 0
 ```
 
+::: {.fuente}
+Fuente: PISCO temperatura diaria 1981–2020 (SENAMHI), promediada por subcuenca. Tmax: [doi.org/10.6084/m9.figshare.20522806](https://doi.org/10.6084/m9.figshare.20522806) · Tmin: [doi.org/10.6084/m9.figshare.20533715](https://doi.org/10.6084/m9.figshare.20533715)
+:::
+
 ## ETP por Hargreaves-Samani
 
 $$ETP = 0.0023 \cdot R_a \cdot (T_{media} + 17.8) \cdot \sqrt{T_{max} - T_{min}}$$
@@ -1345,7 +1398,7 @@ etp_cuenca_mes <- etp_dia |>
   summarise(etp = sum(etp), .groups = "drop") |>   # diaria -> mensual
   group_by(fecha) |>
   summarise(etp = weighted.mean(etp, area_km2))    # ponderado por área
-#> ETP media anual: 1105 mm
+#> ETP media anual 1981–2020: 1105 mm
 ```
 
 ::: {.fuente}
@@ -1360,17 +1413,19 @@ $R_a$ = radiación extraterrestre (FAO-56), función de la latitud del centroide
 balance <- inner_join(
   pp_cuenca_mes,
   etp_cuenca_mes,
-  by = "fecha")
+  by = "fecha") |>
+  filter(year(fecha) %in%
+         1991:2020)
 ```
 
 | | mm/año |
 |---|---:|
-| Precipitación | 695 |
-| ETP | 1101 |
-| **P / ETP** | **0.63** |
+| Precipitación | 716 |
+| ETP | 1115 |
+| **P / ETP** | **0.64** |
 
 ::: {.fuente}
-Solo de diciembre a febrero llueve más de lo que se puede evaporar. De abril a noviembre la cuenca tiene déficit.
+Normal 1991–2020. Solo de diciembre a marzo llueve más de lo que se puede evaporar; de abril a noviembre la cuenca tiene déficit.
 :::
 :::
 
@@ -1382,11 +1437,13 @@ Solo de diciembre a febrero llueve más de lo que se puede evaporar. De abril a 
 ## Exportar: entrada para el Día 2
 
 ```r
-# Serie mensual areal de la cuenca (1981–2016)
-write_csv(balance, "data/processed/PP_ETP_mensual_cuenca.csv")
+# Series mensuales areales: pp 1981–2025, etp 1981–2020
+pp_cuenca_mes |>
+  left_join(etp_cuenca_mes, by = "fecha") |>
+  write_csv("data/processed/PP_ETP_mensual_cuenca.csv")
 
 # Mapa de precipitación media como GeoTIFF (se abre en QGIS)
-writeRaster(pp_media, "outputs/PP_media_anual_PISCO.tif")
+writeRaster(pp_media, "outputs/PP_media_anual_PISCOv3.tif")
 ```
 
 . . .

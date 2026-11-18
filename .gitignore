@@ -10,8 +10,34 @@
 *.nc
 *.tif
 *.tiff
+# Excepción: recorte PISCOp v3 de la cuenca (5.9 MB); el nacional (1.5 GB) se ignora
+!data/raw/pisco/PISCOp_v3_diario_Huancane.nc
 
 # Resultados: se sube la estructura, no el contenido
 outputs/**
 !outputs/**/
 !outputs/**/.gitkeep
+
+# Datos procesados: cada participante los genera con los scripts del curso
+data/processed/*
+!data/processed/.gitkeep
+
+# ---------------------------------------------------------------------------
+# DÍA 2 OCULTO hasta terminar la presentación del Día 1.
+# Para publicarlo: borrar este bloque, quitar "!slides/dia2/" de _quarto.yml,
+# descomentar el Día 2 en el menú (_quarto.yml) y en index.qmd, y renderizar.
+# ---------------------------------------------------------------------------
+slides/dia2/
+docs/slides/dia2/
+assets/img/gr4j.png
+assets/img/s06_*
+assets/img/s07_*
+assets/img/s08_*
+docs/assets/img/gr4j.png
+docs/assets/img/s06_*
+docs/assets/img/s07_*
+docs/assets/img/s08_*
+ejercicios/05_CC_observado.R
+ejercicios/07_Modelamiento_GR4J.R
+ejercicios/Descarga_CMIP6_GEE.js
+data/cmip6/

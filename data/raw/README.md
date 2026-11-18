@@ -63,3 +63,51 @@ En ese periodo, muchos días tienen **dos registros**: uno con `HORA = 00:00` y 
 - Si se suman sin tratar, la precipitación mensual y anual de esos años sale casi duplicada.
 
 **Regla adoptada en el curso:** por cada fecha se usa el registro `00:00`; si no existe, el de `05:00`.
+
+
+## PISCO (`pisco/`)
+
+| Archivo | Contenido | Periodo | Resolución | En el repo |
+|---|---|---|---|---|
+| `PISCOp_d.nc` | PISCOp v3.0 (SENAMHI; Gutiérrez et al., 2026), precipitación diaria (mm), todo el Perú, 1.5 GB | 1981-01-01 a 2025-12-31 | 0.1° | No (`.gitignore`) |
+| `PISCOp_v3_diario_Huancane.nc` | Recorte de lon -70.3 a -69.2 y lat -15.5 a -14.4 (11 × 11 celdas), 5.9 MB | 1981-01-01 a 2025-12-31 | 0.1° | Sí |
+
+- El archivo nacional no trae fechas: su eje `Z1` va de 1 a 16436 (días desde el 1981-01-01).
+  El recorte ya incluye las fechas.
+- El recorte se hace en la sección 2 de `ejercicios/04_Grillados.R` con `ncdf4` (menos de 1 s).
+  Con `terra::crop()` tarda más de 10 minutos por la forma en que el archivo está fragmentado.
+- Verificación: la precipitación areal del recorte por subcuenca coincide con `../pcp/Datos_pcp.csv`
+  (r = 0.97 a 0.998 con desfase 0 días; r ≈ 0.5 con ±1 día).
+
+**ETP de PISCO descartada:** el producto `PISCO/.PET/.v1p1` de la IRI Data Library viene etiquetado
+como `mm/day`, pero los valores están en mm/mes. Además, su ciclo estacional se desplaza unos 2 meses
+por año. La ETP se calcula por Hargreaves-Samani con la temperatura de `../temp/`.
+
+## Precipitación por subcuenca (`../pcp/`)
+
+`Datos_pcp.csv`: precipitación diaria PISCOp v3 (mm), promedio areal de cada subcuenca (`Sb1` a `Sb5`),
+1981-01-01 a 2025-12-31. Se usa en el ejercicio E4 de `04_Grillados.R`.
+## Temperatura (`../temp/`)
+
+`Datos_tmax.csv` y `Datos_tmin.csv`: temperatura máxima y mínima diaria (°C), promedio areal
+de cada subcuenca (columnas `Sb1` a `Sb5` = campo `Subbasin` del shapefile), 1981-01-01 a 2020-12-31.
+
+Fuente: PISCO temperatura diaria 1981-2020 (SENAMHI), promediada por subcuenca:
+
+- Tmax: https://doi.org/10.6084/m9.figshare.20522806
+- Tmin: https://doi.org/10.6084/m9.figshare.20533715
+
+## Cuenca y ríos (`../basin/`, `../rivers/`)
+
+`Subbasins.shp`: 5 subcuencas del río Huancané hasta la estación Puente Carretera (3545 km²).
+`Rivers.shp`: red de drenaje principal. Ambos en WGS 84 / UTM 19S (EPSG:32719).
+
+## ../cmip6/ — proyecciones NEX-GDDP-CMIP6 (SSP2-4.5)
+
+Archivos `Huancane_<MODELO>_ssp245.csv` descargados de Google Earth Engine (colección `NASA/GDDP-CMIP6`) con `ejercicios/Descarga_CMIP6_GEE.js`: promedio diario por subcuenca, 1981-01-01 a 2050-12-31 (histórico hasta 2014, SSP2-4.5 desde 2015).
+
+Columnas: `Fecha`, `Subcuenca`, `Modelo`, `Escenario` (historical / ssp245), `Pr_mm` (mm/día), `Tmax` y `Tmin` (°C).
+
+Modelos: ACCESS-CM2, MPI-ESM1-2-HR y MIROC6.
+
+Referencia: Thrasher, B. et al. (2022). NASA Global Daily Downscaled Projections, CMIP6. *Scientific Data*, 9, 262.
