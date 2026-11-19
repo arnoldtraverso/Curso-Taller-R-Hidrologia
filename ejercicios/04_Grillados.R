@@ -428,7 +428,7 @@ g_balance <- regimen |>
   ggplot(aes(x = mes, y = mm, color = variable)) +
   geom_line(linewidth = 1.2) +
   geom_point(size = 2.5) +
-  scale_x_continuous(breaks = 1:12, labels = month.abb) +
+  scale_x_continuous(breaks = 1:12, labels = meses) +
   scale_color_manual(values = c("#FF6732", "#0B5394")) +
   labs(title = "Balance climático de la cuenca Huancané (1991-2020)",
        x = NULL, y = "mm/mes", color = NULL) +
@@ -441,7 +441,8 @@ g_balance
 
 # 13. Exportar ----------------------------------------------------------------------
 
-# Series mensuales areales de la cuenca: entrada del modelo hidrológico (Día 2)
+# Series mensuales areales de la cuenca (balance y régimen). El modelo GR4J del
+# Día 2 usa series DIARIAS por subcuenca (data/pcp/ y data/temp/)
 pp_cuenca_mes |>
   left_join(etp_cuenca_mes, by = "fecha") |>
   write_csv("data/processed/PP_ETP_mensual_cuenca.csv")   # etp = NA desde 2021

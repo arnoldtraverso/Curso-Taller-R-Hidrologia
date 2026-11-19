@@ -102,7 +102,7 @@
     "href": "slides/dia1/index.html#tipos-de-datos",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Tipos de datos",
-    "text": "Tipos de datos\n\n\n\n\nTipo\nEjemplo\nUso en hidrología\n\n\n\n\nnumeric\n12.69\ncaudal, precipitación, altitud\n\n\ncharacter\n\"Huancane\"\nnombre o código de estación\n\n\nlogical\nTRUE, FALSE\n¿es año seco?, ¿falta el dato?\n\n\nDate\nas.Date(\"2024-01-01\")\nfecha de la observación\n\n\n\n\n\nVerificar los valores durante el proceso de escribir codigo es importante!\nclass(caudal)          #&gt; \"numeric\"\nclass(estacion)        #&gt; \"character\"\ncaudal &gt; 10            #&gt; TRUE\nis.na(NA)              #&gt; TRUE    NA = dato faltante"
+    "text": "Tipos de datos\n\n\n\n\nTipo\nEjemplo\nUso en hidrología\n\n\n\n\nnumeric\n12.69\ncaudal, precipitación, altitud\n\n\ncharacter\n\"Huancane\"\nnombre o código de estación\n\n\nlogical\nTRUE, FALSE\n¿es año seco?, ¿falta el dato?\n\n\nDate\nas.Date(\"2024-01-01\")\nfecha de la observación\n\n\n\n\n\nVerificar los valores durante el proceso de escribir código es importante!\nclass(caudal)          #&gt; \"numeric\"\nclass(estacion)        #&gt; \"character\"\ncaudal &gt; 10            #&gt; TRUE\nis.na(NA)              #&gt; TRUE    NA = dato faltante"
   },
   {
     "objectID": "slides/dia1/index.html#vectores",
@@ -158,14 +158,14 @@
     "href": "slides/dia1/index.html#paquetes-y-tidyverse",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Paquetes y tidyverse",
-    "text": "Paquetes y tidyverse\n\n\n# Se instala UNA vez\ninstall.packages(\"tidyverse\")\n\n# Se carga en CADA sesión\nlibrary(tidyverse)\nlibrary(readxl)\n\n\n\n\nPaquete\nPara qué\n\n\n\n\nreadr / readxl\nimportar datos\n\n\ndplyr\nfiltrar, resumir\n\n\ntidyr\nreordenar tablas\n\n\nlubridate\nfechas\n\n\nggplot2\ngráficos\n\n\npurrr\nrepetir tareas\n\n\n\n\n\nEl pipe |&gt;: “y luego…”\nround(mean(pp_mensual), 1)              # se lee de adentro hacia afuera\n\npp_mensual |&gt; mean() |&gt; round(1)        # se lee de izquierda a derecha\n#&gt; 54.7"
+    "text": "Paquetes y tidyverse\n\n\n\n\n\n\nImagen tomada de: https://irwingss.github.io/intro_r_ciencias/tidyversecap.html"
   },
   {
     "objectID": "slides/dia1/index.html#primer-contacto-con-los-datos-reales",
     "href": "slides/dia1/index.html#primer-contacto-con-los-datos-reales",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Primer contacto con los datos reales",
-    "text": "Primer contacto con los datos reales\nlibrary(readxl)\n\nq &lt;- read_excel(\"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx\",\n                skip = 13)       # saltar las 13 filas de metadatos\nhead(q, 3)\n#&gt;   FECHA      HORA  `VALOR (m³/s)`\n#&gt; 1 04/05/2026 00:00          17.41\n#&gt; ...\n\n¿Qué hay que arreglar?\n\nFECHA es texto → convertir con dmy()\nEstá ordenado de 2026 a 1956 → ordenar\nFaltan días sin fila → completar y contar vacíos\nEn precipitación hay días duplicados (2017–2024)\n\n\nEso es la sección 03: procesamiento y control de calidad."
+    "text": "Primer contacto con los datos reales\nImportamos los caudales de Huancané\n\nlibrary(readxl)\n\nq &lt;- read_excel(\"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx\",\n                skip = 13)       # saltar las 13 filas de metadatos\nhead(q, 3)\n#&gt;   FECHA      HORA  `VALOR (m³/s)`\n#&gt; 1 04/05/2026 00:00          17.41\n#&gt; ...\n\n\n¿Qué hay que arreglar?\n\nFECHA es texto → convertir con dmy()\nEstá ordenado de 2026 a 1956 → ordenar\nFaltan días sin fila → completar y contar vacíos\nEn precipitación hay días duplicados (2017–2024)\n\n\nEso es la sección 03: procesamiento y control de calidad."
   },
   {
     "objectID": "slides/dia1/index.html#procesamiento-y-visualización",
@@ -179,14 +179,14 @@
     "href": "slides/dia1/index.html#importar-y-ordenar-el-caudal",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Importar y ordenar el caudal",
-    "text": "Importar y ordenar el caudal\nlibrary(tidyverse)\nlibrary(readxl)\n\nq &lt;- read_excel(\"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx\",\n                skip = 13) |&gt;\n  rename(fecha = FECHA, hora = HORA, q = 3) |&gt;  # nombres cortos\n  mutate(fecha = dmy(fecha)) |&gt;                 # texto → Date\n  arrange(fecha) |&gt;                             # de 1956 a 2026\n  select(fecha, q)                              # columnas útiles\n\nq\n#&gt;   fecha          q\n#&gt; 1 1956-01-01  0.08\n#&gt; 2 1956-01-02  0.05\n#&gt; ...\nnrow(q)            #&gt; 25208\n\nUna sola cadena con |&gt; resuelve los tres problemas de la sección 02: nombres, tipo de fecha y orden."
+    "text": "Importar y ordenar el caudal\nImportamos el caudal\nlibrary(tidyverse)\nlibrary(readxl)\n\nq &lt;- read_excel(\"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx\",\n                skip = 13) |&gt;\n  rename(fecha = FECHA, hora = HORA, q = 3) |&gt;  # nombres cortos\n  mutate(fecha = dmy(fecha)) |&gt;                 # texto → Date\n  arrange(fecha) |&gt;                             # de 1956 a 2026\n  select(fecha, q)                              # columnas útiles\n\nq\n#&gt;   fecha          q\n#&gt; 1 1956-01-01  0.08\n#&gt; 2 1956-01-02  0.05\n#&gt; ...\nnrow(q)            #&gt; 25208\n\nUna sola cadena con |&gt; resuelve los tres problemas de la sección 02: nombres, tipo de fecha y orden."
   },
   {
     "objectID": "slides/dia1/index.html#los-verbos-de-dplyr",
     "href": "slides/dia1/index.html#los-verbos-de-dplyr",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Los verbos de dplyr",
-    "text": "Los verbos de dplyr\n\n\n\n\n\n\n\n\nVerbo\nQué hace\nEjemplo con el caudal\n\n\n\n\nfilter()\nelige filas\nfilter(q &gt; 200) → 72 días\n\n\nmutate()\ncrea columnas\nmutate(vol_hm3 = q * 86400 / 1e6)\n\n\narrange()\nordena\narrange(desc(q)) → 368.6 el 27/02/2016\n\n\nselect()\nelige columnas\nselect(fecha, q)\n\n\nsummarise()\nresume\nsummarise(q_medio = mean(q)) → 18.3\n\n\n\n\ngroup_by() + summarise(): resumir por grupos\nq |&gt;\n  group_by(anio = year(fecha)) |&gt;\n  summarise(q_medio = mean(q), q_max = max(q))"
+    "text": "Los verbos de dplyr\nEntendemos las principales funciones:\n\n\n\n\n\n\n\n\n\nVerbo\nQué hace\nEjemplo con el caudal\n\n\n\n\nfilter()\nelige filas\nfilter(q &gt; 200) → 72 días\n\n\nmutate()\ncrea columnas\nmutate(vol_hm3 = q * 86400 / 1e6)\n\n\narrange()\nordena\narrange(desc(q)) → 368.6 el 27/02/2016\n\n\nselect()\nelige columnas\nselect(fecha, q)\n\n\nsummarise()\nresume\nsummarise(q_medio = mean(q)) → 18.3\n\n\n\n\n\n\ngroup_by() + summarise(): resumir por grupos\nq |&gt;\n  group_by(anio = year(fecha)) |&gt;\n  summarise(q_medio = mean(q), q_max = max(q))"
   },
   {
     "objectID": "slides/dia1/index.html#completar-las-fechas-faltantes",
@@ -200,7 +200,7 @@
     "href": "slides/dia1/index.html#precipitación-registros-duplicados",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Precipitación: registros duplicados",
-    "text": "Precipitación: registros duplicados\npp &lt;- read_excel(\"data/raw/precipitacion/PP_000786_Huancane.xlsx\", skip = 13) |&gt;\n  rename(fecha = FECHA, hora = HORA, pp = 3) |&gt;\n  mutate(fecha = dmy(fecha))\n\ntable(pp$hora)\n#&gt; 00:00 01:00 05:00\n#&gt; 19030     1  1260\n\npp |&gt; count(fecha) |&gt; filter(n &gt; 1) |&gt; nrow()\n#&gt; 1260   fechas repetidas entre 2017 y 2024\n\npp |&gt; group_by(fecha) |&gt; filter(n() &gt; 1, n_distinct(pp) &gt; 1)\n#&gt;   fecha      hora     pp\n#&gt;   2017-02-28 00:00  21.9\n#&gt;   2017-02-28 05:00   2.9     ← ¿cuál es el correcto?"
+    "text": "Precipitación: registros duplicados\nImportamos la precipitación de la Est. Huancané\n\npp &lt;- read_excel(\"data/raw/precipitacion/PP_000786_Huancane.xlsx\", skip = 13) |&gt;\n  rename(fecha = FECHA, hora = HORA, pp = 3) |&gt;\n  mutate(fecha = dmy(fecha))\n\ntable(pp$hora)\n#&gt; 00:00 01:00 05:00\n#&gt; 19030     1  1260\n\npp |&gt; count(fecha) |&gt; filter(n &gt; 1) |&gt; nrow()\n#&gt; 1260   fechas repetidas entre 2017 y 2024\n\n\npp |&gt; group_by(fecha) |&gt; filter(n() &gt; 1, n_distinct(pp) &gt; 1)\n#&gt;   fecha      hora     pp\n#&gt;   2017-02-28 00:00  21.9\n#&gt;   2017-02-28 05:00   2.9     ← ¿cuál es el correcto?"
   },
   {
     "objectID": "slides/dia1/index.html#precipitación-una-fila-por-día",
@@ -221,7 +221,7 @@
     "href": "slides/dia1/index.html#control-de-calidad-mapa-de-vacíos",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Control de calidad: mapa de vacíos",
-    "text": "Control de calidad: mapa de vacíos\n\n\nEstación Huancané (000786): sin datos en 2010–2016 y 2020–2022. Antes de usar una estación hay que saber qué periodo cubre realmente."
+    "text": "Control de calidad: mapa de vacíos\n\n\n\n\n\n\nEstación Huancané (000786): dos grandes vacíos, de junio 2010 a diciembre 2016 (79 meses) y de marzo 2020 a julio 2023 (41 meses), más meses incompletos hasta marzo 2024. Antes de usar una estación hay que saber qué periodo cubre realmente."
   },
   {
     "objectID": "slides/dia1/index.html#agregación-diaria-mensual",
@@ -270,7 +270,7 @@
     "href": "slides/dia1/index.html#funciones-propias",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Funciones propias",
-    "text": "Funciones propias\nEscribir la limpieza UNA vez y reutilizarla\nleer_senamhi &lt;- function(archivo) {\n  read_excel(archivo, skip = 13) |&gt;\n    rename(fecha = 1, hora = 2, valor = 3) |&gt;\n    mutate(fecha = dmy(fecha)) |&gt;\n    arrange(fecha, hora) |&gt;\n    distinct(fecha, .keep_all = TRUE) |&gt;        # regla 00:00 → 05:00\n    select(fecha, valor) |&gt;\n    complete(fecha = seq(min(fecha), max(fecha), by = \"day\"))\n}\n\nq  &lt;- leer_senamhi(\"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx\")\npp &lt;- leer_senamhi(\"data/raw/precipitacion/PP_000786_Huancane.xlsx\")\nnrow(q)     #&gt; 25692\n\nTodo el procesamiento de la sección 03 quedó en una línea. Si mañana cambia el formato de SENAMHI, se corrige en un solo lugar."
+    "text": "Funciones propias\nEscribir la limpieza UNA vez y reutilizarla\nCreando la función de lectura de datos\n\nleer_datos &lt;- function(archivo) {\n  read_excel(archivo, skip = 13) |&gt;\n    rename(fecha = 1, hora = 2, valor = 3) |&gt;\n    mutate(fecha = dmy(fecha)) |&gt;\n    arrange(fecha, hora) |&gt;\n    distinct(fecha, .keep_all = TRUE) |&gt;        # regla 00:00 → 05:00\n    select(fecha, valor) |&gt;\n    complete(fecha = seq(min(fecha), max(fecha), by = \"day\"))\n}\n\n\nq  &lt;- leer_datos(\"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx\")\npp &lt;- leer_datos(\"data/raw/precipitacion/PP_000786_Huancane.xlsx\")\nnrow(q)     #&gt; 25692\n\nTodo el procesamiento de la sección 03 quedó en una línea. Si mañana cambia el formato del ANA, se corrige en un solo lugar."
   },
   {
     "objectID": "slides/dia1/index.html#funciones-argumentos-por-defecto",
@@ -284,21 +284,21 @@
     "href": "slides/dia1/index.html#condicionales-if-else",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Condicionales: if / else",
-    "text": "Condicionales: if / else\numbrales &lt;- quantile(q_anual$valor, c(0.2, 0.8))\n#&gt;   20%   80%\n#&gt; 11.48 24.41\n\nclasificar &lt;- function(q, p20, p80) {\n  if (q &lt; p20) {\n    \"seco\"\n  } else if (q &gt; p80) {\n    \"húmedo\"\n  } else {\n    \"normal\"\n  }\n}\n\nclasificar(4.75, umbrales[1], umbrales[2])   # caudal medio de 2023\n#&gt; \"seco\""
+    "text": "Condicionales: if / else\n\n\n\n\n\n\n\n\n\n\n\numbrales &lt;- quantile(q_anual$valor,\n                     c(0.2, 0.8))\n#&gt;   20%   80%\n#&gt; 11.48 24.41\n\nclasificar &lt;- function(q, p20, p80) {\n  if (q &lt; p20) {\n    \"seco\"\n  } else if (q &gt; p80) {\n    \"húmedo\"\n  } else {\n    \"normal\"\n  }\n}\n\n# caudal medio de 2023\nclasificar(4.75, umbrales[1], umbrales[2])\n#&gt; \"seco\""
   },
   {
     "objectID": "slides/dia1/index.html#condicionales-para-una-columna-case_when",
     "href": "slides/dia1/index.html#condicionales-para-una-columna-case_when",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Condicionales para una columna: case_when()",
-    "text": "Condicionales para una columna: case_when()\nq_anual &lt;- q_anual |&gt;\n  mutate(tipo = case_when(\n    valor &lt; umbrales[1] ~ \"seco\",\n    valor &gt; umbrales[2] ~ \"húmedo\",\n    .default            = \"normal\"\n  ))\n\ncount(q_anual, tipo)\n#&gt;   tipo       n\n#&gt;   húmedo    13\n#&gt;   normal    36\n#&gt;   seco      13\n\n\nif() evalúa un solo valor; case_when() evalúa una columna completa. Los años más secos: 2023 (4.75), 1983 (7.23), 1967 (7.67), 1990 (8.23) y 2009 (9.29 m³/s)."
+    "text": "Condicionales para una columna: case_when()\n\n\n\n\n\n\n\n\n\n\n\nq_anual &lt;- q_anual |&gt;\n  mutate(tipo = case_when(\n    valor &lt; umbrales[1] ~ \"seco\",\n    valor &gt; umbrales[2] ~ \"húmedo\",\n    .default            = \"normal\"\n  ))\n\ncount(q_anual, tipo)\n#&gt;   tipo       n\n#&gt;   húmedo    13\n#&gt;   normal    36\n#&gt;   seco      13\n\n\n\n\nif() evalúa un solo valor; case_when() evalúa una columna completa. Los años más secos: 2023 (4.75), 1983 (7.23), 1967 (7.67), 1990 (8.23) y 2009 (9.29 m³/s)."
   },
   {
     "objectID": "slides/dia1/index.html#bucles-for-repetir-para-cada-estación",
     "href": "slides/dia1/index.html#bucles-for-repetir-para-cada-estación",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Bucles for: repetir para cada estación",
-    "text": "Bucles for: repetir para cada estación\narchivos &lt;- list.files(\"data/raw/precipitacion\", pattern = \"\\\\.xlsx$\",\n                       full.names = TRUE)\nnombres  &lt;- archivos |&gt; basename() |&gt; str_remove(\"\\\\.xlsx$\") |&gt;\n  str_remove(\"^PP_\\\\d+_\")\n#&gt; \"Munani\" \"Huancane\" \"Ananea\" \"Cojata\" \"Putina\"\n\nresumen &lt;- vector(\"list\", length(archivos))     # lista vacía\n\nfor (i in seq_along(archivos)) {\n  datos &lt;- leer_senamhi(archivos[i])\n  anual &lt;- datos |&gt; agregar_mensual() |&gt; agregar_anual()\n  resumen[[i]] &lt;- tibble(\n    estacion     = nombres[i],\n    pct_faltante = round(mean(is.na(datos$valor)) * 100, 1),\n    pp_anual     = mean(anual$valor[anual$anio %in% 1991:2020])\n  )\n}\nresumen &lt;- bind_rows(resumen)"
+    "text": "Bucles for: repetir para cada estación\narchivos &lt;- list.files(\"data/raw/precipitacion\", pattern = \"\\\\.xlsx$\",\n                       full.names = TRUE)\nnombres &lt;- archivos |&gt; basename() |&gt; str_remove(\"\\\\.xlsx$\") |&gt; str_remove(\"^PP_\\\\d+_\")\n#&gt; \"Munani\" \"Huancane\" \"Ananea\" \"Cojata\" \"Putina\"\n\nresumen &lt;- vector(\"list\", length(archivos))      # lista vacía\n\nfor (i in seq_along(archivos)) {\n  datos &lt;- leer_datos(archivos[i])\n  anual &lt;- datos |&gt; agregar_mensual() |&gt; agregar_anual()\n  resumen[[i]] &lt;- tibble(\n    estacion     = nombres[i],\n    pct_faltante = round(mean(is.na(datos$valor)) * 100, 1),\n    pp_anual     = mean(anual$valor[anual$anio %in% 1991:2020])\n  )\n}\nresumen &lt;- bind_rows(resumen)"
   },
   {
     "objectID": "slides/dia1/index.html#bucles-for-el-resultado",
@@ -312,14 +312,14 @@
     "href": "slides/dia1/index.html#iteración-con-purrrmap",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Iteración con purrr::map()",
-    "text": "Iteración con purrr::map()\npp_lista &lt;- map(archivos, leer_senamhi)   # aplica la función a cada archivo\nnames(pp_lista) &lt;- nombres\npp_lista$Cojata                           # una estación de la lista\n\n# Une la lista en UNA tabla larga con la columna \"estacion\"\npp_todas &lt;- pp_lista |&gt; list_rbind(names_to = \"estacion\")\nnrow(pp_todas)       #&gt; 114159\n\n# Con la tabla larga, group_by() reemplaza al bucle\npp_todas |&gt;\n  group_by(estacion) |&gt;\n  summarise(pct_faltante = mean(is.na(valor)) * 100,\n            maximo       = max(valor, na.rm = TRUE))\n\n\n\nfor y map() hacen lo mismo; map() es más corto y no necesita preparar la lista vacía."
+    "text": "Iteración con purrr::map()"
   },
   {
     "objectID": "slides/dia1/index.html#todas-las-estaciones-en-un-gráfico",
     "href": "slides/dia1/index.html#todas-las-estaciones-en-un-gráfico",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Todas las estaciones en un gráfico",
-    "text": "Todas las estaciones en un gráfico\n\n\npp_anual &lt;- pp_lista |&gt;\n  map(\\(d) d |&gt;\n        agregar_mensual() |&gt;\n        agregar_anual()) |&gt;\n  list_rbind(names_to = \"estacion\")\n\nggplot(pp_anual,\n       aes(anio, valor)) +\n  geom_col(fill = \"#0B5394\") +\n  facet_wrap(~ estacion,\n             ncol = 1)\n\nfacet_wrap() hace un panel por estación. Entre 2010 y 2016 solo Cojata tiene años completos: es un vacío de toda la red, no de una estación."
+    "text": "Todas las estaciones en un gráfico\nEmpleando ggplot2 y facet_wrap\n\n\n# Anual de cada estación, en una tabla\npp_anual &lt;- pp_lista |&gt;\n  map(\\(d) d |&gt;\n        agregar_mensual() |&gt;\n        agregar_anual()) |&gt;\n  list_rbind(names_to = \"estacion\")\n\n# Un color por estación\ncolores &lt;- c(Ananea   = \"#0B5394\",\n             Cojata   = \"#6AA84F\",\n             Huancane = \"#E69138\",\n             Munani   = \"#8E7CC3\",\n             Putina   = \"#CC4125\")\n\nggplot(pp_anual, aes(anio, valor,\n                     fill = estacion)) +\n  geom_col(width = 0.8) +\n  # línea base en 0\n  geom_hline(yintercept = 0,\n             linewidth = 0.8) +\n  facet_wrap(~ estacion, ncol = 1) +\n  # años cada 10\n  scale_x_continuous(\n    breaks = seq(1950, 2030, 10)) +\n  scale_fill_manual(values = colores,\n                    guide = \"none\")\n\n\nfill = estacion da un color a cada estación; scale_fill_manual() elige cuáles. guide = \"none\" quita la leyenda, porque el nombre ya está en cada panel."
   },
   {
     "objectID": "slides/dia1/index.html#datos-climáticos-grillados",
@@ -333,14 +333,14 @@
     "href": "slides/dia1/index.html#pisco-datos-grillados-del-perú",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "PISCO: datos grillados del Perú",
-    "text": "PISCO: datos grillados del Perú\n\nPISCOp v3.0 (SENAMHI): precipitación diaria 1981–2025, celdas de 0.1° (~11 km)\nFormato NetCDF (.nc): un “cubo” longitud × latitud × tiempo\nEl archivo nacional pesa 1.5 GB (16 436 días)\n\n\n# Recorte de la cuenca (lo hace el instructor UNA vez)\nnc &lt;- ncdf4::nc_open(\"data/raw/pisco/PISCOp_d.nc\")\na  &lt;- ncdf4::ncvar_get(nc, \"precipitation\",\n                       start = c(min(ix), min(iy), 1),       # esquina\n                       count = c(length(ix), length(iy), -1)) # 11 x 11 x todo\n\nterra::crop() sobre el archivo nacional tarda más de 10 minutos; leer solo la ventana con ncdf4 tarda menos de 1 segundo. El recorte (5.9 MB) ya está en data/raw/pisco/."
+    "text": "PISCO: datos grillados del Perú\n\n\n\nCaracterísticas\n\nPISCOp v3.0 (SENAMHI): precipitación diaria 1981–2025, celdas de 0.1° (~11 km)\nFormato NetCDF (.nc): un “cubo” longitud × latitud × tiempo\nEl archivo nacional pesa 1.5 GB (16 436 días)\n\n\n\n\n\n\n\n\n\n\n\n# Recorte de la cuenca (lo hace el instructor UNA vez)\nnc &lt;- ncdf4::nc_open(\"data/raw/pisco/PISCOp_d.nc\")\na  &lt;- ncdf4::ncvar_get(nc, \"precipitation\",\n                       start = c(min(ix), min(iy), 1),        # esquina\n                       count = c(length(ix), length(iy), -1)) # 11 x 11 x todo\n\nterra::crop() sobre el archivo nacional tarda más de 10 minutos; leer solo la ventana de la cuenca con ncdf4 tarda menos de 1 segundo. El recorte (5.9 MB) ya está en data/raw/pisco/. Artículo: https://www.mdpi.com/2306-5338/13/11/306"
   },
   {
     "objectID": "slides/dia1/index.html#leer-un-netcdf-con-terra",
     "href": "slides/dia1/index.html#leer-un-netcdf-con-terra",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Leer un NetCDF con terra",
-    "text": "Leer un NetCDF con terra\nlibrary(terra)\npp_dia &lt;- rast(\"data/raw/pisco/PISCOp_v3_diario_Huancane.nc\")\npp_dia\n#&gt; class       : SpatRaster\n#&gt; size        : 11, 11, 16436  (nrow, ncol, nlyr)\n#&gt; resolution  : 0.1, 0.1  (x, y)\n#&gt; extent      : -70.3, -69.2, -15.5, -14.4  (xmin, xmax, ymin, ymax)\n#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326)\n#&gt; unit        : mm\n#&gt; time (days) : 1981-01-01 to 2025-12-31 (16436 steps)\n\nplot(pp_dia[[1]])            # una capa = un mapa (1 de enero de 1981)\n\n16 436 capas = 16 436 días. Cada capa es una grilla de 11 × 11 celdas."
+    "text": "Leer un NetCDF con terra\nLeer el archivo de la cuenca (recorte de PISCOp v3)\nlibrary(terra)\npp_dia &lt;- rast(\"data/raw/pisco/PISCOp_v3_diario_Huancane.nc\")\npp_dia\n#&gt; class       : SpatRaster\n#&gt; size        : 11, 11, 16436  (nrow, ncol, nlyr)\n#&gt; resolution  : 0.1, 0.1  (x, y)\n#&gt; extent      : -70.3, -69.2, -15.5, -14.4  (xmin, xmax, ymin, ymax)\n#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326)\n#&gt; unit        : mm\n#&gt; time (days) : 1981-01-01 to 2025-12-31 (16436 steps)\n\n\n\nplot(pp_dia[[1]])  # 1 capa = 1 mapa\n\n16 436 capas = 16 436 días (1 de enero de 1981 a 31 de diciembre de 2025). Cada capa es una grilla de 11 × 11 celdas.\n\n\n\n\n¿Dónde se encuentran los datos? PISCO nacional (SENAMHI):\n\nPrecipitación: https://doi.org/10.6084/m9.figshare.32411886\nTemperatura máxima: https://doi.org/10.6084/m9.figshare.20522806\nTemperatura mínima: https://doi.org/10.6084/m9.figshare.20533715"
   },
   {
     "objectID": "slides/dia1/index.html#de-diario-a-mensual-con-tapp",
@@ -403,14 +403,14 @@
     "href": "slides/dia1/index.html#etp-por-hargreaves-samani",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "ETP por Hargreaves-Samani",
-    "text": "ETP por Hargreaves-Samani\n\\[ETP = 0.0023 \\cdot R_a \\cdot (T_{media} + 17.8) \\cdot \\sqrt{T_{max} - T_{min}}\\]\nhargreaves &lt;- function(tmax, tmin, lat, fecha) {\n  tmedia &lt;- (tmax + tmin) / 2\n  0.0023 * radiacion_ext(lat, fecha) * (tmedia + 17.8) *\n    sqrt(pmax(tmax - tmin, 0))\n}\n\netp_dia &lt;- temp |&gt;\n  left_join(info_sub, by = \"subcuenca\") |&gt;        # latitud y área\n  mutate(etp = hargreaves(tmax, tmin, lat, fecha))\n\netp_cuenca_mes &lt;- etp_dia |&gt;\n  group_by(subcuenca, area_km2, fecha = floor_date(fecha, \"month\")) |&gt;\n  summarise(etp = sum(etp), .groups = \"drop\") |&gt;   # diaria -&gt; mensual\n  group_by(fecha) |&gt;\n  summarise(etp = weighted.mean(etp, area_km2))    # ponderado por área\n#&gt; ETP media anual 1981–2020: 1105 mm\n\n\\(R_a\\) = radiación extraterrestre (FAO-56), función de la latitud del centroide y del día del año."
+    "text": "ETP por Hargreaves-Samani\nComprendiendo la ecuación\n\\[ETP = 0.0023 \\cdot R_a \\cdot (T_{media} + 17.8) \\cdot \\sqrt{T_{max} - T_{min}}\\]\n\nhargreaves &lt;- function(tmax, tmin, lat, fecha) {\n  tmedia &lt;- (tmax + tmin) / 2\n  0.0023 * radiacion_ext(lat, fecha) * (tmedia + 17.8) *\n    sqrt(pmax(tmax - tmin, 0))\n}\n\n\netp_dia &lt;- temp |&gt;\n  left_join(info_sub, by = \"subcuenca\") |&gt;        # latitud y área\n  mutate(etp = hargreaves(tmax, tmin, lat, fecha))\n\netp_cuenca_mes &lt;- etp_dia |&gt;\n  group_by(subcuenca, area_km2, fecha = floor_date(fecha, \"month\")) |&gt;\n  summarise(etp = sum(etp), .groups = \"drop\") |&gt;   # diaria -&gt; mensual\n  group_by(fecha) |&gt;\n  summarise(etp = weighted.mean(etp, area_km2))    # ponderado por área\n#&gt; ETP media anual 1981–2020: 1105 mm\n\n\\(R_a\\) = radiación extraterrestre (FAO-56), función de la latitud del centroide y del día del año."
   },
   {
     "objectID": "slides/dia1/index.html#balance-p-etp",
     "href": "slides/dia1/index.html#balance-p-etp",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Balance P – ETP",
-    "text": "Balance P – ETP\n\n\nbalance &lt;- inner_join(\n  pp_cuenca_mes,\n  etp_cuenca_mes,\n  by = \"fecha\") |&gt;\n  filter(year(fecha) %in%\n         1991:2020)\n\n\n\n\nmm/año\n\n\n\n\nPrecipitación\n716\n\n\nETP\n1115\n\n\nP / ETP\n0.64\n\n\n\n\nNormal 1991–2020. Solo de diciembre a marzo llueve más de lo que se puede evaporar; de abril a noviembre la cuenca tiene déficit."
+    "text": "Balance P – ETP\n\n\nUnir P y ETP de la cuenca\nbalance &lt;- inner_join(\n  pp_cuenca_mes,\n  etp_cuenca_mes,\n  by = \"fecha\") |&gt;\n  filter(year(fecha) %in%\n         1991:2020)\n\n\n\n\n\nmm/año\n\n\n\n\nPrecipitación\n716\n\n\nETP\n1115\n\n\nP / ETP\n0.64\n\n\n\n\n\n\n\n\n\n\n\n\nP / ETP\nSignificado\n\n\n\n\n&lt; 1\nDéficit: la ETP supera a la lluvia (más seco)\n\n\n≈ 1\nEquilibrio entre lluvia y ETP\n\n\n&gt; 1\nExceso: la lluvia supera a la ETP (más húmedo)\n\n\n\n\n\n\n\nNormal 1991–2020: P/ETP = 0.64, la cuenca es deficitaria en el año. Solo de diciembre a marzo llueve más de lo que se puede evaporar; de abril a noviembre hay déficit."
   },
   {
     "objectID": "slides/dia1/index.html#exportar-entrada-para-el-día-2",
@@ -446,5 +446,47 @@
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "",
     "text": "Introducción\nFundamentos\nProcesamiento y visualización\nAutomatización\nDatos climáticos grillados"
+  },
+  {
+    "objectID": "slides/dia1/index.html#condicionales-if-else-1",
+    "href": "slides/dia1/index.html#condicionales-if-else-1",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Condicionales: if / else",
+    "text": "Condicionales: if / else\n\n\n\n\n\n\n\n\n\n\n\nq_anual &lt;- q_anual |&gt;\n  mutate(tipo = case_when(\n    valor &lt; umbrales[1] ~ \"seco\",\n    valor &gt; umbrales[2] ~ \"húmedo\",\n    .default            = \"normal\"\n  ))\n\ncount(q_anual, tipo)\n#&gt;   tipo       n\n#&gt;   húmedo    13\n#&gt;   normal    36\n#&gt;   seco      13\n\n\n\n\nif() evalúa un solo valor; case_when() evalúa una columna completa. Los años más secos: 2023 (4.75), 1983 (7.23), 1967 (7.67), 1990 (8.23) y 2009 (9.29 m³/s)."
+  },
+  {
+    "objectID": "slides/dia1/index.html#iteración-con-purrrmap-1",
+    "href": "slides/dia1/index.html#iteración-con-purrrmap-1",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Iteración con purrr::map()",
+    "text": "Iteración con purrr::map()\n\nAplicando la función map()\npp_lista &lt;- map(archivos, leer_datos)   # aplica la función a cada archivo\nnames(pp_lista) &lt;- nombres\npp_lista$Cojata                         # una estación de la lista\n\n\nOrdenando los datos\n# Une la lista en UNA tabla larga con la columna \"estacion\"\npp_todas &lt;- pp_lista |&gt; list_rbind(names_to = \"estacion\")\nnrow(pp_todas)       #&gt; 114159\n\n# Con la tabla larga, group_by() reemplaza al bucle\npp_todas |&gt;\n  group_by(estacion) |&gt;\n  summarise(pct_faltante = mean(is.na(valor)) * 100,\n            maximo       = max(valor, na.rm = TRUE))\n\n\nfor y map() hacen lo mismo; map() es más corto y no necesita preparar la lista vacía."
+  },
+  {
+    "objectID": "slides/dia1/index.html#todas-las-estaciones-el-resultado",
+    "href": "slides/dia1/index.html#todas-las-estaciones-el-resultado",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Todas las estaciones: el resultado",
+    "text": "Todas las estaciones: el resultado\n\n\n\n\n\n\n\nfacet_wrap() hace un panel por estación. Entre 2010 y 2016 solo Cojata tiene años completos: es un vacío de toda la red, no de una estación."
+  },
+  {
+    "objectID": "slides/dia1/index.html#exportar-los-resultados",
+    "href": "slides/dia1/index.html#exportar-los-resultados",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Exportar los resultados",
+    "text": "Exportar los resultados\n# Series mensuales areales: pp 1981–2025, etp 1981–2020\npp_cuenca_mes |&gt;\n  left_join(etp_cuenca_mes, by = \"fecha\") |&gt;\n  write_csv(\"data/processed/PP_ETP_mensual_cuenca.csv\")\n\n# Mapa de precipitación media como GeoTIFF (se abre en QGIS)\nwriteRaster(pp_media, \"outputs/PP_media_anual_PISCOv3.tif\")\n\n\nEn el Día 2 el modelo GR4J trabaja a paso diario y por subcuenca: usa la misma lluvia PISCOp v3 y la ETP de Hargreaves, pero día a día en cada una de las 5 subcuencas (data/pcp/ y data/temp/)."
+  },
+  {
+    "objectID": "slides/dia1/index.html#paquetes-y-tidyverse-1",
+    "href": "slides/dia1/index.html#paquetes-y-tidyverse-1",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Paquetes y tidyverse",
+    "text": "Paquetes y tidyverse\nInstalación y principales funciones:\n\n\n\n# Se instala UNA vez\ninstall.packages(\"tidyverse\")\n\n# Se carga en CADA sesión\nlibrary(tidyverse)\nlibrary(readxl)\n\n\n\n\nPaquete\nPara qué\n\n\n\n\nreadr / readxl\nimportar datos\n\n\ndplyr\nfiltrar, resumir\n\n\ntidyr\nreordenar tablas\n\n\nlubridate\nfechas\n\n\nggplot2\ngráficos\n\n\npurrr\nrepetir tareas\n\n\n\n\n\n\nEl pipe |&gt;: “y luego…”\nround(mean(pp_mensual), 1)              # se lee de adentro hacia afuera\n\npp_mensual |&gt; mean() |&gt; round(1)        # se lee de izquierda a derecha\n#&gt; 54.7"
+  },
+  {
+    "objectID": "slides/dia1/index.html#bucles-for-la-idea",
+    "href": "slides/dia1/index.html#bucles-for-la-idea",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Bucles for: la idea",
+    "text": "Bucles for: la idea"
   }
 ]

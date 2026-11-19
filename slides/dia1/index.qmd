@@ -1,7 +1,7 @@
 ---
 title: 'Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático'
 subtitle: 'Curso Taller Día 1'
-institute: 'CIP Puno - Cap. Ingeniería Agrícola - Facultad de Ingeniería del Agua y Gestión de Recursos Hídricos'
+institute: 'CIP Puno - Cap. Ingeniería Agrícola - Facultad de Ingeniería del Agua y Gestión de Recursos Hídricos - IICTA-FIA'
 author: 'Profesor: Kevin Arnold Traverso Yucra'
 
 format: 
@@ -307,7 +307,7 @@ Nombres válidos: empiezan con letra, sin espacios ni tildes (`pp_anual`, no `pp
 
 . . .
 
-Verificar los valores durante el proceso de escribir codigo es importante!
+Verificar los valores durante el proceso de escribir código es importante!
 
 ```r
 class(caudal)          #> "numeric"
@@ -548,6 +548,17 @@ El registro tiene 25 208 días con dato, pero el periodo abarca 25 692: **faltan
 
 ## Paquetes y tidyverse
 
+![](../../assets/img/tidyverse_universo.png){.nostretch fig-align="center" height="540px"}
+
+::: {.fuente}
+Imagen tomada de: <https://irwingss.github.io/intro_r_ciencias/tidyversecap.html>
+:::
+
+
+## Paquetes y tidyverse
+
+### Instalación y principales funciones:
+::: {.fragment .fade-in}
 :::: {.columns}
 ::: {.column width="50%"}
 ```r
@@ -571,8 +582,11 @@ library(readxl)
 | `purrr` | repetir tareas |
 :::
 ::::
+:::
 
 . . .
+
+::: {.fragment .fade-in}
 
 ### El pipe `|>`: "y luego..."
 
@@ -583,7 +597,11 @@ pp_mensual |> mean() |> round(1)        # se lee de izquierda a derecha
 #> 54.7
 ```
 
+:::
+
 ## Primer contacto con los datos reales
+### Importamos los caudales de Huancané
+::: {.fragment .fade-in}
 
 ```r
 library(readxl)
@@ -595,8 +613,9 @@ head(q, 3)
 #> 1 04/05/2026 00:00          17.41
 #> ...
 ```
+:::
 
-. . .
+::: {.fragment .fade-in}
 
 ### ¿Qué hay que arreglar?
 
@@ -609,6 +628,8 @@ head(q, 3)
 
 Eso es la sección 03: **procesamiento y control de calidad**.
 
+:::
+
 ## Procesamiento y visualización {.seccion background-color="#0B5394"}
 
 ::: {.num}
@@ -618,7 +639,7 @@ Eso es la sección 03: **procesamiento y control de calidad**.
 Importación (readr, readxl), dplyr/tidyr, NAs y control de calidad, agregación diaria → mensual → anual, ggplot2
 
 ## Importar y ordenar el caudal
-
+### Importamos el caudal
 ```r
 library(tidyverse)
 library(readxl)
@@ -648,6 +669,9 @@ Una sola cadena con `|>` resuelve los tres problemas de la sección 02: nombres,
 
 ## Los verbos de dplyr
 
+### Entendemos las principales funciones:
+::: {.fragment .fade-in}
+
 | Verbo | Qué hace | Ejemplo con el caudal |
 |-------------|-----------------------------|---------------------------------------|
 | `filter()` | elige filas | `filter(q > 200)` → 72 días |
@@ -655,6 +679,10 @@ Una sola cadena con `|>` resuelve los tres problemas de la sección 02: nombres,
 | `arrange()` | ordena | `arrange(desc(q))` → 368.6 el 27/02/2016 |
 | `select()` | elige columnas | `select(fecha, q)` |
 | `summarise()` | resume | `summarise(q_medio = mean(q))` → 18.3 |
+
+:::
+
+::: {.fragment .fade-in}
 
 . . .
 
@@ -665,6 +693,8 @@ q |>
   group_by(anio = year(fecha)) |>
   summarise(q_medio = mean(q), q_max = max(q))
 ```
+
+:::
 
 ## Completar las fechas faltantes
 
@@ -693,6 +723,9 @@ q_full |>
 
 ## Precipitación: registros duplicados
 
+### Importamos la precipitación de la Est. Huancané
+::: {.fragment .fade-in}
+
 ```r
 pp <- read_excel("data/raw/precipitacion/PP_000786_Huancane.xlsx", skip = 13) |>
   rename(fecha = FECHA, hora = HORA, pp = 3) |>
@@ -705,6 +738,7 @@ table(pp$hora)
 pp |> count(fecha) |> filter(n > 1) |> nrow()
 #> 1260   fechas repetidas entre 2017 y 2024
 ```
+:::
 
 . . .
 
@@ -766,10 +800,10 @@ vacios_pp <- pp_full |>
 
 ## Control de calidad: mapa de vacíos
 
-![](../../assets/img/s03_PP_vacios.png){fig-align="center" width="85%"}
+![](../../assets/img/s03_PP_vacios.png){.nostretch fig-align="center" width="85%"}
 
 ::: {.fuente}
-Estación Huancané (000786): sin datos en 2010–2016 y 2020–2022. Antes de usar una estación hay que saber **qué periodo cubre realmente**.
+Estación Huancané (000786): dos grandes vacíos, de junio 2010 a diciembre 2016 (79 meses) y de marzo 2020 a julio 2023 (41 meses), más meses incompletos hasta marzo 2024. Antes de usar una estación hay que saber **qué periodo cubre realmente**.
 :::
 
 ## Agregación: diaria → mensual
@@ -845,7 +879,7 @@ ggplot(q_full,
 
 . . .
 
-![](../../assets/img/s03_Q_hidrograma.png){fig-align="center" width="70%"}
+![](../../assets/img/s03_Q_hidrograma.png){.nostretch fig-align="center" width="62%"}
 
 ## ggplot2: régimen y variabilidad
 
@@ -902,8 +936,13 @@ Funciones propias, if/else (años secos/húmedos), for sobre múltiples estacion
 
 ### Escribir la limpieza UNA vez y reutilizarla
 
+**Creando la función de lectura de datos**
+
+
+. . .
+
 ```r
-leer_senamhi <- function(archivo) {
+leer_datos <- function(archivo) {
   read_excel(archivo, skip = 13) |>
     rename(fecha = 1, hora = 2, valor = 3) |>
     mutate(fecha = dmy(fecha)) |>
@@ -917,13 +956,13 @@ leer_senamhi <- function(archivo) {
 . . .
 
 ```r
-q  <- leer_senamhi("data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx")
-pp <- leer_senamhi("data/raw/precipitacion/PP_000786_Huancane.xlsx")
+q  <- leer_datos("data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx")
+pp <- leer_datos("data/raw/precipitacion/PP_000786_Huancane.xlsx")
 nrow(q)     #> 25692
 ```
 
 ::: {.fuente}
-Todo el procesamiento de la sección 03 quedó en una línea. Si mañana cambia el formato de SENAMHI, se corrige **en un solo lugar**.
+Todo el procesamiento de la sección 03 quedó en una línea. Si mañana cambia el formato del ANA, se corrige **en un solo lugar**.
 :::
 
 ## Funciones: argumentos por defecto
@@ -952,9 +991,19 @@ En el script también está `agregar_anual()`, que conserva solo los años con 1
 :::
 
 ## Condicionales: if / else
+:::: {.columns}
+::: {.column width="55%"}
+::: {.fragment .fade-in}
+![](../../assets/img/condiciones_ifelse.jpg){fig-align="center" width="85%"}
+:::
+:::
+
+::: {.column width="45%"}
+::: {.fragment .fade-in style="font-size: 0.8em;"}
 
 ```r
-umbrales <- quantile(q_anual$valor, c(0.2, 0.8))
+umbrales <- quantile(q_anual$valor,
+                     c(0.2, 0.8))
 #>   20%   80%
 #> 11.48 24.41
 
@@ -968,12 +1017,25 @@ clasificar <- function(q, p20, p80) {
   }
 }
 
-clasificar(4.75, umbrales[1], umbrales[2])   # caudal medio de 2023
+# caudal medio de 2023
+clasificar(4.75, umbrales[1], umbrales[2])
 #> "seco"
 ```
+:::
+:::
+::::
 
 ## Condicionales para una columna: `case_when()`
+:::: {.columns}
+::: {.column width="55%"}
+::: {.fragment .fade-in}
+![](../../assets/img/condiciones_casewhen.jpg){fig-align="center" width="100%"}
 
+:::
+:::
+
+::: {.column width="45%"}
+::: {.fragment .fade-in}
 ```r
 q_anual <- q_anual |>
   mutate(tipo = case_when(
@@ -989,29 +1051,35 @@ count(q_anual, tipo)
 #>   seco      13
 ```
 
+:::
+:::
+::::
+
 . . .
 
 ::: {.fuente}
 `if()` evalúa **un solo valor**; `case_when()` evalúa una columna completa. Los años más secos: 2023 (4.75), 1983 (7.23), 1967 (7.67), 1990 (8.23) y 2009 (9.29 m³/s).
 :::
 
+## Bucles for: la idea
+
+![](../../assets/img/condiciones_for.jpg){.nostretch fig-align="center" height="580px"}
+
 ## Bucles for: repetir para cada estación
 
 ```r
 archivos <- list.files("data/raw/precipitacion", pattern = "\\.xlsx$",
                        full.names = TRUE)
-nombres  <- archivos |> basename() |> str_remove("\\.xlsx$") |>
-  str_remove("^PP_\\d+_")
+nombres <- archivos |> basename() |> str_remove("\\.xlsx$") |> str_remove("^PP_\\d+_")
 #> "Munani" "Huancane" "Ananea" "Cojata" "Putina"
 ```
 
-. . .
-
+::: {.fragment .fade-in}
 ```r
-resumen <- vector("list", length(archivos))     # lista vacía
+resumen <- vector("list", length(archivos))      # lista vacía
 
 for (i in seq_along(archivos)) {
-  datos <- leer_senamhi(archivos[i])
+  datos <- leer_datos(archivos[i])
   anual <- datos |> agregar_mensual() |> agregar_anual()
   resumen[[i]] <- tibble(
     estacion     = nombres[i],
@@ -1021,6 +1089,8 @@ for (i in seq_along(archivos)) {
 }
 resumen <- bind_rows(resumen)
 ```
+:::
+
 
 ## Bucles for: el resultado
 
@@ -1039,14 +1109,24 @@ Cinco estaciones procesadas con el mismo código. Con 50 estaciones, el bucle se
 :::
 
 ## Iteración con `purrr::map()`
+::: {.fragment .fade-in}
+![](../../assets/img/condiciones_purrrr.jpg){fig-align="center" width="100%"}
+:::
 
+## Iteración con `purrr::map()`
+
+::: {.fragment .fade-in}
+### Aplicando la función map()
 ```r
-pp_lista <- map(archivos, leer_senamhi)   # aplica la función a cada archivo
+pp_lista <- map(archivos, leer_datos)   # aplica la función a cada archivo
 names(pp_lista) <- nombres
-pp_lista$Cojata                           # una estación de la lista
+pp_lista$Cojata                         # una estación de la lista
 ```
+:::
 
 . . .
+
+### Ordenando los datos
 
 ```r
 # Une la lista en UNA tabla larga con la columna "estacion"
@@ -1067,30 +1147,56 @@ pp_todas |>
 :::
 
 ## Todas las estaciones en un gráfico
-
+### Empleando ggplot2 y facet_wrap
 :::: {.columns}
-::: {.column width="45%"}
+::: {.column width="48%"}
 ```r
+# Anual de cada estación, en una tabla
 pp_anual <- pp_lista |>
   map(\(d) d |>
         agregar_mensual() |>
         agregar_anual()) |>
   list_rbind(names_to = "estacion")
 
-ggplot(pp_anual,
-       aes(anio, valor)) +
-  geom_col(fill = "#0B5394") +
-  facet_wrap(~ estacion,
-             ncol = 1)
+# Un color por estación
+colores <- c(Ananea   = "#0B5394",
+             Cojata   = "#6AA84F",
+             Huancane = "#E69138",
+             Munani   = "#8E7CC3",
+             Putina   = "#CC4125")
 ```
+:::
+
+::: {.column width="52%"}
+```r
+ggplot(pp_anual, aes(anio, valor,
+                     fill = estacion)) +
+  geom_col(width = 0.8) +
+  # línea base en 0
+  geom_hline(yintercept = 0,
+             linewidth = 0.8) +
+  facet_wrap(~ estacion, ncol = 1) +
+  # años cada 10
+  scale_x_continuous(
+    breaks = seq(1950, 2030, 10)) +
+  scale_fill_manual(values = colores,
+                    guide = "none")
+```
+:::
+::::
+
+::: {.fuente}
+`fill = estacion` da un color a cada estación; `scale_fill_manual()` elige cuáles. `guide = "none"` quita la leyenda, porque el nombre ya está en cada panel.
+:::
+
+## Todas las estaciones: el resultado
+
+::: {.fragment .fade-in}
+
+![](../../assets/img/s04_PP_anual_estaciones.png){.nostretch width="60%" fig-align="center"}
 
 ::: {.fuente}
 `facet_wrap()` hace un panel por estación. Entre 2010 y 2016 **solo Cojata** tiene años completos: es un vacío de toda la red, no de una estación.
-:::
-:::
-
-::: {.column width="55%"}
-![](../../assets/img/s04_PP_anual_estaciones.png){width="100%"}
 :::
 ::::
 
@@ -1104,25 +1210,44 @@ Paquete terra: lectura de NetCDF, recorte de cuenca, climatología, mapas, preci
 
 ## PISCO: datos grillados del Perú
 
+:::: {.columns}
+::: {.column width="50%"}
+::: {.fragment .fade-in style="font-size: 0.85em;"}
+**Características**
+
 -   **PISCOp v3.0** (SENAMHI): precipitación **diaria** 1981–2025, celdas de 0.1° (~11 km)
 -   Formato **NetCDF** (`.nc`): un "cubo" longitud × latitud × tiempo
 -   El archivo nacional pesa **1.5 GB** (16 436 días)
+:::
+:::
 
-. . .
+::: {.column width="50%"}
+::: {.fragment .fade-in}
+![](../../assets/img/articulo_pisco.png){width="100%" fig-align="center"}
+:::
+:::
 
+::: {.fragment .fade-in}
 ```r
 # Recorte de la cuenca (lo hace el instructor UNA vez)
 nc <- ncdf4::nc_open("data/raw/pisco/PISCOp_d.nc")
 a  <- ncdf4::ncvar_get(nc, "precipitation",
-                       start = c(min(ix), min(iy), 1),       # esquina
+                       start = c(min(ix), min(iy), 1),        # esquina
                        count = c(length(ix), length(iy), -1)) # 11 x 11 x todo
 ```
 
+
 ::: {.fuente}
-`terra::crop()` sobre el archivo nacional tarda más de 10 minutos; leer solo la ventana con `ncdf4` tarda menos de 1 segundo. El recorte (5.9 MB) ya está en `data/raw/pisco/`.
+`terra::crop()` sobre el archivo nacional tarda más de 10 minutos; leer solo la ventana de la cuenca con `ncdf4` tarda menos de 1 segundo. El recorte (5.9 MB) ya está en `data/raw/pisco/`. Artículo: <https://www.mdpi.com/2306-5338/13/11/306>
 :::
 
+:::
+::::
+
+
 ## Leer un NetCDF con `terra`
+
+**Leer el archivo de la cuenca** (recorte de PISCOp v3)
 
 ```r
 library(terra)
@@ -1137,15 +1262,29 @@ pp_dia
 #> time (days) : 1981-01-01 to 2025-12-31 (16436 steps)
 ```
 
-. . .
-
+:::: {.columns}
+::: {.column width="48%"}
+::: {.fragment .fade-in}
 ```r
-plot(pp_dia[[1]])            # una capa = un mapa (1 de enero de 1981)
+plot(pp_dia[[1]])  # 1 capa = 1 mapa
 ```
 
 ::: {.fuente}
-16 436 capas = 16 436 días. Cada capa es una grilla de 11 × 11 celdas.
+16 436 capas = 16 436 días (1 de enero de 1981 a 31 de diciembre de 2025). Cada capa es una grilla de 11 × 11 celdas.
 :::
+:::
+:::
+
+::: {.column width="52%"}
+::: {.fragment .fade-in style="font-size: 0.6em;"}
+**¿Dónde se encuentran los datos?** PISCO nacional (SENAMHI):
+
+- Precipitación: <https://doi.org/10.6084/m9.figshare.32411886>
+- Temperatura máxima: <https://doi.org/10.6084/m9.figshare.20522806>
+- Temperatura mínima: <https://doi.org/10.6084/m9.figshare.20533715>
+:::
+:::
+::::
 
 ## De diario a mensual con `tapp()`
 
@@ -1375,8 +1514,11 @@ Fuente: PISCO temperatura diaria 1981–2020 (SENAMHI), promediada por subcuenca
 :::
 
 ## ETP por Hargreaves-Samani
+**Comprendiendo la ecuación**
 
 $$ETP = 0.0023 \cdot R_a \cdot (T_{media} + 17.8) \cdot \sqrt{T_{max} - T_{min}}$$
+
+. . .
 
 ```r
 hargreaves <- function(tmax, tmin, lat, fecha) {
@@ -1409,6 +1551,8 @@ $R_a$ = radiación extraterrestre (FAO-56), función de la latitud del centroide
 
 :::: {.columns}
 ::: {.column width="40%"}
+**Unir P y ETP de la cuenca**
+
 ```r
 balance <- inner_join(
   pp_cuenca_mes,
@@ -1418,23 +1562,37 @@ balance <- inner_join(
          1991:2020)
 ```
 
+::: {.fragment .fade-in}
 | | mm/año |
 |---|---:|
 | Precipitación | 716 |
 | ETP | 1115 |
 | **P / ETP** | **0.64** |
-
-::: {.fuente}
-Normal 1991–2020. Solo de diciembre a marzo llueve más de lo que se puede evaporar; de abril a noviembre la cuenca tiene déficit.
 :::
 :::
 
 ::: {.column width="60%"}
+::: {.fragment .fade-in}
 ![](../../assets/img/s05_Balance_P_ETP.png){width="100%"}
+:::
+
+::: {.fragment .fade-in style="font-size: 0.7em;"}
+| P / ETP | Significado |
+|:---:|:---|
+| **< 1** | Déficit: la ETP supera a la lluvia (más seco) |
+| **≈ 1** | Equilibrio entre lluvia y ETP |
+| **> 1** | Exceso: la lluvia supera a la ETP (más húmedo) |
+:::
 :::
 ::::
 
-## Exportar: entrada para el Día 2
+::: {.fragment .fade-in}
+::: {.fuente}
+Normal 1991–2020: P/ETP = 0.64, la cuenca es **deficitaria** en el año. Solo de diciembre a marzo llueve más de lo que se puede evaporar; de abril a noviembre hay déficit.
+:::
+:::
+
+## Exportar los resultados
 
 ```r
 # Series mensuales areales: pp 1981–2025, etp 1981–2020
@@ -1449,7 +1607,7 @@ writeRaster(pp_media, "outputs/PP_media_anual_PISCOv3.tif")
 . . .
 
 ::: {.fuente}
-`PP_ETP_mensual_cuenca.csv` + el caudal de Huancané = todo lo que necesita un modelo hidrológico mensual (GR2M) en el Día 2.
+En el Día 2 el modelo **GR4J** trabaja a paso **diario** y por **subcuenca**: usa la misma lluvia PISCOp v3 y la ETP de Hargreaves, pero día a día en cada una de las 5 subcuencas (`data/pcp/` y `data/temp/`).
 :::
 
 

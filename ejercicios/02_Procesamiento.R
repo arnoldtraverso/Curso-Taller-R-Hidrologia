@@ -234,10 +234,12 @@ g_anual <- ggplot(q_anual, aes(x = anio, y = q)) +
 g_anual
 
 # 8.4 Mapa de vacíos de la precipitación
-g_vacios <- ggplot(vacios_pp, aes(x = anio, y = factor(mes), fill = n_na)) +
+# levels = 12:1 pone enero arriba y diciembre abajo; cada etiqueta va con su mes
+g_vacios <- ggplot(vacios_pp, aes(x = anio,
+                                  y = factor(mes, levels = 12:1, labels = rev(meses_es)),
+                                  fill = n_na)) +
   geom_tile(color = "white", linewidth = 0.2) +
-  scale_y_discrete(labels = meses_es, limits = rev) +
-  scale_fill_gradient(low = "#EEF4FB", high = "#073763",
+  scale_fill_gradient(low = "#FFF1EB", high = "#FE5F2F",
                       name = "Días sin\ndato") +
   labs(title = "Precipitación Huancané: días sin dato por mes",
        x = NULL, y = NULL) +

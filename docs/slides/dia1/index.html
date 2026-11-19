@@ -208,7 +208,7 @@
 Profesor: Kevin Arnold Traverso Yucra
 </div>
         <p class="quarto-title-affiliation">
-            CIP Puno - Cap. Ingeniería Agrícola - Facultad de Ingeniería del Agua y Gestión de Recursos Hídricos
+            CIP Puno - Cap. Ingeniería Agrícola - Facultad de Ingeniería del Agua y Gestión de Recursos Hídricos - IICTA-FIA
           </p>
     </div>
 </div>
@@ -528,7 +528,7 @@ El script documenta cada paso del análisis.</p>
 </table>
 </div>
 <div class="fragment">
-<p>Verificar los valores durante el proceso de escribir codigo es importante!</p>
+<p>Verificar los valores durante el proceso de escribir código es importante!</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">class</span>(caudal)          <span class="co">#&gt; "numeric"</span></span>
 <span id="cb5-2"><a aria-label="2"></a><span class="fu">class</span>(estacion)        <span class="co">#&gt; "character"</span></span>
 <span id="cb5-3"><a aria-label="3"></a>caudal <span class="sc">&gt;</span> <span class="dv">10</span>            <span class="co">#&gt; TRUE</span></span>
@@ -704,6 +704,19 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="paquetes-y-tidyverse" class="slide level2">
 <h2>Paquetes y tidyverse</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/tidyverse_universo.png" class="quarto-figure quarto-figure-center" height="540"></p>
+</figure>
+</div>
+<div class="fuente">
+<p>Imagen tomada de: <a href="https://irwingss.github.io/intro_r_ciencias/tidyversecap.html" class="uri">https://irwingss.github.io/intro_r_ciencias/tidyversecap.html</a></p>
+</div>
+</section>
+<section id="paquetes-y-tidyverse-1" class="slide level2">
+<h2>Paquetes y tidyverse</h2>
+<h3 id="instalación-y-principales-funciones">Instalación y principales funciones:</h3>
+<div class="fragment fade-in">
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-label="1"></a><span class="co"># Se instala UNA vez</span></span>
@@ -748,7 +761,8 @@ El script documenta cada paso del análisis.</p>
 </tbody>
 </table>
 </div></div>
-<div class="fragment">
+</div>
+<div class="fragment fade-in">
 <h3 id="el-pipe-y-luego">El pipe <code>|&gt;</code>: “y luego…”</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-label="1"></a><span class="fu">round</span>(<span class="fu">mean</span>(pp_mensual), <span class="dv">1</span>)              <span class="co"># se lee de adentro hacia afuera</span></span>
 <span id="cb23-2"><a aria-label="2"></a></span>
@@ -758,6 +772,8 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="primer-contacto-con-los-datos-reales" class="slide level2">
 <h2>Primer contacto con los datos reales</h2>
+<h3 id="importamos-los-caudales-de-huancané">Importamos los caudales de Huancané</h3>
+<div class="fragment fade-in">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-label="1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb24-2"><a aria-label="2"></a></span>
 <span id="cb24-3"><a aria-label="3"></a>q <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx"</span>,</span>
@@ -766,7 +782,8 @@ El script documenta cada paso del análisis.</p>
 <span id="cb24-6"><a aria-label="6"></a><span class="co">#&gt;   FECHA      HORA  `VALOR (m³/s)`</span></span>
 <span id="cb24-7"><a aria-label="7"></a><span class="co">#&gt; 1 04/05/2026 00:00          17.41</span></span>
 <span id="cb24-8"><a aria-label="8"></a><span class="co">#&gt; ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
+</div>
+<div class="fragment fade-in">
 <h3 id="qué-hay-que-arreglar">¿Qué hay que arreglar?</h3>
 <ul>
 <li><code>FECHA</code> es texto → convertir con <code>dmy()</code></li>
@@ -788,6 +805,7 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="importar-y-ordenar-el-caudal" class="slide level2">
 <h2>Importar y ordenar el caudal</h2>
+<h3 id="importamos-el-caudal">Importamos el caudal</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb25-2"><a aria-label="2"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb25-3"><a aria-label="3"></a></span>
@@ -811,6 +829,8 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="los-verbos-de-dplyr" class="slide level2">
 <h2>Los verbos de dplyr</h2>
+<h3 id="entendemos-las-principales-funciones">Entendemos las principales funciones:</h3>
+<div class="fragment fade-in">
 <table class="caption-top">
 <colgroup>
 <col style="width: 16%">
@@ -852,11 +872,14 @@ El script documenta cada paso del análisis.</p>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="fragment fade-in">
 <div class="fragment">
 <h3 id="group_by-summarise-resumir-por-grupos"><code>group_by()</code> + <code>summarise()</code>: resumir por grupos</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-label="1"></a>q <span class="sc">|&gt;</span></span>
 <span id="cb27-2"><a aria-label="2"></a>  <span class="fu">group_by</span>(<span class="at">anio =</span> <span class="fu">year</span>(fecha)) <span class="sc">|&gt;</span></span>
 <span id="cb27-3"><a aria-label="3"></a>  <span class="fu">summarise</span>(<span class="at">q_medio =</span> <span class="fu">mean</span>(q), <span class="at">q_max =</span> <span class="fu">max</span>(q))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </section>
 <section id="completar-las-fechas-faltantes" class="slide level2">
@@ -880,6 +903,8 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="precipitación-registros-duplicados" class="slide level2">
 <h2>Precipitación: registros duplicados</h2>
+<h3 id="importamos-la-precipitación-de-la-est.-huancané">Importamos la precipitación de la Est. Huancané</h3>
+<div class="fragment fade-in">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-label="1"></a>pp <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/precipitacion/PP_000786_Huancane.xlsx"</span>, <span class="at">skip =</span> <span class="dv">13</span>) <span class="sc">|&gt;</span></span>
 <span id="cb30-2"><a aria-label="2"></a>  <span class="fu">rename</span>(<span class="at">fecha =</span> FECHA, <span class="at">hora =</span> HORA, <span class="at">pp =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
 <span id="cb30-3"><a aria-label="3"></a>  <span class="fu">mutate</span>(<span class="at">fecha =</span> <span class="fu">dmy</span>(fecha))</span>
@@ -890,6 +915,7 @@ El script documenta cada paso del análisis.</p>
 <span id="cb30-8"><a aria-label="8"></a></span>
 <span id="cb30-9"><a aria-label="9"></a>pp <span class="sc">|&gt;</span> <span class="fu">count</span>(fecha) <span class="sc">|&gt;</span> <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">nrow</span>()</span>
 <span id="cb30-10"><a aria-label="10"></a><span class="co">#&gt; 1260   fechas repetidas entre 2017 y 2024</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <div class="fragment">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-label="1"></a>pp <span class="sc">|&gt;</span> <span class="fu">group_by</span>(fecha) <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="fu">n_distinct</span>(pp) <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
 <span id="cb31-2"><a aria-label="2"></a><span class="co">#&gt;   fecha      hora     pp</span></span>
@@ -936,9 +962,13 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="control-de-calidad-mapa-de-vacíos" class="slide level2">
 <h2>Control de calidad: mapa de vacíos</h2>
-
-<img data-src="../../assets/img/s03_PP_vacios.png" class="quarto-figure quarto-figure-center r-stretch" style="width:85.0%"><div class="fuente">
-<p>Estación Huancané (000786): sin datos en 2010–2016 y 2020–2022. Antes de usar una estación hay que saber <strong>qué periodo cubre realmente</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/s03_PP_vacios.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></p>
+</figure>
+</div>
+<div class="fuente">
+<p>Estación Huancané (000786): dos grandes vacíos, de junio 2010 a diciembre 2016 (79 meses) y de marzo 2020 a julio 2023 (41 meses), más meses incompletos hasta marzo 2024. Antes de usar una estación hay que saber <strong>qué periodo cubre realmente</strong>.</p>
 </div>
 </section>
 <section id="agregación-diaria-mensual" class="slide level2">
@@ -1003,7 +1033,7 @@ El script documenta cada paso del análisis.</p>
 <div class="fragment">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../../assets/img/s03_Q_hidrograma.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<p><img data-src="../../assets/img/s03_Q_hidrograma.png" class="quarto-figure quarto-figure-center" style="width:62.0%"></p>
 </figure>
 </div>
 </div>
@@ -1052,7 +1082,9 @@ El script documenta cada paso del análisis.</p>
 <section id="funciones-propias" class="slide level2">
 <h2>Funciones propias</h2>
 <h3 id="escribir-la-limpieza-una-vez-y-reutilizarla">Escribir la limpieza UNA vez y reutilizarla</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a aria-label="1"></a>leer_senamhi <span class="ot">&lt;-</span> <span class="cf">function</span>(archivo) {</span>
+<p><strong>Creando la función de lectura de datos</strong></p>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a aria-label="1"></a>leer_datos <span class="ot">&lt;-</span> <span class="cf">function</span>(archivo) {</span>
 <span id="cb43-2"><a aria-label="2"></a>  <span class="fu">read_excel</span>(archivo, <span class="at">skip =</span> <span class="dv">13</span>) <span class="sc">|&gt;</span></span>
 <span id="cb43-3"><a aria-label="3"></a>    <span class="fu">rename</span>(<span class="at">fecha =</span> <span class="dv">1</span>, <span class="at">hora =</span> <span class="dv">2</span>, <span class="at">valor =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
 <span id="cb43-4"><a aria-label="4"></a>    <span class="fu">mutate</span>(<span class="at">fecha =</span> <span class="fu">dmy</span>(fecha)) <span class="sc">|&gt;</span></span>
@@ -1061,12 +1093,13 @@ El script documenta cada paso del análisis.</p>
 <span id="cb43-7"><a aria-label="7"></a>    <span class="fu">select</span>(fecha, valor) <span class="sc">|&gt;</span></span>
 <span id="cb43-8"><a aria-label="8"></a>    <span class="fu">complete</span>(<span class="at">fecha =</span> <span class="fu">seq</span>(<span class="fu">min</span>(fecha), <span class="fu">max</span>(fecha), <span class="at">by =</span> <span class="st">"day"</span>))</span>
 <span id="cb43-9"><a aria-label="9"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a aria-label="1"></a>q  <span class="ot">&lt;-</span> <span class="fu">leer_senamhi</span>(<span class="st">"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx"</span>)</span>
-<span id="cb44-2"><a aria-label="2"></a>pp <span class="ot">&lt;-</span> <span class="fu">leer_senamhi</span>(<span class="st">"data/raw/precipitacion/PP_000786_Huancane.xlsx"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a aria-label="1"></a>q  <span class="ot">&lt;-</span> <span class="fu">leer_datos</span>(<span class="st">"data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx"</span>)</span>
+<span id="cb44-2"><a aria-label="2"></a>pp <span class="ot">&lt;-</span> <span class="fu">leer_datos</span>(<span class="st">"data/raw/precipitacion/PP_000786_Huancane.xlsx"</span>)</span>
 <span id="cb44-3"><a aria-label="3"></a><span class="fu">nrow</span>(q)     <span class="co">#&gt; 25692</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fuente">
-<p>Todo el procesamiento de la sección 03 quedó en una línea. Si mañana cambia el formato de SENAMHI, se corrige <strong>en un solo lugar</strong>.</p>
+<p>Todo el procesamiento de la sección 03 quedó en una línea. Si mañana cambia el formato del ANA, se corrige <strong>en un solo lugar</strong>.</p>
 </div>
 </div>
 </section>
@@ -1091,25 +1124,51 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="condicionales-if-else" class="slide level2">
 <h2>Condicionales: if / else</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a aria-label="1"></a>umbrales <span class="ot">&lt;-</span> <span class="fu">quantile</span>(q_anual<span class="sc">$</span>valor, <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>))</span>
-<span id="cb47-2"><a aria-label="2"></a><span class="co">#&gt;   20%   80%</span></span>
-<span id="cb47-3"><a aria-label="3"></a><span class="co">#&gt; 11.48 24.41</span></span>
-<span id="cb47-4"><a aria-label="4"></a></span>
-<span id="cb47-5"><a aria-label="5"></a>clasificar <span class="ot">&lt;-</span> <span class="cf">function</span>(q, p20, p80) {</span>
-<span id="cb47-6"><a aria-label="6"></a>  <span class="cf">if</span> (q <span class="sc">&lt;</span> p20) {</span>
-<span id="cb47-7"><a aria-label="7"></a>    <span class="st">"seco"</span></span>
-<span id="cb47-8"><a aria-label="8"></a>  } <span class="cf">else</span> <span class="cf">if</span> (q <span class="sc">&gt;</span> p80) {</span>
-<span id="cb47-9"><a aria-label="9"></a>    <span class="st">"húmedo"</span></span>
-<span id="cb47-10"><a aria-label="10"></a>  } <span class="cf">else</span> {</span>
-<span id="cb47-11"><a aria-label="11"></a>    <span class="st">"normal"</span></span>
-<span id="cb47-12"><a aria-label="12"></a>  }</span>
-<span id="cb47-13"><a aria-label="13"></a>}</span>
-<span id="cb47-14"><a aria-label="14"></a></span>
-<span id="cb47-15"><a aria-label="15"></a><span class="fu">clasificar</span>(<span class="fl">4.75</span>, umbrales[<span class="dv">1</span>], umbrales[<span class="dv">2</span>])   <span class="co"># caudal medio de 2023</span></span>
-<span id="cb47-16"><a aria-label="16"></a><span class="co">#&gt; "seco"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/condiciones_ifelse.jpg" class="quarto-figure quarto-figure-center" style="width:85.0%"></p>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="fragment fade-in" style="font-size: 0.8em;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a aria-label="1"></a>umbrales <span class="ot">&lt;-</span> <span class="fu">quantile</span>(q_anual<span class="sc">$</span>valor,</span>
+<span id="cb47-2"><a aria-label="2"></a>                     <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>))</span>
+<span id="cb47-3"><a aria-label="3"></a><span class="co">#&gt;   20%   80%</span></span>
+<span id="cb47-4"><a aria-label="4"></a><span class="co">#&gt; 11.48 24.41</span></span>
+<span id="cb47-5"><a aria-label="5"></a></span>
+<span id="cb47-6"><a aria-label="6"></a>clasificar <span class="ot">&lt;-</span> <span class="cf">function</span>(q, p20, p80) {</span>
+<span id="cb47-7"><a aria-label="7"></a>  <span class="cf">if</span> (q <span class="sc">&lt;</span> p20) {</span>
+<span id="cb47-8"><a aria-label="8"></a>    <span class="st">"seco"</span></span>
+<span id="cb47-9"><a aria-label="9"></a>  } <span class="cf">else</span> <span class="cf">if</span> (q <span class="sc">&gt;</span> p80) {</span>
+<span id="cb47-10"><a aria-label="10"></a>    <span class="st">"húmedo"</span></span>
+<span id="cb47-11"><a aria-label="11"></a>  } <span class="cf">else</span> {</span>
+<span id="cb47-12"><a aria-label="12"></a>    <span class="st">"normal"</span></span>
+<span id="cb47-13"><a aria-label="13"></a>  }</span>
+<span id="cb47-14"><a aria-label="14"></a>}</span>
+<span id="cb47-15"><a aria-label="15"></a></span>
+<span id="cb47-16"><a aria-label="16"></a><span class="co"># caudal medio de 2023</span></span>
+<span id="cb47-17"><a aria-label="17"></a><span class="fu">clasificar</span>(<span class="fl">4.75</span>, umbrales[<span class="dv">1</span>], umbrales[<span class="dv">2</span>])</span>
+<span id="cb47-18"><a aria-label="18"></a><span class="co">#&gt; "seco"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div></div>
 </section>
 <section id="condicionales-para-una-columna-case_when" class="slide level2">
 <h2>Condicionales para una columna: <code>case_when()</code></h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/condiciones_casewhen.jpg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="fragment fade-in">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a aria-label="1"></a>q_anual <span class="ot">&lt;-</span> q_anual <span class="sc">|&gt;</span></span>
 <span id="cb48-2"><a aria-label="2"></a>  <span class="fu">mutate</span>(<span class="at">tipo =</span> <span class="fu">case_when</span>(</span>
 <span id="cb48-3"><a aria-label="3"></a>    valor <span class="sc">&lt;</span> umbrales[<span class="dv">1</span>] <span class="sc">~</span> <span class="st">"seco"</span>,</span>
@@ -1122,24 +1181,33 @@ El script documenta cada paso del análisis.</p>
 <span id="cb48-10"><a aria-label="10"></a><span class="co">#&gt;   húmedo    13</span></span>
 <span id="cb48-11"><a aria-label="11"></a><span class="co">#&gt;   normal    36</span></span>
 <span id="cb48-12"><a aria-label="12"></a><span class="co">#&gt;   seco      13</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div></div>
 <div class="fragment">
 <div class="fuente">
 <p><code>if()</code> evalúa <strong>un solo valor</strong>; <code>case_when()</code> evalúa una columna completa. Los años más secos: 2023 (4.75), 1983 (7.23), 1967 (7.67), 1990 (8.23) y 2009 (9.29 m³/s).</p>
 </div>
 </div>
 </section>
+<section id="bucles-for-la-idea" class="slide level2">
+<h2>Bucles for: la idea</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/condiciones_for.jpg" class="quarto-figure quarto-figure-center" height="580"></p>
+</figure>
+</div>
+</section>
 <section id="bucles-for-repetir-para-cada-estación" class="slide level2">
 <h2>Bucles for: repetir para cada estación</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a aria-label="1"></a>archivos <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"data/raw/precipitacion"</span>, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.xlsx$"</span>,</span>
 <span id="cb49-2"><a aria-label="2"></a>                       <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb49-3"><a aria-label="3"></a>nombres  <span class="ot">&lt;-</span> archivos <span class="sc">|&gt;</span> <span class="fu">basename</span>() <span class="sc">|&gt;</span> <span class="fu">str_remove</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.xlsx$"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb49-4"><a aria-label="4"></a>  <span class="fu">str_remove</span>(<span class="st">"^PP_</span><span class="sc">\\</span><span class="st">d+_"</span>)</span>
-<span id="cb49-5"><a aria-label="5"></a><span class="co">#&gt; "Munani" "Huancane" "Ananea" "Cojata" "Putina"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a aria-label="1"></a>resumen <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="fu">length</span>(archivos))     <span class="co"># lista vacía</span></span>
+<span id="cb49-3"><a aria-label="3"></a>nombres <span class="ot">&lt;-</span> archivos <span class="sc">|&gt;</span> <span class="fu">basename</span>() <span class="sc">|&gt;</span> <span class="fu">str_remove</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.xlsx$"</span>) <span class="sc">|&gt;</span> <span class="fu">str_remove</span>(<span class="st">"^PP_</span><span class="sc">\\</span><span class="st">d+_"</span>)</span>
+<span id="cb49-4"><a aria-label="4"></a><span class="co">#&gt; "Munani" "Huancane" "Ananea" "Cojata" "Putina"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment fade-in">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a aria-label="1"></a>resumen <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="fu">length</span>(archivos))      <span class="co"># lista vacía</span></span>
 <span id="cb50-2"><a aria-label="2"></a></span>
 <span id="cb50-3"><a aria-label="3"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(archivos)) {</span>
-<span id="cb50-4"><a aria-label="4"></a>  datos <span class="ot">&lt;-</span> <span class="fu">leer_senamhi</span>(archivos[i])</span>
+<span id="cb50-4"><a aria-label="4"></a>  datos <span class="ot">&lt;-</span> <span class="fu">leer_datos</span>(archivos[i])</span>
 <span id="cb50-5"><a aria-label="5"></a>  anual <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span> <span class="fu">agregar_mensual</span>() <span class="sc">|&gt;</span> <span class="fu">agregar_anual</span>()</span>
 <span id="cb50-6"><a aria-label="6"></a>  resumen[[i]] <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb50-7"><a aria-label="7"></a>    <span class="at">estacion     =</span> nombres[i],</span>
@@ -1208,10 +1276,24 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="iteración-con-purrrmap" class="slide level2">
 <h2>Iteración con <code>purrr::map()</code></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a aria-label="1"></a>pp_lista <span class="ot">&lt;-</span> <span class="fu">map</span>(archivos, leer_senamhi)   <span class="co"># aplica la función a cada archivo</span></span>
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/condiciones_purrrr.jpg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="iteración-con-purrrmap-1" class="slide level2">
+<h2>Iteración con <code>purrr::map()</code></h2>
+<div class="fragment fade-in">
+<h3 id="aplicando-la-función-map">Aplicando la función map()</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a aria-label="1"></a>pp_lista <span class="ot">&lt;-</span> <span class="fu">map</span>(archivos, leer_datos)   <span class="co"># aplica la función a cada archivo</span></span>
 <span id="cb51-2"><a aria-label="2"></a><span class="fu">names</span>(pp_lista) <span class="ot">&lt;-</span> nombres</span>
-<span id="cb51-3"><a aria-label="3"></a>pp_lista<span class="sc">$</span>Cojata                           <span class="co"># una estación de la lista</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb51-3"><a aria-label="3"></a>pp_lista<span class="sc">$</span>Cojata                         <span class="co"># una estación de la lista</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <div class="fragment">
+<h3 id="ordenando-los-datos">Ordenando los datos</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a aria-label="1"></a><span class="co"># Une la lista en UNA tabla larga con la columna "estacion"</span></span>
 <span id="cb52-2"><a aria-label="2"></a>pp_todas <span class="ot">&lt;-</span> pp_lista <span class="sc">|&gt;</span> <span class="fu">list_rbind</span>(<span class="at">names_to =</span> <span class="st">"estacion"</span>)</span>
 <span id="cb52-3"><a aria-label="3"></a><span class="fu">nrow</span>(pp_todas)       <span class="co">#&gt; 114159</span></span>
@@ -1221,34 +1303,61 @@ El script documenta cada paso del análisis.</p>
 <span id="cb52-7"><a aria-label="7"></a>  <span class="fu">group_by</span>(estacion) <span class="sc">|&gt;</span></span>
 <span id="cb52-8"><a aria-label="8"></a>  <span class="fu">summarise</span>(<span class="at">pct_faltante =</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(valor)) <span class="sc">*</span> <span class="dv">100</span>,</span>
 <span id="cb52-9"><a aria-label="9"></a>            <span class="at">maximo       =</span> <span class="fu">max</span>(valor, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 <div class="fragment">
 <div class="fuente">
 <p><code>for</code> y <code>map()</code> hacen lo mismo; <code>map()</code> es más corto y no necesita preparar la lista vacía.</p>
 </div>
 </div>
+</div>
 </section>
 <section id="todas-las-estaciones-en-un-gráfico" class="slide level2">
 <h2>Todas las estaciones en un gráfico</h2>
+<h3 id="empleando-ggplot2-y-facet_wrap">Empleando ggplot2 y facet_wrap</h3>
 <div class="columns">
-<div class="column" style="width:45%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a aria-label="1"></a>pp_anual <span class="ot">&lt;-</span> pp_lista <span class="sc">|&gt;</span></span>
-<span id="cb53-2"><a aria-label="2"></a>  <span class="fu">map</span>(\(d) d <span class="sc">|&gt;</span></span>
-<span id="cb53-3"><a aria-label="3"></a>        <span class="fu">agregar_mensual</span>() <span class="sc">|&gt;</span></span>
-<span id="cb53-4"><a aria-label="4"></a>        <span class="fu">agregar_anual</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb53-5"><a aria-label="5"></a>  <span class="fu">list_rbind</span>(<span class="at">names_to =</span> <span class="st">"estacion"</span>)</span>
-<span id="cb53-6"><a aria-label="6"></a></span>
-<span id="cb53-7"><a aria-label="7"></a><span class="fu">ggplot</span>(pp_anual,</span>
-<span id="cb53-8"><a aria-label="8"></a>       <span class="fu">aes</span>(anio, valor)) <span class="sc">+</span></span>
-<span id="cb53-9"><a aria-label="9"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#0B5394"</span>) <span class="sc">+</span></span>
-<span id="cb53-10"><a aria-label="10"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> estacion,</span>
-<span id="cb53-11"><a aria-label="11"></a>             <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="column" style="width:48%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a aria-label="1"></a><span class="co"># Anual de cada estación, en una tabla</span></span>
+<span id="cb53-2"><a aria-label="2"></a>pp_anual <span class="ot">&lt;-</span> pp_lista <span class="sc">|&gt;</span></span>
+<span id="cb53-3"><a aria-label="3"></a>  <span class="fu">map</span>(\(d) d <span class="sc">|&gt;</span></span>
+<span id="cb53-4"><a aria-label="4"></a>        <span class="fu">agregar_mensual</span>() <span class="sc">|&gt;</span></span>
+<span id="cb53-5"><a aria-label="5"></a>        <span class="fu">agregar_anual</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb53-6"><a aria-label="6"></a>  <span class="fu">list_rbind</span>(<span class="at">names_to =</span> <span class="st">"estacion"</span>)</span>
+<span id="cb53-7"><a aria-label="7"></a></span>
+<span id="cb53-8"><a aria-label="8"></a><span class="co"># Un color por estación</span></span>
+<span id="cb53-9"><a aria-label="9"></a>colores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Ananea   =</span> <span class="st">"#0B5394"</span>,</span>
+<span id="cb53-10"><a aria-label="10"></a>             <span class="at">Cojata   =</span> <span class="st">"#6AA84F"</span>,</span>
+<span id="cb53-11"><a aria-label="11"></a>             <span class="at">Huancane =</span> <span class="st">"#E69138"</span>,</span>
+<span id="cb53-12"><a aria-label="12"></a>             <span class="at">Munani   =</span> <span class="st">"#8E7CC3"</span>,</span>
+<span id="cb53-13"><a aria-label="13"></a>             <span class="at">Putina   =</span> <span class="st">"#CC4125"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:52%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a aria-label="1"></a><span class="fu">ggplot</span>(pp_anual, <span class="fu">aes</span>(anio, valor,</span>
+<span id="cb54-2"><a aria-label="2"></a>                     <span class="at">fill =</span> estacion)) <span class="sc">+</span></span>
+<span id="cb54-3"><a aria-label="3"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb54-4"><a aria-label="4"></a>  <span class="co"># línea base en 0</span></span>
+<span id="cb54-5"><a aria-label="5"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
+<span id="cb54-6"><a aria-label="6"></a>             <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb54-7"><a aria-label="7"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> estacion, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb54-8"><a aria-label="8"></a>  <span class="co"># años cada 10</span></span>
+<span id="cb54-9"><a aria-label="9"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb54-10"><a aria-label="10"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1950</span>, <span class="dv">2030</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb54-11"><a aria-label="11"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> colores,</span>
+<span id="cb54-12"><a aria-label="12"></a>                    <span class="at">guide =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fuente">
+<p><code>fill = estacion</code> da un color a cada estación; <code>scale_fill_manual()</code> elige cuáles. <code>guide = "none"</code> quita la leyenda, porque el nombre ya está en cada panel.</p>
+</div>
+</section>
+<section id="todas-las-estaciones-el-resultado" class="slide level2">
+<h2>Todas las estaciones: el resultado</h2>
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/s04_PP_anual_estaciones.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+</figure>
+</div>
 <div class="fuente">
 <p><code>facet_wrap()</code> hace un panel por estación. Entre 2010 y 2016 <strong>solo Cojata</strong> tiene años completos: es un vacío de toda la red, no de una estación.</p>
 </div>
-</div><div class="column" style="width:55%;">
-<p><img data-src="../../assets/img/s04_PP_anual_estaciones.png" style="width:100.0%"></p>
-</div></div>
+</div>
 </section>
 <section id="datos-climáticos-grillados" class="slide level2 seccion" data-background-color="#0B5394">
 <h2>Datos climáticos grillados</h2>
@@ -1259,52 +1368,79 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="pisco-datos-grillados-del-perú" class="slide level2">
 <h2>PISCO: datos grillados del Perú</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment fade-in" style="font-size: 0.85em;">
+<p><strong>Características</strong></p>
 <ul>
 <li><strong>PISCOp v3.0</strong> (SENAMHI): precipitación <strong>diaria</strong> 1981–2025, celdas de 0.1° (~11 km)</li>
 <li>Formato <strong>NetCDF</strong> (<code>.nc</code>): un “cubo” longitud × latitud × tiempo</li>
 <li>El archivo nacional pesa <strong>1.5 GB</strong> (16 436 días)</li>
 </ul>
-<div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a aria-label="1"></a><span class="co"># Recorte de la cuenca (lo hace el instructor UNA vez)</span></span>
-<span id="cb54-2"><a aria-label="2"></a>nc <span class="ot">&lt;-</span> ncdf4<span class="sc">::</span><span class="fu">nc_open</span>(<span class="st">"data/raw/pisco/PISCOp_d.nc"</span>)</span>
-<span id="cb54-3"><a aria-label="3"></a>a  <span class="ot">&lt;-</span> ncdf4<span class="sc">::</span><span class="fu">ncvar_get</span>(nc, <span class="st">"precipitation"</span>,</span>
-<span id="cb54-4"><a aria-label="4"></a>                       <span class="at">start =</span> <span class="fu">c</span>(<span class="fu">min</span>(ix), <span class="fu">min</span>(iy), <span class="dv">1</span>),       <span class="co"># esquina</span></span>
-<span id="cb54-5"><a aria-label="5"></a>                       <span class="at">count =</span> <span class="fu">c</span>(<span class="fu">length</span>(ix), <span class="fu">length</span>(iy), <span class="sc">-</span><span class="dv">1</span>)) <span class="co"># 11 x 11 x todo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/articulo_pisco.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div><div class="fragment fade-in">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a aria-label="1"></a><span class="co"># Recorte de la cuenca (lo hace el instructor UNA vez)</span></span>
+<span id="cb55-2"><a aria-label="2"></a>nc <span class="ot">&lt;-</span> ncdf4<span class="sc">::</span><span class="fu">nc_open</span>(<span class="st">"data/raw/pisco/PISCOp_d.nc"</span>)</span>
+<span id="cb55-3"><a aria-label="3"></a>a  <span class="ot">&lt;-</span> ncdf4<span class="sc">::</span><span class="fu">ncvar_get</span>(nc, <span class="st">"precipitation"</span>,</span>
+<span id="cb55-4"><a aria-label="4"></a>                       <span class="at">start =</span> <span class="fu">c</span>(<span class="fu">min</span>(ix), <span class="fu">min</span>(iy), <span class="dv">1</span>),        <span class="co"># esquina</span></span>
+<span id="cb55-5"><a aria-label="5"></a>                       <span class="at">count =</span> <span class="fu">c</span>(<span class="fu">length</span>(ix), <span class="fu">length</span>(iy), <span class="sc">-</span><span class="dv">1</span>)) <span class="co"># 11 x 11 x todo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fuente">
-<p><code>terra::crop()</code> sobre el archivo nacional tarda más de 10 minutos; leer solo la ventana con <code>ncdf4</code> tarda menos de 1 segundo. El recorte (5.9 MB) ya está en <code>data/raw/pisco/</code>.</p>
+<p><code>terra::crop()</code> sobre el archivo nacional tarda más de 10 minutos; leer solo la ventana de la cuenca con <code>ncdf4</code> tarda menos de 1 segundo. El recorte (5.9 MB) ya está en <code>data/raw/pisco/</code>. Artículo: <a href="https://www.mdpi.com/2306-5338/13/11/306" class="uri">https://www.mdpi.com/2306-5338/13/11/306</a></p>
+</div>
 </div>
 </div>
 </section>
 <section id="leer-un-netcdf-con-terra" class="slide level2">
 <h2>Leer un NetCDF con <code>terra</code></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a aria-label="1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb55-2"><a aria-label="2"></a>pp_dia <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"data/raw/pisco/PISCOp_v3_diario_Huancane.nc"</span>)</span>
-<span id="cb55-3"><a aria-label="3"></a>pp_dia</span>
-<span id="cb55-4"><a aria-label="4"></a><span class="co">#&gt; class       : SpatRaster</span></span>
-<span id="cb55-5"><a aria-label="5"></a><span class="co">#&gt; size        : 11, 11, 16436  (nrow, ncol, nlyr)</span></span>
-<span id="cb55-6"><a aria-label="6"></a><span class="co">#&gt; resolution  : 0.1, 0.1  (x, y)</span></span>
-<span id="cb55-7"><a aria-label="7"></a><span class="co">#&gt; extent      : -70.3, -69.2, -15.5, -14.4  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb55-8"><a aria-label="8"></a><span class="co">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326)</span></span>
-<span id="cb55-9"><a aria-label="9"></a><span class="co">#&gt; unit        : mm</span></span>
-<span id="cb55-10"><a aria-label="10"></a><span class="co">#&gt; time (days) : 1981-01-01 to 2025-12-31 (16436 steps)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a aria-label="1"></a><span class="fu">plot</span>(pp_dia[[<span class="dv">1</span>]])            <span class="co"># una capa = un mapa (1 de enero de 1981)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Leer el archivo de la cuenca</strong> (recorte de PISCOp v3)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a aria-label="1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb56-2"><a aria-label="2"></a>pp_dia <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"data/raw/pisco/PISCOp_v3_diario_Huancane.nc"</span>)</span>
+<span id="cb56-3"><a aria-label="3"></a>pp_dia</span>
+<span id="cb56-4"><a aria-label="4"></a><span class="co">#&gt; class       : SpatRaster</span></span>
+<span id="cb56-5"><a aria-label="5"></a><span class="co">#&gt; size        : 11, 11, 16436  (nrow, ncol, nlyr)</span></span>
+<span id="cb56-6"><a aria-label="6"></a><span class="co">#&gt; resolution  : 0.1, 0.1  (x, y)</span></span>
+<span id="cb56-7"><a aria-label="7"></a><span class="co">#&gt; extent      : -70.3, -69.2, -15.5, -14.4  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb56-8"><a aria-label="8"></a><span class="co">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326)</span></span>
+<span id="cb56-9"><a aria-label="9"></a><span class="co">#&gt; unit        : mm</span></span>
+<span id="cb56-10"><a aria-label="10"></a><span class="co">#&gt; time (days) : 1981-01-01 to 2025-12-31 (16436 steps)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="fragment fade-in">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a aria-label="1"></a><span class="fu">plot</span>(pp_dia[[<span class="dv">1</span>]])  <span class="co"># 1 capa = 1 mapa</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fuente">
-<p>16 436 capas = 16 436 días. Cada capa es una grilla de 11 × 11 celdas.</p>
+<p>16 436 capas = 16 436 días (1 de enero de 1981 a 31 de diciembre de 2025). Cada capa es una grilla de 11 × 11 celdas.</p>
 </div>
 </div>
+</div><div class="column" style="width:52%;">
+<div class="fragment fade-in" style="font-size: 0.6em;">
+<p><strong>¿Dónde se encuentran los datos?</strong> PISCO nacional (SENAMHI):</p>
+<ul>
+<li>Precipitación: <a href="https://doi.org/10.6084/m9.figshare.32411886" class="uri">https://doi.org/10.6084/m9.figshare.32411886</a></li>
+<li>Temperatura máxima: <a href="https://doi.org/10.6084/m9.figshare.20522806" class="uri">https://doi.org/10.6084/m9.figshare.20522806</a></li>
+<li>Temperatura mínima: <a href="https://doi.org/10.6084/m9.figshare.20533715" class="uri">https://doi.org/10.6084/m9.figshare.20533715</a></li>
+</ul>
+</div>
+</div></div>
 </section>
 <section id="de-diario-a-mensual-con-tapp" class="slide level2">
 <h2>De diario a mensual con <code>tapp()</code></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a aria-label="1"></a><span class="co"># Agrupa las capas por su fecha y aplica una función</span></span>
-<span id="cb57-2"><a aria-label="2"></a>pp <span class="ot">&lt;-</span> <span class="fu">tapp</span>(pp_dia, <span class="st">"yearmonths"</span>, sum)   <span class="co"># lluvia total de cada mes</span></span>
-<span id="cb57-3"><a aria-label="3"></a><span class="fu">nlyr</span>(pp)                                <span class="co">#&gt; 540 meses = 45 años</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a aria-label="1"></a><span class="co"># Agrupa las capas por su fecha y aplica una función</span></span>
+<span id="cb58-2"><a aria-label="2"></a>pp <span class="ot">&lt;-</span> <span class="fu">tapp</span>(pp_dia, <span class="st">"yearmonths"</span>, sum)   <span class="co"># lluvia total de cada mes</span></span>
+<span id="cb58-3"><a aria-label="3"></a><span class="fu">nlyr</span>(pp)                                <span class="co">#&gt; 540 meses = 45 años</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a aria-label="1"></a>fechas    <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"1981-01-01"</span>), <span class="at">by =</span> <span class="st">"month"</span>, <span class="at">length.out =</span> <span class="fu">nlyr</span>(pp))</span>
-<span id="cb58-2"><a aria-label="2"></a><span class="fu">time</span>(pp)  <span class="ot">&lt;-</span> fechas</span>
-<span id="cb58-3"><a aria-label="3"></a><span class="fu">names</span>(pp) <span class="ot">&lt;-</span> <span class="fu">format</span>(fechas, <span class="st">"%Y-%m"</span>)</span>
-<span id="cb58-4"><a aria-label="4"></a></span>
-<span id="cb58-5"><a aria-label="5"></a><span class="fu">plot</span>(pp[[<span class="st">"2025-01"</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a aria-label="1"></a>fechas    <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"1981-01-01"</span>), <span class="at">by =</span> <span class="st">"month"</span>, <span class="at">length.out =</span> <span class="fu">nlyr</span>(pp))</span>
+<span id="cb59-2"><a aria-label="2"></a><span class="fu">time</span>(pp)  <span class="ot">&lt;-</span> fechas</span>
+<span id="cb59-3"><a aria-label="3"></a><span class="fu">names</span>(pp) <span class="ot">&lt;-</span> <span class="fu">format</span>(fechas, <span class="st">"%Y-%m"</span>)</span>
+<span id="cb59-4"><a aria-label="4"></a></span>
+<span id="cb59-5"><a aria-label="5"></a><span class="fu">plot</span>(pp[[<span class="st">"2025-01"</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fuente">
 <p><code>tapp()</code> acepta <code>"years"</code>, <code>"months"</code>, <code>"yearmonths"</code>, <code>"doy"</code>… y cualquier función: <code>sum</code>, <code>mean</code>, <code>max</code>.</p>
 </div>
@@ -1312,61 +1448,61 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="la-cuenca-datos-vectoriales" class="slide level2">
 <h2>La cuenca: datos vectoriales</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a aria-label="1"></a>subcuencas <span class="ot">&lt;-</span> <span class="fu">vect</span>(<span class="st">"data/basin/Subbasins.shp"</span>)</span>
-<span id="cb59-2"><a aria-label="2"></a>rios       <span class="ot">&lt;-</span> <span class="fu">vect</span>(<span class="st">"data/rivers/Rivers.shp"</span>)</span>
-<span id="cb59-3"><a aria-label="3"></a><span class="fu">crs</span>(subcuencas, <span class="at">describe =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>name   <span class="co">#&gt; "WGS 84 / UTM zone 19S"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a aria-label="1"></a>subcuencas <span class="ot">&lt;-</span> <span class="fu">vect</span>(<span class="st">"data/basin/Subbasins.shp"</span>)</span>
+<span id="cb60-2"><a aria-label="2"></a>rios       <span class="ot">&lt;-</span> <span class="fu">vect</span>(<span class="st">"data/rivers/Rivers.shp"</span>)</span>
+<span id="cb60-3"><a aria-label="3"></a><span class="fu">crs</span>(subcuencas, <span class="at">describe =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>name   <span class="co">#&gt; "WGS 84 / UTM zone 19S"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a aria-label="1"></a><span class="co"># Ráster en grados, cuenca en metros: mismo sistema de coordenadas</span></span>
-<span id="cb60-2"><a aria-label="2"></a>subcuencas <span class="ot">&lt;-</span> <span class="fu">project</span>(subcuencas, <span class="fu">crs</span>(pp))</span>
-<span id="cb60-3"><a aria-label="3"></a>rios       <span class="ot">&lt;-</span> <span class="fu">project</span>(rios, <span class="fu">crs</span>(pp))</span>
-<span id="cb60-4"><a aria-label="4"></a></span>
-<span id="cb60-5"><a aria-label="5"></a>cuenca <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(subcuencas) <span class="sc">|&gt;</span>     <span class="co"># disolver 5 subcuencas en 1</span></span>
-<span id="cb60-6"><a aria-label="6"></a>  <span class="fu">fillHoles</span>()                          <span class="co"># sin huecos entre subcuencas</span></span>
-<span id="cb60-7"><a aria-label="7"></a><span class="fu">expanse</span>(cuenca, <span class="at">unit =</span> <span class="st">"km"</span>)           <span class="co">#&gt; 3545 km²</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a aria-label="1"></a><span class="co"># Ráster en grados, cuenca en metros: mismo sistema de coordenadas</span></span>
+<span id="cb61-2"><a aria-label="2"></a>subcuencas <span class="ot">&lt;-</span> <span class="fu">project</span>(subcuencas, <span class="fu">crs</span>(pp))</span>
+<span id="cb61-3"><a aria-label="3"></a>rios       <span class="ot">&lt;-</span> <span class="fu">project</span>(rios, <span class="fu">crs</span>(pp))</span>
+<span id="cb61-4"><a aria-label="4"></a></span>
+<span id="cb61-5"><a aria-label="5"></a>cuenca <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(subcuencas) <span class="sc">|&gt;</span>     <span class="co"># disolver 5 subcuencas en 1</span></span>
+<span id="cb61-6"><a aria-label="6"></a>  <span class="fu">fillHoles</span>()                          <span class="co"># sin huecos entre subcuencas</span></span>
+<span id="cb61-7"><a aria-label="7"></a><span class="fu">expanse</span>(cuenca, <span class="at">unit =</span> <span class="st">"km"</span>)           <span class="co">#&gt; 3545 km²</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a aria-label="1"></a><span class="co"># Salida: 1er vértice del tramo que no desemboca en otra subcuenca</span></span>
-<span id="cb61-2"><a aria-label="2"></a>salida <span class="ot">&lt;-</span> <span class="fu">crds</span>(rios[rios<span class="sc">$</span>SubbasinR <span class="sc">==</span> <span class="dv">0</span>])[<span class="dv">1</span>, ]   <span class="co">#&gt; -69.79 -15.22</span></span>
-<span id="cb61-3"><a aria-label="3"></a></span>
-<span id="cb61-4"><a aria-label="4"></a>pp_cuenca <span class="ot">&lt;-</span> <span class="fu">crop</span>(pp, cuenca, <span class="at">mask =</span> <span class="cn">TRUE</span>)       <span class="co"># recortar y enmascarar</span></span>
-<span id="cb61-5"><a aria-label="5"></a><span class="fu">plot</span>(pp_cuenca[[<span class="st">"2025-01"</span>]]); <span class="fu">lines</span>(cuenca)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a aria-label="1"></a><span class="co"># Salida: 1er vértice del tramo que no desemboca en otra subcuenca</span></span>
+<span id="cb62-2"><a aria-label="2"></a>salida <span class="ot">&lt;-</span> <span class="fu">crds</span>(rios[rios<span class="sc">$</span>SubbasinR <span class="sc">==</span> <span class="dv">0</span>])[<span class="dv">1</span>, ]   <span class="co">#&gt; -69.79 -15.22</span></span>
+<span id="cb62-3"><a aria-label="3"></a></span>
+<span id="cb62-4"><a aria-label="4"></a>pp_cuenca <span class="ot">&lt;-</span> <span class="fu">crop</span>(pp, cuenca, <span class="at">mask =</span> <span class="cn">TRUE</span>)       <span class="co"># recortar y enmascarar</span></span>
+<span id="cb62-5"><a aria-label="5"></a><span class="fu">plot</span>(pp_cuenca[[<span class="st">"2025-01"</span>]]); <span class="fu">lines</span>(cuenca)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="climatología-19912020" class="slide level2">
 <h2>Climatología 1991–2020</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a aria-label="1"></a><span class="co"># Normal climatológica: periodo estándar de 30 años (OMM)</span></span>
-<span id="cb62-2"><a aria-label="2"></a>pp_normal <span class="ot">&lt;-</span> pp[[<span class="fu">year</span>(fechas) <span class="sc">%in%</span> <span class="dv">1991</span><span class="sc">:</span><span class="dv">2020</span>]]    <span class="co"># 360 meses</span></span>
-<span id="cb62-3"><a aria-label="3"></a></span>
-<span id="cb62-4"><a aria-label="4"></a>pp_anual   <span class="ot">&lt;-</span> <span class="fu">tapp</span>(pp_normal, <span class="st">"years"</span>, sum)       <span class="co"># 30 mapas: total anual</span></span>
-<span id="cb62-5"><a aria-label="5"></a>pp_media   <span class="ot">&lt;-</span> <span class="fu">mean</span>(pp_anual)                      <span class="co"># 1 mapa: media anual</span></span>
-<span id="cb62-6"><a aria-label="6"></a>pp_regimen <span class="ot">&lt;-</span> <span class="fu">tapp</span>(pp_normal, <span class="st">"months"</span>, mean)     <span class="co"># 12 mapas: régimen</span></span>
-<span id="cb62-7"><a aria-label="7"></a><span class="fu">plot</span>(pp_regimen, <span class="at">nc =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a aria-label="1"></a><span class="co"># Normal climatológica: periodo estándar de 30 años (OMM)</span></span>
+<span id="cb63-2"><a aria-label="2"></a>pp_normal <span class="ot">&lt;-</span> pp[[<span class="fu">year</span>(fechas) <span class="sc">%in%</span> <span class="dv">1991</span><span class="sc">:</span><span class="dv">2020</span>]]    <span class="co"># 360 meses</span></span>
+<span id="cb63-3"><a aria-label="3"></a></span>
+<span id="cb63-4"><a aria-label="4"></a>pp_anual   <span class="ot">&lt;-</span> <span class="fu">tapp</span>(pp_normal, <span class="st">"years"</span>, sum)       <span class="co"># 30 mapas: total anual</span></span>
+<span id="cb63-5"><a aria-label="5"></a>pp_media   <span class="ot">&lt;-</span> <span class="fu">mean</span>(pp_anual)                      <span class="co"># 1 mapa: media anual</span></span>
+<span id="cb63-6"><a aria-label="6"></a>pp_regimen <span class="ot">&lt;-</span> <span class="fu">tapp</span>(pp_normal, <span class="st">"months"</span>, mean)     <span class="co"># 12 mapas: régimen</span></span>
+<span id="cb63-7"><a aria-label="7"></a><span class="fu">plot</span>(pp_regimen, <span class="at">nc =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a aria-label="1"></a><span class="fu">global</span>(<span class="fu">crop</span>(pp_media, cuenca, <span class="at">mask =</span> <span class="cn">TRUE</span>), range, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb63-2"><a aria-label="2"></a><span class="co">#&gt; 560 a 942 mm/año</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a aria-label="1"></a><span class="fu">global</span>(<span class="fu">crop</span>(pp_media, cuenca, <span class="at">mask =</span> <span class="cn">TRUE</span>), range, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb64-2"><a aria-label="2"></a><span class="co">#&gt; 560 a 942 mm/año</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="mapa-con-ggplot2" class="slide level2">
 <h2>Mapa con ggplot2</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a aria-label="1"></a>pp_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pp_media,</span>
-<span id="cb64-2"><a aria-label="2"></a>                       <span class="at">xy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb64-3"><a aria-label="3"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb64-4"><a aria-label="4"></a>  <span class="fu">geom_tile</span>(<span class="at">data =</span> pp_df,</span>
-<span id="cb64-5"><a aria-label="5"></a>    <span class="fu">aes</span>(x, y, <span class="at">fill =</span> mean),</span>
-<span id="cb64-6"><a aria-label="6"></a>    <span class="at">color =</span> <span class="st">"grey85"</span>) <span class="sc">+</span>   <span class="co"># grilla</span></span>
-<span id="cb64-7"><a aria-label="7"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(cuenca),</span>
-<span id="cb64-8"><a aria-label="8"></a>    <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb64-9"><a aria-label="9"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(rios),</span>
-<span id="cb64-10"><a aria-label="10"></a>    <span class="at">color =</span> <span class="st">"#00BFFF"</span>) <span class="sc">+</span></span>
-<span id="cb64-11"><a aria-label="11"></a>  <span class="fu">annotate</span>(<span class="st">"point"</span>,       <span class="co"># salida</span></span>
-<span id="cb64-12"><a aria-label="12"></a>    <span class="at">x =</span> salida[<span class="dv">1</span>], <span class="at">y =</span> salida[<span class="dv">2</span>],</span>
-<span id="cb64-13"><a aria-label="13"></a>    <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"#FF6732"</span>) <span class="sc">+</span></span>
-<span id="cb64-14"><a aria-label="14"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>,     <span class="co"># norte</span></span>
-<span id="cb64-15"><a aria-label="15"></a>    <span class="at">x =</span> <span class="sc">-</span><span class="fl">70.22</span>, <span class="at">xend =</span> <span class="sc">-</span><span class="fl">70.22</span>,</span>
-<span id="cb64-16"><a aria-label="16"></a>    <span class="at">y =</span> <span class="sc">-</span><span class="fl">14.66</span>, <span class="at">yend =</span> <span class="sc">-</span><span class="fl">14.50</span>,</span>
-<span id="cb64-17"><a aria-label="17"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a aria-label="1"></a>pp_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pp_media,</span>
+<span id="cb65-2"><a aria-label="2"></a>                       <span class="at">xy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb65-3"><a aria-label="3"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb65-4"><a aria-label="4"></a>  <span class="fu">geom_tile</span>(<span class="at">data =</span> pp_df,</span>
+<span id="cb65-5"><a aria-label="5"></a>    <span class="fu">aes</span>(x, y, <span class="at">fill =</span> mean),</span>
+<span id="cb65-6"><a aria-label="6"></a>    <span class="at">color =</span> <span class="st">"grey85"</span>) <span class="sc">+</span>   <span class="co"># grilla</span></span>
+<span id="cb65-7"><a aria-label="7"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(cuenca),</span>
+<span id="cb65-8"><a aria-label="8"></a>    <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb65-9"><a aria-label="9"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(rios),</span>
+<span id="cb65-10"><a aria-label="10"></a>    <span class="at">color =</span> <span class="st">"#00BFFF"</span>) <span class="sc">+</span></span>
+<span id="cb65-11"><a aria-label="11"></a>  <span class="fu">annotate</span>(<span class="st">"point"</span>,       <span class="co"># salida</span></span>
+<span id="cb65-12"><a aria-label="12"></a>    <span class="at">x =</span> salida[<span class="dv">1</span>], <span class="at">y =</span> salida[<span class="dv">2</span>],</span>
+<span id="cb65-13"><a aria-label="13"></a>    <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"#FF6732"</span>) <span class="sc">+</span></span>
+<span id="cb65-14"><a aria-label="14"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>,     <span class="co"># norte</span></span>
+<span id="cb65-15"><a aria-label="15"></a>    <span class="at">x =</span> <span class="sc">-</span><span class="fl">70.22</span>, <span class="at">xend =</span> <span class="sc">-</span><span class="fl">70.22</span>,</span>
+<span id="cb65-16"><a aria-label="16"></a>    <span class="at">y =</span> <span class="sc">-</span><span class="fl">14.66</span>, <span class="at">yend =</span> <span class="sc">-</span><span class="fl">14.50</span>,</span>
+<span id="cb65-17"><a aria-label="17"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fuente">
 <p>En la cuenca la lluvia va de 560 a 942 mm/año; es mayor al noreste (subcuenca 2).</p>
 </div>
@@ -1378,20 +1514,20 @@ El script documenta cada paso del análisis.</p>
 <h2>Climatología mensual en la cuenca</h2>
 <div class="columns">
 <div class="column" style="width:46%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a aria-label="1"></a>reg_cuenca <span class="ot">&lt;-</span> pp_regimen <span class="sc">|&gt;</span></span>
-<span id="cb65-2"><a aria-label="2"></a>  <span class="fu">crop</span>(cuenca) <span class="sc">|&gt;</span></span>
-<span id="cb65-3"><a aria-label="3"></a>  <span class="fu">mask</span>(cuenca, <span class="at">touches =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb65-4"><a aria-label="4"></a></span>
-<span id="cb65-5"><a aria-label="5"></a>regimen_df <span class="ot">&lt;-</span> reg_cuenca <span class="sc">|&gt;</span></span>
-<span id="cb65-6"><a aria-label="6"></a>  <span class="fu">as.data.frame</span>(<span class="at">xy =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb65-7"><a aria-label="7"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span><span class="fu">c</span>(x, y),</span>
-<span id="cb65-8"><a aria-label="8"></a>    <span class="at">names_to =</span> <span class="st">"mes"</span>,</span>
-<span id="cb65-9"><a aria-label="9"></a>    <span class="at">values_to =</span> <span class="st">"pp"</span>)</span>
-<span id="cb65-10"><a aria-label="10"></a></span>
-<span id="cb65-11"><a aria-label="11"></a><span class="fu">ggplot</span>(regimen_df) <span class="sc">+</span></span>
-<span id="cb65-12"><a aria-label="12"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(x, y,</span>
-<span id="cb65-13"><a aria-label="13"></a>                <span class="at">fill =</span> pp)) <span class="sc">+</span></span>
-<span id="cb65-14"><a aria-label="14"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> mes, <span class="at">ncol =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a aria-label="1"></a>reg_cuenca <span class="ot">&lt;-</span> pp_regimen <span class="sc">|&gt;</span></span>
+<span id="cb66-2"><a aria-label="2"></a>  <span class="fu">crop</span>(cuenca) <span class="sc">|&gt;</span></span>
+<span id="cb66-3"><a aria-label="3"></a>  <span class="fu">mask</span>(cuenca, <span class="at">touches =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb66-4"><a aria-label="4"></a></span>
+<span id="cb66-5"><a aria-label="5"></a>regimen_df <span class="ot">&lt;-</span> reg_cuenca <span class="sc">|&gt;</span></span>
+<span id="cb66-6"><a aria-label="6"></a>  <span class="fu">as.data.frame</span>(<span class="at">xy =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb66-7"><a aria-label="7"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span><span class="fu">c</span>(x, y),</span>
+<span id="cb66-8"><a aria-label="8"></a>    <span class="at">names_to =</span> <span class="st">"mes"</span>,</span>
+<span id="cb66-9"><a aria-label="9"></a>    <span class="at">values_to =</span> <span class="st">"pp"</span>)</span>
+<span id="cb66-10"><a aria-label="10"></a></span>
+<span id="cb66-11"><a aria-label="11"></a><span class="fu">ggplot</span>(regimen_df) <span class="sc">+</span></span>
+<span id="cb66-12"><a aria-label="12"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(x, y,</span>
+<span id="cb66-13"><a aria-label="13"></a>                <span class="at">fill =</span> pp)) <span class="sc">+</span></span>
+<span id="cb66-14"><a aria-label="14"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> mes, <span class="at">ncol =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fuente">
 <p>Diciembre a marzo concentra el 68 % de la lluvia anual (489 de 716 mm). En julio caen apenas 5 mm.</p>
 </div>
@@ -1401,20 +1537,20 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="precipitación-areal" class="slide level2">
 <h2>Precipitación areal</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a aria-label="1"></a><span class="co"># Promedio de las celdas, ponderado por la fracción dentro de la cuenca</span></span>
-<span id="cb66-2"><a aria-label="2"></a>pp_areal <span class="ot">&lt;-</span> <span class="fu">extract</span>(pp, cuenca, <span class="at">fun =</span> mean, <span class="at">weights =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb66-3"><a aria-label="3"></a>                    <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">ID =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb66-4"><a aria-label="4"></a></span>
-<span id="cb66-5"><a aria-label="5"></a>pp_cuenca_mes <span class="ot">&lt;-</span> pp_areal <span class="sc">|&gt;</span></span>
-<span id="cb66-6"><a aria-label="6"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">values_to =</span> <span class="st">"pp"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb66-7"><a aria-label="7"></a>  <span class="fu">mutate</span>(<span class="at">fecha =</span> fechas)</span>
-<span id="cb66-8"><a aria-label="8"></a><span class="co">#&gt; Media anual 1991–2020 de la cuenca: 716 mm</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a aria-label="1"></a><span class="co"># Promedio de las celdas, ponderado por la fracción dentro de la cuenca</span></span>
+<span id="cb67-2"><a aria-label="2"></a>pp_areal <span class="ot">&lt;-</span> <span class="fu">extract</span>(pp, cuenca, <span class="at">fun =</span> mean, <span class="at">weights =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb67-3"><a aria-label="3"></a>                    <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">ID =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb67-4"><a aria-label="4"></a></span>
+<span id="cb67-5"><a aria-label="5"></a>pp_cuenca_mes <span class="ot">&lt;-</span> pp_areal <span class="sc">|&gt;</span></span>
+<span id="cb67-6"><a aria-label="6"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">values_to =</span> <span class="st">"pp"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb67-7"><a aria-label="7"></a>  <span class="fu">mutate</span>(<span class="at">fecha =</span> fechas)</span>
+<span id="cb67-8"><a aria-label="8"></a><span class="co">#&gt; Media anual 1991–2020 de la cuenca: 716 mm</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <div class="columns">
 <div class="column" style="width:55%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a aria-label="1"></a><span class="co"># El mismo código, con las subcuencas</span></span>
-<span id="cb67-2"><a aria-label="2"></a><span class="fu">extract</span>(pp_media, subcuencas,</span>
-<span id="cb67-3"><a aria-label="3"></a>        <span class="at">fun =</span> mean, <span class="at">weights =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a aria-label="1"></a><span class="co"># El mismo código, con las subcuencas</span></span>
+<span id="cb68-2"><a aria-label="2"></a><span class="fu">extract</span>(pp_media, subcuencas,</span>
+<span id="cb68-3"><a aria-label="3"></a>        <span class="at">fun =</span> mean, <span class="at">weights =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:45%;">
 <table class="caption-top">
 <thead>
@@ -1459,16 +1595,16 @@ El script documenta cada paso del análisis.</p>
 <h2>PISCO frente a la estación</h2>
 <div class="columns">
 <div class="column" style="width:55%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a aria-label="1"></a>pisco_punto <span class="ot">&lt;-</span> <span class="fu">extract</span>(pp, huancane_v,</span>
-<span id="cb68-2"><a aria-label="2"></a>                       <span class="at">ID =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb68-3"><a aria-label="3"></a></span>
-<span id="cb68-4"><a aria-label="4"></a>comparacion <span class="sc">|&gt;</span></span>
-<span id="cb68-5"><a aria-label="5"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb68-6"><a aria-label="6"></a>    <span class="at">r     =</span> <span class="fu">cor</span>(obs, pisco),</span>
-<span id="cb68-7"><a aria-label="7"></a>    <span class="at">pbias =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">sum</span>(pisco <span class="sc">-</span> obs) <span class="sc">/</span></span>
-<span id="cb68-8"><a aria-label="8"></a>                  <span class="fu">sum</span>(obs))</span>
-<span id="cb68-9"><a aria-label="9"></a><span class="co">#&gt;       r  pbias</span></span>
-<span id="cb68-10"><a aria-label="10"></a><span class="co">#&gt;   0.950  -4.13</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a aria-label="1"></a>pisco_punto <span class="ot">&lt;-</span> <span class="fu">extract</span>(pp, huancane_v,</span>
+<span id="cb69-2"><a aria-label="2"></a>                       <span class="at">ID =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb69-3"><a aria-label="3"></a></span>
+<span id="cb69-4"><a aria-label="4"></a>comparacion <span class="sc">|&gt;</span></span>
+<span id="cb69-5"><a aria-label="5"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb69-6"><a aria-label="6"></a>    <span class="at">r     =</span> <span class="fu">cor</span>(obs, pisco),</span>
+<span id="cb69-7"><a aria-label="7"></a>    <span class="at">pbias =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">sum</span>(pisco <span class="sc">-</span> obs) <span class="sc">/</span></span>
+<span id="cb69-8"><a aria-label="8"></a>                  <span class="fu">sum</span>(obs))</span>
+<span id="cb69-9"><a aria-label="9"></a><span class="co">#&gt;       r  pbias</span></span>
+<span id="cb69-10"><a aria-label="10"></a><span class="co">#&gt;   0.950  -4.13</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fuente">
 <p>413 meses comunes (1981–2025). PISCOp v3 subestima en un 4 % la estación Huancané. Como PISCO <strong>incorpora</strong> las estaciones del SENAMHI, esto no es una validación independiente.</p>
 </div>
@@ -1478,22 +1614,22 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="temperatura-por-subcuenca" class="slide level2">
 <h2>Temperatura por subcuenca</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a aria-label="1"></a>tmax <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/temp/Datos_tmax.csv"</span>)    <span class="co"># diaria, 1981–2020</span></span>
-<span id="cb69-2"><a aria-label="2"></a>tmin <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/temp/Datos_tmin.csv"</span>)</span>
-<span id="cb69-3"><a aria-label="3"></a><span class="co">#&gt;   Date         Sb1   Sb3   Sb2   Sb5   Sb4</span></span>
-<span id="cb69-4"><a aria-label="4"></a><span class="co">#&gt;   1981-01-01 13.9  15.8  14.0  15.9  14.7</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a aria-label="1"></a>tmax <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/temp/Datos_tmax.csv"</span>)    <span class="co"># diaria, 1981–2020</span></span>
+<span id="cb70-2"><a aria-label="2"></a>tmin <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/temp/Datos_tmin.csv"</span>)</span>
+<span id="cb70-3"><a aria-label="3"></a><span class="co">#&gt;   Date         Sb1   Sb3   Sb2   Sb5   Sb4</span></span>
+<span id="cb70-4"><a aria-label="4"></a><span class="co">#&gt;   1981-01-01 13.9  15.8  14.0  15.9  14.7</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a aria-label="1"></a>a_largo <span class="ot">&lt;-</span> <span class="cf">function</span>(datos, nombre) {</span>
-<span id="cb70-2"><a aria-label="2"></a>  datos <span class="sc">|&gt;</span></span>
-<span id="cb70-3"><a aria-label="3"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>Date, <span class="at">names_to =</span> <span class="st">"subcuenca"</span>, <span class="at">values_to =</span> nombre) <span class="sc">|&gt;</span></span>
-<span id="cb70-4"><a aria-label="4"></a>    <span class="fu">mutate</span>(<span class="at">subcuenca =</span> <span class="fu">parse_number</span>(subcuenca)) <span class="sc">|&gt;</span></span>
-<span id="cb70-5"><a aria-label="5"></a>    <span class="fu">rename</span>(<span class="at">fecha =</span> Date)</span>
-<span id="cb70-6"><a aria-label="6"></a>}</span>
-<span id="cb70-7"><a aria-label="7"></a></span>
-<span id="cb70-8"><a aria-label="8"></a>temp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="fu">a_largo</span>(tmax, <span class="st">"tmax"</span>), <span class="fu">a_largo</span>(tmin, <span class="st">"tmin"</span>),</span>
-<span id="cb70-9"><a aria-label="9"></a>                   <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"fecha"</span>, <span class="st">"subcuenca"</span>))</span>
-<span id="cb70-10"><a aria-label="10"></a><span class="fu">nrow</span>(temp)                          <span class="co">#&gt; 73050 (14610 días × 5)</span></span>
-<span id="cb70-11"><a aria-label="11"></a>temp <span class="sc">|&gt;</span> <span class="fu">filter</span>(tmin <span class="sc">&gt;</span> tmax) <span class="sc">|&gt;</span> <span class="fu">nrow</span>()   <span class="co">#&gt; 0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a aria-label="1"></a>a_largo <span class="ot">&lt;-</span> <span class="cf">function</span>(datos, nombre) {</span>
+<span id="cb71-2"><a aria-label="2"></a>  datos <span class="sc">|&gt;</span></span>
+<span id="cb71-3"><a aria-label="3"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>Date, <span class="at">names_to =</span> <span class="st">"subcuenca"</span>, <span class="at">values_to =</span> nombre) <span class="sc">|&gt;</span></span>
+<span id="cb71-4"><a aria-label="4"></a>    <span class="fu">mutate</span>(<span class="at">subcuenca =</span> <span class="fu">parse_number</span>(subcuenca)) <span class="sc">|&gt;</span></span>
+<span id="cb71-5"><a aria-label="5"></a>    <span class="fu">rename</span>(<span class="at">fecha =</span> Date)</span>
+<span id="cb71-6"><a aria-label="6"></a>}</span>
+<span id="cb71-7"><a aria-label="7"></a></span>
+<span id="cb71-8"><a aria-label="8"></a>temp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="fu">a_largo</span>(tmax, <span class="st">"tmax"</span>), <span class="fu">a_largo</span>(tmin, <span class="st">"tmin"</span>),</span>
+<span id="cb71-9"><a aria-label="9"></a>                   <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"fecha"</span>, <span class="st">"subcuenca"</span>))</span>
+<span id="cb71-10"><a aria-label="10"></a><span class="fu">nrow</span>(temp)                          <span class="co">#&gt; 73050 (14610 días × 5)</span></span>
+<span id="cb71-11"><a aria-label="11"></a>temp <span class="sc">|&gt;</span> <span class="fu">filter</span>(tmin <span class="sc">&gt;</span> tmax) <span class="sc">|&gt;</span> <span class="fu">nrow</span>()   <span class="co">#&gt; 0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fuente">
 <p>Fuente: PISCO temperatura diaria 1981–2020 (SENAMHI), promediada por subcuenca. Tmax: <a href="https://doi.org/10.6084/m9.figshare.20522806">doi.org/10.6084/m9.figshare.20522806</a> · Tmin: <a href="https://doi.org/10.6084/m9.figshare.20533715">doi.org/10.6084/m9.figshare.20533715</a></p>
 </div>
@@ -1501,23 +1637,26 @@ El script documenta cada paso del análisis.</p>
 </section>
 <section id="etp-por-hargreaves-samani" class="slide level2">
 <h2>ETP por Hargreaves-Samani</h2>
+<p><strong>Comprendiendo la ecuación</strong></p>
 <p><span class="math display">\[ETP = 0.0023 \cdot R_a \cdot (T_{media} + 17.8) \cdot \sqrt{T_{max} - T_{min}}\]</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a aria-label="1"></a>hargreaves <span class="ot">&lt;-</span> <span class="cf">function</span>(tmax, tmin, lat, fecha) {</span>
-<span id="cb71-2"><a aria-label="2"></a>  tmedia <span class="ot">&lt;-</span> (tmax <span class="sc">+</span> tmin) <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb71-3"><a aria-label="3"></a>  <span class="fl">0.0023</span> <span class="sc">*</span> <span class="fu">radiacion_ext</span>(lat, fecha) <span class="sc">*</span> (tmedia <span class="sc">+</span> <span class="fl">17.8</span>) <span class="sc">*</span></span>
-<span id="cb71-4"><a aria-label="4"></a>    <span class="fu">sqrt</span>(<span class="fu">pmax</span>(tmax <span class="sc">-</span> tmin, <span class="dv">0</span>))</span>
-<span id="cb71-5"><a aria-label="5"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a aria-label="1"></a>etp_dia <span class="ot">&lt;-</span> temp <span class="sc">|&gt;</span></span>
-<span id="cb72-2"><a aria-label="2"></a>  <span class="fu">left_join</span>(info_sub, <span class="at">by =</span> <span class="st">"subcuenca"</span>) <span class="sc">|&gt;</span>        <span class="co"># latitud y área</span></span>
-<span id="cb72-3"><a aria-label="3"></a>  <span class="fu">mutate</span>(<span class="at">etp =</span> <span class="fu">hargreaves</span>(tmax, tmin, lat, fecha))</span>
-<span id="cb72-4"><a aria-label="4"></a></span>
-<span id="cb72-5"><a aria-label="5"></a>etp_cuenca_mes <span class="ot">&lt;-</span> etp_dia <span class="sc">|&gt;</span></span>
-<span id="cb72-6"><a aria-label="6"></a>  <span class="fu">group_by</span>(subcuenca, area_km2, <span class="at">fecha =</span> <span class="fu">floor_date</span>(fecha, <span class="st">"month"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb72-7"><a aria-label="7"></a>  <span class="fu">summarise</span>(<span class="at">etp =</span> <span class="fu">sum</span>(etp), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span>   <span class="co"># diaria -&gt; mensual</span></span>
-<span id="cb72-8"><a aria-label="8"></a>  <span class="fu">group_by</span>(fecha) <span class="sc">|&gt;</span></span>
-<span id="cb72-9"><a aria-label="9"></a>  <span class="fu">summarise</span>(<span class="at">etp =</span> <span class="fu">weighted.mean</span>(etp, area_km2))    <span class="co"># ponderado por área</span></span>
-<span id="cb72-10"><a aria-label="10"></a><span class="co">#&gt; ETP media anual 1981–2020: 1105 mm</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a aria-label="1"></a>hargreaves <span class="ot">&lt;-</span> <span class="cf">function</span>(tmax, tmin, lat, fecha) {</span>
+<span id="cb72-2"><a aria-label="2"></a>  tmedia <span class="ot">&lt;-</span> (tmax <span class="sc">+</span> tmin) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb72-3"><a aria-label="3"></a>  <span class="fl">0.0023</span> <span class="sc">*</span> <span class="fu">radiacion_ext</span>(lat, fecha) <span class="sc">*</span> (tmedia <span class="sc">+</span> <span class="fl">17.8</span>) <span class="sc">*</span></span>
+<span id="cb72-4"><a aria-label="4"></a>    <span class="fu">sqrt</span>(<span class="fu">pmax</span>(tmax <span class="sc">-</span> tmin, <span class="dv">0</span>))</span>
+<span id="cb72-5"><a aria-label="5"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a aria-label="1"></a>etp_dia <span class="ot">&lt;-</span> temp <span class="sc">|&gt;</span></span>
+<span id="cb73-2"><a aria-label="2"></a>  <span class="fu">left_join</span>(info_sub, <span class="at">by =</span> <span class="st">"subcuenca"</span>) <span class="sc">|&gt;</span>        <span class="co"># latitud y área</span></span>
+<span id="cb73-3"><a aria-label="3"></a>  <span class="fu">mutate</span>(<span class="at">etp =</span> <span class="fu">hargreaves</span>(tmax, tmin, lat, fecha))</span>
+<span id="cb73-4"><a aria-label="4"></a></span>
+<span id="cb73-5"><a aria-label="5"></a>etp_cuenca_mes <span class="ot">&lt;-</span> etp_dia <span class="sc">|&gt;</span></span>
+<span id="cb73-6"><a aria-label="6"></a>  <span class="fu">group_by</span>(subcuenca, area_km2, <span class="at">fecha =</span> <span class="fu">floor_date</span>(fecha, <span class="st">"month"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb73-7"><a aria-label="7"></a>  <span class="fu">summarise</span>(<span class="at">etp =</span> <span class="fu">sum</span>(etp), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span>   <span class="co"># diaria -&gt; mensual</span></span>
+<span id="cb73-8"><a aria-label="8"></a>  <span class="fu">group_by</span>(fecha) <span class="sc">|&gt;</span></span>
+<span id="cb73-9"><a aria-label="9"></a>  <span class="fu">summarise</span>(<span class="at">etp =</span> <span class="fu">weighted.mean</span>(etp, area_km2))    <span class="co"># ponderado por área</span></span>
+<span id="cb73-10"><a aria-label="10"></a><span class="co">#&gt; ETP media anual 1981–2020: 1105 mm</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fuente">
 <p><span class="math inline">\(R_a\)</span> = radiación extraterrestre (FAO-56), función de la latitud del centroide y del día del año.</p>
 </div>
@@ -1527,12 +1666,14 @@ El script documenta cada paso del análisis.</p>
 <h2>Balance P – ETP</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a aria-label="1"></a>balance <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(</span>
-<span id="cb73-2"><a aria-label="2"></a>  pp_cuenca_mes,</span>
-<span id="cb73-3"><a aria-label="3"></a>  etp_cuenca_mes,</span>
-<span id="cb73-4"><a aria-label="4"></a>  <span class="at">by =</span> <span class="st">"fecha"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb73-5"><a aria-label="5"></a>  <span class="fu">filter</span>(<span class="fu">year</span>(fecha) <span class="sc">%in%</span></span>
-<span id="cb73-6"><a aria-label="6"></a>         <span class="dv">1991</span><span class="sc">:</span><span class="dv">2020</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Unir P y ETP de la cuenca</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a aria-label="1"></a>balance <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(</span>
+<span id="cb74-2"><a aria-label="2"></a>  pp_cuenca_mes,</span>
+<span id="cb74-3"><a aria-label="3"></a>  etp_cuenca_mes,</span>
+<span id="cb74-4"><a aria-label="4"></a>  <span class="at">by =</span> <span class="st">"fecha"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb74-5"><a aria-label="5"></a>  <span class="fu">filter</span>(<span class="fu">year</span>(fecha) <span class="sc">%in%</span></span>
+<span id="cb74-6"><a aria-label="6"></a>         <span class="dv">1991</span><span class="sc">:</span><span class="dv">2020</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment fade-in">
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -1555,25 +1696,54 @@ El script documenta cada paso del análisis.</p>
 </tr>
 </tbody>
 </table>
-<div class="fuente">
-<p>Normal 1991–2020. Solo de diciembre a marzo llueve más de lo que se puede evaporar; de abril a noviembre la cuenca tiene déficit.</p>
 </div>
 </div><div class="column" style="width:60%;">
+<div class="fragment fade-in">
 <p><img data-src="../../assets/img/s05_Balance_P_ETP.png" style="width:100.0%"></p>
+</div>
+<div class="fragment fade-in" style="font-size: 0.7em;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">P / ETP</th>
+<th style="text-align: left;">Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>&lt; 1</strong></td>
+<td style="text-align: left;">Déficit: la ETP supera a la lluvia (más seco)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>≈ 1</strong></td>
+<td style="text-align: left;">Equilibrio entre lluvia y ETP</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>&gt; 1</strong></td>
+<td style="text-align: left;">Exceso: la lluvia supera a la ETP (más húmedo)</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div></div>
+<div class="fragment fade-in">
+<div class="fuente">
+<p>Normal 1991–2020: P/ETP = 0.64, la cuenca es <strong>deficitaria</strong> en el año. Solo de diciembre a marzo llueve más de lo que se puede evaporar; de abril a noviembre hay déficit.</p>
+</div>
+</div>
 </section>
-<section id="exportar-entrada-para-el-día-2" class="slide level2">
-<h2>Exportar: entrada para el Día 2</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a aria-label="1"></a><span class="co"># Series mensuales areales: pp 1981–2025, etp 1981–2020</span></span>
-<span id="cb74-2"><a aria-label="2"></a>pp_cuenca_mes <span class="sc">|&gt;</span></span>
-<span id="cb74-3"><a aria-label="3"></a>  <span class="fu">left_join</span>(etp_cuenca_mes, <span class="at">by =</span> <span class="st">"fecha"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb74-4"><a aria-label="4"></a>  <span class="fu">write_csv</span>(<span class="st">"data/processed/PP_ETP_mensual_cuenca.csv"</span>)</span>
-<span id="cb74-5"><a aria-label="5"></a></span>
-<span id="cb74-6"><a aria-label="6"></a><span class="co"># Mapa de precipitación media como GeoTIFF (se abre en QGIS)</span></span>
-<span id="cb74-7"><a aria-label="7"></a><span class="fu">writeRaster</span>(pp_media, <span class="st">"outputs/PP_media_anual_PISCOv3.tif"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exportar-los-resultados" class="slide level2">
+<h2>Exportar los resultados</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a aria-label="1"></a><span class="co"># Series mensuales areales: pp 1981–2025, etp 1981–2020</span></span>
+<span id="cb75-2"><a aria-label="2"></a>pp_cuenca_mes <span class="sc">|&gt;</span></span>
+<span id="cb75-3"><a aria-label="3"></a>  <span class="fu">left_join</span>(etp_cuenca_mes, <span class="at">by =</span> <span class="st">"fecha"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb75-4"><a aria-label="4"></a>  <span class="fu">write_csv</span>(<span class="st">"data/processed/PP_ETP_mensual_cuenca.csv"</span>)</span>
+<span id="cb75-5"><a aria-label="5"></a></span>
+<span id="cb75-6"><a aria-label="6"></a><span class="co"># Mapa de precipitación media como GeoTIFF (se abre en QGIS)</span></span>
+<span id="cb75-7"><a aria-label="7"></a><span class="fu">writeRaster</span>(pp_media, <span class="st">"outputs/PP_media_anual_PISCOv3.tif"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <div class="fuente">
-<p><code>PP_ETP_mensual_cuenca.csv</code> + el caudal de Huancané = todo lo que necesita un modelo hidrológico mensual (GR2M) en el Día 2.</p>
+<p>En el Día 2 el modelo <strong>GR4J</strong> trabaja a paso <strong>diario</strong> y por <strong>subcuenca</strong>: usa la misma lluvia PISCOp v3 y la ETP de Hargreaves, pero día a día en cada una de las 5 subcuencas (<code>data/pcp/</code> y <code>data/temp/</code>).</p>
 </div>
 
 

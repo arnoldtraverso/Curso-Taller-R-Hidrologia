@@ -25,7 +25,7 @@ library(readxl)
 
 # Todo lo que hicimos en 02_Procesamiento.R para limpiar un archivo SENAMHI,
 # escrito UNA vez y guardado con un nombre.
-leer_senamhi <- function(archivo) {
+leer_datos <- function(archivo) {
   read_excel(archivo, skip = 13) |>
     rename(fecha = 1, hora = 2, valor = 3) |>
     mutate(fecha = dmy(fecha)) |>
@@ -36,10 +36,10 @@ leer_senamhi <- function(archivo) {
 }
 
 # Sirve igual para caudal o precipitación
-q <- leer_senamhi("data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx")
+q <- leer_datos("data/raw/caudal/Q_210201_PteCarretera_Huancane.xlsx")
 nrow(q)                       #> 25692
 
-pp_huancane <- leer_senamhi("data/raw/precipitacion/PP_000786_Huancane.xlsx")
+pp_huancane <- leer_datos("data/raw/precipitacion/PP_000786_Huancane.xlsx")
 nrow(pp_huancane)             #> 22939
 
 # Una función con argumentos y valores por defecto:
@@ -128,7 +128,7 @@ nombres                       #> "Munani" "Huancane" "Ananea" "Cojata" "Putina"
 
 # Bucle sencillo: repetir una tarea para cada archivo
 for (i in seq_along(archivos)) {
-  datos <- leer_senamhi(archivos[i])
+  datos <- leer_datos(archivos[i])
   cat(nombres[i], ":", nrow(datos), "días\n")
 }
 
@@ -136,7 +136,7 @@ for (i in seq_along(archivos)) {
 resumen <- vector("list", length(archivos))
 
 for (i in seq_along(archivos)) {
-  datos <- leer_senamhi(archivos[i])
+  datos <- leer_datos(archivos[i])
   anual <- datos |> agregar_mensual() |> agregar_anual()
 
   resumen[[i]] <- tibble(
@@ -162,7 +162,7 @@ resumen
 # 5. Iteración con purrr::map ---------------------------------------------------
 
 # map() aplica una función a cada elemento y devuelve una lista
-pp_lista <- map(archivos, leer_senamhi)
+pp_lista <- map(archivos, leer_datos)
 names(pp_lista) <- nombres
 length(pp_lista)              #> 5
 pp_lista$Cojata               # una estación
@@ -185,9 +185,16 @@ pp_anual <- pp_lista |>
 
 # 6. Gráfico de todas las estaciones ----------------------------------------------
 
-g_estaciones <- ggplot(pp_anual, aes(x = anio, y = valor)) +
-  geom_col(fill = "#0B5394", width = 0.8) +
+# Un color por estación (vector con nombre: cada estación su color)
+colores <- c(Ananea = "#0B5394", Cojata = "#6AA84F", Huancane = "#E69138",
+             Munani = "#8E7CC3", Putina = "#CC4125")
+
+g_estaciones <- ggplot(pp_anual, aes(x = anio, y = valor, fill = estacion)) +
+  geom_col(width = 0.8) +
+  geom_hline(yintercept = 0, linewidth = 0.8) +    # línea base en 0
   facet_wrap(~ estacion, ncol = 1) +
+  scale_x_continuous(breaks = seq(1950, 2030, 10)) +     # cada 10 años
+  scale_fill_manual(values = colores, guide = "none") +  # sin leyenda: ya está en el panel
   labs(title = "Precipitación anual por estación (años completos)",
        x = NULL, y = "Precipitación (mm)") +
   theme_minimal(base_size = 14) +
