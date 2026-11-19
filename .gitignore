@@ -49,3 +49,9 @@ ejercicios/07_Modelamiento_GR4J.R
 ejercicios/08_Modelamiento_futuro.R
 ejercicios/Descarga_CMIP6_GEE.js
 data/cmip6/
+
+# Solo para el Google Drive de los participantes (contiene datos de contacto)
+LEEME_Instalacion.txt
+
+# Restos de renders sueltos (el sitio usa docs/site_libs)
+/site_libs/

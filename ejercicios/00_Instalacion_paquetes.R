@@ -42,6 +42,7 @@ paquetes <- c(
   "tidyverse",   # readr, dplyr, tidyr, ggplot2, purrr, lubridate
   "readxl",      # lectura de archivos Excel
   "terra",       # datos grillados (NetCDF, ráster)
+  "ncdf4",       # lectura rápida de una ventana de un NetCDF grande
   "sf",          # vectores en mapas de ggplot2 (geom_sf)
   "trend",       # Mann-Kendall y pendiente de Sen
   "modifiedmk",  # Mann-Kendall modificado
