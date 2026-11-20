@@ -239,6 +239,36 @@ Profesor: Kevin Arnold Traverso Yucra
 <h3 id="qué-es-el-cambio-climático">¿Qué es el cambio climático?</h3>
 <p>El cambio climático es la variación a largo plazo de las temperaturas y los patrones habituales del clima en la Tierra. Aunque puede tener causas naturales, desde el siglo XIX se debe principalmente a las actividades humanas (como la quema de combustibles fósiles y la deforestación), que aumentan los gases de efecto invernadero y provocan el calentamiento global.</p>
 </section>
+<section id="cambio-climático-en-el-altiplano" class="slide level2">
+<h2>Cambio climático en el altiplano</h2>
+<p>En los Andes y el altiplano (cuenca del lago Titicaca), el cambio climático afecta directamente la disponibilidad de agua y los medios de vida.</p>
+<div class="columns" style="font-size: 0.8em">
+<div class="column" style="width:33%;">
+<p><strong>Glaciares y agua</strong></p>
+<ul>
+<li>Los glaciares tropicales pierden hielo con rapidez: menos reserva de agua para ríos y lagunas en época seca.</li>
+<li>Más evaporación por el aumento de temperatura: menos agua en ríos, bofedales y lagos.</li>
+<li>El deshielo forma o agranda lagunas glaciares: riesgo de aluviones y desbordes.</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>Lluvia y temperatura</strong></p>
+<ul>
+<li>Inicio de lluvias irregular y tormentas intensas en pocos días: inundaciones y erosión.</li>
+<li>Periodos secos largos: menos agua para consumo, riego y pastos.</li>
+<li>Aunque sube la temperatura media, heladas fuera de época y granizadas siguen dañando los cultivos.</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>Agricultura y ganadería</strong></p>
+<ul>
+<li>Papa, quinua, cebada y habas: pérdidas por estrés hídrico, heladas tardías o exceso de humedad.</li>
+<li>Plagas y enfermedades llegan a zonas más altas, donde antes no sobrevivían.</li>
+<li>Bofedales degradados: menos alimento y agua para alpacas, llamas, ovinos y vacunos.</li>
+</ul>
+</div></div>
+<div class="fuente">
+<p>Los glaciares andinos perdieron entre 30 % y más del 50 % de su área desde los años 80 (IPCC AR6 GTII, cap. 12). Fuentes: Castellanos et al.&nbsp;(2022), <em>Central and South America</em>, IPCC AR6 GTII, cap. 12 — <a href="https://www.ipcc.ch/report/ar6/wg2/chapter/chapter-12/">ipcc.ch/report/ar6/wg2/chapter/chapter-12</a> · Rabatel et al.&nbsp;(2013), <em>The Cryosphere</em> 7, 81–102, <a href="https://doi.org/10.5194/tc-7-81-2013">doi:10.5194/tc-7-81-2013</a>.</p>
+</div>
+</section>
 <section id="series-diarias-de-la-cuenca" class="slide level2">
 <h2>Series diarias de la cuenca</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="co"># Precipitación (PISCOp v3, 1981–2025) y temperatura (PISCO, 1981–2020)</span></span>
@@ -262,13 +292,69 @@ Profesor: Kevin Arnold Traverso Yucra
 </div>
 </div>
 </section>
+<section id="de-dónde-salen-los-índices-etccdi" class="slide level2">
+<h2>¿De dónde salen los índices ETCCDI?</h2>
+<div class="columns">
+<div class="column" style="width: 55%; font-size: 0.8em">
+<ul>
+<li><strong>ETCCDI</strong>: <em>Expert Team on Climate Change Detection and Indices</em>, equipo conjunto de la OMM (Comisión de Climatología), el WCRP (CLIVAR) y la JCOMM, creado tras el taller CLIVAR/GCOS/OMM de 1998 (Karl et al., 1999).</li>
+<li>Definió <strong>27 índices básicos</strong> calculados con datos <strong>diarios</strong> de lluvia y temperatura (Peterson et al., 2001; Zhang et al., 2011).</li>
+<li><strong>El problema que resuelven</strong>: muchos países no comparten sus datos diarios, pero sí pueden compartir índices calculados <strong>con la misma fórmula</strong> → se comparan regiones y estudios.</li>
+<li>Describen extremos <strong>moderados</strong> (ocurren varias veces al año), no eventos de 100 años → hay suficientes casos para detectar <strong>tendencias</strong>.</li>
+</ul>
+</div><div class="column" style="width: 45%; font-size: 0.8em">
+<p><strong>Cinco tipos de índices</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Absolutos</td>
+<td style="text-align: left;">Rx1day, Rx5day, TXx, TNn</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Umbral fijo</td>
+<td style="text-align: left;">FD, R10mm, SU</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Percentiles</td>
+<td style="text-align: left;">TX90p, TN10p, R95p</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Duración</td>
+<td style="text-align: left;">CDD, CWD, WSDI</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Otros</td>
+<td style="text-align: left;">PRCPTOT, SDII, DTR</td>
+</tr>
+</tbody>
+</table>
+<p>Software: RClimDex, <code>climdex.pcic</code> (R), ClimPACT. Base de los capítulos de extremos del IPCC (AR6, cap. 11).</p>
+</div></div>
+<div class="fuente">
+<p>Karl, Nicholls y Ghazi (1999), <em>Climatic Change</em> 42, 3–7 · Peterson et al.&nbsp;(2001), WMO-TD 1071 · Zhang et al.&nbsp;(2011), <em>WIREs Climate Change</em> 2, 851–870, <a href="https://doi.org/10.1002/wcc.147">doi:10.1002/wcc.147</a> · Lista oficial: <a href="https://etccdi.pacificclimate.org/list_27_indices.shtml">etccdi.pacificclimate.org/list_27_indices.shtml</a></p>
+</div>
+</section>
 <section id="índices-de-extremos-etccdi" class="slide level2">
 <h2>Índices de extremos (ETCCDI)</h2>
+<div style="font-size: 0.8em">
 <table class="caption-top">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 58%">
+<col style="width: 12%">
+<col style="width: 10%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Índice</th>
 <th style="text-align: left;">Definición</th>
+<th style="text-align: left;">Tipo</th>
 <th style="text-align: center;">Unidad</th>
 </tr>
 </thead>
@@ -276,52 +362,62 @@ Profesor: Kevin Arnold Traverso Yucra
 <tr class="odd">
 <td style="text-align: left;">PRCPTOT</td>
 <td style="text-align: left;">Lluvia total anual en días húmedos (≥ 1 mm)</td>
+<td style="text-align: left;">Otros</td>
 <td style="text-align: center;">mm</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Rx1day / Rx5day</td>
 <td style="text-align: left;">Máxima lluvia en 1 día / en 5 días seguidos</td>
+<td style="text-align: left;">Absoluto</td>
 <td style="text-align: center;">mm</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">SDII</td>
 <td style="text-align: left;">Intensidad: lluvia por día húmedo</td>
+<td style="text-align: left;">Otros</td>
 <td style="text-align: center;">mm/día</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">R10mm</td>
 <td style="text-align: left;">Días con lluvia ≥ 10 mm</td>
+<td style="text-align: left;">Umbral</td>
 <td style="text-align: center;">días</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">CDD / CWD</td>
 <td style="text-align: left;">Racha seca (&lt; 1 mm) / húmeda (≥ 1 mm) más larga</td>
+<td style="text-align: left;">Duración</td>
 <td style="text-align: center;">días</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">TX / TN</td>
 <td style="text-align: left;">Tmax / Tmin media anual</td>
+<td style="text-align: left;">ET-SCI*</td>
 <td style="text-align: center;">°C</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">TXx / TNn</td>
 <td style="text-align: left;">Tmax más alta / Tmin más baja del año</td>
+<td style="text-align: left;">Absoluto</td>
 <td style="text-align: center;">°C</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">FD</td>
 <td style="text-align: left;">Días con helada (Tmin &lt; 0 °C)</td>
+<td style="text-align: left;">Umbral</td>
 <td style="text-align: center;">días</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">DTR</td>
 <td style="text-align: left;">Rango térmico diario medio (Tmax − Tmin)</td>
+<td style="text-align: left;">Otros</td>
 <td style="text-align: center;">°C</td>
 </tr>
 </tbody>
 </table>
+</div>
 <div class="fuente">
-<p>Expert Team on Climate Change Detection and Indices (ETCCDI): 27 índices estándar para comparar regiones y estudios.</p>
+<p>* TX y TN no están entre los 27 del ETCCDI: los agregó su sucesor, el ET-SCI (<em>Expert Team on Sector-specific Climate Indices</em>), en ClimPACT como TXm y TNm (<a href="https://climpact-sci.org/indices/">climpact-sci.org/indices</a>). Un “día húmedo” es el que tiene ≥ 1 mm.</p>
 </div>
 </section>
 <section id="calcular-los-índices-con-summarise" class="slide level2">
@@ -477,7 +573,7 @@ Profesor: Kevin Arnold Traverso Yucra
 <li>Resuelve las <strong>ecuaciones físicas</strong> de la atmósfera, el océano, el hielo y la superficie terrestre.</li>
 <li>Divide el planeta en una <strong>grilla de 100 a 250 km</strong>: una cuenca como Huancané cabe en una o dos celdas.</li>
 <li>Simula el <strong>clima</strong>, no el tiempo: el año 2030 del modelo no es un pronóstico del año 2030.</li>
-<li>Por eso se comparan <strong>estadísticas de 30 años</strong>, nunca días o años sueltos.</li>
+<li>Por eso se comparan <strong>estadísticas de periodos largos</strong> (idealmente 30 años), nunca días o años sueltos.</li>
 </ul>
 </div><div class="column" style="width:45%;">
 <p><strong>CMIP6</strong> (Coupled Model Intercomparison Project, fase 6)</p>
@@ -587,7 +683,7 @@ Profesor: Kevin Arnold Traverso Yucra
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Variabilidad natural</td>
-<td style="text-align: left;">Periodos de 30 años</td>
+<td style="text-align: left;">Periodos largos (20–30 años)</td>
 </tr>
 </tbody>
 </table>
@@ -624,14 +720,14 @@ Profesor: Kevin Arnold Traverso Yucra
 <h2>Horizontes y periodos</h2>
 
 <img data-src="../../assets/img/s08_linea_tiempo.png" class="quarto-figure quarto-figure-center r-stretch" style="width:85.0%"><div class="fuente">
-<p><strong>Referencia</strong> 1985–2014: los últimos 30 años del histórico de CMIP6, que también cubren PISCO. <strong>Futuro cercano</strong> 2020–2049: el horizonte útil para planificar obras y adaptación. Cambio = futuro − referencia, <strong>del mismo modelo</strong>.</p>
+<p><strong>Referencia</strong> 1981–2014: todo el histórico de CMIP6 que también cubre PISCO (34 años). <strong>Futuro</strong> 2030–2050 (21 años, porque los datos llegan a 2050; lo ideal son 30): el horizonte útil para planificar obras y adaptación. Cambio = futuro − referencia, <strong>del mismo modelo</strong>.</p>
 </div>
 </section>
 <section id="lo-que-trae-un-modelo-sin-corregir" class="slide level2">
 <h2>Lo que trae un modelo sin corregir</h2>
 
 <img data-src="../../assets/img/s08_gcm_crudo.png" class="quarto-figure quarto-figure-center r-stretch" style="width:78.0%"><div class="fuente">
-<p>En 1985–2014 los modelos dan una Tmax <strong>~2 °C más alta</strong> y una lluvia <strong>6–10 % mayor</strong> que PISCO. Tampoco reproducen años concretos (1983 seco, 1984 húmedo), y no deben hacerlo. Antes de usarlos hay que <strong>corregir el sesgo</strong>.</p>
+<p>En 1981–2014 los modelos dan una Tmax <strong>~2 °C más alta</strong> y una lluvia <strong>5–7 % mayor</strong> que PISCO. Tampoco reproducen años concretos (1983 seco, 1984 húmedo), y no deben hacerlo. Antes de usarlos hay que <strong>corregir el sesgo</strong>.</p>
 </div>
 </section>
 <section id="datos-cmip6-en-gee-y-corrección-de-sesgo" class="slide level2 seccion" data-background-color="#0B5394">
@@ -650,7 +746,7 @@ Profesor: Kevin Arnold Traverso Yucra
 <span id="cb9-3"><a aria-label="3"></a>  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">eq</span>(<span class="st">'model'</span><span class="op">,</span> modelo))</span>
 <span id="cb9-4"><a aria-label="4"></a>  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">inList</span>(<span class="st">'scenario'</span><span class="op">,</span></span>
 <span id="cb9-5"><a aria-label="5"></a>          [<span class="st">'historical'</span><span class="op">,</span> <span class="st">'ssp245'</span>]))</span>
-<span id="cb9-6"><a aria-label="6"></a>  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">'1981-01-01'</span><span class="op">,</span> <span class="st">'2050-01-01'</span>)</span>
+<span id="cb9-6"><a aria-label="6"></a>  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">'1981-01-01'</span><span class="op">,</span> <span class="st">'2051-01-01'</span>)</span>
 <span id="cb9-7"><a aria-label="7"></a>  <span class="op">.</span><span class="fu">select</span>([<span class="st">'pr'</span><span class="op">,</span> <span class="st">'tasmax'</span><span class="op">,</span> <span class="st">'tasmin'</span>])</span>
 <span id="cb9-8"><a aria-label="8"></a>  <span class="op">.</span><span class="fu">map</span>(convertir)<span class="op">;</span>   <span class="co">// a mm/día y °C</span></span>
 <span id="cb9-9"><a aria-label="9"></a></span>
@@ -666,7 +762,7 @@ Profesor: Kevin Arnold Traverso Yucra
 <ul>
 <li>Script: <code>ejercicios/Descarga_CMIP6_GEE.js</code>, se ejecuta en <a href="https://code.earthengine.google.com">code.earthengine.google.com</a>.</li>
 <li>Una tarea por modelo; el CSV llega a Google Drive.</li>
-<li>Resultado: una fila por <strong>día y subcuenca</strong>, 1981–2049.</li>
+<li>Resultado: una fila por <strong>día y subcuenca</strong>, 1981–2050.</li>
 <li>Lo mismo se puede hacer desde R con el paquete <strong>rgee</strong>.</li>
 </ul>
 </div></div>
@@ -686,9 +782,9 @@ Profesor: Kevin Arnold Traverso Yucra
 <span id="cb10-8"><a aria-label="8"></a>            <span class="at">pp =</span> Pr_mm, <span class="at">tmax =</span> Tmax, <span class="at">tmin =</span> Tmin)</span>
 <span id="cb10-9"><a aria-label="9"></a></span>
 <span id="cb10-10"><a aria-label="10"></a><span class="fu">count</span>(cmip, modelo)</span>
-<span id="cb10-11"><a aria-label="11"></a><span class="co">#&gt;   ACCESS-CM2    126010</span></span>
-<span id="cb10-12"><a aria-label="12"></a><span class="co">#&gt;   MIROC6        126010</span></span>
-<span id="cb10-13"><a aria-label="13"></a><span class="co">#&gt;   MPI-ESM1-2-HR 126010     (5 subcuencas x 25202 días)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-11"><a aria-label="11"></a><span class="co">#&gt;   ACCESS-CM2    127835</span></span>
+<span id="cb10-12"><a aria-label="12"></a><span class="co">#&gt;   MIROC6        127835</span></span>
+<span id="cb10-13"><a aria-label="13"></a><span class="co">#&gt;   MPI-ESM1-2-HR 127835     (5 subcuencas x 25567 días)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fuente">
 <p><code>map()</code> + <code>list_rbind()</code>: el mismo patrón del Día 1 para leer varias estaciones.</p>
 </div>
@@ -697,7 +793,7 @@ Profesor: Kevin Arnold Traverso Yucra
 <h2>¿Cuánto sesgo tienen?</h2>
 
 <img data-src="../../assets/img/s09_CMIP6_sesgo.png" class="quarto-figure quarto-figure-center r-stretch" style="width:92.0%"><div class="fuente">
-<p>Sesgo anual de la cuenca, 1985–2014: lluvia <strong>+4.6 a +7.6 %</strong>, Tmax <strong>+2.1 a +2.2 °C</strong> y Tmin <strong>+2.7 a +3.0 °C</strong>. La lluvia tiene la forma correcta; la temperatura está desplazada en todos los meses, más en la Tmin del invierno.</p>
+<p>Sesgo anual de la cuenca, 1981–2014: lluvia <strong>+4.1 a +5.0 %</strong>, Tmax <strong>+2.1 a +2.2 °C</strong> y Tmin <strong>+2.7 a +3.0 °C</strong>. La lluvia tiene la forma correcta; la temperatura está desplazada en todos los meses, más en la Tmin del invierno.</p>
 </div>
 </section>
 <section id="dos-formas-de-corregir" class="slide level2">
@@ -733,7 +829,7 @@ Profesor: Kevin Arnold Traverso Yucra
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Variabilidad futura</strong></td>
-<td style="text-align: left;">La misma de 1985–2014</td>
+<td style="text-align: left;">La misma de 1981–2014</td>
 <td style="text-align: left;">La del modelo</td>
 </tr>
 <tr class="odd">
@@ -749,8 +845,19 @@ Profesor: Kevin Arnold Traverso Yucra
 </div>
 </div>
 </section>
-<section id="método-delta" class="slide level2">
-<h2>Método delta</h2>
+<section id="método-delta-la-idea" class="slide level2 nostretch">
+<h2>Método delta: la idea</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/s09_concepto_delta.png" class="quarto-figure quarto-figure-center" style="width:72.0%"></p>
+</figure>
+</div>
+<div class="fuente">
+<p>El modelo <strong>solo aporta el cambio</strong> (2): su sesgo se cancela en la razón (marzo: modelo 125 mm, PISCO 105 mm; solo importa que sube 26 %). El futuro es <strong>lo observado escalado</strong> (3, 4). En temperatura se <strong>suma</strong> la diferencia (enero: +1.9 °C). Subcuenca 1, ACCESS-CM2.</p>
+</div>
+</section>
+<section id="método-delta-en-r" class="slide level2">
+<h2>Método delta en R</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-label="1"></a>deltas <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="fu">regimen</span>(cmip, ref, <span class="at">cuenca =</span> <span class="cn">FALSE</span>),</span>
 <span id="cb11-2"><a aria-label="2"></a>                     <span class="fu">regimen</span>(cmip, fut, <span class="at">cuenca =</span> <span class="cn">FALSE</span>),</span>
 <span id="cb11-3"><a aria-label="3"></a>                     <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"modelo"</span>, <span class="st">"subcuenca"</span>, <span class="st">"mes"</span>),</span>
@@ -760,14 +867,25 @@ Profesor: Kevin Arnold Traverso Yucra
 <span id="cb11-7"><a aria-label="7"></a>            <span class="at">d_tmax =</span> tmax_fut <span class="sc">-</span> tmax_ref,      <span class="co"># diferencia</span></span>
 <span id="cb11-8"><a aria-label="8"></a>            <span class="at">d_tmin =</span> tmin_fut <span class="sc">-</span> tmin_ref)</span>
 <span id="cb11-9"><a aria-label="9"></a><span class="co">#&gt;   ACCESS-CM2, subcuenca 1:   mes  f_pp  d_tmax  d_tmin</span></span>
-<span id="cb11-10"><a aria-label="10"></a><span class="co">#&gt;                                1  1.00    1.61    1.36</span></span>
-<span id="cb11-11"><a aria-label="11"></a><span class="co">#&gt;                                3  1.19    1.56    1.23</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-10"><a aria-label="10"></a><span class="co">#&gt;                                1  1.02    1.86    1.73</span></span>
+<span id="cb11-11"><a aria-label="11"></a><span class="co">#&gt;                                3  1.26    1.76    1.43</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-label="1"></a>fut_delta <span class="ot">&lt;-</span> obs <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a aria-label="2"></a>  <span class="fu">filter</span>(<span class="fu">year</span>(fecha) <span class="sc">%in%</span> ref) <span class="sc">|&gt;</span></span>
 <span id="cb12-3"><a aria-label="3"></a>  <span class="fu">mutate</span>(<span class="at">mes =</span> <span class="fu">month</span>(fecha)) <span class="sc">|&gt;</span></span>
 <span id="cb12-4"><a aria-label="4"></a>  <span class="fu">inner_join</span>(deltas, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"subcuenca"</span>, <span class="st">"mes"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb12-5"><a aria-label="5"></a>  <span class="fu">mutate</span>(<span class="at">pp =</span> pp <span class="sc">*</span> f_pp, <span class="at">tmax =</span> tmax <span class="sc">+</span> d_tmax, <span class="at">tmin =</span> tmin <span class="sc">+</span> d_tmin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="mapeo-de-cuantiles-la-idea" class="slide level2 nostretch">
+<h2>Mapeo de cuantiles: la idea</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/img/s09_concepto_qm.png" class="quarto-figure quarto-figure-center" style="width:92.0%"></p>
+</figure>
+</div>
+<div class="fuente">
+<p>Para cada valor del modelo: (1) se busca su <strong>probabilidad</strong> en la curva del modelo y (2) se reemplaza por el valor de PISCO con <strong>la misma probabilidad</strong>. La mediana del modelo (4.7 mm) pasa a 3.7 mm. La función de transferencia se ajusta en 1981–2014 y se aplica a <strong>toda</strong> la serie, futuro incluido. Subcuenca 1, febrero, ACCESS-CM2.</p>
 </div>
 </section>
 <section id="mapeo-de-cuantiles-un-caso" class="slide level2">
@@ -792,21 +910,21 @@ Profesor: Kevin Arnold Traverso Yucra
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">PISCO</td>
-<td style="text-align: center;">4.52</td>
+<td style="text-align: center;">4.55</td>
 <td style="text-align: center;">12.3</td>
-<td style="text-align: center;">3.8 %</td>
+<td style="text-align: center;">3.7 %</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Modelo</td>
-<td style="text-align: center;">5.04</td>
+<td style="text-align: center;">4.99</td>
 <td style="text-align: center;">11.8</td>
-<td style="text-align: center;">5.5 %</td>
+<td style="text-align: center;">5.7 %</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Corregido</td>
-<td style="text-align: center;">4.54</td>
-<td style="text-align: center;">12.1</td>
-<td style="text-align: center;">4.1 %</td>
+<td style="text-align: center;">4.57</td>
+<td style="text-align: center;">12.4</td>
+<td style="text-align: center;">4.0 %</td>
 </tr>
 </tbody>
 </table>
@@ -820,10 +938,10 @@ Profesor: Kevin Arnold Traverso Yucra
 <section id="todos-los-casos-con-nest-y-pmap" class="slide level2">
 <h2>Todos los casos con <code>nest()</code> y <code>pmap()</code></h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-label="1"></a>corregir <span class="ot">&lt;-</span> <span class="cf">function</span>(o, m, variable) {</span>
-<span id="cb14-2"><a aria-label="2"></a>  m_ref  <span class="ot">&lt;-</span> m<span class="sc">$</span>valor[<span class="fu">year</span>(m<span class="sc">$</span>fecha) <span class="sc">%in%</span> ref]        <span class="co"># ajuste en 1985-2014</span></span>
+<span id="cb14-2"><a aria-label="2"></a>  m_ref  <span class="ot">&lt;-</span> m<span class="sc">$</span>valor[<span class="fu">year</span>(m<span class="sc">$</span>fecha) <span class="sc">%in%</span> ref]        <span class="co"># ajuste en 1981-2014</span></span>
 <span id="cb14-3"><a aria-label="3"></a>  ajuste <span class="ot">&lt;-</span> <span class="fu">fitQmap</span>(o<span class="sc">$</span>valor, m_ref, <span class="at">method =</span> <span class="st">"QUANT"</span>,</span>
 <span id="cb14-4"><a aria-label="4"></a>                    <span class="at">wet.day =</span> variable <span class="sc">==</span> <span class="st">"pp"</span>)</span>
-<span id="cb14-5"><a aria-label="5"></a>  <span class="fu">tibble</span>(<span class="at">fecha =</span> m<span class="sc">$</span>fecha, <span class="at">valor =</span> <span class="fu">doQmap</span>(m<span class="sc">$</span>valor, ajuste))  <span class="co"># aplica 1981-2049</span></span>
+<span id="cb14-5"><a aria-label="5"></a>  <span class="fu">tibble</span>(<span class="at">fecha =</span> m<span class="sc">$</span>fecha, <span class="at">valor =</span> <span class="fu">doQmap</span>(m<span class="sc">$</span>valor, ajuste))  <span class="co"># aplica 1981-2050</span></span>
 <span id="cb14-6"><a aria-label="6"></a>}</span>
 <span id="cb14-7"><a aria-label="7"></a></span>
 <span id="cb14-8"><a aria-label="8"></a>cmip_qm <span class="ot">&lt;-</span> cmip <span class="sc">|&gt;</span></span>
@@ -843,11 +961,11 @@ Profesor: Kevin Arnold Traverso Yucra
 <h2>¿Funcionó la corrección?</h2>
 
 <img data-src="../../assets/img/s09_CMIP6_corregido.png" class="quarto-figure quarto-figure-center r-stretch" style="width:90.0%"><div class="fuente">
-<p>Después de corregir, los tres modelos reproducen el régimen de PISCO en 1985–2014: lluvia 720–723 mm (PISCO 716), Tmax 13.8 °C y Tmin −1.2 °C. Las líneas quedan una sobre otra.</p>
+<p>Después de corregir, los tres modelos reproducen el régimen de PISCO en 1981–2014: lluvia 729–732 mm (PISCO 725), Tmax 13.8 °C y Tmin −1.2 °C. Las líneas quedan una sobre otra.</p>
 </div>
 </section>
-<section id="señales-de-cambio-20202049-frente-a-19852014" class="slide level2">
-<h2>Señales de cambio: 2020–2049 frente a 1985–2014</h2>
+<section id="señales-de-cambio-al-20302050" class="slide level2">
+<h2>Señales de cambio al 2030–2050</h2>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -862,57 +980,57 @@ Profesor: Kevin Arnold Traverso Yucra
 <tr class="odd">
 <td style="text-align: left;">Lluvia</td>
 <td style="text-align: left;">Sin corregir</td>
-<td style="text-align: center;">+1.2 %</td>
-<td style="text-align: center;">+8.3 %</td>
-<td style="text-align: center;">+9.5 %</td>
+<td style="text-align: center;">+3.8 %</td>
+<td style="text-align: center;">+9.8 %</td>
+<td style="text-align: center;">+11.5 %</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Delta</td>
-<td style="text-align: center;">+1.2 %</td>
-<td style="text-align: center;">+7.7 %</td>
-<td style="text-align: center;">+9.8 %</td>
+<td style="text-align: center;">+3.4 %</td>
+<td style="text-align: center;">+9.6 %</td>
+<td style="text-align: center;">+12.6 %</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Cuantiles</td>
-<td style="text-align: center;">+2.1 %</td>
-<td style="text-align: center;">+6.8 %</td>
-<td style="text-align: center;">+8.2 %</td>
+<td style="text-align: center;">+4.7 %</td>
+<td style="text-align: center;">+8.4 %</td>
+<td style="text-align: center;">+9.9 %</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Tmax</td>
 <td style="text-align: left;">Sin corregir y delta</td>
-<td style="text-align: center;">+1.51 °C</td>
-<td style="text-align: center;">+1.15 °C</td>
-<td style="text-align: center;">+0.92 °C</td>
+<td style="text-align: center;">+1.81 °C</td>
+<td style="text-align: center;">+1.30 °C</td>
+<td style="text-align: center;">+1.09 °C</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Cuantiles</td>
-<td style="text-align: center;">+1.20 °C</td>
-<td style="text-align: center;">+0.85 °C</td>
-<td style="text-align: center;">+0.64 °C</td>
+<td style="text-align: center;">+1.44 °C</td>
+<td style="text-align: center;">+0.98 °C</td>
+<td style="text-align: center;">+0.78 °C</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Tmin</td>
 <td style="text-align: left;">Sin corregir y delta</td>
-<td style="text-align: center;">+1.32 °C</td>
-<td style="text-align: center;">+0.91 °C</td>
-<td style="text-align: center;">+0.94 °C</td>
+<td style="text-align: center;">+1.62 °C</td>
+<td style="text-align: center;">+1.09 °C</td>
+<td style="text-align: center;">+1.11 °C</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Cuantiles</td>
-<td style="text-align: center;">+1.22 °C</td>
-<td style="text-align: center;">+0.95 °C</td>
-<td style="text-align: center;">+0.80 °C</td>
+<td style="text-align: center;">+1.48 °C</td>
+<td style="text-align: center;">+1.12 °C</td>
+<td style="text-align: center;">+0.94 °C</td>
 </tr>
 </tbody>
 </table>
 <div class="fragment">
 <div class="fuente">
-<p>Los tres modelos coinciden: <strong>más calor</strong> (+0.6 a +1.5 °C) y <strong>algo más de lluvia</strong> (+1 a +10 %). El método delta conserva la señal del modelo; el mapeo de cuantiles la <strong>modifica</strong>, sobre todo en Tmax (ejercicio E3). Ensamble (cuantiles): +5.7 % de lluvia, +0.9 °C Tmax, +1.0 °C Tmin.</p>
+<p>Cambio respecto a 1981–2014. Los tres modelos coinciden: <strong>más calor</strong> (+0.8 a +1.8 °C) y <strong>algo más de lluvia</strong> (+3 a +13 %). El método delta conserva la señal del modelo; el mapeo de cuantiles la <strong>modifica</strong>, sobre todo en Tmax (ejercicio E3). Ensamble (cuantiles): +7.7 % de lluvia, +1.1 °C Tmax, +1.2 °C Tmin.</p>
 </div>
 </div>
 </section>
@@ -1224,7 +1342,7 @@ Profesor: Kevin Arnold Traverso Yucra
 <ul>
 <li>Se usa el GR4J <strong>calibrado</strong> en el bloque 04 (<code>outputs/modelo_GR4J_Huancane.rds</code>): los parámetros no cambian.</li>
 <li>Solo cambian los <strong>forzantes</strong>: lluvia corregida y ETP de Hargreaves con las temperaturas corregidas.</li>
-<li>Cuantiles: una corrida por modelo, de 1981 a 2049; referencia y futuro salen <strong>de la misma corrida</strong>.</li>
+<li>Cuantiles: una corrida por modelo, de 1981 a 2050; referencia y futuro salen <strong>de la misma corrida</strong>.</li>
 <li>Delta: referencia = PISCO observado; futuro = PISCO perturbado.</li>
 </ul>
 <div class="fragment">
@@ -1235,37 +1353,43 @@ Profesor: Kevin Arnold Traverso Yucra
 </section>
 <section id="una-función-para-simular-cualquier-clima" class="slide level2">
 <h2>Una función para simular cualquier clima</h2>
+<div style="font-size: 0.85em">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-label="1"></a>simular <span class="ot">&lt;-</span> <span class="cf">function</span>(forzantes, <span class="at">anios_warmup =</span> <span class="dv">3</span>) {</span>
 <span id="cb18-2"><a aria-label="2"></a>  f <span class="ot">&lt;-</span> forzantes <span class="sc">|&gt;</span></span>
 <span id="cb18-3"><a aria-label="3"></a>    <span class="fu">left_join</span>(latitudes, <span class="at">by =</span> <span class="st">"subcuenca"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb18-4"><a aria-label="4"></a>    <span class="fu">mutate</span>(<span class="at">etp =</span> <span class="fu">hargreaves</span>(tmax, tmin, lat, fecha))</span>
 <span id="cb18-5"><a aria-label="5"></a>  <span class="co"># ... matrices de pp y etp con a_matriz() (columnas en el orden de griwrm)</span></span>
 <span id="cb18-6"><a aria-label="6"></a>  InputsModel <span class="ot">&lt;-</span> <span class="fu">CreateInputsModel</span>(griwrm, <span class="at">DatesR =</span> fechas,</span>
-<span id="cb18-7"><a aria-label="7"></a>                                   <span class="at">Precip =</span> <span class="fu">a_matriz</span>(<span class="st">"pp"</span>),</span>
-<span id="cb18-8"><a aria-label="8"></a>                                   <span class="at">PotEvap =</span> <span class="fu">a_matriz</span>(<span class="st">"etp"</span>))</span>
-<span id="cb18-9"><a aria-label="9"></a>  RunOptions <span class="ot">&lt;-</span> <span class="fu">CreateRunOptions</span>(InputsModel, <span class="at">IndPeriod_WarmUp =</span> ...,</span>
-<span id="cb18-10"><a aria-label="10"></a>                                 <span class="at">IndPeriod_Run =</span> ...)</span>
-<span id="cb18-11"><a aria-label="11"></a>  salida <span class="ot">&lt;-</span> <span class="fu">RunModel</span>(InputsModel, RunOptions, Param)</span>
-<span id="cb18-12"><a aria-label="12"></a>  <span class="fu">tibble</span>(<span class="at">fecha =</span> ..., <span class="at">q =</span> <span class="fu">attr</span>(salida, <span class="st">"Qm3s"</span>)[[<span class="st">"5"</span>]])</span>
-<span id="cb18-13"><a aria-label="13"></a>}</span>
-<span id="cb18-14"><a aria-label="14"></a></span>
-<span id="cb18-15"><a aria-label="15"></a>q_qm <span class="ot">&lt;-</span> cmip_qm <span class="sc">|&gt;</span></span>
-<span id="cb18-16"><a aria-label="16"></a>  <span class="fu">nest</span>(<span class="at">forzantes =</span> <span class="sc">-</span>modelo) <span class="sc">|&gt;</span>              <span class="co"># un clima por modelo</span></span>
-<span id="cb18-17"><a aria-label="17"></a>  <span class="fu">mutate</span>(<span class="at">q =</span> <span class="fu">map</span>(forzantes, simular)) <span class="sc">|&gt;</span></span>
-<span id="cb18-18"><a aria-label="18"></a>  <span class="fu">unnest</span>(q)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-7"><a aria-label="7"></a>                                   <span class="at">Precip =</span> <span class="fu">a_matriz</span>(<span class="st">"pp"</span>), <span class="at">PotEvap =</span> <span class="fu">a_matriz</span>(<span class="st">"etp"</span>))</span>
+<span id="cb18-8"><a aria-label="8"></a>  n_warm <span class="ot">&lt;-</span> <span class="dv">365</span> <span class="sc">*</span> anios_warmup</span>
+<span id="cb18-9"><a aria-label="9"></a>  RunOptions <span class="ot">&lt;-</span> <span class="fu">CreateRunOptions</span>(InputsModel,</span>
+<span id="cb18-10"><a aria-label="10"></a>                                 <span class="at">IndPeriod_WarmUp =</span> <span class="dv">1</span><span class="sc">:</span>n_warm,          <span class="co"># 1981-1983</span></span>
+<span id="cb18-11"><a aria-label="11"></a>                                 <span class="at">IndPeriod_Run =</span> <span class="fu">seq_along</span>(fechas))    <span class="co"># desde 1981</span></span>
+<span id="cb18-12"><a aria-label="12"></a>  salida <span class="ot">&lt;-</span> <span class="fu">RunModel</span>(InputsModel, RunOptions, Param)</span>
+<span id="cb18-13"><a aria-label="13"></a>  <span class="fu">tibble</span>(<span class="at">fecha =</span> fechas, <span class="at">q =</span> <span class="fu">attr</span>(salida, <span class="st">"Qm3s"</span>)[[<span class="st">"5"</span>]])</span>
+<span id="cb18-14"><a aria-label="14"></a>}</span>
+<span id="cb18-15"><a aria-label="15"></a></span>
+<span id="cb18-16"><a aria-label="16"></a>q_qm <span class="ot">&lt;-</span> cmip_qm <span class="sc">|&gt;</span></span>
+<span id="cb18-17"><a aria-label="17"></a>  <span class="fu">nest</span>(<span class="at">forzantes =</span> <span class="sc">-</span>modelo) <span class="sc">|&gt;</span>              <span class="co"># un clima por modelo</span></span>
+<span id="cb18-18"><a aria-label="18"></a>  <span class="fu">mutate</span>(<span class="at">q =</span> <span class="fu">map</span>(forzantes, simular)) <span class="sc">|&gt;</span></span>
+<span id="cb18-19"><a aria-label="19"></a>  <span class="fu">unnest</span>(q)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fuente">
+<p>La referencia empieza en 1981 y no hay años previos: se calienta con 1981–1983 y la corrida vuelve a empezar en 1981 con los almacenamientos ya cargados.</p>
+</div>
 </section>
 <section id="lluvia-cambio-por-subcuenca" class="slide level2">
 <h2>Lluvia: cambio por subcuenca</h2>
 
 <img data-src="../../assets/img/s10_Futuro_mapa_pp.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><div class="fuente">
-<p>Los tres modelos dan <strong>más lluvia</strong> en todas las subcuencas, pero con distinta intensidad: de +0.6 % (ACCESS-CM2) a +13 % (MPI-ESM1-2-HR). El mayor aumento está en la subcuenca 3, en el centro de la cuenca.</p>
+<p>Los tres modelos dan <strong>más lluvia</strong> en todas las subcuencas, pero con distinta intensidad: de +3 % (ACCESS-CM2) a +15 % (MPI-ESM1-2-HR). El mayor aumento está en la subcuenca 3, en el centro de la cuenca.</p>
 </div>
 </section>
 <section id="evapotranspiración-cambio-por-subcuenca" class="slide level2">
 <h2>Evapotranspiración: cambio por subcuenca</h2>
 
 <img data-src="../../assets/img/s10_Futuro_mapa_etp.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><div class="fuente">
-<p>La ETP sube en todos los casos (+2 a +6 %), más en la cabecera (subcuenca 1). El modelo que más calienta (ACCESS-CM2, ETP ~+5 %) es el que menos lluvia agrega (~+1 %): por eso es el único con <strong>menos caudal</strong> en el futuro.</p>
+<p>La ETP sube en todos los casos (+3 a +7 %), más en la cabecera (subcuenca 1). El modelo que más calienta (ACCESS-CM2, ETP ~+6 %) es el que menos lluvia agrega (~+5 %): por eso es el único en que el caudal <strong>no aumenta</strong>.</p>
 </div>
 </section>
 <section id="caudal-cambio-por-tramo-de-río" class="slide level2">
@@ -1276,7 +1400,7 @@ Profesor: Kevin Arnold Traverso Yucra
 <span id="cb19-3"><a aria-label="3"></a>  <span class="fu">mutate</span>(<span class="at">q =</span> <span class="fu">map</span>(forzantes, \(f) <span class="fu">simular</span>(f, <span class="at">nodos =</span> griwrm<span class="sc">$</span>id))) <span class="sc">|&gt;</span></span>
 <span id="cb19-4"><a aria-label="4"></a>  <span class="fu">unnest</span>(q)                                  <span class="co"># caudal en los 5 nodos</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fuente">
-<p>El caudal responde más que la lluvia y no igual en todos los tramos: en el tramo 4 la lluvia sube +7 a +8 % (MIROC6, MPI) y el caudal +23 a +38 %. Con ACCESS-CM2 el tramo 2 pierde caudal (−5 %) porque la ETP (+5 %) crece más que la lluvia (+1 %).</p>
+<p>El caudal responde más que la lluvia y no igual en todos los tramos: en el tramo 4 la lluvia sube +9 a +10 % (MIROC6, MPI) y el caudal +22 a +46 %. Con ACCESS-CM2 el tramo 2 pierde caudal (−4 %) porque la ETP (+6 %) crece más que la lluvia (+4 %).</p>
 </div>
 </section>
 <section id="régimen-de-caudales-referencia-y-futuro" class="slide level2">
@@ -1299,50 +1423,50 @@ Profesor: Kevin Arnold Traverso Yucra
 <tr class="odd">
 <td style="text-align: left;">ACCESS-CM2</td>
 <td style="text-align: left;">Cuantiles</td>
-<td style="text-align: center;">−1.1 %</td>
-<td style="text-align: center;">−4.1 %</td>
-<td style="text-align: center;">+3.8 %</td>
+<td style="text-align: center;">−0.3 %</td>
+<td style="text-align: center;">−4.0 %</td>
+<td style="text-align: center;">+6.7 %</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Delta</td>
-<td style="text-align: center;">−6.1 %</td>
-<td style="text-align: center;">−9.2 %</td>
-<td style="text-align: center;">−0.5 %</td>
+<td style="text-align: center;">−2.1 %</td>
+<td style="text-align: center;">−5.6 %</td>
+<td style="text-align: center;">+1.4 %</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MIROC6</td>
 <td style="text-align: left;">Cuantiles</td>
-<td style="text-align: center;">+14.5 %</td>
-<td style="text-align: center;">+15.8 %</td>
-<td style="text-align: center;">+3.9 %</td>
+<td style="text-align: center;">+13.4 %</td>
+<td style="text-align: center;">+11.2 %</td>
+<td style="text-align: center;">+18.9 %</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Delta</td>
+<td style="text-align: center;">+17.7 %</td>
 <td style="text-align: center;">+15.3 %</td>
-<td style="text-align: center;">+15.5 %</td>
-<td style="text-align: center;">+6.3 %</td>
+<td style="text-align: center;">+24.2 %</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MPI-ESM1-2-HR</td>
 <td style="text-align: left;">Cuantiles</td>
-<td style="text-align: center;">+30.1 %</td>
-<td style="text-align: center;">+41.2 %</td>
-<td style="text-align: center;">−3.1 %</td>
+<td style="text-align: center;">+36.1 %</td>
+<td style="text-align: center;">+46.6 %</td>
+<td style="text-align: center;">+1.2 %</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Delta</td>
-<td style="text-align: center;">+31.1 %</td>
-<td style="text-align: center;">+41.6 %</td>
-<td style="text-align: center;">−4.2 %</td>
+<td style="text-align: center;">+40.2 %</td>
+<td style="text-align: center;">+51.3 %</td>
+<td style="text-align: center;">+8.0 %</td>
 </tr>
 </tbody>
 </table>
 <div class="fragment">
 <div class="fuente">
-<p>Lluvia +1 a +10 % → caudal −6 a +31 %: el caudal <strong>amplifica</strong> el cambio de la lluvia, y más calor (más ETP) no alcanza a compensarlo. Los dos métodos dan el mismo orden de magnitud; la <strong>diferencia entre modelos</strong> es mucho mayor que la diferencia entre métodos.</p>
+<p>Lluvia +3 a +13 % → caudal −2 a +40 %: el caudal <strong>amplifica</strong> el cambio de la lluvia, y más calor (más ETP) no alcanza a compensarlo. Los dos métodos dan el mismo orden de magnitud; la <strong>diferencia entre modelos</strong> es mucho mayor que la diferencia entre métodos.</p>
 </div>
 </div>
 </section>
@@ -1350,7 +1474,7 @@ Profesor: Kevin Arnold Traverso Yucra
 <h2>Cambio mes a mes</h2>
 
 <img data-src="../../assets/img/s10_Futuro_cambio.png" class="quarto-figure quarto-figure-center r-stretch" style="width:78.0%"><div class="fuente">
-<p>El cambio se concentra en <strong>dic–ene</strong>, el inicio de la época de lluvias. En estiaje los cambios son pequeños (±6 %).</p>
+<p>El cambio más grande está en <strong>dic–ene</strong> (MPI-ESM1-2-HR: +90 a +130 %), mientras que ACCESS-CM2 da menos caudal en esos meses. En estiaje los cambios son menores, salvo MIROC6 en junio (+33 a +42 %).</p>
 </div>
 </section>
 <section id="curva-de-duración-1" class="slide level2">
@@ -1371,41 +1495,41 @@ Profesor: Kevin Arnold Traverso Yucra
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">ACCESS</td>
-<td style="text-align: center;">46→47</td>
-<td style="text-align: center;">6.2→6.2</td>
-<td style="text-align: center;">2.6→2.7</td>
+<td style="text-align: center;">48→51</td>
+<td style="text-align: center;">6.4→6.5</td>
+<td style="text-align: center;">2.7→2.8</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MIROC6</td>
-<td style="text-align: center;">46→52</td>
-<td style="text-align: center;">6.4→6.7</td>
-<td style="text-align: center;">2.7→2.8</td>
+<td style="text-align: center;">48→55</td>
+<td style="text-align: center;">6.5→7.1</td>
+<td style="text-align: center;">2.7→2.9</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MPI</td>
-<td style="text-align: center;">48→67</td>
-<td style="text-align: center;">6.0→6.9</td>
-<td style="text-align: center;">2.6→2.6</td>
+<td style="text-align: center;">49→71</td>
+<td style="text-align: center;">6.1→7.6</td>
+<td style="text-align: center;">2.7→2.7</td>
 </tr>
 </tbody>
 </table>
 <p>m³/s, referencia → futuro</p>
 </div></div>
 <div class="fuente">
-<p>Los caudales <strong>altos</strong> (Q10) son los que más cambian; los caudales bajos (Q90) casi no se mueven.</p>
+<p>Los caudales <strong>altos</strong> (Q10) son los que más cambian (+6 a +44 %); los caudales bajos (Q90) se mueven poco (+3 a +9 %).</p>
 </div>
 </section>
 <section id="qué-le-decimos-al-usuario-del-agua" class="slide level2">
 <h2>¿Qué le decimos al usuario del agua?</h2>
 <ul>
-<li><strong>Temperatura</strong>: señal clara y coherente entre modelos: +0.6 a +1.5 °C hacia 2020–2049.</li>
-<li><strong>Lluvia y caudal</strong>: los tres modelos van de “sin cambio” a “+30 % de caudal medio”: la <strong>incertidumbre</strong> es mayor que la señal.</li>
-<li>El estiaje casi no cambia en ningún caso: buena noticia para la oferta en época seca, pero con solo 3 modelos.</li>
+<li><strong>Temperatura</strong>: señal clara y coherente entre modelos: +0.8 a +1.8 °C hacia 2030–2050.</li>
+<li><strong>Lluvia y caudal</strong>: los tres modelos van de “sin cambio” a “+36 % de caudal medio”: la <strong>incertidumbre</strong> es mayor que la señal.</li>
+<li>El estiaje no disminuye en ningún modelo (+1 a +24 %): buena noticia para la oferta en época seca, pero con solo 3 modelos.</li>
 <li>Un servicio climático no da <strong>un</strong> número: da un <strong>rango</strong> y explica de dónde sale.</li>
 </ul>
 <div class="fragment">
 <div class="fuente">
-<p>Para un estudio real: más modelos (≥ 10), más escenarios (SSP1-2.6, SSP3-7.0, SSP5-8.5), otros horizontes (2050–2079) y, si se puede, más de un modelo hidrológico.</p>
+<p>Para un estudio real: más modelos (≥ 10), más escenarios (SSP1-2.6, SSP3-7.0, SSP5-8.5), otros horizontes (2071–2100) y, si se puede, más de un modelo hidrológico.</p>
 </div>
 </div>
 </section>
@@ -1415,6 +1539,265 @@ Profesor: Kevin Arnold Traverso Yucra
 <p>06</p>
 </div>
 <p>R + Python, recursos y rutas de continuación</p>
+</section>
+<section id="el-flujo-completo-en-dos-días" class="slide level2">
+<h2>El flujo completo en dos días</h2>
+<div style="font-size: 0.8em">
+<table class="caption-top">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 27%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Paso</th>
+<th style="text-align: center;">Script</th>
+<th style="text-align: left;">Lo que obtuvimos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fundamentos de R</td>
+<td style="text-align: center;"><code>01</code></td>
+<td style="text-align: left;">objetos, data frames, fechas, paquetes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Estaciones SENAMHI</td>
+<td style="text-align: center;"><code>02</code> <code>03</code></td>
+<td style="text-align: left;">datos ordenados, control de calidad, funciones, bucles</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Grillados PISCO</td>
+<td style="text-align: center;"><code>04</code></td>
+<td style="text-align: left;">lluvia areal 716 mm/año, ETP, balance P – ETP</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CC observado</td>
+<td style="text-align: center;"><code>05</code></td>
+<td style="text-align: left;">Tmáx +0.35 °C/década; lluvia sin tendencia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CMIP6 + sesgo</td>
+<td style="text-align: center;"><code>06</code></td>
+<td style="text-align: left;">3 modelos SSP2-4.5 corregidos (cuantiles y delta)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GR4J: calibración</td>
+<td style="text-align: center;"><code>07</code></td>
+<td style="text-align: left;">KGE 0.86 (calibración), 0.81 (validación)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GR4J: futuro</td>
+<td style="text-align: center;"><code>08</code></td>
+<td style="text-align: left;">caudal medio 2030–2050: de 0 % a +36 %</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fuente">
+<p>Cada script lee lo que produce el anterior: con los datos crudos y los scripts <code>00</code>–<code>08</code> cualquiera puede <strong>reproducir</strong> todo el análisis.</p>
+</div>
+</section>
+<section id="r-y-python-no-compiten" class="slide level2">
+<h2>R y Python: no compiten</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tarea</th>
+<th style="text-align: left;">R</th>
+<th style="text-align: left;">Python</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Tablas</td>
+<td style="text-align: left;"><code>dplyr</code>, <code>tidyr</code></td>
+<td style="text-align: left;"><code>pandas</code>, <code>polars</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gráficos</td>
+<td style="text-align: left;"><code>ggplot2</code></td>
+<td style="text-align: left;"><code>matplotlib</code>, <code>plotnine</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Grillas y NetCDF</td>
+<td style="text-align: left;"><code>terra</code>, <code>ncdf4</code></td>
+<td style="text-align: left;"><code>xarray</code>, <code>rioxarray</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Vectores (shapefiles)</td>
+<td style="text-align: left;"><code>sf</code></td>
+<td style="text-align: left;"><code>geopandas</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tendencias</td>
+<td style="text-align: left;"><code>trend</code>, <code>modifiedmk</code></td>
+<td style="text-align: left;"><code>pymannkendall</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Corrección de sesgo</td>
+<td style="text-align: left;"><code>qmap</code></td>
+<td style="text-align: left;"><code>xsdba</code> (xclim)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Métricas de ajuste</td>
+<td style="text-align: left;"><code>hydroGOF</code></td>
+<td style="text-align: left;"><code>hydroeval</code>, <code>HydroErr</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Google Earth Engine</td>
+<td style="text-align: left;"><code>rgee</code></td>
+<td style="text-align: left;"><code>earthengine-api</code>, <code>geemap</code></td>
+</tr>
+</tbody>
+</table>
+<div class="fuente">
+<p>Lo importante es el <strong>método</strong> (control de calidad, corrección de sesgo, calibración), no el lenguaje. Y no hay que elegir: los dos se pueden combinar.</p>
+</div>
+</section>
+<section id="r-python-con-reticulate" class="slide level2">
+<h2>R + Python con <code>reticulate</code></h2>
+<div class="columns">
+<div class="column" style="width: 60%; font-size: 0.85em">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb20-2"><a aria-label="2"></a><span class="fu">use_python</span>(<span class="fu">Sys.which</span>(<span class="st">"python"</span>))</span>
+<span id="cb20-3"><a aria-label="3"></a></span>
+<span id="cb20-4"><a aria-label="4"></a>xr <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"xarray"</span>)  <span class="co"># import xarray as xr</span></span>
+<span id="cb20-5"><a aria-label="5"></a></span>
+<span id="cb20-6"><a aria-label="6"></a>ds <span class="ot">&lt;-</span> xr<span class="sc">$</span><span class="fu">open_dataset</span>(archivo)  <span class="co"># PISCOp v3</span></span>
+<span id="cb20-7"><a aria-label="7"></a></span>
+<span id="cb20-8"><a aria-label="8"></a><span class="co"># diario -&gt; anual -&gt; promedio de la grilla</span></span>
+<span id="cb20-9"><a aria-label="9"></a>anual_py <span class="ot">&lt;-</span> ds<span class="sc">$</span>pp<span class="sc">$</span></span>
+<span id="cb20-10"><a aria-label="10"></a>  <span class="fu">resample</span>(<span class="at">time =</span> <span class="st">"YE"</span>)<span class="sc">$</span><span class="fu">sum</span>()<span class="sc">$</span></span>
+<span id="cb20-11"><a aria-label="11"></a>  <span class="fu">mean</span>(<span class="fu">c</span>(<span class="st">"latitude"</span>, <span class="st">"longitude"</span>))<span class="sc">$</span></span>
+<span id="cb20-12"><a aria-label="12"></a>  <span class="fu">to_pandas</span>()</span>
+<span id="cb20-13"><a aria-label="13"></a></span>
+<span id="cb20-14"><a aria-label="14"></a>pp_py <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb20-15"><a aria-label="15"></a>  <span class="at">anio =</span> <span class="dv">1981</span><span class="sc">:</span><span class="dv">2025</span>,</span>
+<span id="cb20-16"><a aria-label="16"></a>  <span class="at">pp_python =</span> <span class="fu">as.numeric</span>(anual_py))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:40%;">
+<ul>
+<li>El <code>$</code> de R reemplaza al <code>.</code> de Python.</li>
+<li><code>xarray</code> lee las <strong>fechas</strong> del NetCDF por sí solo.</li>
+<li>El resultado vuelve a R como un vector: se sigue con <code>tidyverse</code>.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-label="1"></a><span class="fu">head</span>(pp_py, <span class="dv">3</span>)</span>
+<span id="cb21-2"><a aria-label="2"></a><span class="co">#&gt;    anio pp_python</span></span>
+<span id="cb21-3"><a aria-label="3"></a><span class="co">#&gt; 1  1981      835.</span></span>
+<span id="cb21-4"><a aria-label="4"></a><span class="co">#&gt; 2  1982      683.</span></span>
+<span id="cb21-5"><a aria-label="5"></a><span class="co">#&gt; 3  1983      501.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fuente">
+<p>Script <code>ejercicios/09_R_y_Python.R</code>. Requiere Python 3 con <code>pip install xarray netCDF4 pandas</code>.</p>
+</div>
+</section>
+<section id="r-y-python-dan-lo-mismo" class="slide level2">
+<h2>¿R y Python dan lo mismo?</h2>
+<div class="columns">
+<div class="column" style="width: 45%; font-size: 0.85em">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-label="1"></a><span class="co"># Lo mismo con terra (Día 1)</span></span>
+<span id="cb22-2"><a aria-label="2"></a>pp_r <span class="ot">&lt;-</span> <span class="fu">tapp</span>(r, <span class="st">"years"</span>, sum) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a aria-label="3"></a>  <span class="fu">global</span>(<span class="st">"mean"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-4"><a aria-label="4"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb22-5"><a aria-label="5"></a>  <span class="fu">transmute</span>(<span class="at">anio =</span> <span class="dv">1981</span><span class="sc">:</span><span class="dv">2025</span>,</span>
+<span id="cb22-6"><a aria-label="6"></a>            <span class="at">pp_r =</span> mean)</span>
+<span id="cb22-7"><a aria-label="7"></a></span>
+<span id="cb22-8"><a aria-label="8"></a>comparar <span class="ot">&lt;-</span> <span class="fu">left_join</span>(pp_py, pp_r) <span class="sc">|&gt;</span></span>
+<span id="cb22-9"><a aria-label="9"></a>  <span class="fu">mutate</span>(<span class="at">dif =</span> pp_python <span class="sc">-</span> pp_r)</span>
+<span id="cb22-10"><a aria-label="10"></a></span>
+<span id="cb22-11"><a aria-label="11"></a><span class="fu">max</span>(<span class="fu">abs</span>(comparar<span class="sc">$</span>dif))</span>
+<span id="cb22-12"><a aria-label="12"></a><span class="co">#&gt; [1] 0.0001372217</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width: 55%; font-size: 0.85em">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-label="1"></a><span class="co"># También se escribe Python directo</span></span>
+<span id="cb23-2"><a aria-label="2"></a><span class="fu">py_run_string</span>(<span class="st">"</span></span>
+<span id="cb23-3"><a aria-label="3"></a><span class="st">n = ds.pp.sel(time=slice('1991','2020'))</span></span>
+<span id="cb23-4"><a aria-label="4"></a><span class="st">c = n.groupby('time.month').sum() / 30</span></span>
+<span id="cb23-5"><a aria-label="5"></a><span class="st">clim = c.mean(['latitude','longitude'])</span></span>
+<span id="cb23-6"><a aria-label="6"></a><span class="st">"</span>)</span>
+<span id="cb23-7"><a aria-label="7"></a></span>
+<span id="cb23-8"><a aria-label="8"></a><span class="co"># Lo de Python se lee con py$</span></span>
+<span id="cb23-9"><a aria-label="9"></a><span class="fu">round</span>(py<span class="sc">$</span>clim<span class="sc">$</span>values, <span class="dv">1</span>)</span>
+<span id="cb23-10"><a aria-label="10"></a><span class="co">#&gt;  [1] 127.7 121.7  99.0  40.9  14.9   6.4</span></span>
+<span id="cb23-11"><a aria-label="11"></a><span class="co">#&gt;  [7]   6.0   9.7  22.9  59.4  66.1 111.9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fuente">
+<p>Diferencia máxima: 0.00014 mm/año, solo redondeo. Mismo dato + mismo método = mismo resultado, en cualquier lenguaje.</p>
+</div>
+</section>
+<section id="recursos-para-seguir" class="slide level2">
+<h2>Recursos para seguir</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Para aprender</strong></p>
+<ul>
+<li><em>R for Data Science</em> (2.ª ed.), Wickham et al.&nbsp;— <a href="https://r4ds.hadley.nz">r4ds.hadley.nz</a></li>
+<li><em>Geocomputation with R</em> — <a href="https://r.geocompx.org">r.geocompx.org</a></li>
+<li><em>Geocomputation with Python</em> — <a href="https://py.geocompx.org">py.geocompx.org</a></li>
+<li>Slater et al.&nbsp;(2019). Using R in hydrology. <em>HESS</em>, 23, 2939–2963. <a href="https://doi.org/10.5194/hess-23-2939-2019">doi:10.5194/hess-23-2939-2019</a></li>
+<li>CRAN Task View: Hydrological Data and Modeling — <a href="https://cran.r-project.org/web/views/Hydrology.html">cran.r-project.org/web/views/Hydrology.html</a></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Datos</strong></p>
+<ul>
+<li><strong>SENAMHI</strong>: estaciones hidrometeorológicas del Perú</li>
+<li><strong>PISCO</strong>: precipitación y temperatura grillada (SENAMHI)</li>
+<li><strong>NEX-GDDP-CMIP6</strong> en GEE: <code>NASA/GDDP-CMIP6</code></li>
+<li><strong>ERA5-Land</strong> en GEE: <code>ECMWF/ERA5_LAND/DAILY_AGGR</code></li>
+<li><strong>CHIRPS</strong> en GEE: <code>UCSB-CHG/CHIRPS/DAILY</code></li>
+</ul>
+</div></div>
+</section>
+<section id="rutas-de-continuación" class="slide level2">
+<h2>Rutas de continuación</h2>
+<ul>
+<li><strong>Más clima futuro</strong>: más modelos (≥ 10), otros escenarios (SSP1-2.6, SSP3-7.0, SSP5-8.5) y horizontes (2071–2100).</li>
+<li><strong>Otros modelos hidrológicos</strong>: SWAT, WEAP o los demás modelos GR (<code>airGR</code>), y comparar resultados.</li>
+<li><strong>Demanda de agua</strong>: sumar riego y consumo poblacional al balance para ver la brecha oferta – demanda.</li>
+<li><strong>Tableros interactivos</strong>: compartir resultados con <code>shiny</code> o Quarto Dashboards.</li>
+<li><strong>Pronóstico</strong>: aprendizaje automático para pronosticar caudales y niveles a corto plazo.</li>
+</ul>
+<div class="fragment">
+<div class="fuente">
+<p>La regla de oro: <strong>un script por paso</strong>, datos crudos que nunca se tocan, y resultados que se pueden volver a generar.</p>
+</div>
+</div>
+</section>
+<section id="materiales-del-curso" class="slide level2">
+<h2>Materiales del curso</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>Todo el curso está en GitHub:</p>
+<p><strong><a href="https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia">github.com/arnoldtraverso/Curso-Taller-R-Hidrologia</a></strong></p>
+<ol type="1">
+<li>Descargar el repositorio (<em>Code → Download ZIP</em>).</li>
+<li>Abrir <code>Curso-Taller-R-Hidrologia.Rproj</code>.</li>
+<li>Ejecutar <code>00_Instalacion_paquetes.R</code>.</li>
+<li>Ejecutar los scripts <code>01</code> a <code>08</code> en orden.</li>
+</ol>
+</div><div class="column" style="width:52%;">
+<pre class="arbol-carpetas"><span class="raiz">Curso-Taller-R-Hidrologia/</span>
+<span class="rama">├──</span> <span class="rproj">*.Rproj</span>
+<span class="rama">├──</span> <span class="dir">data/</span>
+<span class="rama">│   ├──</span> <span class="dir">raw/</span>        <span class="nota">datos crudos</span>
+<span class="rama">│   ├──</span> <span class="dir">cmip6/</span>      <span class="nota">modelos CMIP6</span>
+<span class="rama">│   └──</span> <span class="dir">processed/</span>  <span class="nota">se generan</span>
+<span class="rama">├──</span> <span class="dir">ejercicios/</span>     <span class="nota">scripts 00–09</span>
+<span class="rama">├──</span> <span class="dir">outputs/</span>        <span class="nota">resultados</span>
+<span class="rama">└──</span> <span class="dir">slides/</span>         <span class="nota">diapositivas</span>
+</pre>
+</div></div>
+<div class="fuente">
+<p>El archivo nacional de PISCOp v3 (1.5 GB) no está en el repositorio: el recorte de la cuenca (<code>PISCOp_v3_diario_Huancane.nc</code>) sí.</p>
+</div>
+</section>
+<section id="gracias" class="slide level2 seccion" data-background-color="#073763">
+<h2>¡Gracias!</h2>
+<p>Kevin Arnold Traverso Yucra</p>
+<p>Correo: <a href="mailto:arnold.traverso@gmail.com">arnold.traverso@gmail.com</a></p>
+<p>LinkedIn: <a href="https://www.linkedin.com/in/kevin-arnold-traverso">linkedin.com/in/kevin-arnold-traverso</a></p>
+<p>GitHub: <a href="https://github.com/arnoldtraverso">github.com/arnoldtraverso</a></p>
+<p>CIP Puno - Cap. Ingeniería Agrícola · FIAGRH - UNA Puno · IICTA-FIA</p>
 
 
 </section>

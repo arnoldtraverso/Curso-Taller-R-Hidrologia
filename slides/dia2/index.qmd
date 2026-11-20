@@ -40,6 +40,40 @@ Los servicios climáticos consisten en la generación, traducción y entrega de 
 
 El cambio climático es la variación a largo plazo de las temperaturas y los patrones habituales del clima en la Tierra. Aunque puede tener causas naturales, desde el siglo XIX se debe principalmente a las actividades humanas (como la quema de combustibles fósiles y la deforestación), que aumentan los gases de efecto invernadero y provocan el calentamiento global.
 
+## Cambio climático en el altiplano
+
+En los Andes y el altiplano (cuenca del lago Titicaca), el cambio climático afecta directamente la disponibilidad de agua y los medios de vida.
+
+:::: {.columns style="font-size: 0.8em"}
+::: {.column width="33%"}
+**Glaciares y agua**
+
+- Los glaciares tropicales pierden hielo con rapidez: menos reserva de agua para ríos y lagunas en época seca.
+- Más evaporación por el aumento de temperatura: menos agua en ríos, bofedales y lagos.
+- El deshielo forma o agranda lagunas glaciares: riesgo de aluviones y desbordes.
+:::
+
+::: {.column width="33%"}
+**Lluvia y temperatura**
+
+- Inicio de lluvias irregular y tormentas intensas en pocos días: inundaciones y erosión.
+- Periodos secos largos: menos agua para consumo, riego y pastos.
+- Aunque sube la temperatura media, heladas fuera de época y granizadas siguen dañando los cultivos.
+:::
+
+::: {.column width="33%"}
+**Agricultura y ganadería**
+
+- Papa, quinua, cebada y habas: pérdidas por estrés hídrico, heladas tardías o exceso de humedad.
+- Plagas y enfermedades llegan a zonas más altas, donde antes no sobrevivían.
+- Bofedales degradados: menos alimento y agua para alpacas, llamas, ovinos y vacunos.
+:::
+::::
+
+::: {.fuente}
+Los glaciares andinos perdieron entre 30 % y más del 50 % de su área desde los años 80 (IPCC AR6 GTII, cap. 12). Fuentes: Castellanos et al. (2022), *Central and South America*, IPCC AR6 GTII, cap. 12 — [ipcc.ch/report/ar6/wg2/chapter/chapter-12](https://www.ipcc.ch/report/ar6/wg2/chapter/chapter-12/) · Rabatel et al. (2013), *The Cryosphere* 7, 81–102, [doi:10.5194/tc-7-81-2013](https://doi.org/10.5194/tc-7-81-2013).
+:::
+
 ## Series diarias de la cuenca
 
 ```r
@@ -69,22 +103,53 @@ clima <- serie_cuenca("data/pcp/Datos_pcp.csv",   pp) |>
 Las llaves dobles alrededor de `nombre` y el operador `:=` usan el nombre que le pasamos (`pp`, `tmax`, `tmin`) como nombre de la columna nueva.
 :::
 
-## Índices de extremos (ETCCDI)
+## ¿De dónde salen los índices ETCCDI?
 
-| Índice | Definición | Unidad |
-|:---|:---|:---:|
-| PRCPTOT | Lluvia total anual en días húmedos (≥ 1 mm) | mm |
-| Rx1day / Rx5day | Máxima lluvia en 1 día / en 5 días seguidos | mm |
-| SDII | Intensidad: lluvia por día húmedo | mm/día |
-| R10mm | Días con lluvia ≥ 10 mm | días |
-| CDD / CWD | Racha seca (< 1 mm) / húmeda (≥ 1 mm) más larga | días |
-| TX / TN | Tmax / Tmin media anual | °C |
-| TXx / TNn | Tmax más alta / Tmin más baja del año | °C |
-| FD | Días con helada (Tmin < 0 °C) | días |
-| DTR | Rango térmico diario medio (Tmax − Tmin) | °C |
+:::: {.columns}
+::: {.column style="width: 55%; font-size: 0.8em"}
+- **ETCCDI**: *Expert Team on Climate Change Detection and Indices*, equipo conjunto de la OMM (Comisión de Climatología), el WCRP (CLIVAR) y la JCOMM, creado tras el taller CLIVAR/GCOS/OMM de 1998 (Karl et al., 1999).
+- Definió **27 índices básicos** calculados con datos **diarios** de lluvia y temperatura (Peterson et al., 2001; Zhang et al., 2011).
+- **El problema que resuelven**: muchos países no comparten sus datos diarios, pero sí pueden compartir índices calculados **con la misma fórmula** → se comparan regiones y estudios.
+- Describen extremos **moderados** (ocurren varias veces al año), no eventos de 100 años → hay suficientes casos para detectar **tendencias**.
+:::
+
+::: {.column style="width: 45%; font-size: 0.8em"}
+**Cinco tipos de índices**
+
+| Tipo | Ejemplos |
+|:---|:---|
+| Absolutos | Rx1day, Rx5day, TXx, TNn |
+| Umbral fijo | FD, R10mm, SU |
+| Percentiles | TX90p, TN10p, R95p |
+| Duración | CDD, CWD, WSDI |
+| Otros | PRCPTOT, SDII, DTR |
+
+Software: RClimDex, `climdex.pcic` (R), ClimPACT. Base de los capítulos de extremos del IPCC (AR6, cap. 11).
+:::
+::::
 
 ::: {.fuente}
-Expert Team on Climate Change Detection and Indices (ETCCDI): 27 índices estándar para comparar regiones y estudios.
+Karl, Nicholls y Ghazi (1999), *Climatic Change* 42, 3–7 · Peterson et al. (2001), WMO-TD 1071 · Zhang et al. (2011), *WIREs Climate Change* 2, 851–870, [doi:10.1002/wcc.147](https://doi.org/10.1002/wcc.147) · Lista oficial: [etccdi.pacificclimate.org/list_27_indices.shtml](https://etccdi.pacificclimate.org/list_27_indices.shtml)
+:::
+
+## Índices de extremos (ETCCDI)
+
+::: {style="font-size: 0.8em"}
+| Índice | Definición | Tipo | Unidad |
+|:-------------|:--------------------------------------------|:---------|:------:|
+| PRCPTOT | Lluvia total anual en días húmedos (≥ 1 mm) | Otros | mm |
+| Rx1day / Rx5day | Máxima lluvia en 1 día / en 5 días seguidos | Absoluto | mm |
+| SDII | Intensidad: lluvia por día húmedo | Otros | mm/día |
+| R10mm | Días con lluvia ≥ 10 mm | Umbral | días |
+| CDD / CWD | Racha seca (< 1 mm) / húmeda (≥ 1 mm) más larga | Duración | días |
+| TX / TN | Tmax / Tmin media anual | ET-SCI\* | °C |
+| TXx / TNn | Tmax más alta / Tmin más baja del año | Absoluto | °C |
+| FD | Días con helada (Tmin < 0 °C) | Umbral | días |
+| DTR | Rango térmico diario medio (Tmax − Tmin) | Otros | °C |
+:::
+
+::: {.fuente}
+\* TX y TN no están entre los 27 del ETCCDI: los agregó su sucesor, el ET-SCI (*Expert Team on Sector-specific Climate Indices*), en ClimPACT como TXm y TNm ([climpact-sci.org/indices](https://climpact-sci.org/indices/)). Un "día húmedo" es el que tiene ≥ 1 mm.
 :::
 
 ## Calcular los índices con `summarise()`
@@ -222,7 +287,7 @@ CMIP6, escenarios SSP, ensambles de modelos y horizontes temporales
 - Resuelve las **ecuaciones físicas** de la atmósfera, el océano, el hielo y la superficie terrestre.
 - Divide el planeta en una **grilla de 100 a 250 km**: una cuenca como Huancané cabe en una o dos celdas.
 - Simula el **clima**, no el tiempo: el año 2030 del modelo no es un pronóstico del año 2030.
-- Por eso se comparan **estadísticas de 30 años**, nunca días o años sueltos.
+- Por eso se comparan **estadísticas de periodos largos** (idealmente 30 años), nunca días o años sueltos.
 :::
 
 ::: {.column width="45%"}
@@ -294,7 +359,7 @@ Thrasher et al. (2022). NASA Global Daily Downscaled Projections, CMIP6. *Scient
 |:---|:---|
 | Escenario | Varios SSP |
 | Modelo | Varios GCM (ensamble) |
-| Variabilidad natural | Periodos de 30 años |
+| Variabilidad natural | Periodos largos (20–30 años) |
 :::
 
 ::: {.column width="58%"}
@@ -317,7 +382,7 @@ Cada modelo representa de forma distinta los procesos físicos: su **dispersión
 ![](../../assets/img/s08_linea_tiempo.png){width="85%" fig-align="center"}
 
 ::: {.fuente}
-**Referencia** 1985–2014: los últimos 30 años del histórico de CMIP6, que también cubren PISCO. **Futuro cercano** 2020–2049: el horizonte útil para planificar obras y adaptación. Cambio = futuro − referencia, **del mismo modelo**.
+**Referencia** 1981–2014: todo el histórico de CMIP6 que también cubre PISCO (34 años). **Futuro** 2030–2050 (21 años, porque los datos llegan a 2050; lo ideal son 30): el horizonte útil para planificar obras y adaptación. Cambio = futuro − referencia, **del mismo modelo**.
 :::
 
 ## Lo que trae un modelo sin corregir
@@ -325,7 +390,7 @@ Cada modelo representa de forma distinta los procesos físicos: su **dispersión
 ![](../../assets/img/s08_gcm_crudo.png){width="78%" fig-align="center"}
 
 ::: {.fuente}
-En 1985–2014 los modelos dan una Tmax **~2 °C más alta** y una lluvia **6–10 % mayor** que PISCO. Tampoco reproducen años concretos (1983 seco, 1984 húmedo), y no deben hacerlo. Antes de usarlos hay que **corregir el sesgo**.
+En 1981–2014 los modelos dan una Tmax **~2 °C más alta** y una lluvia **5–7 % mayor** que PISCO. Tampoco reproducen años concretos (1983 seco, 1984 húmedo), y no deben hacerlo. Antes de usarlos hay que **corregir el sesgo**.
 :::
 
 ## Datos CMIP6 en GEE y corrección de sesgo {.seccion background-color="#0B5394"}
@@ -346,7 +411,7 @@ var coleccion = ee.ImageCollection(
   .filter(ee.Filter.eq('model', modelo))
   .filter(ee.Filter.inList('scenario',
           ['historical', 'ssp245']))
-  .filterDate('1981-01-01', '2050-01-01')
+  .filterDate('1981-01-01', '2051-01-01')
   .select(['pr', 'tasmax', 'tasmin'])
   .map(convertir);   // a mm/día y °C
 
@@ -364,7 +429,7 @@ Export.table.toDrive({ ... fileFormat: 'CSV' });
 ::: {.column width="42%"}
 - Script: `ejercicios/Descarga_CMIP6_GEE.js`, se ejecuta en [code.earthengine.google.com](https://code.earthengine.google.com).
 - Una tarea por modelo; el CSV llega a Google Drive.
-- Resultado: una fila por **día y subcuenca**, 1981–2049.
+- Resultado: una fila por **día y subcuenca**, 1981–2050.
 - Lo mismo se puede hacer desde R con el paquete **rgee**.
 :::
 ::::
@@ -386,9 +451,9 @@ cmip <- archivos |>
             pp = Pr_mm, tmax = Tmax, tmin = Tmin)
 
 count(cmip, modelo)
-#>   ACCESS-CM2    126010
-#>   MIROC6        126010
-#>   MPI-ESM1-2-HR 126010     (5 subcuencas x 25202 días)
+#>   ACCESS-CM2    127835
+#>   MIROC6        127835
+#>   MPI-ESM1-2-HR 127835     (5 subcuencas x 25567 días)
 ```
 
 ::: {.fuente}
@@ -400,7 +465,7 @@ count(cmip, modelo)
 ![](../../assets/img/s09_CMIP6_sesgo.png){width="92%" fig-align="center"}
 
 ::: {.fuente}
-Sesgo anual de la cuenca, 1985–2014: lluvia **+4.6 a +7.6 %**, Tmax **+2.1 a +2.2 °C** y Tmin **+2.7 a +3.0 °C**. La lluvia tiene la forma correcta; la temperatura está desplazada en todos los meses, más en la Tmin del invierno.
+Sesgo anual de la cuenca, 1981–2014: lluvia **+4.1 a +5.0 %**, Tmax **+2.1 a +2.2 °C** y Tmin **+2.7 a +3.0 °C**. La lluvia tiene la forma correcta; la temperatura está desplazada en todos los meses, más en la Tmin del invierno.
 :::
 
 ## Dos formas de corregir
@@ -410,7 +475,7 @@ Sesgo anual de la cuenca, 1985–2014: lluvia **+4.6 a +7.6 %**, Tmax **+2.1 a +
 | **Qué usa del modelo** | Solo el **cambio** entre sus periodos | Toda la serie diaria |
 | **Serie futura** | Lo observado, perturbado mes a mes | El modelo corregido |
 | **Corrige** | La media mensual | Toda la distribución (medias, extremos, días secos) |
-| **Variabilidad futura** | La misma de 1985–2014 | La del modelo |
+| **Variabilidad futura** | La misma de 1981–2014 | La del modelo |
 | **Ventaja** | Simple, robusto | Conserva la secuencia de años del modelo |
 
 . . .
@@ -419,7 +484,15 @@ Sesgo anual de la cuenca, 1985–2014: lluvia **+4.6 a +7.6 %**, Tmax **+2.1 a +
 Delta: P~fut~ = P~obs~ × (P~mod,fut~ / P~mod,ref~) y T~fut~ = T~obs~ + (T~mod,fut~ − T~mod,ref~), para cada mes y subcuenca.
 :::
 
-## Método delta
+## Método delta: la idea {.nostretch}
+
+![](../../assets/img/s09_concepto_delta.png){width="72%" fig-align="center"}
+
+::: {.fuente}
+El modelo **solo aporta el cambio** (2): su sesgo se cancela en la razón (marzo: modelo 125 mm, PISCO 105 mm; solo importa que sube 26 %). El futuro es **lo observado escalado** (3, 4). En temperatura se **suma** la diferencia (enero: +1.9 °C). Subcuenca 1, ACCESS-CM2.
+:::
+
+## Método delta en R
 
 ```r
 deltas <- inner_join(regimen(cmip, ref, cuenca = FALSE),
@@ -431,8 +504,8 @@ deltas <- inner_join(regimen(cmip, ref, cuenca = FALSE),
             d_tmax = tmax_fut - tmax_ref,      # diferencia
             d_tmin = tmin_fut - tmin_ref)
 #>   ACCESS-CM2, subcuenca 1:   mes  f_pp  d_tmax  d_tmin
-#>                                1  1.00    1.61    1.36
-#>                                3  1.19    1.56    1.23
+#>                                1  1.02    1.86    1.73
+#>                                3  1.26    1.76    1.43
 ```
 
 . . .
@@ -444,6 +517,14 @@ fut_delta <- obs |>
   inner_join(deltas, by = c("subcuenca", "mes")) |>
   mutate(pp = pp * f_pp, tmax = tmax + d_tmax, tmin = tmin + d_tmin)
 ```
+
+## Mapeo de cuantiles: la idea {.nostretch}
+
+![](../../assets/img/s09_concepto_qm.png){width="92%" fig-align="center"}
+
+::: {.fuente}
+Para cada valor del modelo: (1) se busca su **probabilidad** en la curva del modelo y (2) se reemplaza por el valor de PISCO con **la misma probabilidad**. La mediana del modelo (4.7 mm) pasa a 3.7 mm. La función de transferencia se ajusta en 1981–2014 y se aplica a **toda** la serie, futuro incluido. Subcuenca 1, febrero, ACCESS-CM2.
+:::
 
 ## Mapeo de cuantiles: un caso
 
@@ -460,9 +541,9 @@ m_cor <- doQmap(m_ref, ajuste)
 
 | | Media | P95 | Días secos |
 |:---|:---:|:---:|:---:|
-| PISCO | 4.52 | 12.3 | 3.8 % |
-| Modelo | 5.04 | 11.8 | 5.5 % |
-| Corregido | 4.54 | 12.1 | 4.1 % |
+| PISCO | 4.55 | 12.3 | 3.7 % |
+| Modelo | 4.99 | 11.8 | 5.7 % |
+| Corregido | 4.57 | 12.4 | 4.0 % |
 :::
 
 ::: {.column width="50%"}
@@ -478,10 +559,10 @@ Cada valor del modelo se reemplaza por el valor observado **del mismo cuantil**.
 
 ```r
 corregir <- function(o, m, variable) {
-  m_ref  <- m$valor[year(m$fecha) %in% ref]        # ajuste en 1985-2014
+  m_ref  <- m$valor[year(m$fecha) %in% ref]        # ajuste en 1981-2014
   ajuste <- fitQmap(o$valor, m_ref, method = "QUANT",
                     wet.day = variable == "pp")
-  tibble(fecha = m$fecha, valor = doQmap(m$valor, ajuste))  # aplica 1981-2049
+  tibble(fecha = m$fecha, valor = doQmap(m$valor, ajuste))  # aplica 1981-2050
 }
 
 cmip_qm <- cmip |>
@@ -504,25 +585,25 @@ cmip_qm <- cmip |>
 ![](../../assets/img/s09_CMIP6_corregido.png){width="90%" fig-align="center"}
 
 ::: {.fuente}
-Después de corregir, los tres modelos reproducen el régimen de PISCO en 1985–2014: lluvia 720–723 mm (PISCO 716), Tmax 13.8 °C y Tmin −1.2 °C. Las líneas quedan una sobre otra.
+Después de corregir, los tres modelos reproducen el régimen de PISCO en 1981–2014: lluvia 729–732 mm (PISCO 725), Tmax 13.8 °C y Tmin −1.2 °C. Las líneas quedan una sobre otra.
 :::
 
-## Señales de cambio: 2020–2049 frente a 1985–2014
+## Señales de cambio al 2030–2050
 
 | Variable | Método | ACCESS-CM2 | MIROC6 | MPI-ESM1-2-HR |
 |:---|:---|:---:|:---:|:---:|
-| Lluvia | Sin corregir | +1.2 % | +8.3 % | +9.5 % |
-| | Delta | +1.2 % | +7.7 % | +9.8 % |
-| | Cuantiles | +2.1 % | +6.8 % | +8.2 % |
-| Tmax | Sin corregir y delta | +1.51 °C | +1.15 °C | +0.92 °C |
-| | Cuantiles | +1.20 °C | +0.85 °C | +0.64 °C |
-| Tmin | Sin corregir y delta | +1.32 °C | +0.91 °C | +0.94 °C |
-| | Cuantiles | +1.22 °C | +0.95 °C | +0.80 °C |
+| Lluvia | Sin corregir | +3.8 % | +9.8 % | +11.5 % |
+| | Delta | +3.4 % | +9.6 % | +12.6 % |
+| | Cuantiles | +4.7 % | +8.4 % | +9.9 % |
+| Tmax | Sin corregir y delta | +1.81 °C | +1.30 °C | +1.09 °C |
+| | Cuantiles | +1.44 °C | +0.98 °C | +0.78 °C |
+| Tmin | Sin corregir y delta | +1.62 °C | +1.09 °C | +1.11 °C |
+| | Cuantiles | +1.48 °C | +1.12 °C | +0.94 °C |
 
 . . .
 
 ::: {.fuente}
-Los tres modelos coinciden: **más calor** (+0.6 a +1.5 °C) y **algo más de lluvia** (+1 a +10 %). El método delta conserva la señal del modelo; el mapeo de cuantiles la **modifica**, sobre todo en Tmax (ejercicio E3). Ensamble (cuantiles): +5.7 % de lluvia, +0.9 °C Tmax, +1.0 °C Tmin.
+Cambio respecto a 1981–2014. Los tres modelos coinciden: **más calor** (+0.8 a +1.8 °C) y **algo más de lluvia** (+3 a +13 %). El método delta conserva la señal del modelo; el mapeo de cuantiles la **modifica**, sobre todo en Tmax (ejercicio E3). Ensamble (cuantiles): +7.7 % de lluvia, +1.1 °C Tmax, +1.2 °C Tmin.
 :::
 
 ## Señal mensual
@@ -763,7 +844,7 @@ Simulación futura (SSP2-4.5) y comparación del régimen de caudales
 
 - Se usa el GR4J **calibrado** en el bloque 04 (`outputs/modelo_GR4J_Huancane.rds`): los parámetros no cambian.
 - Solo cambian los **forzantes**: lluvia corregida y ETP de Hargreaves con las temperaturas corregidas.
-- Cuantiles: una corrida por modelo, de 1981 a 2049; referencia y futuro salen **de la misma corrida**.
+- Cuantiles: una corrida por modelo, de 1981 a 2050; referencia y futuro salen **de la misma corrida**.
 - Delta: referencia = PISCO observado; futuro = PISCO perturbado.
 
 . . .
@@ -774,6 +855,7 @@ Supuesto fuerte: la cuenca responde en el futuro igual que en 1984–2004 (mismo
 
 ## Una función para simular cualquier clima
 
+::: {style="font-size: 0.85em"}
 ```r
 simular <- function(forzantes, anios_warmup = 3) {
   f <- forzantes |>
@@ -781,12 +863,13 @@ simular <- function(forzantes, anios_warmup = 3) {
     mutate(etp = hargreaves(tmax, tmin, lat, fecha))
   # ... matrices de pp y etp con a_matriz() (columnas en el orden de griwrm)
   InputsModel <- CreateInputsModel(griwrm, DatesR = fechas,
-                                   Precip = a_matriz("pp"),
-                                   PotEvap = a_matriz("etp"))
-  RunOptions <- CreateRunOptions(InputsModel, IndPeriod_WarmUp = ...,
-                                 IndPeriod_Run = ...)
+                                   Precip = a_matriz("pp"), PotEvap = a_matriz("etp"))
+  n_warm <- 365 * anios_warmup
+  RunOptions <- CreateRunOptions(InputsModel,
+                                 IndPeriod_WarmUp = 1:n_warm,          # 1981-1983
+                                 IndPeriod_Run = seq_along(fechas))    # desde 1981
   salida <- RunModel(InputsModel, RunOptions, Param)
-  tibble(fecha = ..., q = attr(salida, "Qm3s")[["5"]])
+  tibble(fecha = fechas, q = attr(salida, "Qm3s")[["5"]])
 }
 
 q_qm <- cmip_qm |>
@@ -794,13 +877,18 @@ q_qm <- cmip_qm |>
   mutate(q = map(forzantes, simular)) |>
   unnest(q)
 ```
+:::
+
+::: {.fuente}
+La referencia empieza en 1981 y no hay años previos: se calienta con 1981–1983 y la corrida vuelve a empezar en 1981 con los almacenamientos ya cargados.
+:::
 
 ## Lluvia: cambio por subcuenca
 
 ![](../../assets/img/s10_Futuro_mapa_pp.png){width="100%" fig-align="center"}
 
 ::: {.fuente}
-Los tres modelos dan **más lluvia** en todas las subcuencas, pero con distinta intensidad: de +0.6 % (ACCESS-CM2) a +13 % (MPI-ESM1-2-HR). El mayor aumento está en la subcuenca 3, en el centro de la cuenca.
+Los tres modelos dan **más lluvia** en todas las subcuencas, pero con distinta intensidad: de +3 % (ACCESS-CM2) a +15 % (MPI-ESM1-2-HR). El mayor aumento está en la subcuenca 3, en el centro de la cuenca.
 :::
 
 ## Evapotranspiración: cambio por subcuenca
@@ -808,7 +896,7 @@ Los tres modelos dan **más lluvia** en todas las subcuencas, pero con distinta 
 ![](../../assets/img/s10_Futuro_mapa_etp.png){width="100%" fig-align="center"}
 
 ::: {.fuente}
-La ETP sube en todos los casos (+2 a +6 %), más en la cabecera (subcuenca 1). El modelo que más calienta (ACCESS-CM2, ETP ~+5 %) es el que menos lluvia agrega (~+1 %): por eso es el único con **menos caudal** en el futuro.
+La ETP sube en todos los casos (+3 a +7 %), más en la cabecera (subcuenca 1). El modelo que más calienta (ACCESS-CM2, ETP ~+6 %) es el que menos lluvia agrega (~+5 %): por eso es el único en que el caudal **no aumenta**.
 :::
 
 ## Caudal: cambio por tramo de río
@@ -823,7 +911,7 @@ q_nodos <- cmip_qm |>
 ```
 
 ::: {.fuente}
-El caudal responde más que la lluvia y no igual en todos los tramos: en el tramo 4 la lluvia sube +7 a +8 % (MIROC6, MPI) y el caudal +23 a +38 %. Con ACCESS-CM2 el tramo 2 pierde caudal (−5 %) porque la ETP (+5 %) crece más que la lluvia (+1 %).
+El caudal responde más que la lluvia y no igual en todos los tramos: en el tramo 4 la lluvia sube +9 a +10 % (MIROC6, MPI) y el caudal +22 a +46 %. Con ACCESS-CM2 el tramo 2 pierde caudal (−4 %) porque la ETP (+6 %) crece más que la lluvia (+4 %).
 :::
 
 ## Régimen de caudales: referencia y futuro
@@ -834,17 +922,17 @@ El caudal responde más que la lluvia y no igual en todos los tramos: en el tram
 
 | Modelo | Método | Q medio | Lluvias (dic–mar) | Estiaje (jun–set) |
 |:---|:---|:---:|:---:|:---:|
-| ACCESS-CM2 | Cuantiles | −1.1 % | −4.1 % | +3.8 % |
-| | Delta | −6.1 % | −9.2 % | −0.5 % |
-| MIROC6 | Cuantiles | +14.5 % | +15.8 % | +3.9 % |
-| | Delta | +15.3 % | +15.5 % | +6.3 % |
-| MPI-ESM1-2-HR | Cuantiles | +30.1 % | +41.2 % | −3.1 % |
-| | Delta | +31.1 % | +41.6 % | −4.2 % |
+| ACCESS-CM2 | Cuantiles | −0.3 % | −4.0 % | +6.7 % |
+| | Delta | −2.1 % | −5.6 % | +1.4 % |
+| MIROC6 | Cuantiles | +13.4 % | +11.2 % | +18.9 % |
+| | Delta | +17.7 % | +15.3 % | +24.2 % |
+| MPI-ESM1-2-HR | Cuantiles | +36.1 % | +46.6 % | +1.2 % |
+| | Delta | +40.2 % | +51.3 % | +8.0 % |
 
 . . .
 
 ::: {.fuente}
-Lluvia +1 a +10 % → caudal −6 a +31 %: el caudal **amplifica** el cambio de la lluvia, y más calor (más ETP) no alcanza a compensarlo. Los dos métodos dan el mismo orden de magnitud; la **diferencia entre modelos** es mucho mayor que la diferencia entre métodos.
+Lluvia +3 a +13 % → caudal −2 a +40 %: el caudal **amplifica** el cambio de la lluvia, y más calor (más ETP) no alcanza a compensarlo. Los dos métodos dan el mismo orden de magnitud; la **diferencia entre modelos** es mucho mayor que la diferencia entre métodos.
 :::
 
 ## Cambio mes a mes
@@ -852,7 +940,7 @@ Lluvia +1 a +10 % → caudal −6 a +31 %: el caudal **amplifica** el cambio de 
 ![](../../assets/img/s10_Futuro_cambio.png){width="78%" fig-align="center"}
 
 ::: {.fuente}
-El cambio se concentra en **dic–ene**, el inicio de la época de lluvias. En estiaje los cambios son pequeños (±6 %).
+El cambio más grande está en **dic–ene** (MPI-ESM1-2-HR: +90 a +130 %), mientras que ACCESS-CM2 da menos caudal en esos meses. En estiaje los cambios son menores, salvo MIROC6 en junio (+33 a +42 %).
 :::
 
 ## Curva de duración
@@ -865,29 +953,29 @@ El cambio se concentra en **dic–ene**, el inicio de la época de lluvias. En e
 ::: {.column width="44%"}
 | | Q10 | Q50 | Q90 |
 |:---|:---:|:---:|:---:|
-| ACCESS | 46→47 | 6.2→6.2 | 2.6→2.7 |
-| MIROC6 | 46→52 | 6.4→6.7 | 2.7→2.8 |
-| MPI | 48→67 | 6.0→6.9 | 2.6→2.6 |
+| ACCESS | 48→51 | 6.4→6.5 | 2.7→2.8 |
+| MIROC6 | 48→55 | 6.5→7.1 | 2.7→2.9 |
+| MPI | 49→71 | 6.1→7.6 | 2.7→2.7 |
 
 m³/s, referencia → futuro
 :::
 ::::
 
 ::: {.fuente}
-Los caudales **altos** (Q10) son los que más cambian; los caudales bajos (Q90) casi no se mueven.
+Los caudales **altos** (Q10) son los que más cambian (+6 a +44 %); los caudales bajos (Q90) se mueven poco (+3 a +9 %).
 :::
 
 ## ¿Qué le decimos al usuario del agua?
 
-- **Temperatura**: señal clara y coherente entre modelos: +0.6 a +1.5 °C hacia 2020–2049.
-- **Lluvia y caudal**: los tres modelos van de "sin cambio" a "+30 % de caudal medio": la **incertidumbre** es mayor que la señal.
-- El estiaje casi no cambia en ningún caso: buena noticia para la oferta en época seca, pero con solo 3 modelos.
+- **Temperatura**: señal clara y coherente entre modelos: +0.8 a +1.8 °C hacia 2030–2050.
+- **Lluvia y caudal**: los tres modelos van de "sin cambio" a "+36 % de caudal medio": la **incertidumbre** es mayor que la señal.
+- El estiaje no disminuye en ningún modelo (+1 a +24 %): buena noticia para la oferta en época seca, pero con solo 3 modelos.
 - Un servicio climático no da **un** número: da un **rango** y explica de dónde sale.
 
 . . .
 
 ::: {.fuente}
-Para un estudio real: más modelos (≥ 10), más escenarios (SSP1-2.6, SSP3-7.0, SSP5-8.5), otros horizontes (2050–2079) y, si se puede, más de un modelo hidrológico.
+Para un estudio real: más modelos (≥ 10), más escenarios (SSP1-2.6, SSP3-7.0, SSP5-8.5), otros horizontes (2071–2100) y, si se puede, más de un modelo hidrológico.
 :::
 
 ## Cierre {.seccion background-color="#0B5394"}
@@ -897,3 +985,204 @@ Para un estudio real: más modelos (≥ 10), más escenarios (SSP1-2.6, SSP3-7.0
 :::
 
 R + Python, recursos y rutas de continuación
+
+## El flujo completo en dos días
+
+::: {style="font-size: 0.8em"}
+| Paso | Script | Lo que obtuvimos |
+|:---|:-:|:---|
+| Fundamentos de R | `01` | objetos, data frames, fechas, paquetes |
+| Estaciones SENAMHI | `02` `03` | datos ordenados, control de calidad, funciones, bucles |
+| Grillados PISCO | `04` | lluvia areal 716 mm/año, ETP, balance P – ETP |
+| CC observado | `05` | Tmáx +0.35 °C/década; lluvia sin tendencia |
+| CMIP6 + sesgo | `06` | 3 modelos SSP2-4.5 corregidos (cuantiles y delta) |
+| GR4J: calibración | `07` | KGE 0.86 (calibración), 0.81 (validación) |
+| GR4J: futuro | `08` | caudal medio 2030–2050: de 0 % a +36 % |
+:::
+
+::: {.fuente}
+Cada script lee lo que produce el anterior: con los datos crudos y los scripts `00`–`08` cualquiera puede **reproducir** todo el análisis.
+:::
+
+## R y Python: no compiten
+
+| Tarea | R | Python |
+|:---|:---|:---|
+| Tablas | `dplyr`, `tidyr` | `pandas`, `polars` |
+| Gráficos | `ggplot2` | `matplotlib`, `plotnine` |
+| Grillas y NetCDF | `terra`, `ncdf4` | `xarray`, `rioxarray` |
+| Vectores (shapefiles) | `sf` | `geopandas` |
+| Tendencias | `trend`, `modifiedmk` | `pymannkendall` |
+| Corrección de sesgo | `qmap` | `xsdba` (xclim) |
+| Métricas de ajuste | `hydroGOF` | `hydroeval`, `HydroErr` |
+| Google Earth Engine | `rgee` | `earthengine-api`, `geemap` |
+
+::: {.fuente}
+Lo importante es el **método** (control de calidad, corrección de sesgo, calibración), no el lenguaje. Y no hay que elegir: los dos se pueden combinar.
+:::
+
+## R + Python con `reticulate`
+
+:::: {.columns}
+::: {.column style="width: 60%; font-size: 0.85em"}
+```{.r}
+library(reticulate)
+use_python(Sys.which("python"))
+
+xr <- import("xarray")  # import xarray as xr
+
+ds <- xr$open_dataset(archivo)  # PISCOp v3
+
+# diario -> anual -> promedio de la grilla
+anual_py <- ds$pp$
+  resample(time = "YE")$sum()$
+  mean(c("latitude", "longitude"))$
+  to_pandas()
+
+pp_py <- tibble(
+  anio = 1981:2025,
+  pp_python = as.numeric(anual_py))
+```
+:::
+
+::: {.column width="40%"}
+- El `$` de R reemplaza al `.` de Python.
+- `xarray` lee las **fechas** del NetCDF por sí solo.
+- El resultado vuelve a R como un vector: se sigue con `tidyverse`.
+
+```{.r}
+head(pp_py, 3)
+#>    anio pp_python
+#> 1  1981      835.
+#> 2  1982      683.
+#> 3  1983      501.
+```
+:::
+::::
+
+::: {.fuente}
+Script `ejercicios/09_R_y_Python.R`. Requiere Python 3 con `pip install xarray netCDF4 pandas`.
+:::
+
+## ¿R y Python dan lo mismo?
+
+:::: {.columns}
+::: {.column style="width: 45%; font-size: 0.85em"}
+```{.r}
+# Lo mismo con terra (Día 1)
+pp_r <- tapp(r, "years", sum) |>
+  global("mean", na.rm = TRUE) |>
+  as_tibble() |>
+  transmute(anio = 1981:2025,
+            pp_r = mean)
+
+comparar <- left_join(pp_py, pp_r) |>
+  mutate(dif = pp_python - pp_r)
+
+max(abs(comparar$dif))
+#> [1] 0.0001372217
+```
+:::
+
+::: {.column style="width: 55%; font-size: 0.85em"}
+```{.r}
+# También se escribe Python directo
+py_run_string("
+n = ds.pp.sel(time=slice('1991','2020'))
+c = n.groupby('time.month').sum() / 30
+clim = c.mean(['latitude','longitude'])
+")
+
+# Lo de Python se lee con py$
+round(py$clim$values, 1)
+#>  [1] 127.7 121.7  99.0  40.9  14.9   6.4
+#>  [7]   6.0   9.7  22.9  59.4  66.1 111.9
+```
+:::
+::::
+
+::: {.fuente}
+Diferencia máxima: 0.00014 mm/año, solo redondeo. Mismo dato + mismo método = mismo resultado, en cualquier lenguaje.
+:::
+
+## Recursos para seguir
+
+:::: {.columns}
+::: {.column width="50%"}
+**Para aprender**
+
+- *R for Data Science* (2.ª ed.), Wickham et al. — [r4ds.hadley.nz](https://r4ds.hadley.nz)
+- *Geocomputation with R* — [r.geocompx.org](https://r.geocompx.org)
+- *Geocomputation with Python* — [py.geocompx.org](https://py.geocompx.org)
+- Slater et al. (2019). Using R in hydrology. *HESS*, 23, 2939–2963. [doi:10.5194/hess-23-2939-2019](https://doi.org/10.5194/hess-23-2939-2019)
+- CRAN Task View: Hydrological Data and Modeling — [cran.r-project.org/web/views/Hydrology.html](https://cran.r-project.org/web/views/Hydrology.html)
+:::
+
+::: {.column width="50%"}
+**Datos**
+
+- **SENAMHI**: estaciones hidrometeorológicas del Perú
+- **PISCO**: precipitación y temperatura grillada (SENAMHI)
+- **NEX-GDDP-CMIP6** en GEE: `NASA/GDDP-CMIP6`
+- **ERA5-Land** en GEE: `ECMWF/ERA5_LAND/DAILY_AGGR`
+- **CHIRPS** en GEE: `UCSB-CHG/CHIRPS/DAILY`
+:::
+::::
+
+## Rutas de continuación
+
+- **Más clima futuro**: más modelos (≥ 10), otros escenarios (SSP1-2.6, SSP3-7.0, SSP5-8.5) y horizontes (2071–2100).
+- **Otros modelos hidrológicos**: SWAT, WEAP o los demás modelos GR (`airGR`), y comparar resultados.
+- **Demanda de agua**: sumar riego y consumo poblacional al balance para ver la brecha oferta – demanda.
+- **Tableros interactivos**: compartir resultados con `shiny` o Quarto Dashboards.
+- **Pronóstico**: aprendizaje automático para pronosticar caudales y niveles a corto plazo.
+
+. . .
+
+::: {.fuente}
+La regla de oro: **un script por paso**, datos crudos que nunca se tocan, y resultados que se pueden volver a generar.
+:::
+
+## Materiales del curso
+
+:::: {.columns}
+::: {.column width="48%"}
+Todo el curso está en GitHub:
+
+**[github.com/arnoldtraverso/Curso-Taller-R-Hidrologia](https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia)**
+
+1. Descargar el repositorio (*Code → Download ZIP*).
+2. Abrir `Curso-Taller-R-Hidrologia.Rproj`.
+3. Ejecutar `00_Instalacion_paquetes.R`.
+4. Ejecutar los scripts `01` a `08` en orden.
+:::
+
+::: {.column width="52%"}
+<pre class="arbol-carpetas"><span class="raiz">Curso-Taller-R-Hidrologia/</span>
+<span class="rama">├──</span> <span class="rproj">*.Rproj</span>
+<span class="rama">├──</span> <span class="dir">data/</span>
+<span class="rama">│   ├──</span> <span class="dir">raw/</span>        <span class="nota">datos crudos</span>
+<span class="rama">│   ├──</span> <span class="dir">cmip6/</span>      <span class="nota">modelos CMIP6</span>
+<span class="rama">│   └──</span> <span class="dir">processed/</span>  <span class="nota">se generan</span>
+<span class="rama">├──</span> <span class="dir">ejercicios/</span>     <span class="nota">scripts 00–09</span>
+<span class="rama">├──</span> <span class="dir">outputs/</span>        <span class="nota">resultados</span>
+<span class="rama">└──</span> <span class="dir">slides/</span>         <span class="nota">diapositivas</span>
+</pre>
+:::
+::::
+
+::: {.fuente}
+El archivo nacional de PISCOp v3 (1.5 GB) no está en el repositorio: el recorte de la cuenca (`PISCOp_v3_diario_Huancane.nc`) sí.
+:::
+
+## ¡Gracias! {.seccion background-color="#073763"}
+
+Kevin Arnold Traverso Yucra
+
+Correo: [arnold.traverso@gmail.com](mailto:arnold.traverso@gmail.com)
+
+LinkedIn: [linkedin.com/in/kevin-arnold-traverso](https://www.linkedin.com/in/kevin-arnold-traverso)
+
+GitHub: [github.com/arnoldtraverso](https://github.com/arnoldtraverso)
+
+CIP Puno - Cap. Ingeniería Agrícola · FIAGRH - UNA Puno · IICTA-FIA

@@ -7,9 +7,9 @@
 # Proyecciones NEX-GDDP-CMIP6 (SSP2-4.5) de 3 modelos por subcuenca, descargadas
 # de Google Earth Engine con ejercicios/Descarga_CMIP6_GEE.js. Se comparan con
 # PISCO, se corrige el sesgo con dos métodos (delta y mapeo de cuantiles) y se
-# calculan las señales de cambio para el futuro cercano.
+# calculan las señales de cambio para el futuro 2030-2050.
 #
-#   Periodo de referencia: 1985-2014     Futuro cercano: 2020-2049
+#   Periodo de referencia (histórico): 1981-2014     Futuro: 2030-2050
 #
 # Cómo usar este script:
 #   - Abre el proyecto Curso-Taller-R-Hidrologia.Rproj
@@ -26,8 +26,8 @@ library(qmap)         # mapeo de cuantiles
 library(tidyverse)
 library(terra)        # áreas de las subcuencas
 
-ref <- 1985:2014      # referencia: últimos 30 años del histórico CMIP6
-fut <- 2020:2049      # futuro cercano (los datos llegan a 2049)
+ref <- 1981:2014      # referencia: todo el histórico CMIP6 que cubre PISCO
+fut <- 2030:2050      # futuro (los datos CMIP6 llegan a 2050)
 
 colores <- c("PISCO" = "black", "ACCESS-CM2" = "#0B5394",
              "MIROC6" = "#8E7CC3", "MPI-ESM1-2-HR" = "#6AA84F")
@@ -56,12 +56,12 @@ cmip
 #>   fecha      subcuenca modelo        pp  tmax  tmin
 #>   1981-01-01         1 ACCESS-CM2  9.06  14.7  1.76
 #>   1981-01-01         3 ACCESS-CM2  8.85  16.8  4.05
-#>   ... 378,030 filas (3 modelos x 5 subcuencas x 25202 días)
+#>   ... 383,505 filas (3 modelos x 5 subcuencas x 25567 días)
 
 count(cmip, modelo)
-#>   ACCESS-CM2    126010
-#>   MIROC6        126010
-#>   MPI-ESM1-2-HR 126010
+#>   ACCESS-CM2    127835
+#>   MIROC6        127835
+#>   MPI-ESM1-2-HR 127835
 
 
 # 3. Datos observados (PISCO) por subcuenca ---------------------------------------
@@ -106,7 +106,7 @@ regimen <- function(datos, anios, cuenca = TRUE) {
 
 reg_crudo <- bind_rows(regimen(obs, ref), regimen(cmip, ref))
 
-# Sesgo anual de la cuenca (modelo - PISCO), 1985-2014
+# Sesgo anual de la cuenca (modelo - PISCO), 1981-2014
 sesgo <- reg_crudo |>
   group_by(modelo) |>
   summarise(pp = sum(pp), tmax = mean(tmax), tmin = mean(tmin)) |>
@@ -115,10 +115,10 @@ sesgo <- reg_crudo |>
          sesgo_tmin   = tmin - tmin[modelo == "PISCO"])
 sesgo
 #>   modelo           pp  tmax  tmin sesgo_pp_pct sesgo_tmax sesgo_tmin
-#>   ACCESS-CM2      758  16.0  1.76         5.9       2.21       2.94
-#>   MIROC6          749  15.9  1.55         4.6       2.09       2.72
-#>   MPI-ESM1-2-HR   770  16.0  1.84         7.6       2.12       3.02
-#>   PISCO           716  13.8 -1.18         0         0          0
+#>   ACCESS-CM2      755  16.0  1.71         4.1       2.20       2.90
+#>   MIROC6          755  15.9  1.54         4.2       2.13       2.74
+#>   MPI-ESM1-2-HR   761  15.9  1.77         5.0       2.11       2.97
+#>   PISCO           725  13.8 -1.19         0         0          0
 
 grafico_regimen <- function(datos, titulo) {
   datos |>
@@ -135,7 +135,7 @@ grafico_regimen <- function(datos, titulo) {
     tema
 }
 
-g_sesgo <- grafico_regimen(reg_crudo, "Modelos SIN corregir frente a PISCO (1985-2014)")
+g_sesgo <- grafico_regimen(reg_crudo, "Modelos SIN corregir frente a PISCO (1981-2014)")
 g_sesgo
 
 
@@ -155,12 +155,12 @@ deltas <- inner_join(regimen(cmip, ref, cuenca = FALSE),
             d_tmin = tmin_fut - tmin_ref)
 deltas |> filter(subcuenca == 1, modelo == "ACCESS-CM2")
 #>   mes  f_pp d_tmax d_tmin
-#>     1  1.00   1.61   1.36
-#>     2  1.01   1.50   1.38
-#>     3  1.19   1.56   1.23
+#>     1  1.02   1.86   1.73
+#>     2  1.02   1.80   1.67
+#>     3  1.26   1.76   1.43
 #>   ...
 
-# Serie "futura" = observado 1985-2014 con los factores de cada mes
+# Serie "futura" = observado 1981-2014 con los factores de cada mes
 # (conserva la variabilidad observada; solo cambia la media mensual)
 fut_delta <- obs |>
   filter(year(fecha) %in% ref) |>
@@ -190,9 +190,9 @@ tibble(PISCO = o, Modelo = m_ref, Corregido = m_cor) |>
   summarise(across(everything(), list(media = mean, p95 = \(x) quantile(x, 0.95),
                                       secos = \(x) mean(x < 0.1))))
 #>               media   p95  secos
-#>   PISCO        4.52  12.3  0.038
-#>   Modelo       5.04  11.8  0.055
-#>   Corregido    4.54  12.1  0.041
+#>   PISCO        4.55  12.3  0.037
+#>   Modelo       4.99  11.8  0.057
+#>   Corregido    4.57  12.4  0.040
 
 g_cuantiles <- tibble(PISCO = o, `Modelo sin corregir` = m_ref, Corregido = m_cor) |>
   pivot_longer(everything(), names_to = "serie", values_to = "pp") |>
@@ -210,7 +210,7 @@ g_cuantiles <- tibble(PISCO = o, `Modelo sin corregir` = m_ref, Corregido = m_co
 g_cuantiles
 
 # 6.2 Todos los casos: 3 modelos x 5 subcuencas x 3 variables x 12 meses
-# Se ajusta en la referencia y se aplica a TODA la serie del modelo (1981-2049)
+# Se ajusta en la referencia y se aplica a TODA la serie del modelo (1981-2050)
 corregir <- function(o, m, variable) {
   m_ref  <- m$valor[year(m$fecha) %in% ref]
   ajuste <- fitQmap(o$valor, m_ref, method = "QUANT",
@@ -237,8 +237,8 @@ cmip_qm <- cmip |>
   arrange(modelo, subcuenca, fecha)
 cmip_qm
 #>   modelo     subcuenca fecha         pp  tmax  tmin
-#>   ACCESS-CM2         1 1981-01-01  8.75  12.5 0.766
-#>   ACCESS-CM2         1 1981-01-02  3.15  11.3 1.02
+#>   ACCESS-CM2         1 1981-01-01  9.01  12.5 0.760
+#>   ACCESS-CM2         1 1981-01-02  3.28  11.3 1.05
 
 # Control: la Tmin corregida no debe superar a la Tmax corregida
 cmip_qm |> filter(tmin >= tmax) |> nrow()
@@ -249,20 +249,20 @@ cmip_qm |> filter(tmin >= tmax) |> nrow()
 
 reg_qm <- bind_rows(regimen(obs, ref), regimen(cmip_qm, ref))
 
-g_corregido <- grafico_regimen(reg_qm, "Modelos CORREGIDOS (cuantiles) frente a PISCO (1985-2014)")
+g_corregido <- grafico_regimen(reg_qm, "Modelos CORREGIDOS (cuantiles) frente a PISCO (1981-2014)")
 g_corregido
 
 reg_qm |>
   group_by(modelo) |>
   summarise(pp = sum(pp), tmax = mean(tmax), tmin = mean(tmin))
 #>   modelo           pp  tmax  tmin
-#>   ACCESS-CM2      720  13.8 -1.18
-#>   MIROC6          720  13.8 -1.18
-#>   MPI-ESM1-2-HR   723  13.8 -1.18
-#>   PISCO           716  13.8 -1.18
+#>   ACCESS-CM2      729  13.8 -1.19
+#>   MIROC6          729  13.8 -1.19
+#>   MPI-ESM1-2-HR   732  13.8 -1.19
+#>   PISCO           725  13.8 -1.19
 
 
-# 8. Señales de cambio: futuro 2020-2049 frente a 1985-2014 --------------------------------
+# 8. Señales de cambio: futuro 2030-2050 frente a 1981-2014 --------------------------------
 
 senal <- function(datos, metodo) {
   inner_join(regimen(datos, ref), regimen(datos, fut),
@@ -274,7 +274,7 @@ senal <- function(datos, metodo) {
     mutate(metodo = metodo, .before = 1)
 }
 
-# Para el método delta, la serie futura está fechada en 1985-2014: se compara
+# Para el método delta, la serie futura está fechada en 1981-2014: se compara
 # directamente con el observado de ese periodo
 senal_delta <- inner_join(
   regimen(fut_delta, ref),
@@ -292,22 +292,22 @@ senales <- bind_rows(senal(cmip, "Sin corregir"),
   mutate(across(where(is.numeric), \(x) round(x, 2)))
 senales
 #>   metodo       modelo        dP_pct dTmax dTmin
-#>   Sin corregir ACCESS-CM2      1.23  1.51  1.32
-#>   Sin corregir MIROC6          8.30  1.15  0.91
-#>   Sin corregir MPI-ESM1-2-HR   9.48  0.92  0.94
-#>   Cuantiles    ACCESS-CM2      2.08  1.20  1.22
-#>   Cuantiles    MIROC6          6.83  0.85  0.95
-#>   Cuantiles    MPI-ESM1-2-HR   8.23  0.64  0.80
-#>   Delta        ACCESS-CM2      1.21  1.51  1.32
-#>   Delta        MIROC6          7.68  1.15  0.91
-#>   Delta        MPI-ESM1-2-HR   9.76  0.92  0.94
+#>   Sin corregir ACCESS-CM2      3.82  1.81  1.62
+#>   Sin corregir MIROC6          9.77  1.30  1.09
+#>   Sin corregir MPI-ESM1-2-HR  11.47  1.09  1.11
+#>   Cuantiles    ACCESS-CM2      4.74  1.44  1.48
+#>   Cuantiles    MIROC6          8.41  0.98  1.12
+#>   Cuantiles    MPI-ESM1-2-HR   9.89  0.78  0.94
+#>   Delta        ACCESS-CM2      3.37  1.81  1.62
+#>   Delta        MIROC6          9.62  1.30  1.09
+#>   Delta        MPI-ESM1-2-HR  12.58  1.09  1.11
 
 # Promedio del ensamble (cuantiles)
 senales |>
   filter(metodo == "Cuantiles") |>
   summarise(across(c(dP_pct, dTmax, dTmin), mean))
 #>   dP_pct dTmax dTmin
-#>     5.71  0.90  0.99
+#>     7.68  1.07  1.18
 
 # Señal mensual (cuantiles) por modelo
 senal_mes <- inner_join(regimen(cmip_qm, ref), regimen(cmip_qm, fut),
@@ -324,7 +324,7 @@ g_senal <- ggplot(senal_mes, aes(mes, cambio, fill = modelo)) +
   facet_wrap(~ variable, scales = "free_y", ncol = 1) +
   scale_x_continuous(breaks = 1:12, labels = meses) +
   scale_fill_manual(values = colores, name = NULL) +
-  labs(title = "Señal de cambio 2020-2049 frente a 1985-2014 (SSP2-4.5, cuantiles)",
+  labs(title = "Señal de cambio 2030-2050 frente a 1981-2014 (SSP2-4.5, cuantiles)",
        x = NULL, y = NULL) +
   tema
 g_senal
@@ -341,13 +341,13 @@ anual <- bind_rows(obs, cmip_qm) |>
   pivot_longer(-c(modelo, anio), names_to = "variable", values_to = "valor")
 
 g_anual <- ggplot(anual, aes(anio, valor, color = modelo)) +
-  annotate("rect", xmin = 2020, xmax = 2049, ymin = -Inf, ymax = Inf, fill = "grey93") +
+  annotate("rect", xmin = 2030, xmax = 2050, ymin = -Inf, ymax = Inf, fill = "grey93") +
   geom_line(aes(linewidth = modelo == "PISCO")) +
   facet_wrap(~ variable, scales = "free_y", ncol = 1) +
   scale_color_manual(values = colores, name = NULL) +
   scale_linewidth_manual(values = c(0.6, 1.1), guide = "none") +
   labs(title = "Cuenca Huancané: PISCO y modelos corregidos (SSP2-4.5)",
-       subtitle = "Fondo gris: futuro cercano 2020-2049", x = NULL, y = NULL) +
+       subtitle = "Fondo gris: futuro 2030-2050", x = NULL, y = NULL) +
   tema
 g_anual
 
@@ -380,5 +380,5 @@ ggsave("outputs/figuras/CMIP6_anual.png",      g_anual,     width = 10, height =
 # E3. Compara la señal de cambio de Tmax "Sin corregir" y "Cuantiles".
 #     ¿El mapeo de cuantiles conserva la señal del modelo?
 
-# E4. Calcula la señal para el horizonte 2035-2049 en lugar de 2020-2049.
+# E4. Calcula la señal para el horizonte 2041-2050 en lugar de 2030-2050.
 #     ¿El cambio crece con el tiempo?

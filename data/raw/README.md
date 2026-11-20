@@ -104,7 +104,7 @@ Fuente: PISCO temperatura diaria 1981-2020 (SENAMHI), promediada por subcuenca:
 
 ## ../cmip6/ — proyecciones NEX-GDDP-CMIP6 (SSP2-4.5)
 
-Archivos `Huancane_<MODELO>_ssp245.csv` descargados de Google Earth Engine (colección `NASA/GDDP-CMIP6`) con `ejercicios/Descarga_CMIP6_GEE.js`: promedio diario por subcuenca, 1981-01-01 a 2049-12-31 (histórico hasta 2014, SSP2-4.5 desde 2015).
+Archivos `Huancane_<MODELO>_ssp245.csv` descargados de Google Earth Engine (colección `NASA/GDDP-CMIP6`) con `ejercicios/Descarga_CMIP6_GEE.js`: promedio diario por subcuenca, 1981-01-01 a 2050-12-31 (histórico hasta 2014, SSP2-4.5 desde 2015).
 
 Columnas: `Fecha`, `Subcuenca`, `Modelo`, `Escenario` (historical / ssp245), `Pr_mm` (mm/día), `Tmax` y `Tmin` (°C).
 

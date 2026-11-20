@@ -51,9 +51,9 @@ periodos <- tribble(
   "PISCO precipitación",       1981, 2025, "Observado",
   "PISCO temperatura",         1981, 2020, "Observado",
   "CMIP6 histórico",           1981, 2014, "Modelo",
-  "CMIP6 SSP2-4.5",            2015, 2049, "Modelo",
-  "Periodo de referencia",     1985, 2014, "Análisis",
-  "Futuro cercano",            2020, 2049, "Análisis"
+  "CMIP6 SSP2-4.5",            2015, 2050, "Modelo",
+  "Periodo de referencia",     1981, 2014, "Análisis",
+  "Futuro",                    2030, 2050, "Análisis"
 ) |>
   mutate(fila = fct_rev(fct_inorder(fila)))
 
@@ -98,7 +98,7 @@ g_gcm <- bind_rows(gcm, pisco) |>
   mutate(variable = recode(variable, pp = "Precipitación anual (mm)",
                            tmax = "Temperatura máxima media (°C)")) |>
   ggplot(aes(anio, valor, color = Modelo)) +
-  annotate("rect", xmin = 2015, xmax = 2049, ymin = -Inf, ymax = Inf,
+  annotate("rect", xmin = 2015, xmax = 2050, ymin = -Inf, ymax = Inf,
            fill = "grey93") +
   geom_line(linewidth = 0.8) +
   facet_wrap(~ variable, scales = "free_y", ncol = 1) +
@@ -111,9 +111,9 @@ g_gcm <- bind_rows(gcm, pisco) |>
   theme(legend.position = "top", strip.text = element_text(face = "bold", hjust = 0))
 ggsave("assets/img/s08_gcm_crudo.png", g_gcm, width = 10, height = 6, dpi = 150)
 
-# Sesgo medio 1985-2014 (modelo - observado), para el texto de la diapositiva
+# Sesgo medio 1981-2014 (modelo - observado), para el texto de la diapositiva
 bind_rows(gcm, pisco) |>
-  filter(anio %in% 1985:2014) |>
+  filter(anio %in% 1981:2014) |>
   group_by(Modelo) |>
   summarise(pp = mean(pp), tmax = mean(tmax)) |>
   print()
