@@ -20,11 +20,13 @@
 
 # 1. Paquetes y periodos -----------------------------------------------------------
 
-# qmap carga el paquete MASS, que tiene su propia select(). Cargando qmap ANTES
-# que tidyverse, la select() de dplyr queda por encima y es la que se usa.
+# qmap carga el paquete MASS, que tiene su propia select(). Si tidyverse ya
+# estaba cargado en la sesión (por ejemplo, del script 05), la select() de MASS
+# queda por encima y aparece el error "unused argument (-modelo)".
 library(qmap)         # mapeo de cuantiles
 library(tidyverse)
 library(terra)        # áreas de las subcuencas
+select <- dplyr::select   # asegura la select() de dplyr, sin importar el orden
 
 ref <- 1981:2014      # referencia: todo el histórico CMIP6 que cubre PISCO
 fut <- 2030:2050      # futuro (los datos CMIP6 llegan a 2050)
