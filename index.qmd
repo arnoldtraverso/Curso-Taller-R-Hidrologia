@@ -24,5 +24,5 @@ Organizado por las entidades:
 Las diapositivas del Curso-Taller, para los dos días se encuentran en los siguientes enlaces:
 
 - [Diapositivas Día 1](slides/dia1/index.qmd)
-<!-- DÍA 2 oculto - [Diapositivas Día 2](slides/dia2/index.qmd) -->
+- [Diapositivas Día 2](slides/dia2/index.qmd)
 

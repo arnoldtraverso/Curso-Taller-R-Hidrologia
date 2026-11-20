@@ -1,5 +1,411 @@
 [
   {
+    "objectID": "slides/dia2/index.html#contenido-día-2",
+    "href": "slides/dia2/index.html#contenido-día-2",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Contenido día 2",
+    "text": "Contenido día 2\n\nCambio climático observado\nEscenarios futuros: conceptos\nDatos CMIP6 en GEE y corrección de sesgo\nModelamiento I: calibración y validación\nModelamiento II: simulación futura\nCierre"
+  },
+  {
+    "objectID": "slides/dia2/index.html#cambio-climático-observado",
+    "href": "slides/dia2/index.html#cambio-climático-observado",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Cambio climático observado",
+    "text": "Cambio climático observado\n\n01\n\nSeries areales de la cuenca, índices de extremos (ETCCDI) y tendencias (Mann-Kendall y pendiente de Sen)"
+  },
+  {
+    "objectID": "slides/dia2/index.html#servicios-climáticos-y-cambio-climático",
+    "href": "slides/dia2/index.html#servicios-climáticos-y-cambio-climático",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Servicios climáticos y Cambio Climático",
+    "text": "Servicios climáticos y Cambio Climático\n¿Que son los Servicios Climáticos?\nLos servicios climáticos consisten en la generación, traducción y entrega de información científica sobre el clima (pasado, presente y futuro) en un formato práctico y comprensible. Su objetivo es ayudar a personas, empresas y gobiernos a tomar mejores decisiones para reducir riesgos y aprovechar oportunidades frente a las condiciones del clima.\n¿Qué es el cambio climático?\nEl cambio climático es la variación a largo plazo de las temperaturas y los patrones habituales del clima en la Tierra. Aunque puede tener causas naturales, desde el siglo XIX se debe principalmente a las actividades humanas (como la quema de combustibles fósiles y la deforestación), que aumentan los gases de efecto invernadero y provocan el calentamiento global."
+  },
+  {
+    "objectID": "slides/dia2/index.html#series-diarias-de-la-cuenca",
+    "href": "slides/dia2/index.html#series-diarias-de-la-cuenca",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Series diarias de la cuenca",
+    "text": "Series diarias de la cuenca\n# Precipitación (PISCOp v3, 1981–2025) y temperatura (PISCO, 1981–2020)\n# por subcuenca -&gt; cuenca: promedio ponderado por área\nserie_cuenca &lt;- function(archivo, nombre) {\n  read_csv(archivo) |&gt;\n    pivot_longer(-Date, names_to = \"subcuenca\", values_to = \"valor\") |&gt;\n    mutate(subcuenca = parse_number(subcuenca)) |&gt;\n    left_join(areas, by = \"subcuenca\") |&gt;\n    group_by(fecha = Date) |&gt;\n    summarise({{ nombre }} := weighted.mean(valor, area_km2))\n}\n\nclima &lt;- serie_cuenca(\"data/pcp/Datos_pcp.csv\",   pp) |&gt;\n  left_join(serie_cuenca(\"data/temp/Datos_tmax.csv\", tmax), by = \"fecha\") |&gt;\n  left_join(serie_cuenca(\"data/temp/Datos_tmin.csv\", tmin), by = \"fecha\")\n#&gt;   fecha         pp  tmax  tmin\n#&gt;   1981-01-01  6.40  14.5  2.14\n\nLas llaves dobles alrededor de nombre y el operador := usan el nombre que le pasamos (pp, tmax, tmin) como nombre de la columna nueva."
+  },
+  {
+    "objectID": "slides/dia2/index.html#índices-de-extremos-etccdi",
+    "href": "slides/dia2/index.html#índices-de-extremos-etccdi",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Índices de extremos (ETCCDI)",
+    "text": "Índices de extremos (ETCCDI)\n\n\n\nÍndice\nDefinición\nUnidad\n\n\n\n\nPRCPTOT\nLluvia total anual en días húmedos (≥ 1 mm)\nmm\n\n\nRx1day / Rx5day\nMáxima lluvia en 1 día / en 5 días seguidos\nmm\n\n\nSDII\nIntensidad: lluvia por día húmedo\nmm/día\n\n\nR10mm\nDías con lluvia ≥ 10 mm\ndías\n\n\nCDD / CWD\nRacha seca (&lt; 1 mm) / húmeda (≥ 1 mm) más larga\ndías\n\n\nTX / TN\nTmax / Tmin media anual\n°C\n\n\nTXx / TNn\nTmax más alta / Tmin más baja del año\n°C\n\n\nFD\nDías con helada (Tmin &lt; 0 °C)\ndías\n\n\nDTR\nRango térmico diario medio (Tmax − Tmin)\n°C\n\n\n\n\nExpert Team on Climate Change Detection and Indices (ETCCDI): 27 índices estándar para comparar regiones y estudios."
+  },
+  {
+    "objectID": "slides/dia2/index.html#calcular-los-índices-con-summarise",
+    "href": "slides/dia2/index.html#calcular-los-índices-con-summarise",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Calcular los índices con summarise()",
+    "text": "Calcular los índices con summarise()\n# Racha más larga de TRUE seguidos: rle() cuenta \"corridas\"\nracha_max &lt;- function(condicion) {\n  r &lt;- rle(condicion)\n  max(c(0, r$lengths[r$values]))\n}\nracha_max(c(TRUE, TRUE, FALSE, TRUE, TRUE, TRUE))   #&gt; 3\n\nindices_pp &lt;- clima |&gt;\n  group_by(anio = year(fecha)) |&gt;\n  summarise(PRCPTOT = sum(pp[pp &gt;= 1]),\n            Rx1day  = max(pp),\n            Rx5day  = max(zoo::rollsum(pp, 5)),\n            CDD     = racha_max(pp &lt; 1),\n            CWD     = racha_max(pp &gt;= 1))\n\nindices_t &lt;- clima |&gt;\n  filter(year(fecha) &lt;= 2020) |&gt;\n  group_by(anio = year(fecha)) |&gt;\n  summarise(TX = mean(tmax), TN = mean(tmin),\n            FD = sum(tmin &lt; 0))                     # días con helada"
+  },
+  {
+    "objectID": "slides/dia2/index.html#anomalías-de-temperatura",
+    "href": "slides/dia2/index.html#anomalías-de-temperatura",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Anomalías de temperatura",
+    "text": "Anomalías de temperatura\n\n\nanomalias &lt;- indices |&gt;\n  filter(anio &lt;= 2020) |&gt;\n  mutate(\n    ref = anio %in% 1991:2020,\n    anom_TX = TX - mean(TX[ref]),\n    anom_TN = TN - mean(TN[ref]))\n\nAnomalía = valor del año − media de la normal 1991–2020. De 2013 a 2020 todos los años tienen Tmax sobre la normal. 1983, 1998 y 2016 coinciden con eventos El Niño."
+  },
+  {
+    "objectID": "slides/dia2/index.html#tendencias-mann-kendall-y-sen",
+    "href": "slides/dia2/index.html#tendencias-mann-kendall-y-sen",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Tendencias: Mann-Kendall y Sen",
+    "text": "Tendencias: Mann-Kendall y Sen\ntx &lt;- indices_t$TX            # Tmax media anual, 1981–2020\n\nmk.test(tx)                   # ¿hay tendencia monótona?\n#&gt; z = 4.3458, n = 40, p-value = 1.387e-05\n\nsens.slope(tx)                # ¿cuánto cambia por año?\n#&gt; Sen's slope 0.0345 °C/año  (IC 95 %: 0.023 a 0.048)\n\n# Series autocorrelacionadas: MK modificado (Hamed y Rao, 1998)\nacf(tx, plot = FALSE)$acf[2]  #&gt; 0.27\nmmkh(tx)[\"new P-value\"]       #&gt; 1.39e-05\n\n\n\nMann-Kendall: prueba no paramétrica, no supone normalidad. Sen: mediana de las pendientes entre todos los pares de años, robusta a valores extremos. Tmax sube +0.35 °C por década."
+  },
+  {
+    "objectID": "slides/dia2/index.html#todas-las-tendencias-con-map",
+    "href": "slides/dia2/index.html#todas-las-tendencias-con-map",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Todas las tendencias con map()",
+    "text": "Todas las tendencias con map()\n\n\ntendencia &lt;- function(x) {\n  x &lt;- x[!is.na(x)]\n  b &lt;- sens.slope(x)$estimates\n  tibble(\n    sen_decada = b * 10,\n    p_mmk = mmkh(x)[\"new P-value\"])\n}\n\nresumen &lt;- indices |&gt;\n  select(-anio) |&gt;\n  map(tendencia) |&gt;\n  list_rbind(names_to = \"indice\")\n\n\n\n\nÍndice\nSen /década\np (MMK)\n\n\n\n\nPRCPTOT\n−6.6 mm\n0.66\n\n\nRx1day\n+0.3 mm\n0.48\n\n\nCDD\n+2.3 días\n0.42\n\n\nTX\n+0.35 °C\n&lt; 0.001\n\n\nTN\n+0.14 °C\n0.004\n\n\nTXx\n+0.48 °C\n&lt; 0.001\n\n\nFD\n−4.5 días\n0.015\n\n\nDTR\n+0.18 °C\n0.002"
+  },
+  {
+    "objectID": "slides/dia2/index.html#cambio-climático-observado-en-la-cuenca",
+    "href": "slides/dia2/index.html#cambio-climático-observado-en-la-cuenca",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Cambio climático observado en la cuenca",
+    "text": "Cambio climático observado en la cuenca\n\n\nLa precipitación no muestra tendencia significativa (1981–2025). La temperatura sí: la cuenca se calienta y pierde ~4.5 días de helada por década (1981–2020). Tmax sube más rápido que Tmin, por eso el rango térmico (DTR) aumenta."
+  },
+  {
+    "objectID": "slides/dia2/index.html#escenarios-futuros-conceptos",
+    "href": "slides/dia2/index.html#escenarios-futuros-conceptos",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Escenarios futuros: conceptos",
+    "text": "Escenarios futuros: conceptos\n\n02\n\nCMIP6, escenarios SSP, ensambles de modelos y horizontes temporales"
+  },
+  {
+    "objectID": "slides/dia2/index.html#qué-es-un-modelo-climático-global",
+    "href": "slides/dia2/index.html#qué-es-un-modelo-climático-global",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿Qué es un modelo climático global?",
+    "text": "¿Qué es un modelo climático global?\n\n\n\nResuelve las ecuaciones físicas de la atmósfera, el océano, el hielo y la superficie terrestre.\nDivide el planeta en una grilla de 100 a 250 km: una cuenca como Huancané cabe en una o dos celdas.\nSimula el clima, no el tiempo: el año 2030 del modelo no es un pronóstico del año 2030.\nPor eso se comparan estadísticas de 30 años, nunca días o años sueltos.\n\n\nCMIP6 (Coupled Model Intercomparison Project, fase 6)\n\nProyecto internacional que coordina a decenas de centros de modelación.\nTodos corren los mismos experimentos: histórico (1850–2014) y escenarios futuros (2015–2100).\nEs la base del 6.º informe del IPCC (AR6, 2021).\n\n\n\nEyring et al. (2016). Overview of the Coupled Model Intercomparison Project Phase 6 (CMIP6). Geoscientific Model Development, 9, 1937–1958."
+  },
+  {
+    "objectID": "slides/dia2/index.html#escenarios-ssp",
+    "href": "slides/dia2/index.html#escenarios-ssp",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Escenarios SSP",
+    "text": "Escenarios SSP\n\n\n\n\n\n\n\n\nEscenario\nNarrativa socioeconómica\nForzamiento 2100\n\n\n\n\nSSP1-2.6\nSostenibilidad: cooperación, energía limpia\n2.6 W/m²\n\n\nSSP2-4.5\nCamino intermedio: las tendencias actuales continúan\n4.5 W/m²\n\n\nSSP3-7.0\nRivalidad regional: poca cooperación, alto crecimiento poblacional\n7.0 W/m²\n\n\nSSP5-8.5\nDesarrollo basado en combustibles fósiles\n8.5 W/m²\n\n\n\n\n\nSSP (Shared Socioeconomic Pathway) describe cómo evoluciona la sociedad; el número es el forzamiento radiativo al 2100, que resume cuánto se calienta el planeta. En el curso usamos SSP2-4.5 por tiempo: es el escenario intermedio y el más usado en estudios de adaptación."
+  },
+  {
+    "objectID": "slides/dia2/index.html#cuánto-se-calienta-el-planeta",
+    "href": "slides/dia2/index.html#cuánto-se-calienta-el-planeta",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿Cuánto se calienta el planeta?",
+    "text": "¿Cuánto se calienta el planeta?\n\n\nHasta 2040 todos los escenarios llegan a ~1.5 °C: la diferencia entre escenarios aparece después de 2050. IPCC (2021), AR6 WG1, Resumen para responsables de políticas, Tabla SPM.1."
+  },
+  {
+    "objectID": "slides/dia2/index.html#de-la-grilla-global-a-la-cuenca",
+    "href": "slides/dia2/index.html#de-la-grilla-global-a-la-cuenca",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "De la grilla global a la cuenca",
+    "text": "De la grilla global a la cuenca\n\n\nNEX-GDDP-CMIP6 (NASA)\n\n35 modelos CMIP6 reducidos de escala a 0.25° (~27 km).\nDatos diarios: precipitación, Tmax, Tmin y otras variables.\nHistórico 1950–2014 y escenarios SSP 2015–2100.\nDisponible en Google Earth Engine: NASA/GDDP-CMIP6.\n\n\n\nMétodo BCSD: corrige el sesgo contra un producto global de referencia.\nUna celda de 0.25° cubre ~730 km²: la cuenca Huancané (3542 km²) tiene unas 5 celdas.\nQue esté corregido a escala global no significa que coincida con PISCO: hay que volver a corregir con datos locales (bloque 03).\n\n\n\nThrasher et al. (2022). NASA Global Daily Downscaled Projections, CMIP6. Scientific Data, 9, 262."
+  },
+  {
+    "objectID": "slides/dia2/index.html#ensambles-por-qué-varios-modelos",
+    "href": "slides/dia2/index.html#ensambles-por-qué-varios-modelos",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Ensambles: ¿por qué varios modelos?",
+    "text": "Ensambles: ¿por qué varios modelos?\n\n\nTres fuentes de incertidumbre\n\n\n\nFuente\nCómo se aborda\n\n\n\n\nEscenario\nVarios SSP\n\n\nModelo\nVarios GCM (ensamble)\n\n\nVariabilidad natural\nPeriodos de 30 años\n\n\n\n\nEnsamble del curso (SSP2-4.5)\n\n\n\nModelo\nCentro (país)\n\n\n\n\nACCESS‑CM2\nCSIRO-ARCCSS (Australia)\n\n\nMIROC6\nJAMSTEC / AORI / NIES (Japón)\n\n\nMPI‑ESM1‑2‑HR\nMax Planck (Alemania)\n\n\n\n\n\nCada modelo representa de forma distinta los procesos físicos: su dispersión es una medida de la incertidumbre. Tres modelos es un mínimo didáctico; los estudios usan 5 a 10 o más. Hawkins y Sutton (2009), Bulletin of the American Meteorological Society, 90, 1095–1108."
+  },
+  {
+    "objectID": "slides/dia2/index.html#horizontes-y-periodos",
+    "href": "slides/dia2/index.html#horizontes-y-periodos",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Horizontes y periodos",
+    "text": "Horizontes y periodos\n\n\nReferencia 1985–2014: los últimos 30 años del histórico de CMIP6, que también cubren PISCO. Futuro cercano 2020–2049: el horizonte útil para planificar obras y adaptación. Cambio = futuro − referencia, del mismo modelo."
+  },
+  {
+    "objectID": "slides/dia2/index.html#lo-que-trae-un-modelo-sin-corregir",
+    "href": "slides/dia2/index.html#lo-que-trae-un-modelo-sin-corregir",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Lo que trae un modelo sin corregir",
+    "text": "Lo que trae un modelo sin corregir\n\n\nEn 1985–2014 los modelos dan una Tmax ~2 °C más alta y una lluvia 6–10 % mayor que PISCO. Tampoco reproducen años concretos (1983 seco, 1984 húmedo), y no deben hacerlo. Antes de usarlos hay que corregir el sesgo."
+  },
+  {
+    "objectID": "slides/dia2/index.html#datos-cmip6-en-gee-y-corrección-de-sesgo",
+    "href": "slides/dia2/index.html#datos-cmip6-en-gee-y-corrección-de-sesgo",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Datos CMIP6 en GEE y corrección de sesgo",
+    "text": "Datos CMIP6 en GEE y corrección de sesgo\n\n03\n\nDescarga en Google Earth Engine, mapeo de cuantiles (qmap) vs. método delta y señales de cambio"
+  },
+  {
+    "objectID": "slides/dia2/index.html#descarga-en-google-earth-engine",
+    "href": "slides/dia2/index.html#descarga-en-google-earth-engine",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Descarga en Google Earth Engine",
+    "text": "Descarga en Google Earth Engine\n\n\nvar coleccion = ee.ImageCollection(\n    'NASA/GDDP-CMIP6')\n  .filter(ee.Filter.eq('model', modelo))\n  .filter(ee.Filter.inList('scenario',\n          ['historical', 'ssp245']))\n  .filterDate('1981-01-01', '2050-01-01')\n  .select(['pr', 'tasmax', 'tasmin'])\n  .map(convertir);   // a mm/día y °C\n\n// Promedio de cada día en cada subcuenca\nimg.reduceRegions({\n  collection: cuenca.select(['Subbasin']),\n  reducer: ee.Reducer.mean(),\n  scale: 1000\n});\n\nExport.table.toDrive({ ... fileFormat: 'CSV' });\n\n\nScript: ejercicios/Descarga_CMIP6_GEE.js, se ejecuta en code.earthengine.google.com.\nUna tarea por modelo; el CSV llega a Google Drive.\nResultado: una fila por día y subcuenca, 1981–2049.\nLo mismo se puede hacer desde R con el paquete rgee.\n\n\n\nEl campo de la subcuenca (Subbasin) debe existir en el asset: si el nombre no coincide, la columna llega vacía y sin error."
+  },
+  {
+    "objectID": "slides/dia2/index.html#leer-los-tres-modelos",
+    "href": "slides/dia2/index.html#leer-los-tres-modelos",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Leer los tres modelos",
+    "text": "Leer los tres modelos\narchivos &lt;- list.files(\"data/cmip6\", pattern = \"ssp245\\\\.csv$\",\n                       full.names = TRUE)\n\ncmip &lt;- archivos |&gt;\n  map(\\(f) read_csv(f, show_col_types = FALSE)) |&gt;\n  list_rbind() |&gt;\n  transmute(fecha = Fecha, subcuenca = Subcuenca, modelo = Modelo,\n            pp = Pr_mm, tmax = Tmax, tmin = Tmin)\n\ncount(cmip, modelo)\n#&gt;   ACCESS-CM2    126010\n#&gt;   MIROC6        126010\n#&gt;   MPI-ESM1-2-HR 126010     (5 subcuencas x 25202 días)\n\nmap() + list_rbind(): el mismo patrón del Día 1 para leer varias estaciones."
+  },
+  {
+    "objectID": "slides/dia2/index.html#cuánto-sesgo-tienen",
+    "href": "slides/dia2/index.html#cuánto-sesgo-tienen",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿Cuánto sesgo tienen?",
+    "text": "¿Cuánto sesgo tienen?\n\n\nSesgo anual de la cuenca, 1985–2014: lluvia +4.6 a +7.6 %, Tmax +2.1 a +2.2 °C y Tmin +2.7 a +3.0 °C. La lluvia tiene la forma correcta; la temperatura está desplazada en todos los meses, más en la Tmin del invierno."
+  },
+  {
+    "objectID": "slides/dia2/index.html#dos-formas-de-corregir",
+    "href": "slides/dia2/index.html#dos-formas-de-corregir",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Dos formas de corregir",
+    "text": "Dos formas de corregir\n\n\n\n\n\n\n\n\n\nMétodo delta\nMapeo de cuantiles\n\n\n\n\nQué usa del modelo\nSolo el cambio entre sus periodos\nToda la serie diaria\n\n\nSerie futura\nLo observado, perturbado mes a mes\nEl modelo corregido\n\n\nCorrige\nLa media mensual\nToda la distribución (medias, extremos, días secos)\n\n\nVariabilidad futura\nLa misma de 1985–2014\nLa del modelo\n\n\nVentaja\nSimple, robusto\nConserva la secuencia de años del modelo\n\n\n\n\n\nDelta: Pfut = Pobs × (Pmod,fut / Pmod,ref) y Tfut = Tobs + (Tmod,fut − Tmod,ref), para cada mes y subcuenca."
+  },
+  {
+    "objectID": "slides/dia2/index.html#método-delta",
+    "href": "slides/dia2/index.html#método-delta",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Método delta",
+    "text": "Método delta\ndeltas &lt;- inner_join(regimen(cmip, ref, cuenca = FALSE),\n                     regimen(cmip, fut, cuenca = FALSE),\n                     by = c(\"modelo\", \"subcuenca\", \"mes\"),\n                     suffix = c(\"_ref\", \"_fut\")) |&gt;\n  transmute(modelo, subcuenca, mes,\n            f_pp   = pp_fut / pp_ref,          # razón\n            d_tmax = tmax_fut - tmax_ref,      # diferencia\n            d_tmin = tmin_fut - tmin_ref)\n#&gt;   ACCESS-CM2, subcuenca 1:   mes  f_pp  d_tmax  d_tmin\n#&gt;                                1  1.00    1.61    1.36\n#&gt;                                3  1.19    1.56    1.23\n\nfut_delta &lt;- obs |&gt;\n  filter(year(fecha) %in% ref) |&gt;\n  mutate(mes = month(fecha)) |&gt;\n  inner_join(deltas, by = c(\"subcuenca\", \"mes\")) |&gt;\n  mutate(pp = pp * f_pp, tmax = tmax + d_tmax, tmin = tmin + d_tmin)"
+  },
+  {
+    "objectID": "slides/dia2/index.html#mapeo-de-cuantiles-un-caso",
+    "href": "slides/dia2/index.html#mapeo-de-cuantiles-un-caso",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Mapeo de cuantiles: un caso",
+    "text": "Mapeo de cuantiles: un caso\n\n\n# Subcuenca 1, febrero, ACCESS-CM2\najuste &lt;- fitQmap(o, m_ref,\n                  method  = \"QUANT\",\n                  wet.day = TRUE,\n                  qstep   = 0.01)\nm_cor &lt;- doQmap(m_ref, ajuste)\n\n\n\n\nMedia\nP95\nDías secos\n\n\n\n\nPISCO\n4.52\n12.3\n3.8 %\n\n\nModelo\n5.04\n11.8\n5.5 %\n\n\nCorregido\n4.54\n12.1\n4.1 %\n\n\n\n\n\n\n\nCada valor del modelo se reemplaza por el valor observado del mismo cuantil. wet.day = TRUE corrige además la frecuencia de días con lluvia. Cargar qmap antes que tidyverse: su dependencia MASS tiene otra select()."
+  },
+  {
+    "objectID": "slides/dia2/index.html#todos-los-casos-con-nest-y-pmap",
+    "href": "slides/dia2/index.html#todos-los-casos-con-nest-y-pmap",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Todos los casos con nest() y pmap()",
+    "text": "Todos los casos con nest() y pmap()\ncorregir &lt;- function(o, m, variable) {\n  m_ref  &lt;- m$valor[year(m$fecha) %in% ref]        # ajuste en 1985-2014\n  ajuste &lt;- fitQmap(o$valor, m_ref, method = \"QUANT\",\n                    wet.day = variable == \"pp\")\n  tibble(fecha = m$fecha, valor = doQmap(m$valor, ajuste))  # aplica 1981-2049\n}\n\ncmip_qm &lt;- cmip |&gt;\n  pivot_longer(c(pp, tmax, tmin), names_to = \"variable\", values_to = \"valor\") |&gt;\n  mutate(mes = month(fecha)) |&gt;\n  nest(m = c(fecha, valor)) |&gt;                     # 540 grupos\n  left_join(obs_mes, by = c(\"subcuenca\", \"variable\", \"mes\")) |&gt;\n  mutate(cor = pmap(list(o, m, variable), corregir)) |&gt;\n  select(modelo, subcuenca, variable, cor) |&gt;\n  unnest(cor) |&gt;\n  pivot_wider(names_from = variable, values_from = valor)\n\n3 modelos × 5 subcuencas × 3 variables × 12 meses = 540 ajustes en ~20 segundos. Control: ningún día con Tmin ≥ Tmax."
+  },
+  {
+    "objectID": "slides/dia2/index.html#funcionó-la-corrección",
+    "href": "slides/dia2/index.html#funcionó-la-corrección",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿Funcionó la corrección?",
+    "text": "¿Funcionó la corrección?\n\n\nDespués de corregir, los tres modelos reproducen el régimen de PISCO en 1985–2014: lluvia 720–723 mm (PISCO 716), Tmax 13.8 °C y Tmin −1.2 °C. Las líneas quedan una sobre otra."
+  },
+  {
+    "objectID": "slides/dia2/index.html#señales-de-cambio-20202049-frente-a-19852014",
+    "href": "slides/dia2/index.html#señales-de-cambio-20202049-frente-a-19852014",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Señales de cambio: 2020–2049 frente a 1985–2014",
+    "text": "Señales de cambio: 2020–2049 frente a 1985–2014\n\n\n\nVariable\nMétodo\nACCESS-CM2\nMIROC6\nMPI-ESM1-2-HR\n\n\n\n\nLluvia\nSin corregir\n+1.2 %\n+8.3 %\n+9.5 %\n\n\n\nDelta\n+1.2 %\n+7.7 %\n+9.8 %\n\n\n\nCuantiles\n+2.1 %\n+6.8 %\n+8.2 %\n\n\nTmax\nSin corregir y delta\n+1.51 °C\n+1.15 °C\n+0.92 °C\n\n\n\nCuantiles\n+1.20 °C\n+0.85 °C\n+0.64 °C\n\n\nTmin\nSin corregir y delta\n+1.32 °C\n+0.91 °C\n+0.94 °C\n\n\n\nCuantiles\n+1.22 °C\n+0.95 °C\n+0.80 °C\n\n\n\n\n\nLos tres modelos coinciden: más calor (+0.6 a +1.5 °C) y algo más de lluvia (+1 a +10 %). El método delta conserva la señal del modelo; el mapeo de cuantiles la modifica, sobre todo en Tmax (ejercicio E3). Ensamble (cuantiles): +5.7 % de lluvia, +0.9 °C Tmax, +1.0 °C Tmin."
+  },
+  {
+    "objectID": "slides/dia2/index.html#señal-mensual",
+    "href": "slides/dia2/index.html#señal-mensual",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Señal mensual",
+    "text": "Señal mensual"
+  },
+  {
+    "objectID": "slides/dia2/index.html#series-corregidas-de-la-cuenca",
+    "href": "slides/dia2/index.html#series-corregidas-de-la-cuenca",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Series corregidas de la cuenca",
+    "text": "Series corregidas de la cuenca\n\n\nEstas series diarias por subcuenca (data/processed/CMIP6_QM_subcuencas.csv) son la entrada del modelo GR4J en el bloque 05."
+  },
+  {
+    "objectID": "slides/dia2/index.html#modelamiento-i",
+    "href": "slides/dia2/index.html#modelamiento-i",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Modelamiento I",
+    "text": "Modelamiento I\n\n04\n\nModelo GR4J semidistribuido con airGRiwrm: red de subcuencas, calibración y validación"
+  },
+  {
+    "objectID": "slides/dia2/index.html#introducción-al-modelo-gr4j",
+    "href": "slides/dia2/index.html#introducción-al-modelo-gr4j",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Introducción al modelo GR4J",
+    "text": "Introducción al modelo GR4J\n\n\n\nConceptos generales\n\nModelo conceptual de lluvia-escorrentía, de paso diario, con solo 4 parámetros libres (\\(X_1\\) a \\(X_4\\)).\nDesarrollado por Perrin (2001) a partir del modelo pionero GR3J (Edijatno y Michel, 1989).\nValidación global: evaluado en 429 cuencas de climas muy distintos, incluidos climas tropicales.\nDesempeño: superó a modelos clásicos como TOPMODEL, Tank, IHACRES, HBV y SMAR (Perrin et al., 2003).\nEntradas: precipitación (\\(P\\)) y evapotranspiración potencial (\\(E\\)). Salida: caudal (\\(Q\\))."
+  },
+  {
+    "objectID": "slides/dia2/index.html#parámetros-del-gr4j",
+    "href": "slides/dia2/index.html#parámetros-del-gr4j",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Parámetros del GR4J",
+    "text": "Parámetros del GR4J\n\n\n\n\n\n\n\n\n\n\n\n\nParámetro\nQué representa\n\n\n\n\n\\(X_1\\)\nReservorio de producción (mm)\nEl suelo: reparte la lluvia entre ETP, almacenamiento y percolación. Suelos más profundos → mayor \\(X_1\\).\n\n\n\\(X_2\\)\nIntercambio subterráneo (mm/día)\n\\(X_2 &lt; 0\\): la cuenca pierde agua hacia el acuífero; \\(X_2 &gt; 0\\): la gana.\n\n\n\\(X_3\\)\nReservorio de tránsito (mm)\nRetención del agua: controla la recesión y el caudal base.\n\n\n\\(X_4\\)\nTiempo base del UH1 (días)\nRapidez de la respuesta; UH2 dura \\(2X_4\\).\n\n\n\n\n\nLa lluvia efectiva se reparte siempre en 90 % por UH1 hacia el reservorio de tránsito (flujo lento) y 10 % por UH2 directo al río (flujo rápido): ese reparto es fijo, no es un parámetro."
+  },
+  {
+    "objectID": "slides/dia2/index.html#por-qué-semidistribuido",
+    "href": "slides/dia2/index.html#por-qué-semidistribuido",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿Por qué semidistribuido?",
+    "text": "¿Por qué semidistribuido?\n\n\nLa lluvia cambia entre 636 y 819 mm/año según la subcuenca. Un modelo agregado la promedia; airGRiwrm corre GR4J en cada subcuenca y suma los caudales a lo largo del río. Ejercicio: ejercicios/07_Modelamiento_GR4J.R."
+  },
+  {
+    "objectID": "slides/dia2/index.html#la-red-sale-de-la-tabla-de-ríos",
+    "href": "slides/dia2/index.html#la-red-sale-de-la-tabla-de-ríos",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "La red sale de la tabla de ríos",
+    "text": "La red sale de la tabla de ríos\n\n\nred &lt;- tramos |&gt;\n  mutate(\n    id   = as.character(Subbasin),\n    down = as.character(SubbasinR),\n    down = na_if(down, \"0\")) |&gt;\n  transmute(\n    id, down,\n    length = largo_km[match(down, id)],\n    area   = AreaC / 100,  # km²\n    model  = if_else(is.na(down),\n                     \"RunModel_GR4J\",\n                     \"Ungauged\"))\n\ngriwrm &lt;- CreateGRiwrm(red)\n\narea es el área acumulada en el nodo. Solo la salida tiene estación: las otras 4 subcuencas son Ungauged y heredan los parámetros de la 5."
+  },
+  {
+    "objectID": "slides/dia2/index.html#esquema-de-la-red",
+    "href": "slides/dia2/index.html#esquema-de-la-red",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Esquema de la red",
+    "text": "Esquema de la red\n\n\nplot(griwrm) dibuja este esquema con el servicio en línea mermaid.ink (requiere internet). En el script lo construimos con ggplot2."
+  },
+  {
+    "objectID": "slides/dia2/index.html#entradas-del-modelo",
+    "href": "slides/dia2/index.html#entradas-del-modelo",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Entradas del modelo",
+    "text": "Entradas del modelo\n# Una fila por día, una columna por nodo (mismo orden que la red)\nP   &lt;- a_matriz(forzantes, \"pp\")    #&gt; 14610 x 5  (1981-2020)\nETP &lt;- a_matriz(forzantes, \"etp\")   # Hargreaves, como en el Día 1\n\n# GR4J trabaja en lámina: m³/s -&gt; mm/día\nQobs &lt;- cbind(\"5\" = q_obs$q * 86.4 / area_salida)\n\nInputsModel &lt;- CreateInputsModel(griwrm,\n                                 DatesR  = as.POSIXct(fechas, tz = \"UTC\"),\n                                 Precip  = P,\n                                 PotEvap = ETP)\n\n\n\n\nPeriodo\nAños\nUso\n\n\n\n\nCalentamiento\n1981–1983\nllenar los reservorios del modelo\n\n\nCalibración\n1984–2004\najustar los parámetros\n\n\nValidación\n2005–2019\nevaluar con datos que el modelo no vio"
+  },
+  {
+    "objectID": "slides/dia2/index.html#calibración-con-kge",
+    "href": "slides/dia2/index.html#calibración-con-kge",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Calibración con KGE",
+    "text": "Calibración con KGE\n\n\nInputsCrit &lt;- CreateInputsCrit(\n  InputsModel,\n  FUN_CRIT   = ErrorCrit_KGE2,\n  RunOptions = RunOptions_cal,\n  Obs        = Qobs[i_cal, , drop = FALSE])\n\nCalibOptions &lt;- CreateCalibOptions(InputsModel)\nOutputsCalib &lt;- Calibration(\n  InputsModel, RunOptions_cal,\n  InputsCrit, CalibOptions)\n#&gt; Crit. KGE2[Q] = 0.8563     (~2 minutos)\n\nParam &lt;- extractParam(OutputsCalib)\n\n\n\n\nParámetro\nValor\n\n\n\n\nX1 (mm)\n47.6\n\n\nX2 (mm/d)\n0.32\n\n\nX3 (mm)\n203.5\n\n\nX4 (d)\n1.64\n\n\n\n\nX1 producción, X2 intercambio con acuíferos, X3 tránsito, X4 tiempo base del hidrograma unitario. Las subcuencas sin estación reciben X1–X3 iguales; X4 se ajusta por el área: 1.43 a 2.28 días (Lobligeois, 2014)."
+  },
+  {
+    "objectID": "slides/dia2/index.html#desempeño-del-modelo",
+    "href": "slides/dia2/index.html#desempeño-del-modelo",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Desempeño del modelo",
+    "text": "Desempeño del modelo\n\n\n\n\nPeriodo\nKGE\nNSE\nr\nPBIAS\nQ obs (m³/s)\nQ sim (m³/s)\n\n\n\n\nCalibración\n0.86\n0.71\n0.86\n+0.3 %\n20.2\n20.2\n\n\nValidación\n0.81\n0.76\n0.87\n−4.1 %\n16.2\n15.6"
+  },
+  {
+    "objectID": "slides/dia2/index.html#régimen-mensual",
+    "href": "slides/dia2/index.html#régimen-mensual",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Régimen mensual",
+    "text": "Régimen mensual\n\n\nEl modelo reproduce la época de lluvias (diciembre a abril) y la recesión. En los meses secos simula algo más de caudal que el observado."
+  },
+  {
+    "objectID": "slides/dia2/index.html#un-año-de-validación-día-a-día",
+    "href": "slides/dia2/index.html#un-año-de-validación-día-a-día",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Un año de validación, día a día",
+    "text": "Un año de validación, día a día\n\n\nAño hidrológico 2011–2012: el pico de febrero (~200 m³/s) se subestima, pero la forma de la crecida y la recesión siguen bien al caudal observado."
+  },
+  {
+    "objectID": "slides/dia2/index.html#curva-de-duración",
+    "href": "slides/dia2/index.html#curva-de-duración",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Curva de duración",
+    "text": "Curva de duración\n\n\n\n\n\nCrecidas y caudales medios: bien representados.\nEstiaje (más del 50 % del tiempo): el modelo sobrestima, ~2.5 m³/s simulados frente a ~1.5 m³/s observados.\nEl KGE da más peso a los caudales altos. Para estiajes: transfo = \"sqrt\" o \"log\" en CreateInputsCrit() (ejercicio E2)."
+  },
+  {
+    "objectID": "slides/dia2/index.html#cómo-se-arma-el-caudal-en-la-red",
+    "href": "slides/dia2/index.html#cómo-se-arma-el-caudal-en-la-red",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Cómo se arma el caudal en la red",
+    "text": "Cómo se arma el caudal en la red\n\n\nEl modelo entrega caudal en todos los nodos, también donde no hay estación. Con airGRiwrm se pueden agregar extracciones de riego, trasvases o embalses en cualquier nodo."
+  },
+  {
+    "objectID": "slides/dia2/index.html#modelamiento-ii",
+    "href": "slides/dia2/index.html#modelamiento-ii",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Modelamiento II",
+    "text": "Modelamiento II\n\n05\n\nSimulación futura (SSP2-4.5) y comparación del régimen de caudales"
+  },
+  {
+    "objectID": "slides/dia2/index.html#el-mismo-modelo-otro-clima",
+    "href": "slides/dia2/index.html#el-mismo-modelo-otro-clima",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "El mismo modelo, otro clima",
+    "text": "El mismo modelo, otro clima\n\nSe usa el GR4J calibrado en el bloque 04 (outputs/modelo_GR4J_Huancane.rds): los parámetros no cambian.\nSolo cambian los forzantes: lluvia corregida y ETP de Hargreaves con las temperaturas corregidas.\nCuantiles: una corrida por modelo, de 1981 a 2049; referencia y futuro salen de la misma corrida.\nDelta: referencia = PISCO observado; futuro = PISCO perturbado.\n\n\n\nSupuesto fuerte: la cuenca responde en el futuro igual que en 1984–2004 (mismos parámetros, mismo uso del suelo). Es la práctica habitual, pero hay que decirlo."
+  },
+  {
+    "objectID": "slides/dia2/index.html#una-función-para-simular-cualquier-clima",
+    "href": "slides/dia2/index.html#una-función-para-simular-cualquier-clima",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Una función para simular cualquier clima",
+    "text": "Una función para simular cualquier clima\nsimular &lt;- function(forzantes, anios_warmup = 3) {\n  f &lt;- forzantes |&gt;\n    left_join(latitudes, by = \"subcuenca\") |&gt;\n    mutate(etp = hargreaves(tmax, tmin, lat, fecha))\n  # ... matrices de pp y etp con a_matriz() (columnas en el orden de griwrm)\n  InputsModel &lt;- CreateInputsModel(griwrm, DatesR = fechas,\n                                   Precip = a_matriz(\"pp\"),\n                                   PotEvap = a_matriz(\"etp\"))\n  RunOptions &lt;- CreateRunOptions(InputsModel, IndPeriod_WarmUp = ...,\n                                 IndPeriod_Run = ...)\n  salida &lt;- RunModel(InputsModel, RunOptions, Param)\n  tibble(fecha = ..., q = attr(salida, \"Qm3s\")[[\"5\"]])\n}\n\nq_qm &lt;- cmip_qm |&gt;\n  nest(forzantes = -modelo) |&gt;              # un clima por modelo\n  mutate(q = map(forzantes, simular)) |&gt;\n  unnest(q)"
+  },
+  {
+    "objectID": "slides/dia2/index.html#lluvia-cambio-por-subcuenca",
+    "href": "slides/dia2/index.html#lluvia-cambio-por-subcuenca",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Lluvia: cambio por subcuenca",
+    "text": "Lluvia: cambio por subcuenca\n\n\nLos tres modelos dan más lluvia en todas las subcuencas, pero con distinta intensidad: de +0.6 % (ACCESS-CM2) a +13 % (MPI-ESM1-2-HR). El mayor aumento está en la subcuenca 3, en el centro de la cuenca."
+  },
+  {
+    "objectID": "slides/dia2/index.html#evapotranspiración-cambio-por-subcuenca",
+    "href": "slides/dia2/index.html#evapotranspiración-cambio-por-subcuenca",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Evapotranspiración: cambio por subcuenca",
+    "text": "Evapotranspiración: cambio por subcuenca\n\n\nLa ETP sube en todos los casos (+2 a +6 %), más en la cabecera (subcuenca 1). El modelo que más calienta (ACCESS-CM2, ETP ~+5 %) es el que menos lluvia agrega (~+1 %): por eso es el único con menos caudal en el futuro."
+  },
+  {
+    "objectID": "slides/dia2/index.html#caudal-cambio-por-tramo-de-río",
+    "href": "slides/dia2/index.html#caudal-cambio-por-tramo-de-río",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Caudal: cambio por tramo de río",
+    "text": "Caudal: cambio por tramo de río\n\nq_nodos &lt;- cmip_qm |&gt;\n  nest(forzantes = -modelo) |&gt;\n  mutate(q = map(forzantes, \\(f) simular(f, nodos = griwrm$id))) |&gt;\n  unnest(q)                                  # caudal en los 5 nodos\n\nEl caudal responde más que la lluvia y no igual en todos los tramos: en el tramo 4 la lluvia sube +7 a +8 % (MIROC6, MPI) y el caudal +23 a +38 %. Con ACCESS-CM2 el tramo 2 pierde caudal (−5 %) porque la ETP (+5 %) crece más que la lluvia (+1 %)."
+  },
+  {
+    "objectID": "slides/dia2/index.html#régimen-de-caudales-referencia-y-futuro",
+    "href": "slides/dia2/index.html#régimen-de-caudales-referencia-y-futuro",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Régimen de caudales: referencia y futuro",
+    "text": "Régimen de caudales: referencia y futuro"
+  },
+  {
+    "objectID": "slides/dia2/index.html#cuánto-cambia-el-caudal",
+    "href": "slides/dia2/index.html#cuánto-cambia-el-caudal",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿Cuánto cambia el caudal?",
+    "text": "¿Cuánto cambia el caudal?\n\n\n\nModelo\nMétodo\nQ medio\nLluvias (dic–mar)\nEstiaje (jun–set)\n\n\n\n\nACCESS-CM2\nCuantiles\n−1.1 %\n−4.1 %\n+3.8 %\n\n\n\nDelta\n−6.1 %\n−9.2 %\n−0.5 %\n\n\nMIROC6\nCuantiles\n+14.5 %\n+15.8 %\n+3.9 %\n\n\n\nDelta\n+15.3 %\n+15.5 %\n+6.3 %\n\n\nMPI-ESM1-2-HR\nCuantiles\n+30.1 %\n+41.2 %\n−3.1 %\n\n\n\nDelta\n+31.1 %\n+41.6 %\n−4.2 %\n\n\n\n\n\nLluvia +1 a +10 % → caudal −6 a +31 %: el caudal amplifica el cambio de la lluvia, y más calor (más ETP) no alcanza a compensarlo. Los dos métodos dan el mismo orden de magnitud; la diferencia entre modelos es mucho mayor que la diferencia entre métodos."
+  },
+  {
+    "objectID": "slides/dia2/index.html#cambio-mes-a-mes",
+    "href": "slides/dia2/index.html#cambio-mes-a-mes",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Cambio mes a mes",
+    "text": "Cambio mes a mes\n\n\nEl cambio se concentra en dic–ene, el inicio de la época de lluvias. En estiaje los cambios son pequeños (±6 %)."
+  },
+  {
+    "objectID": "slides/dia2/index.html#curva-de-duración-1",
+    "href": "slides/dia2/index.html#curva-de-duración-1",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Curva de duración",
+    "text": "Curva de duración\n\n\n\n\n\n\n\n\nQ10\nQ50\nQ90\n\n\n\n\nACCESS\n46→47\n6.2→6.2\n2.6→2.7\n\n\nMIROC6\n46→52\n6.4→6.7\n2.7→2.8\n\n\nMPI\n48→67\n6.0→6.9\n2.6→2.6\n\n\n\nm³/s, referencia → futuro\n\n\nLos caudales altos (Q10) son los que más cambian; los caudales bajos (Q90) casi no se mueven."
+  },
+  {
+    "objectID": "slides/dia2/index.html#qué-le-decimos-al-usuario-del-agua",
+    "href": "slides/dia2/index.html#qué-le-decimos-al-usuario-del-agua",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿Qué le decimos al usuario del agua?",
+    "text": "¿Qué le decimos al usuario del agua?\n\nTemperatura: señal clara y coherente entre modelos: +0.6 a +1.5 °C hacia 2020–2049.\nLluvia y caudal: los tres modelos van de “sin cambio” a “+30 % de caudal medio”: la incertidumbre es mayor que la señal.\nEl estiaje casi no cambia en ningún caso: buena noticia para la oferta en época seca, pero con solo 3 modelos.\nUn servicio climático no da un número: da un rango y explica de dónde sale.\n\n\n\nPara un estudio real: más modelos (≥ 10), más escenarios (SSP1-2.6, SSP3-7.0, SSP5-8.5), otros horizontes (2050–2079) y, si se puede, más de un modelo hidrológico."
+  },
+  {
+    "objectID": "slides/dia2/index.html#cierre",
+    "href": "slides/dia2/index.html#cierre",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Cierre",
+    "text": "Cierre\n\n06\n\nR + Python, recursos y rutas de continuación"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "",
+    "text": "En un entorno donde la tecnología y el análisis de datos avanzan a pasos agigantados, optimizar los flujos de trabajo es fundamental para la toma de decisiones. En ese sentido, contar con un entorno robusto para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.\nBajo este enfoque, se presenta el Curso-Taller: “Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático”. El Lenguaje R se ha consolidado como una herramienta indispensable en el ámbito científico, académico y profesional gracias a su capacidad de gestionar grandes volúmenes de datos, realizar análisis complejos y desarrollar o replicar modelos hidrológicos de manera eficiente.\nOrganizado por las entidades:\n\nColegio de Ingenieros del Perú Consejo Departamental Puno\nFacultad de Ingeniería del Agua y Gestión de Recursos Hídricos\nIICTA-FIA Instituto de Investigación en Ciencia y Tenología del Agua\nERASMUS\nEMPOANDES - Empowering Climate Services in the Andes"
+  },
+  {
+    "objectID": "index.html#objetivo",
+    "href": "index.html#objetivo",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "",
+    "text": "En un entorno donde la tecnología y el análisis de datos avanzan a pasos agigantados, optimizar los flujos de trabajo es fundamental para la toma de decisiones. En ese sentido, contar con un entorno robusto para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.\nBajo este enfoque, se presenta el Curso-Taller: “Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático”. El Lenguaje R se ha consolidado como una herramienta indispensable en el ámbito científico, académico y profesional gracias a su capacidad de gestionar grandes volúmenes de datos, realizar análisis complejos y desarrollar o replicar modelos hidrológicos de manera eficiente.\nOrganizado por las entidades:\n\nColegio de Ingenieros del Perú Consejo Departamental Puno\nFacultad de Ingeniería del Agua y Gestión de Recursos Hídricos\nIICTA-FIA Instituto de Investigación en Ciencia y Tenología del Agua\nERASMUS\nEMPOANDES - Empowering Climate Services in the Andes"
+  },
+  {
+    "objectID": "index.html#materiales",
+    "href": "index.html#materiales",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Materiales",
+    "text": "Materiales\nLas diapositivas del Curso-Taller, para los dos días se encuentran en los siguientes enlaces:\n\nDiapositivas Día 1\nDiapositivas Día 2"
+  },
+  {
     "objectID": "slides/dia1/index.html#contenido-día-1",
     "href": "slides/dia1/index.html#contenido-día-1",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
@@ -161,6 +567,13 @@
     "text": "Paquetes y tidyverse\n\n\n\n\n\n\nImagen tomada de: https://irwingss.github.io/intro_r_ciencias/tidyversecap.html"
   },
   {
+    "objectID": "slides/dia1/index.html#paquetes-y-tidyverse-1",
+    "href": "slides/dia1/index.html#paquetes-y-tidyverse-1",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Paquetes y tidyverse",
+    "text": "Paquetes y tidyverse\nInstalación y principales funciones:\n\n\n\n# Se instala UNA vez\ninstall.packages(\"tidyverse\")\n\n# Se carga en CADA sesión\nlibrary(tidyverse)\nlibrary(readxl)\n\n\n\n\nPaquete\nPara qué\n\n\n\n\nreadr / readxl\nimportar datos\n\n\ndplyr\nfiltrar, resumir\n\n\ntidyr\nreordenar tablas\n\n\nlubridate\nfechas\n\n\nggplot2\ngráficos\n\n\npurrr\nrepetir tareas\n\n\n\n\n\n\nEl pipe |&gt;: “y luego…”\nround(mean(pp_mensual), 1)              # se lee de adentro hacia afuera\n\npp_mensual |&gt; mean() |&gt; round(1)        # se lee de izquierda a derecha\n#&gt; 54.7"
+  },
+  {
     "objectID": "slides/dia1/index.html#primer-contacto-con-los-datos-reales",
     "href": "slides/dia1/index.html#primer-contacto-con-los-datos-reales",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
@@ -294,6 +707,13 @@
     "text": "Condicionales para una columna: case_when()\n\n\n\n\n\n\n\n\n\n\n\nq_anual &lt;- q_anual |&gt;\n  mutate(tipo = case_when(\n    valor &lt; umbrales[1] ~ \"seco\",\n    valor &gt; umbrales[2] ~ \"húmedo\",\n    .default            = \"normal\"\n  ))\n\ncount(q_anual, tipo)\n#&gt;   tipo       n\n#&gt;   húmedo    13\n#&gt;   normal    36\n#&gt;   seco      13\n\n\n\n\nif() evalúa un solo valor; case_when() evalúa una columna completa. Los años más secos: 2023 (4.75), 1983 (7.23), 1967 (7.67), 1990 (8.23) y 2009 (9.29 m³/s)."
   },
   {
+    "objectID": "slides/dia1/index.html#bucles-for-la-idea",
+    "href": "slides/dia1/index.html#bucles-for-la-idea",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Bucles for: la idea",
+    "text": "Bucles for: la idea"
+  },
+  {
     "objectID": "slides/dia1/index.html#bucles-for-repetir-para-cada-estación",
     "href": "slides/dia1/index.html#bucles-for-repetir-para-cada-estación",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
@@ -315,11 +735,25 @@
     "text": "Iteración con purrr::map()"
   },
   {
+    "objectID": "slides/dia1/index.html#iteración-con-purrrmap-1",
+    "href": "slides/dia1/index.html#iteración-con-purrrmap-1",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Iteración con purrr::map()",
+    "text": "Iteración con purrr::map()\n\nAplicando la función map()\npp_lista &lt;- map(archivos, leer_datos)   # aplica la función a cada archivo\nnames(pp_lista) &lt;- nombres\npp_lista$Cojata                         # una estación de la lista\n\n\nOrdenando los datos\n# Une la lista en UNA tabla larga con la columna \"estacion\"\npp_todas &lt;- pp_lista |&gt; list_rbind(names_to = \"estacion\")\nnrow(pp_todas)       #&gt; 114159\n\n# Con la tabla larga, group_by() reemplaza al bucle\npp_todas |&gt;\n  group_by(estacion) |&gt;\n  summarise(pct_faltante = mean(is.na(valor)) * 100,\n            maximo       = max(valor, na.rm = TRUE))\n\n\nfor y map() hacen lo mismo; map() es más corto y no necesita preparar la lista vacía."
+  },
+  {
     "objectID": "slides/dia1/index.html#todas-las-estaciones-en-un-gráfico",
     "href": "slides/dia1/index.html#todas-las-estaciones-en-un-gráfico",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Todas las estaciones en un gráfico",
     "text": "Todas las estaciones en un gráfico\nEmpleando ggplot2 y facet_wrap\n\n\n# Anual de cada estación, en una tabla\npp_anual &lt;- pp_lista |&gt;\n  map(\\(d) d |&gt;\n        agregar_mensual() |&gt;\n        agregar_anual()) |&gt;\n  list_rbind(names_to = \"estacion\")\n\n# Un color por estación\ncolores &lt;- c(Ananea   = \"#0B5394\",\n             Cojata   = \"#6AA84F\",\n             Huancane = \"#E69138\",\n             Munani   = \"#8E7CC3\",\n             Putina   = \"#CC4125\")\n\nggplot(pp_anual, aes(anio, valor,\n                     fill = estacion)) +\n  geom_col(width = 0.8) +\n  # línea base en 0\n  geom_hline(yintercept = 0,\n             linewidth = 0.8) +\n  facet_wrap(~ estacion, ncol = 1) +\n  # años cada 10\n  scale_x_continuous(\n    breaks = seq(1950, 2030, 10)) +\n  scale_fill_manual(values = colores,\n                    guide = \"none\")\n\n\nfill = estacion da un color a cada estación; scale_fill_manual() elige cuáles. guide = \"none\" quita la leyenda, porque el nombre ya está en cada panel."
+  },
+  {
+    "objectID": "slides/dia1/index.html#todas-las-estaciones-el-resultado",
+    "href": "slides/dia1/index.html#todas-las-estaciones-el-resultado",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Todas las estaciones: el resultado",
+    "text": "Todas las estaciones: el resultado\n\n\n\n\n\n\n\nfacet_wrap() hace un panel por estación. Entre 2010 y 2016 solo Cojata tiene años completos: es un vacío de toda la red, no de una estación."
   },
   {
     "objectID": "slides/dia1/index.html#datos-climáticos-grillados",
@@ -413,80 +847,10 @@
     "text": "Balance P – ETP\n\n\nUnir P y ETP de la cuenca\nbalance &lt;- inner_join(\n  pp_cuenca_mes,\n  etp_cuenca_mes,\n  by = \"fecha\") |&gt;\n  filter(year(fecha) %in%\n         1991:2020)\n\n\n\n\n\nmm/año\n\n\n\n\nPrecipitación\n716\n\n\nETP\n1115\n\n\nP / ETP\n0.64\n\n\n\n\n\n\n\n\n\n\n\n\nP / ETP\nSignificado\n\n\n\n\n&lt; 1\nDéficit: la ETP supera a la lluvia (más seco)\n\n\n≈ 1\nEquilibrio entre lluvia y ETP\n\n\n&gt; 1\nExceso: la lluvia supera a la ETP (más húmedo)\n\n\n\n\n\n\n\nNormal 1991–2020: P/ETP = 0.64, la cuenca es deficitaria en el año. Solo de diciembre a marzo llueve más de lo que se puede evaporar; de abril a noviembre hay déficit."
   },
   {
-    "objectID": "slides/dia1/index.html#exportar-entrada-para-el-día-2",
-    "href": "slides/dia1/index.html#exportar-entrada-para-el-día-2",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Exportar: entrada para el Día 2",
-    "text": "Exportar: entrada para el Día 2\n# Series mensuales areales: pp 1981–2025, etp 1981–2020\npp_cuenca_mes |&gt;\n  left_join(etp_cuenca_mes, by = \"fecha\") |&gt;\n  write_csv(\"data/processed/PP_ETP_mensual_cuenca.csv\")\n\n# Mapa de precipitación media como GeoTIFF (se abre en QGIS)\nwriteRaster(pp_media, \"outputs/PP_media_anual_PISCOv3.tif\")\n\n\nPP_ETP_mensual_cuenca.csv + el caudal de Huancané = todo lo que necesita un modelo hidrológico mensual (GR2M) en el Día 2."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "",
-    "text": "En un entorno donde la tecnología y el análisis de datos avanzan a pasos agigantados, optimizar los flujos de trabajo es fundamental para la toma de decisiones. En ese sentido, contar con un entorno robusto para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.\nBajo este enfoque, se presenta el Curso-Taller: “Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático”. El Lenguaje R se ha consolidado como una herramienta indispensable en el ámbito científico, académico y profesional gracias a su capacidad de gestionar grandes volúmenes de datos, realizar análisis complejos y desarrollar o replicar modelos hidrológicos de manera eficiente.\nOrganizado por las entidades:\n\nColegio de Ingenieros del Perú Consejo Departamental Puno\nFacultad de Ingeniería del Agua y Gestión de Recursos Hídricos\nIICTA-FIA Instituto de Investigación en Ciencia y Tenología del Agua\nERASMUS\nEMPOANDES - Empowering Climate Services in the Andes"
-  },
-  {
-    "objectID": "index.html#objetivo",
-    "href": "index.html#objetivo",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "",
-    "text": "En un entorno donde la tecnología y el análisis de datos avanzan a pasos agigantados, optimizar los flujos de trabajo es fundamental para la toma de decisiones. En ese sentido, contar con un entorno robusto para el procesamiento, modelación y visualización de datos permite reducir tiempos operativos y mejorar los resultados esperados.\nBajo este enfoque, se presenta el Curso-Taller: “Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático”. El Lenguaje R se ha consolidado como una herramienta indispensable en el ámbito científico, académico y profesional gracias a su capacidad de gestionar grandes volúmenes de datos, realizar análisis complejos y desarrollar o replicar modelos hidrológicos de manera eficiente.\nOrganizado por las entidades:\n\nColegio de Ingenieros del Perú Consejo Departamental Puno\nFacultad de Ingeniería del Agua y Gestión de Recursos Hídricos\nIICTA-FIA Instituto de Investigación en Ciencia y Tenología del Agua\nERASMUS\nEMPOANDES - Empowering Climate Services in the Andes"
-  },
-  {
-    "objectID": "index.html#materiales",
-    "href": "index.html#materiales",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Materiales",
-    "text": "Materiales\nLas diapositivas del Curso-Taller, para los dos días se encuentran en los siguientes enlaces:\n\nDiapositivas Día 1"
-  },
-  {
-    "objectID": "slides/dia1/index.html",
-    "href": "slides/dia1/index.html",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "",
-    "text": "Introducción\nFundamentos\nProcesamiento y visualización\nAutomatización\nDatos climáticos grillados"
-  },
-  {
-    "objectID": "slides/dia1/index.html#condicionales-if-else-1",
-    "href": "slides/dia1/index.html#condicionales-if-else-1",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Condicionales: if / else",
-    "text": "Condicionales: if / else\n\n\n\n\n\n\n\n\n\n\n\nq_anual &lt;- q_anual |&gt;\n  mutate(tipo = case_when(\n    valor &lt; umbrales[1] ~ \"seco\",\n    valor &gt; umbrales[2] ~ \"húmedo\",\n    .default            = \"normal\"\n  ))\n\ncount(q_anual, tipo)\n#&gt;   tipo       n\n#&gt;   húmedo    13\n#&gt;   normal    36\n#&gt;   seco      13\n\n\n\n\nif() evalúa un solo valor; case_when() evalúa una columna completa. Los años más secos: 2023 (4.75), 1983 (7.23), 1967 (7.67), 1990 (8.23) y 2009 (9.29 m³/s)."
-  },
-  {
-    "objectID": "slides/dia1/index.html#iteración-con-purrrmap-1",
-    "href": "slides/dia1/index.html#iteración-con-purrrmap-1",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Iteración con purrr::map()",
-    "text": "Iteración con purrr::map()\n\nAplicando la función map()\npp_lista &lt;- map(archivos, leer_datos)   # aplica la función a cada archivo\nnames(pp_lista) &lt;- nombres\npp_lista$Cojata                         # una estación de la lista\n\n\nOrdenando los datos\n# Une la lista en UNA tabla larga con la columna \"estacion\"\npp_todas &lt;- pp_lista |&gt; list_rbind(names_to = \"estacion\")\nnrow(pp_todas)       #&gt; 114159\n\n# Con la tabla larga, group_by() reemplaza al bucle\npp_todas |&gt;\n  group_by(estacion) |&gt;\n  summarise(pct_faltante = mean(is.na(valor)) * 100,\n            maximo       = max(valor, na.rm = TRUE))\n\n\nfor y map() hacen lo mismo; map() es más corto y no necesita preparar la lista vacía."
-  },
-  {
-    "objectID": "slides/dia1/index.html#todas-las-estaciones-el-resultado",
-    "href": "slides/dia1/index.html#todas-las-estaciones-el-resultado",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Todas las estaciones: el resultado",
-    "text": "Todas las estaciones: el resultado\n\n\n\n\n\n\n\nfacet_wrap() hace un panel por estación. Entre 2010 y 2016 solo Cojata tiene años completos: es un vacío de toda la red, no de una estación."
-  },
-  {
     "objectID": "slides/dia1/index.html#exportar-los-resultados",
     "href": "slides/dia1/index.html#exportar-los-resultados",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Exportar los resultados",
     "text": "Exportar los resultados\n# Series mensuales areales: pp 1981–2025, etp 1981–2020\npp_cuenca_mes |&gt;\n  left_join(etp_cuenca_mes, by = \"fecha\") |&gt;\n  write_csv(\"data/processed/PP_ETP_mensual_cuenca.csv\")\n\n# Mapa de precipitación media como GeoTIFF (se abre en QGIS)\nwriteRaster(pp_media, \"outputs/PP_media_anual_PISCOv3.tif\")\n\n\nEn el Día 2 el modelo GR4J trabaja a paso diario y por subcuenca: usa la misma lluvia PISCOp v3 y la ETP de Hargreaves, pero día a día en cada una de las 5 subcuencas (data/pcp/ y data/temp/)."
-  },
-  {
-    "objectID": "slides/dia1/index.html#paquetes-y-tidyverse-1",
-    "href": "slides/dia1/index.html#paquetes-y-tidyverse-1",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Paquetes y tidyverse",
-    "text": "Paquetes y tidyverse\nInstalación y principales funciones:\n\n\n\n# Se instala UNA vez\ninstall.packages(\"tidyverse\")\n\n# Se carga en CADA sesión\nlibrary(tidyverse)\nlibrary(readxl)\n\n\n\n\nPaquete\nPara qué\n\n\n\n\nreadr / readxl\nimportar datos\n\n\ndplyr\nfiltrar, resumir\n\n\ntidyr\nreordenar tablas\n\n\nlubridate\nfechas\n\n\nggplot2\ngráficos\n\n\npurrr\nrepetir tareas\n\n\n\n\n\n\nEl pipe |&gt;: “y luego…”\nround(mean(pp_mensual), 1)              # se lee de adentro hacia afuera\n\npp_mensual |&gt; mean() |&gt; round(1)        # se lee de izquierda a derecha\n#&gt; 54.7"
-  },
-  {
-    "objectID": "slides/dia1/index.html#bucles-for-la-idea",
-    "href": "slides/dia1/index.html#bucles-for-la-idea",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Bucles for: la idea",
-    "text": "Bucles for: la idea"
   }
 ]

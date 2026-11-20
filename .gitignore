@@ -22,34 +22,6 @@ outputs/**
 data/processed/*
 !data/processed/.gitkeep
 
-# ---------------------------------------------------------------------------
-# DÍA 2 OCULTO hasta terminar la presentación del Día 1.
-# Para publicarlo: borrar este bloque, quitar "!slides/dia2/" de _quarto.yml,
-# descomentar el Día 2 en el menú (_quarto.yml) y en index.qmd, y renderizar.
-# ---------------------------------------------------------------------------
-slides/dia2/
-docs/slides/dia2/
-assets/img/gr4j.png
-assets/img/s06_*
-assets/img/s07_*
-assets/img/s08_*
-assets/img/s09_*
-assets/img/s10_*
-docs/assets/img/gr4j.png
-docs/assets/img/s06_*
-docs/assets/img/s07_*
-docs/assets/img/s08_*
-docs/assets/img/s09_*
-docs/assets/img/s10_*
-assets/img/s09_*
-assets/img/s10_*
-ejercicios/05_CC_observado.R
-ejercicios/06_CMIP6_correccion_sesgo.R
-ejercicios/07_Modelamiento_GR4J.R
-ejercicios/08_Modelamiento_futuro.R
-ejercicios/Descarga_CMIP6_GEE.js
-data/cmip6/
-
 # Solo para el Google Drive de los participantes (contiene datos de contacto)
 LEEME_Instalacion.txt
 

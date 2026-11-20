@@ -4,7 +4,6 @@ project:
   render:
     - "*.qmd"
     - "!data/"   # data/basin y data/rivers tienen .qmd de estilos QGIS
-    - "!slides/dia2/"   # DÍA 2 oculto: borrar esta línea para publicarlo
 
 website:
   title: "R aplicado a la Hidrología y Cambio Climático"
@@ -14,7 +13,6 @@ website:
         text: Inicio
       - href: slides/dia1/index.qmd
         text: Día 1
-      # DÍA 2 oculto: quitar el # de las 2 líneas siguientes para publicarlo
-      # - href: slides/dia2/index.qmd
-      #   text: Día 2
+      - href: slides/dia2/index.qmd
+        text: Día 2
         
