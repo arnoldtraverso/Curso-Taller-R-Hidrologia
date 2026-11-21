@@ -6,6 +6,8 @@ project:
     - "!data/"   # data/basin y data/rivers tienen .qmd de estilos QGIS
 
 website:
+  page-footer:
+    center: "© 2026 Kevin Arnold Traverso Yucra · Material bajo [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.es) · Código bajo licencia [MIT](https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia/blob/master/LICENSE-CODE)"
   title: "R aplicado a la Hidrología y Cambio Climático"
   navbar:
     left:

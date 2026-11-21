@@ -21,11 +21,25 @@
     "text": "Servicios climáticos y Cambio Climático\n¿Que son los Servicios Climáticos?\nLos servicios climáticos consisten en la generación, traducción y entrega de información científica sobre el clima (pasado, presente y futuro) en un formato práctico y comprensible. Su objetivo es ayudar a personas, empresas y gobiernos a tomar mejores decisiones para reducir riesgos y aprovechar oportunidades frente a las condiciones del clima.\n¿Qué es el cambio climático?\nEl cambio climático es la variación a largo plazo de las temperaturas y los patrones habituales del clima en la Tierra. Aunque puede tener causas naturales, desde el siglo XIX se debe principalmente a las actividades humanas (como la quema de combustibles fósiles y la deforestación), que aumentan los gases de efecto invernadero y provocan el calentamiento global."
   },
   {
+    "objectID": "slides/dia2/index.html#cambio-climático-en-el-altiplano",
+    "href": "slides/dia2/index.html#cambio-climático-en-el-altiplano",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Cambio climático en el altiplano",
+    "text": "Cambio climático en el altiplano\nEn los Andes y el altiplano (cuenca del lago Titicaca), el cambio climático afecta directamente la disponibilidad de agua y los medios de vida.\n\n\nGlaciares y agua\n\nLos glaciares tropicales pierden hielo con rapidez: menos reserva de agua para ríos y lagunas en época seca.\nMás evaporación por el aumento de temperatura: menos agua en ríos, bofedales y lagos.\nEl deshielo forma o agranda lagunas glaciares: riesgo de aluviones y desbordes.\n\n\nLluvia y temperatura\n\nInicio de lluvias irregular y tormentas intensas en pocos días: inundaciones y erosión.\nPeriodos secos largos: menos agua para consumo, riego y pastos.\nAunque sube la temperatura media, heladas fuera de época y granizadas siguen dañando los cultivos.\n\n\nAgricultura y ganadería\n\nPapa, quinua, cebada y habas: pérdidas por estrés hídrico, heladas tardías o exceso de humedad.\nPlagas y enfermedades llegan a zonas más altas, donde antes no sobrevivían.\nBofedales degradados: menos alimento y agua para alpacas, llamas, ovinos y vacunos.\n\n\n\nLos glaciares andinos perdieron entre 30 % y más del 50 % de su área desde los años 80 (IPCC AR6 GTII, cap. 12). Fuentes: Castellanos et al. (2022), Central and South America, IPCC AR6 GTII, cap. 12 — ipcc.ch/report/ar6/wg2/chapter/chapter-12 · Rabatel et al. (2013), The Cryosphere 7, 81–102, doi:10.5194/tc-7-81-2013."
+  },
+  {
     "objectID": "slides/dia2/index.html#series-diarias-de-la-cuenca",
     "href": "slides/dia2/index.html#series-diarias-de-la-cuenca",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Series diarias de la cuenca",
     "text": "Series diarias de la cuenca\n# Precipitación (PISCOp v3, 1981–2025) y temperatura (PISCO, 1981–2020)\n# por subcuenca -&gt; cuenca: promedio ponderado por área\nserie_cuenca &lt;- function(archivo, nombre) {\n  read_csv(archivo) |&gt;\n    pivot_longer(-Date, names_to = \"subcuenca\", values_to = \"valor\") |&gt;\n    mutate(subcuenca = parse_number(subcuenca)) |&gt;\n    left_join(areas, by = \"subcuenca\") |&gt;\n    group_by(fecha = Date) |&gt;\n    summarise({{ nombre }} := weighted.mean(valor, area_km2))\n}\n\nclima &lt;- serie_cuenca(\"data/pcp/Datos_pcp.csv\",   pp) |&gt;\n  left_join(serie_cuenca(\"data/temp/Datos_tmax.csv\", tmax), by = \"fecha\") |&gt;\n  left_join(serie_cuenca(\"data/temp/Datos_tmin.csv\", tmin), by = \"fecha\")\n#&gt;   fecha         pp  tmax  tmin\n#&gt;   1981-01-01  6.40  14.5  2.14\n\nLas llaves dobles alrededor de nombre y el operador := usan el nombre que le pasamos (pp, tmax, tmin) como nombre de la columna nueva."
+  },
+  {
+    "objectID": "slides/dia2/index.html#de-dónde-salen-los-índices-etccdi",
+    "href": "slides/dia2/index.html#de-dónde-salen-los-índices-etccdi",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿De dónde salen los índices ETCCDI?",
+    "text": "¿De dónde salen los índices ETCCDI?\n\n\n\nETCCDI: Expert Team on Climate Change Detection and Indices, equipo conjunto de la OMM (Comisión de Climatología), el WCRP (CLIVAR) y la JCOMM, creado tras el taller CLIVAR/GCOS/OMM de 1998 (Karl et al., 1999).\nDefinió 27 índices básicos calculados con datos diarios de lluvia y temperatura (Peterson et al., 2001; Zhang et al., 2011).\nEl problema que resuelven: muchos países no comparten sus datos diarios, pero sí pueden compartir índices calculados con la misma fórmula → se comparan regiones y estudios.\nDescriben extremos moderados (ocurren varias veces al año), no eventos de 100 años → hay suficientes casos para detectar tendencias.\n\n\nCinco tipos de índices\n\n\n\nTipo\nEjemplos\n\n\n\n\nAbsolutos\nRx1day, Rx5day, TXx, TNn\n\n\nUmbral fijo\nFD, R10mm, SU\n\n\nPercentiles\nTX90p, TN10p, R95p\n\n\nDuración\nCDD, CWD, WSDI\n\n\nOtros\nPRCPTOT, SDII, DTR\n\n\n\nSoftware: RClimDex, climdex.pcic (R), ClimPACT. Base de los capítulos de extremos del IPCC (AR6, cap. 11).\n\n\nKarl, Nicholls y Ghazi (1999), Climatic Change 42, 3–7 · Peterson et al. (2001), WMO-TD 1071 · Zhang et al. (2011), WIREs Climate Change 2, 851–870, doi:10.1002/wcc.147 · Lista oficial: etccdi.pacificclimate.org/list_27_indices.shtml"
   },
   {
     "objectID": "slides/dia2/index.html#índices-de-extremos-etccdi",
@@ -161,11 +175,25 @@
     "text": "Dos formas de corregir\n\n\n\n\n\n\n\n\n\nMétodo delta\nMapeo de cuantiles\n\n\n\n\nQué usa del modelo\nSolo el cambio entre sus periodos\nToda la serie diaria\n\n\nSerie futura\nLo observado, perturbado mes a mes\nEl modelo corregido\n\n\nCorrige\nLa media mensual\nToda la distribución (medias, extremos, días secos)\n\n\nVariabilidad futura\nLa misma de 1981–2014\nLa del modelo\n\n\nVentaja\nSimple, robusto\nConserva la secuencia de años del modelo\n\n\n\n\n\nDelta: Pfut = Pobs × (Pmod,fut / Pmod,ref) y Tfut = Tobs + (Tmod,fut − Tmod,ref), para cada mes y subcuenca."
   },
   {
-    "objectID": "slides/dia2/index.html#método-delta",
-    "href": "slides/dia2/index.html#método-delta",
+    "objectID": "slides/dia2/index.html#método-delta-la-idea",
+    "href": "slides/dia2/index.html#método-delta-la-idea",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Método delta",
-    "text": "Método delta\ndeltas &lt;- inner_join(regimen(cmip, ref, cuenca = FALSE),\n                     regimen(cmip, fut, cuenca = FALSE),\n                     by = c(\"modelo\", \"subcuenca\", \"mes\"),\n                     suffix = c(\"_ref\", \"_fut\")) |&gt;\n  transmute(modelo, subcuenca, mes,\n            f_pp   = pp_fut / pp_ref,          # razón\n            d_tmax = tmax_fut - tmax_ref,      # diferencia\n            d_tmin = tmin_fut - tmin_ref)\n#&gt;   ACCESS-CM2, subcuenca 1:   mes  f_pp  d_tmax  d_tmin\n#&gt;                                1  1.00    1.61    1.36\n#&gt;                                3  1.19    1.56    1.23\n\nfut_delta &lt;- obs |&gt;\n  filter(year(fecha) %in% ref) |&gt;\n  mutate(mes = month(fecha)) |&gt;\n  inner_join(deltas, by = c(\"subcuenca\", \"mes\")) |&gt;\n  mutate(pp = pp * f_pp, tmax = tmax + d_tmax, tmin = tmin + d_tmin)"
+    "section": "Método delta: la idea",
+    "text": "Método delta: la idea\n\n\n\n\n\n\nEl modelo solo aporta el cambio (2): su sesgo se cancela en la razón (marzo: modelo 125 mm, PISCO 105 mm; solo importa que sube 26 %). El futuro es lo observado escalado (3, 4). En temperatura se suma la diferencia (enero: +1.9 °C). Subcuenca 1, ACCESS-CM2."
+  },
+  {
+    "objectID": "slides/dia2/index.html#método-delta-en-r",
+    "href": "slides/dia2/index.html#método-delta-en-r",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Método delta en R",
+    "text": "Método delta en R\ndeltas &lt;- inner_join(regimen(cmip, ref, cuenca = FALSE),\n                     regimen(cmip, fut, cuenca = FALSE),\n                     by = c(\"modelo\", \"subcuenca\", \"mes\"),\n                     suffix = c(\"_ref\", \"_fut\")) |&gt;\n  transmute(modelo, subcuenca, mes,\n            f_pp   = pp_fut / pp_ref,          # razón\n            d_tmax = tmax_fut - tmax_ref,      # diferencia\n            d_tmin = tmin_fut - tmin_ref)\n#&gt;   ACCESS-CM2, subcuenca 1:   mes  f_pp  d_tmax  d_tmin\n#&gt;                                1  1.02    1.86    1.73\n#&gt;                                3  1.26    1.76    1.43\n\nfut_delta &lt;- obs |&gt;\n  filter(year(fecha) %in% ref) |&gt;\n  mutate(mes = month(fecha)) |&gt;\n  inner_join(deltas, by = c(\"subcuenca\", \"mes\")) |&gt;\n  mutate(pp = pp * f_pp, tmax = tmax + d_tmax, tmin = tmin + d_tmin)"
+  },
+  {
+    "objectID": "slides/dia2/index.html#mapeo-de-cuantiles-la-idea",
+    "href": "slides/dia2/index.html#mapeo-de-cuantiles-la-idea",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Mapeo de cuantiles: la idea",
+    "text": "Mapeo de cuantiles: la idea\n\n\n\n\n\n\nPara cada valor del modelo: (1) se busca su probabilidad en la curva del modelo y (2) se reemplaza por el valor de PISCO con la misma probabilidad. La mediana del modelo (4.7 mm) pasa a 3.7 mm. La función de transferencia se ajusta en 1981–2014 y se aplica a toda la serie, futuro incluido. Subcuenca 1, febrero, ACCESS-CM2."
   },
   {
     "objectID": "slides/dia2/index.html#mapeo-de-cuantiles-un-caso",
@@ -189,11 +217,11 @@
     "text": "¿Funcionó la corrección?\n\n\nDespués de corregir, los tres modelos reproducen el régimen de PISCO en 1981–2014: lluvia 729–732 mm (PISCO 725), Tmax 13.8 °C y Tmin −1.2 °C. Las líneas quedan una sobre otra."
   },
   {
-    "objectID": "slides/dia2/index.html#señales-de-cambio-20202049-frente-a-19852014",
-    "href": "slides/dia2/index.html#señales-de-cambio-20202049-frente-a-19852014",
+    "objectID": "slides/dia2/index.html#señales-de-cambio-al-20302050",
+    "href": "slides/dia2/index.html#señales-de-cambio-al-20302050",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Señales de cambio: 2020–2049 frente a 1985–2014",
-    "text": "Señales de cambio: 2020–2049 frente a 1985–2014\n\n\n\nVariable\nMétodo\nACCESS-CM2\nMIROC6\nMPI-ESM1-2-HR\n\n\n\n\nLluvia\nSin corregir\n+1.2 %\n+8.3 %\n+9.5 %\n\n\n\nDelta\n+1.2 %\n+7.7 %\n+9.8 %\n\n\n\nCuantiles\n+2.1 %\n+6.8 %\n+8.2 %\n\n\nTmax\nSin corregir y delta\n+1.51 °C\n+1.15 °C\n+0.92 °C\n\n\n\nCuantiles\n+1.20 °C\n+0.85 °C\n+0.64 °C\n\n\nTmin\nSin corregir y delta\n+1.32 °C\n+0.91 °C\n+0.94 °C\n\n\n\nCuantiles\n+1.22 °C\n+0.95 °C\n+0.80 °C\n\n\n\n\n\nLos tres modelos coinciden: más calor (+0.6 a +1.5 °C) y algo más de lluvia (+1 a +10 %). El método delta conserva la señal del modelo; el mapeo de cuantiles la modifica, sobre todo en Tmax (ejercicio E3). Ensamble (cuantiles): +5.7 % de lluvia, +0.9 °C Tmax, +1.0 °C Tmin."
+    "section": "Señales de cambio al 2030–2050",
+    "text": "Señales de cambio al 2030–2050\n\n\n\nVariable\nMétodo\nACCESS-CM2\nMIROC6\nMPI-ESM1-2-HR\n\n\n\n\nLluvia\nSin corregir\n+3.8 %\n+9.8 %\n+11.5 %\n\n\n\nDelta\n+3.4 %\n+9.6 %\n+12.6 %\n\n\n\nCuantiles\n+4.7 %\n+8.4 %\n+9.9 %\n\n\nTmax\nSin corregir y delta\n+1.81 °C\n+1.30 °C\n+1.09 °C\n\n\n\nCuantiles\n+1.44 °C\n+0.98 °C\n+0.78 °C\n\n\nTmin\nSin corregir y delta\n+1.62 °C\n+1.09 °C\n+1.11 °C\n\n\n\nCuantiles\n+1.48 °C\n+1.12 °C\n+0.94 °C\n\n\n\n\n\nCambio respecto a 1981–2014. Los tres modelos coinciden: más calor (+0.8 a +1.8 °C) y algo más de lluvia (+3 a +13 %). El método delta conserva la señal del modelo; el mapeo de cuantiles la modifica, sobre todo en Tmax (ejercicio E3). Ensamble (cuantiles): +7.7 % de lluvia, +1.1 °C Tmax, +1.2 °C Tmin."
   },
   {
     "objectID": "slides/dia2/index.html#señal-mensual",
@@ -383,6 +411,62 @@
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Cierre",
     "text": "Cierre\n\n06\n\nR + Python, recursos y rutas de continuación"
+  },
+  {
+    "objectID": "slides/dia2/index.html#el-flujo-completo-en-dos-días",
+    "href": "slides/dia2/index.html#el-flujo-completo-en-dos-días",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "El flujo completo en dos días",
+    "text": "El flujo completo en dos días\n\n\n\n\n\n\n\n\n\nPaso\nScript\nLo que obtuvimos\n\n\n\n\nFundamentos de R\n01\nobjetos, data frames, fechas, paquetes\n\n\nEstaciones SENAMHI\n02 03\ndatos ordenados, control de calidad, funciones, bucles\n\n\nGrillados PISCO\n04\nlluvia areal 716 mm/año, ETP, balance P – ETP\n\n\nCC observado\n05\nTmáx +0.35 °C/década; lluvia sin tendencia\n\n\nCMIP6 + sesgo\n06\n3 modelos SSP2-4.5 corregidos (cuantiles y delta)\n\n\nGR4J: calibración\n07\nKGE 0.86 (calibración), 0.81 (validación)\n\n\nGR4J: futuro\n08\ncaudal medio 2030–2050: de 0 % a +36 %\n\n\n\n\n\nCada script lee lo que produce el anterior: con los datos crudos y los scripts 00–08 cualquiera puede reproducir todo el análisis."
+  },
+  {
+    "objectID": "slides/dia2/index.html#r-y-python-no-compiten",
+    "href": "slides/dia2/index.html#r-y-python-no-compiten",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "R y Python: no compiten",
+    "text": "R y Python: no compiten\n\n\n\nTarea\nR\nPython\n\n\n\n\nTablas\ndplyr, tidyr\npandas, polars\n\n\nGráficos\nggplot2\nmatplotlib, plotnine\n\n\nGrillas y NetCDF\nterra, ncdf4\nxarray, rioxarray\n\n\nVectores (shapefiles)\nsf\ngeopandas\n\n\nTendencias\ntrend, modifiedmk\npymannkendall\n\n\nCorrección de sesgo\nqmap\nxsdba (xclim)\n\n\nMétricas de ajuste\nhydroGOF\nhydroeval, HydroErr\n\n\nGoogle Earth Engine\nrgee\nearthengine-api, geemap\n\n\n\n\nLo importante es el método (control de calidad, corrección de sesgo, calibración), no el lenguaje. Y no hay que elegir: los dos se pueden combinar."
+  },
+  {
+    "objectID": "slides/dia2/index.html#r-python-con-reticulate",
+    "href": "slides/dia2/index.html#r-python-con-reticulate",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "R + Python con reticulate",
+    "text": "R + Python con reticulate\n\n\nlibrary(reticulate)\nuse_python(Sys.which(\"python\"))\n\nxr &lt;- import(\"xarray\")  # import xarray as xr\n\nds &lt;- xr$open_dataset(archivo)  # PISCOp v3\n\n# diario -&gt; anual -&gt; promedio de la grilla\nanual_py &lt;- ds$pp$\n  resample(time = \"YE\")$sum()$\n  mean(c(\"latitude\", \"longitude\"))$\n  to_pandas()\n\npp_py &lt;- tibble(\n  anio = 1981:2025,\n  pp_python = as.numeric(anual_py))\n\n\nEl $ de R reemplaza al . de Python.\nxarray lee las fechas del NetCDF por sí solo.\nEl resultado vuelve a R como un vector: se sigue con tidyverse.\n\nhead(pp_py, 3)\n#&gt;    anio pp_python\n#&gt; 1  1981      835.\n#&gt; 2  1982      683.\n#&gt; 3  1983      501.\n\n\nScript ejercicios/09_R_y_Python.R. Requiere Python 3 con pip install xarray netCDF4 pandas."
+  },
+  {
+    "objectID": "slides/dia2/index.html#r-y-python-dan-lo-mismo",
+    "href": "slides/dia2/index.html#r-y-python-dan-lo-mismo",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¿R y Python dan lo mismo?",
+    "text": "¿R y Python dan lo mismo?\n\n\n# Lo mismo con terra (Día 1)\npp_r &lt;- tapp(r, \"years\", sum) |&gt;\n  global(\"mean\", na.rm = TRUE) |&gt;\n  as_tibble() |&gt;\n  transmute(anio = 1981:2025,\n            pp_r = mean)\n\ncomparar &lt;- left_join(pp_py, pp_r) |&gt;\n  mutate(dif = pp_python - pp_r)\n\nmax(abs(comparar$dif))\n#&gt; [1] 0.0001372217\n\n# También se escribe Python directo\npy_run_string(\"\nn = ds.pp.sel(time=slice('1991','2020'))\nc = n.groupby('time.month').sum() / 30\nclim = c.mean(['latitude','longitude'])\n\")\n\n# Lo de Python se lee con py$\nround(py$clim$values, 1)\n#&gt;  [1] 127.7 121.7  99.0  40.9  14.9   6.4\n#&gt;  [7]   6.0   9.7  22.9  59.4  66.1 111.9\n\n\nDiferencia máxima: 0.00014 mm/año, solo redondeo. Mismo dato + mismo método = mismo resultado, en cualquier lenguaje."
+  },
+  {
+    "objectID": "slides/dia2/index.html#recursos-para-seguir",
+    "href": "slides/dia2/index.html#recursos-para-seguir",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Recursos para seguir",
+    "text": "Recursos para seguir\n\n\nPara aprender\n\nR for Data Science (2.ª ed.), Wickham et al. — r4ds.hadley.nz\nGeocomputation with R — r.geocompx.org\nGeocomputation with Python — py.geocompx.org\nSlater et al. (2019). Using R in hydrology. HESS, 23, 2939–2963. doi:10.5194/hess-23-2939-2019\nCRAN Task View: Hydrological Data and Modeling — cran.r-project.org/web/views/Hydrology.html\n\n\nDatos\n\nSENAMHI: estaciones hidrometeorológicas del Perú\nPISCO: precipitación y temperatura grillada (SENAMHI)\nNEX-GDDP-CMIP6 en GEE: NASA/GDDP-CMIP6\nERA5-Land en GEE: ECMWF/ERA5_LAND/DAILY_AGGR\nCHIRPS en GEE: UCSB-CHG/CHIRPS/DAILY"
+  },
+  {
+    "objectID": "slides/dia2/index.html#rutas-de-continuación",
+    "href": "slides/dia2/index.html#rutas-de-continuación",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Rutas de continuación",
+    "text": "Rutas de continuación\n\nMás clima futuro: más modelos (≥ 10), otros escenarios (SSP1-2.6, SSP3-7.0, SSP5-8.5) y horizontes (2071–2100).\nOtros modelos hidrológicos: SWAT, WEAP o los demás modelos GR (airGR), y comparar resultados.\nDemanda de agua: sumar riego y consumo poblacional al balance para ver la brecha oferta – demanda.\nTableros interactivos: compartir resultados con shiny o Quarto Dashboards.\nPronóstico: aprendizaje automático para pronosticar caudales y niveles a corto plazo.\n\n\n\nLa regla de oro: un script por paso, datos crudos que nunca se tocan, y resultados que se pueden volver a generar."
+  },
+  {
+    "objectID": "slides/dia2/index.html#materiales-del-curso",
+    "href": "slides/dia2/index.html#materiales-del-curso",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "Materiales del curso",
+    "text": "Materiales del curso\n\n\nTodo el curso está en GitHub:\ngithub.com/arnoldtraverso/Curso-Taller-R-Hidrologia\n\nDescargar el repositorio (Code → Download ZIP).\nAbrir Curso-Taller-R-Hidrologia.Rproj.\nEjecutar 00_Instalacion_paquetes.R.\nEjecutar los scripts 01 a 08 en orden.\n\n\nCurso-Taller-R-Hidrologia/\n├── *.Rproj\n├── data/\n│   ├── raw/        datos crudos\n│   ├── cmip6/      modelos CMIP6\n│   └── processed/  se generan\n├── ejercicios/     scripts 00–09\n├── outputs/        resultados\n└── slides/         diapositivas\n\n\n\nEl archivo nacional de PISCOp v3 (1.5 GB) no está en el repositorio: el recorte de la cuenca (PISCOp_v3_diario_Huancane.nc) sí."
+  },
+  {
+    "objectID": "slides/dia2/index.html#gracias",
+    "href": "slides/dia2/index.html#gracias",
+    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
+    "section": "¡Gracias!",
+    "text": "¡Gracias!\nKevin Arnold Traverso Yucra\nCorreo: arnold.traverso@gmail.com\nLinkedIn: linkedin.com/in/kevin-arnold-traverso\nGitHub: github.com/arnoldtraverso\nCIP Puno - Cap. Ingeniería Agrícola · FIAGRH - UNA Puno · IICTA-FIA\n\nMaterial bajo licencia CC BY 4.0 · Código bajo licencia MIT"
   },
   {
     "objectID": "index.html",
@@ -854,115 +938,10 @@
     "text": "Exportar los resultados\n# Series mensuales areales: pp 1981–2025, etp 1981–2020\npp_cuenca_mes |&gt;\n  left_join(etp_cuenca_mes, by = \"fecha\") |&gt;\n  write_csv(\"data/processed/PP_ETP_mensual_cuenca.csv\")\n\n# Mapa de precipitación media como GeoTIFF (se abre en QGIS)\nwriteRaster(pp_media, \"outputs/PP_media_anual_PISCOv3.tif\")\n\n\nEn el Día 2 el modelo GR4J trabaja a paso diario y por subcuenca: usa la misma lluvia PISCOp v3 y la ETP de Hargreaves, pero día a día en cada una de las 5 subcuencas (data/pcp/ y data/temp/)."
   },
   {
-    "objectID": "slides/dia2/index.html#el-flujo-completo-en-dos-días",
-    "href": "slides/dia2/index.html#el-flujo-completo-en-dos-días",
+    "objectID": "index.html#cómo-citar",
+    "href": "index.html#cómo-citar",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "El flujo completo en dos días",
-    "text": "El flujo completo en dos días\n\n\n\n\n\n\n\n\n\nPaso\nScript\nLo que obtuvimos\n\n\n\n\nFundamentos de R\n01\nobjetos, data frames, fechas, paquetes\n\n\nEstaciones SENAMHI\n02 03\ndatos ordenados, control de calidad, funciones, bucles\n\n\nGrillados PISCO\n04\nlluvia areal 716 mm/año, ETP, balance P – ETP\n\n\nCC observado\n05\nTmáx +0.35 °C/década; lluvia sin tendencia\n\n\nCMIP6 + sesgo\n06\n3 modelos SSP2-4.5 corregidos (cuantiles y delta)\n\n\nGR4J: calibración\n07\nKGE 0.86 (calibración), 0.81 (validación)\n\n\nGR4J: futuro\n08\ncaudal medio 2030–2050: de 0 % a +36 %\n\n\n\n\n\nCada script lee lo que produce el anterior: con los datos crudos y los scripts 00–08 cualquiera puede reproducir todo el análisis."
-  },
-  {
-    "objectID": "slides/dia2/index.html#r-y-python-no-compiten",
-    "href": "slides/dia2/index.html#r-y-python-no-compiten",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "R y Python: no compiten",
-    "text": "R y Python: no compiten\n\n\n\nTarea\nR\nPython\n\n\n\n\nTablas\ndplyr, tidyr\npandas, polars\n\n\nGráficos\nggplot2\nmatplotlib, plotnine\n\n\nGrillas y NetCDF\nterra, ncdf4\nxarray, rioxarray\n\n\nVectores (shapefiles)\nsf\ngeopandas\n\n\nTendencias\ntrend, modifiedmk\npymannkendall\n\n\nCorrección de sesgo\nqmap\nxsdba (xclim)\n\n\nMétricas de ajuste\nhydroGOF\nhydroeval, HydroErr\n\n\nGoogle Earth Engine\nrgee\nearthengine-api, geemap\n\n\n\n\nLo importante es el método (control de calidad, corrección de sesgo, calibración), no el lenguaje. Y no hay que elegir: los dos se pueden combinar."
-  },
-  {
-    "objectID": "slides/dia2/index.html#r-python-con-reticulate",
-    "href": "slides/dia2/index.html#r-python-con-reticulate",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "R + Python con reticulate",
-    "text": "R + Python con reticulate\n\n\nlibrary(reticulate)\nuse_python(Sys.which(\"python\"))\n\nxr &lt;- import(\"xarray\")  # import xarray as xr\n\nds &lt;- xr$open_dataset(archivo)  # PISCOp v3\n\n# diario -&gt; anual -&gt; promedio de la grilla\nanual_py &lt;- ds$pp$\n  resample(time = \"YE\")$sum()$\n  mean(c(\"latitude\", \"longitude\"))$\n  to_pandas()\n\npp_py &lt;- tibble(\n  anio = 1981:2025,\n  pp_python = as.numeric(anual_py))\n\n\nEl $ de R reemplaza al . de Python.\nxarray lee las fechas del NetCDF por sí solo.\nEl resultado vuelve a R como un vector: se sigue con tidyverse.\n\nhead(pp_py, 3)\n#&gt;    anio pp_python\n#&gt; 1  1981      835.\n#&gt; 2  1982      683.\n#&gt; 3  1983      501.\n\n\nScript ejercicios/09_R_y_Python.R. Requiere Python 3 con pip install xarray netCDF4 pandas."
-  },
-  {
-    "objectID": "slides/dia2/index.html#r-y-python-dan-lo-mismo",
-    "href": "slides/dia2/index.html#r-y-python-dan-lo-mismo",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "¿R y Python dan lo mismo?",
-    "text": "¿R y Python dan lo mismo?\n\n\n# Lo mismo con terra (Día 1)\npp_r &lt;- tapp(r, \"years\", sum) |&gt;\n  global(\"mean\", na.rm = TRUE) |&gt;\n  as_tibble() |&gt;\n  transmute(anio = 1981:2025,\n            pp_r = mean)\n\ncomparar &lt;- left_join(pp_py, pp_r) |&gt;\n  mutate(dif = pp_python - pp_r)\n\nmax(abs(comparar$dif))\n#&gt; [1] 0.0001372217\n\n# También se escribe Python directo\npy_run_string(\"\nn = ds.pp.sel(time=slice('1991','2020'))\nc = n.groupby('time.month').sum() / 30\nclim = c.mean(['latitude','longitude'])\n\")\n\n# Lo de Python se lee con py$\nround(py$clim$values, 1)\n#&gt;  [1] 127.7 121.7  99.0  40.9  14.9   6.4\n#&gt;  [7]   6.0   9.7  22.9  59.4  66.1 111.9\n\n\nDiferencia máxima: 0.00014 mm/año, solo redondeo. Mismo dato + mismo método = mismo resultado, en cualquier lenguaje."
-  },
-  {
-    "objectID": "slides/dia2/index.html#recursos-para-seguir",
-    "href": "slides/dia2/index.html#recursos-para-seguir",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Recursos para seguir",
-    "text": "Recursos para seguir\n\n\nPara aprender\n\nR for Data Science (2.ª ed.), Wickham et al. — r4ds.hadley.nz\nGeocomputation with R — r.geocompx.org\nGeocomputation with Python — py.geocompx.org\nSlater et al. (2019). Using R in hydrology. HESS, 23, 2939–2963. doi:10.5194/hess-23-2939-2019\nCRAN Task View: Hydrological Data and Modeling — cran.r-project.org/web/views/Hydrology.html\n\n\nDatos\n\nSENAMHI: estaciones hidrometeorológicas del Perú\nPISCO: precipitación y temperatura grillada (SENAMHI)\nNEX-GDDP-CMIP6 en GEE: NASA/GDDP-CMIP6\nERA5-Land en GEE: ECMWF/ERA5_LAND/DAILY_AGGR\nCHIRPS en GEE: UCSB-CHG/CHIRPS/DAILY"
-  },
-  {
-    "objectID": "slides/dia2/index.html#rutas-de-continuación",
-    "href": "slides/dia2/index.html#rutas-de-continuación",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Rutas de continuación",
-    "text": "Rutas de continuación\n\nMás clima futuro: más modelos (≥ 10), otros escenarios (SSP1-2.6, SSP3-7.0, SSP5-8.5) y horizontes (2071–2100).\nOtros modelos hidrológicos: SWAT, WEAP o los demás modelos GR (airGR), y comparar resultados.\nDemanda de agua: sumar riego y consumo poblacional al balance para ver la brecha oferta – demanda.\nTableros interactivos: compartir resultados con shiny o Quarto Dashboards.\nPronóstico: aprendizaje automático para pronosticar caudales y niveles a corto plazo.\n\n\n\nLa regla de oro: un script por paso, datos crudos que nunca se tocan, y resultados que se pueden volver a generar."
-  },
-  {
-    "objectID": "slides/dia2/index.html#materiales-del-curso",
-    "href": "slides/dia2/index.html#materiales-del-curso",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Materiales del curso",
-    "text": "Materiales del curso\n\n\nTodo el curso está en GitHub:\ngithub.com/arnoldtraverso/Curso-Taller-R-Hidrologia\n\nDescargar el repositorio (Code → Download ZIP).\nAbrir Curso-Taller-R-Hidrologia.Rproj.\nEjecutar 00_Instalacion_paquetes.R.\nEjecutar los scripts 01 a 08 en orden.\n\n\nCurso-Taller-R-Hidrologia/\n├── *.Rproj\n├── data/\n│   ├── raw/        datos crudos\n│   ├── cmip6/      modelos CMIP6\n│   └── processed/  se generan\n├── ejercicios/     scripts 00–09\n├── outputs/        resultados\n└── slides/         diapositivas\n\n\n\nEl archivo nacional de PISCOp v3 (1.5 GB) no está en el repositorio: el recorte de la cuenca (PISCOp_v3_diario_Huancane.nc) sí."
-  },
-  {
-    "objectID": "slides/dia2/index.html#gracias",
-    "href": "slides/dia2/index.html#gracias",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "¡Gracias!",
-    "text": "¡Gracias!\nKevin Arnold Traverso Yucra\nCorreo: arnold.traverso@gmail.com\nLinkedIn: linkedin.com/in/kevin-arnold-traverso\nGitHub: github.com/arnoldtraverso\nCIP Puno - Cap. Ingeniería Agrícola · FIAGRH - UNA Puno · IICTA-FIA"
-  },
-  {
-    "objectID": "slides/dia2/index.html#de-dónde-salen-los-índices-etccdi",
-    "href": "slides/dia2/index.html#de-dónde-salen-los-índices-etccdi",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "¿De dónde salen los índices ETCCDI?",
-    "text": "¿De dónde salen los índices ETCCDI?\n\n\n\nETCCDI: Expert Team on Climate Change Detection and Indices, equipo conjunto de la OMM (Comisión de Climatología), el WCRP (CLIVAR) y la JCOMM, creado tras el taller CLIVAR/GCOS/OMM de 1998 (Karl et al., 1999).\nDefinió 27 índices básicos calculados con datos diarios de lluvia y temperatura (Peterson et al., 2001; Zhang et al., 2011).\nEl problema que resuelven: muchos países no comparten sus datos diarios, pero sí pueden compartir índices calculados con la misma fórmula → se comparan regiones y estudios.\nDescriben extremos moderados (ocurren varias veces al año), no eventos de 100 años → hay suficientes casos para detectar tendencias.\n\n\nCinco tipos de índices\n\n\n\nTipo\nEjemplos\n\n\n\n\nAbsolutos\nRx1day, Rx5day, TXx, TNn\n\n\nUmbral fijo\nFD, R10mm, SU\n\n\nPercentiles\nTX90p, TN10p, R95p\n\n\nDuración\nCDD, CWD, WSDI\n\n\nOtros\nPRCPTOT, SDII, DTR\n\n\n\nSoftware: RClimDex, climdex.pcic (R), ClimPACT. Base de los capítulos de extremos del IPCC (AR6, cap. 11).\n\n\nKarl, Nicholls y Ghazi (1999), Climatic Change 42, 3–7 · Peterson et al. (2001), WMO-TD 1071 · Zhang et al. (2011), WIREs Climate Change 2, 851–870, doi:10.1002/wcc.147 · Lista oficial: etccdi.pacificclimate.org/list_27_indices.shtml"
-  },
-  {
-    "objectID": "slides/dia2/index.html#método-delta-la-idea",
-    "href": "slides/dia2/index.html#método-delta-la-idea",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Método delta: la idea",
-    "text": "Método delta: la idea\n\n\n\n\n\n\nEl modelo solo aporta el cambio (2): su sesgo se cancela en la razón (marzo: modelo 125 mm, PISCO 105 mm; solo importa que sube 26 %). El futuro es lo observado escalado (3, 4). En temperatura se suma la diferencia (enero: +1.9 °C). Subcuenca 1, ACCESS-CM2."
-  },
-  {
-    "objectID": "slides/dia2/index.html#método-delta-en-r",
-    "href": "slides/dia2/index.html#método-delta-en-r",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Método delta en R",
-    "text": "Método delta en R\ndeltas &lt;- inner_join(regimen(cmip, ref, cuenca = FALSE),\n                     regimen(cmip, fut, cuenca = FALSE),\n                     by = c(\"modelo\", \"subcuenca\", \"mes\"),\n                     suffix = c(\"_ref\", \"_fut\")) |&gt;\n  transmute(modelo, subcuenca, mes,\n            f_pp   = pp_fut / pp_ref,          # razón\n            d_tmax = tmax_fut - tmax_ref,      # diferencia\n            d_tmin = tmin_fut - tmin_ref)\n#&gt;   ACCESS-CM2, subcuenca 1:   mes  f_pp  d_tmax  d_tmin\n#&gt;                                1  1.02    1.86    1.73\n#&gt;                                3  1.26    1.76    1.43\n\nfut_delta &lt;- obs |&gt;\n  filter(year(fecha) %in% ref) |&gt;\n  mutate(mes = month(fecha)) |&gt;\n  inner_join(deltas, by = c(\"subcuenca\", \"mes\")) |&gt;\n  mutate(pp = pp * f_pp, tmax = tmax + d_tmax, tmin = tmin + d_tmin)"
-  },
-  {
-    "objectID": "slides/dia2/index.html#mapeo-de-cuantiles-la-idea",
-    "href": "slides/dia2/index.html#mapeo-de-cuantiles-la-idea",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Mapeo de cuantiles: la idea",
-    "text": "Mapeo de cuantiles: la idea\n\n\n\n\n\n\nPara cada valor del modelo: (1) se busca su probabilidad en la curva del modelo y (2) se reemplaza por el valor de PISCO con la misma probabilidad. La mediana del modelo (4.7 mm) pasa a 3.7 mm. La función de transferencia se ajusta en 1981–2014 y se aplica a toda la serie, futuro incluido. Subcuenca 1, febrero, ACCESS-CM2."
-  },
-  {
-    "objectID": "slides/dia2/index.html#cambio-climático-en-el-altiplano",
-    "href": "slides/dia2/index.html#cambio-climático-en-el-altiplano",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Cambio climático en el altiplano",
-    "text": "Cambio climático en el altiplano\nEn los Andes y el altiplano (cuenca del lago Titicaca), el cambio climático afecta directamente la disponibilidad de agua y los medios de vida.\n\n\nGlaciares y agua\n\nLos glaciares tropicales pierden hielo con rapidez: menos reserva de agua para ríos y lagunas en época seca.\nMás evaporación por el aumento de temperatura: menos agua en ríos, bofedales y lagos.\nEl deshielo forma o agranda lagunas glaciares: riesgo de aluviones y desbordes.\n\n\nLluvia y temperatura\n\nInicio de lluvias irregular y tormentas intensas en pocos días: inundaciones y erosión.\nPeriodos secos largos: menos agua para consumo, riego y pastos.\nAunque sube la temperatura media, heladas fuera de época y granizadas siguen dañando los cultivos.\n\n\nAgricultura y ganadería\n\nPapa, quinua, cebada y habas: pérdidas por estrés hídrico, heladas tardías o exceso de humedad.\nPlagas y enfermedades llegan a zonas más altas, donde antes no sobrevivían.\nBofedales degradados: menos alimento y agua para alpacas, llamas, ovinos y vacunos.\n\n\n\nLos glaciares andinos perdieron entre 30 % y más del 50 % de su área desde los años 80 (IPCC AR6 GTII, cap. 12). Fuentes: Castellanos et al. (2022), Central and South America, IPCC AR6 GTII, cap. 12 — ipcc.ch/report/ar6/wg2/chapter/chapter-12 · Rabatel et al. (2013), The Cryosphere 7, 81–102, doi:10.5194/tc-7-81-2013."
-  },
-  {
-    "objectID": "slides/dia2/index.html#señales-de-cambio-20302050-frente-a-19812014",
-    "href": "slides/dia2/index.html#señales-de-cambio-20302050-frente-a-19812014",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Señales de cambio: 2030–2050 frente a 1981–2014",
-    "text": "Señales de cambio: 2030–2050 frente a 1981–2014\n\n\n\nVariable\nMétodo\nACCESS-CM2\nMIROC6\nMPI-ESM1-2-HR\n\n\n\n\nLluvia\nSin corregir\n+3.8 %\n+9.8 %\n+11.5 %\n\n\n\nDelta\n+3.4 %\n+9.6 %\n+12.6 %\n\n\n\nCuantiles\n+4.7 %\n+8.4 %\n+9.9 %\n\n\nTmax\nSin corregir y delta\n+1.81 °C\n+1.30 °C\n+1.09 °C\n\n\n\nCuantiles\n+1.44 °C\n+0.98 °C\n+0.78 °C\n\n\nTmin\nSin corregir y delta\n+1.62 °C\n+1.09 °C\n+1.11 °C\n\n\n\nCuantiles\n+1.48 °C\n+1.12 °C\n+0.94 °C\n\n\n\n\n\nLos tres modelos coinciden: más calor (+0.8 a +1.8 °C) y algo más de lluvia (+3 a +13 %). El método delta conserva la señal del modelo; el mapeo de cuantiles la modifica, sobre todo en Tmax (ejercicio E3). Ensamble (cuantiles): +7.7 % de lluvia, +1.1 °C Tmax, +1.2 °C Tmin."
-  },
-  {
-    "objectID": "slides/dia2/index.html#señales-de-cambio-20302050-vs.-19812014",
-    "href": "slides/dia2/index.html#señales-de-cambio-20302050-vs.-19812014",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Señales de cambio: 2030–2050 vs. 1981–2014",
-    "text": "Señales de cambio: 2030–2050 vs. 1981–2014\n\n\n\nVariable\nMétodo\nACCESS-CM2\nMIROC6\nMPI-ESM1-2-HR\n\n\n\n\nLluvia\nSin corregir\n+3.8 %\n+9.8 %\n+11.5 %\n\n\n\nDelta\n+3.4 %\n+9.6 %\n+12.6 %\n\n\n\nCuantiles\n+4.7 %\n+8.4 %\n+9.9 %\n\n\nTmax\nSin corregir y delta\n+1.81 °C\n+1.30 °C\n+1.09 °C\n\n\n\nCuantiles\n+1.44 °C\n+0.98 °C\n+0.78 °C\n\n\nTmin\nSin corregir y delta\n+1.62 °C\n+1.09 °C\n+1.11 °C\n\n\n\nCuantiles\n+1.48 °C\n+1.12 °C\n+0.94 °C\n\n\n\n\n\nLos tres modelos coinciden: más calor (+0.8 a +1.8 °C) y algo más de lluvia (+3 a +13 %). El método delta conserva la señal del modelo; el mapeo de cuantiles la modifica, sobre todo en Tmax (ejercicio E3). Ensamble (cuantiles): +7.7 % de lluvia, +1.1 °C Tmax, +1.2 °C Tmin."
-  },
-  {
-    "objectID": "slides/dia2/index.html#señales-de-cambio-al-20302050",
-    "href": "slides/dia2/index.html#señales-de-cambio-al-20302050",
-    "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
-    "section": "Señales de cambio al 2030–2050",
-    "text": "Señales de cambio al 2030–2050\n\n\n\nVariable\nMétodo\nACCESS-CM2\nMIROC6\nMPI-ESM1-2-HR\n\n\n\n\nLluvia\nSin corregir\n+3.8 %\n+9.8 %\n+11.5 %\n\n\n\nDelta\n+3.4 %\n+9.6 %\n+12.6 %\n\n\n\nCuantiles\n+4.7 %\n+8.4 %\n+9.9 %\n\n\nTmax\nSin corregir y delta\n+1.81 °C\n+1.30 °C\n+1.09 °C\n\n\n\nCuantiles\n+1.44 °C\n+0.98 °C\n+0.78 °C\n\n\nTmin\nSin corregir y delta\n+1.62 °C\n+1.09 °C\n+1.11 °C\n\n\n\nCuantiles\n+1.48 °C\n+1.12 °C\n+0.94 °C\n\n\n\n\n\nCambio respecto a 1981–2014. Los tres modelos coinciden: más calor (+0.8 a +1.8 °C) y algo más de lluvia (+3 a +13 %). El método delta conserva la señal del modelo; el mapeo de cuantiles la modifica, sobre todo en Tmax (ejercicio E3). Ensamble (cuantiles): +7.7 % de lluvia, +1.1 °C Tmax, +1.2 °C Tmin."
+    "section": "Cómo citar",
+    "text": "Cómo citar\nTraverso Yucra, K. A. (2026). Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático: Curso-Taller (Versión 1.0.0) [Material de curso]. GitHub. https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia\nEl material se distribuye bajo licencia CC BY 4.0 y el código bajo licencia MIT."
   }
 ]

@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "Si usas este material, cítalo de la siguiente manera."
+title: "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático: Curso-Taller"
+type: software
+authors:
+  - family-names: "Traverso Yucra"
+    given-names: "Kevin Arnold"
+version: "1.0.0"
+date-released: "2026-11-20"
+license:
+  - CC-BY-4.0
+  - MIT
+repository-code: "https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia"
+abstract: >-
+  Material del Curso-Taller dictado el 19 y 20 de noviembre de 2026 en Puno, Perú:
+  diapositivas, scripts de R y datos para el análisis hidrometeorológico, la
+  modelación hidrológica con GR4J (airGR/airGRiwrm), la corrección de sesgo de
+  proyecciones CMIP6 y la evaluación de impactos del cambio climático en la
+  cuenca del río Huancané.
+keywords:
+  - R
+  - hidrología
+  - cambio climático
+  - servicios climáticos
+  - CMIP6
+  - GR4J
+  - PISCO
+  - Huancané

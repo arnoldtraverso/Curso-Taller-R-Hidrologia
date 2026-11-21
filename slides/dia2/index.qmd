@@ -1186,3 +1186,7 @@ LinkedIn: [linkedin.com/in/kevin-arnold-traverso](https://www.linkedin.com/in/ke
 GitHub: [github.com/arnoldtraverso](https://github.com/arnoldtraverso)
 
 CIP Puno - Cap. Ingeniería Agrícola · FIAGRH - UNA Puno · IICTA-FIA
+
+::: {style="font-size: 0.5em; color: #ccc; margin-top: 2em"}
+Material bajo licencia [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.es) · Código bajo licencia MIT
+:::
