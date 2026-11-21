@@ -28,6 +28,7 @@ library(tidyverse)
 library(terra)
 library(airGRiwrm)    # redes de subcuencas; carga también airGR (GR4J)
 library(hydroGOF)     # métricas de desempeño (KGE, NSE, PBIAS)
+select <- dplyr::select   # por si qmap/MASS (script 06) sigue cargado en la sesión
 
 # Colores del curso
 azul    <- "#0B5394"
@@ -112,7 +113,7 @@ centros <- tibble(
   y    = crds(centroids(sub_ll))[, "y"],
   area_local = expanse(sub_ll, unit = "km")
 ) |>
-  left_join(as_tibble(griwrm) |> select(id, down, model), by = "id")
+  left_join(as_tibble(griwrm) |> dplyr::select(id, down, model), by = "id")
 
 # Nodo = salida de cada subcuenca = primer vértice de su tramo de río
 nodos <- tibble(
@@ -128,7 +129,7 @@ etiquetas_nodo <- nodos |>
 
 # Flechas: cada subcuenca entrega su escorrentía a su nodo de salida
 flechas <- centros |>
-  left_join(select(nodos, id, xend = x, yend = y), by = "id")
+  left_join(dplyr::select(nodos, id, xend = x, yend = y), by = "id")
 
 salida <- filter(nodos, id == "5")
 
@@ -188,7 +189,7 @@ esquema <- as_tibble(griwrm) |>
 
 uniones <- esquema |>
   filter(!is.na(down)) |>
-  left_join(select(esquema, down = id, xend = x, yend = y), by = "down")
+  left_join(dplyr::select(esquema, down = id, xend = x, yend = y), by = "down")
 
 g_red_esquema <- ggplot(esquema, aes(x, y)) +
   geom_segment(data = uniones, aes(xend = xend - 0.28, yend = yend),
@@ -235,7 +236,7 @@ hargreaves <- function(tmax, tmin, lat, fecha) {
   0.0023 * radiacion_ext(lat, fecha) * (tmedia + 17.8) * sqrt(pmax(tmax - tmin, 0))
 }
 
-latitudes <- select(centros, id, lat = y)
+latitudes <- dplyr::select(centros, id, lat = y)
 
 # La temperatura llega a 2020: el modelo trabaja 1981-2020
 forzantes <- a_largo("data/pcp/Datos_pcp.csv", "pp") |>
@@ -268,12 +269,13 @@ g_forzantes
 # airGRiwrm pide matrices: una fila por día, una columna por nodo
 a_matriz <- function(datos, variable) {
   datos |>
-    select(fecha, id, all_of(variable)) |>
+    dplyr::select(fecha, id, all_of(variable)) |>
     pivot_wider(names_from = id, values_from = all_of(variable)) |>
     arrange(fecha) |>
-    select(all_of(griwrm$id)) |>           # mismo orden que la red
+    dplyr::select(all_of(griwrm$id)) |>           # mismo orden que la red
     as.matrix()
 }
+
 P   <- a_matriz(forzantes, "pp")
 ETP <- a_matriz(forzantes, "etp")
 fechas <- sort(unique(forzantes$fecha))

@@ -21,6 +21,7 @@ library(tidyverse)
 library(terra)        # solo para leer las áreas de las subcuencas
 library(trend)        # Mann-Kendall y pendiente de Sen
 library(modifiedmk)   # Mann-Kendall modificado (series autocorrelacionadas)
+select <- dplyr::select   # por si qmap/MASS (script 06) sigue cargado en la sesión
 
 
 # 2. Series diarias areales de la cuenca ------------------------------------------

@@ -24,6 +24,7 @@
 library(tidyverse)
 library(terra)
 library(airGRiwrm)
+select <- dplyr::select   # por si qmap/MASS (script 06) sigue cargado en la sesión
 
 ref <- 1981:2014
 fut <- 2030:2050
