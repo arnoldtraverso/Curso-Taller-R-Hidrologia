@@ -6,10 +6,7 @@ authors:
   - family-names: "Traverso Yucra"
     given-names: "Kevin Arnold"
 version: "1.0.0"
-date-released: "2026-11-20"
-license:
-  - CC-BY-4.0
-  - MIT
+license: "CC-BY-4.0"
 repository-code: "https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia"
 abstract: >-
   Material del Curso-Taller dictado el 19 y 20 de noviembre de 2026 en Puno, Perú:
