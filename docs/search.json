@@ -942,6 +942,6 @@
     "href": "index.html#cómo-citar",
     "title": "Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático",
     "section": "Cómo citar",
-    "text": "Cómo citar\nTraverso Yucra, K. A. (2026). Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático: Curso-Taller (Versión 1.0.0) [Material de curso]. GitHub. https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia\nEl material se distribuye bajo licencia CC BY 4.0 y el código bajo licencia MIT."
+    "text": "Cómo citar\nTraverso Yucra, K. A. (2026). Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático: Curso-Taller (Versión 1.0.0) [Material de curso]. Zenodo. https://doi.org/10.5281/zenodo.24444878\nEl material se distribuye bajo licencia CC BY 4.0 y el código bajo licencia MIT."
   }
 ]

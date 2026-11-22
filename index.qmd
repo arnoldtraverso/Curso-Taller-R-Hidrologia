@@ -29,6 +29,6 @@ Las diapositivas del Curso-Taller, para los dos días se encuentran en los sigui
 
 ## Cómo citar
 
-Traverso Yucra, K. A. (2026). *Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático: Curso-Taller* (Versión 1.0.0) [Material de curso]. GitHub. <https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia>
+Traverso Yucra, K. A. (2026). *Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático: Curso-Taller* (Versión 1.0.0) [Material de curso]. Zenodo. <https://doi.org/10.5281/zenodo.24444878>
 
 El material se distribuye bajo licencia [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.es) y el código bajo licencia [MIT](https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia/blob/master/LICENSE-CODE).

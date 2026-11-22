@@ -5,6 +5,7 @@ type: software
 authors:
   - family-names: "Traverso Yucra"
     given-names: "Kevin Arnold"
+doi: "10.5281/zenodo.24444878"
 version: "1.0.0"
 license: "CC-BY-4.0"
 repository-code: "https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia"

@@ -1,5 +1,7 @@
 # Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24444878.svg)](https://doi.org/10.5281/zenodo.24444878)
+
 Este repositorio contiene el material, los scripts y los datos utilizados en el Curso-Taller realizado los días 19 y 20 de noviembre del 2026 en conmemoración del **Día del Ingeniero Agrícola**. 
 
 El evento contó con el respaldo del las siguientes instituciones
@@ -38,6 +40,6 @@ Materiales del Curso Taller:
 
 Si usas este material, por favor cítalo así:
 
-> Traverso Yucra, K. A. (2026). *Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático: Curso-Taller* (Versión 1.0.0) [Material de curso]. GitHub. https://github.com/arnoldtraverso/Curso-Taller-R-Hidrologia
+> Traverso Yucra, K. A. (2026). *Programación en R Aplicada a la Hidrología, Servicios Climáticos y Adaptación al Cambio Climático: Curso-Taller* (Versión 1.0.0) [Material de curso]. Zenodo. https://doi.org/10.5281/zenodo.24444878
 
 En GitHub, el botón **"Cite this repository"** (columna derecha) entrega la cita en formato APA y BibTeX a partir del archivo [`CITATION.cff`](CITATION.cff).
